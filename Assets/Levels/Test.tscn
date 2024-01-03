@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxmcs6p2tyw7q"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/DungeonGenerator.gd" id="1_6cm7d"]
+
+[node name="Test" type="Node3D"]
+script = ExtResource("1_6cm7d")
+seed = null
+roomAmount = null
