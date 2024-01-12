@@ -1,0 +1,53 @@
+[gd_scene load_steps=3 format=3 uid="uid://buan5yi8ma7tr"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/DungeonGenerator.gd" id="1_a3oe2"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_hmjel"]
+size = Vector2(4.5, 2.5)
+
+[node name="Erebos" type="Node3D"]
+script = ExtResource("1_a3oe2")
+randomSeed = true
+nestLimit = 10
+rootRoomPosition = Vector3(100000, 100000, 100000)
+roomDensity = 500
+bigRoomChance = 500
+
+[node name="Floor" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25, 0)
+size = Vector3(50, 50, 50)
+
+[node name="Gate Of Horn" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 2.5, 5)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Gate Of Horn"]
+use_collision = true
+size = Vector3(0.5, 5, 3)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Gate Of Horn/CSGBox3D"]
+operation = 2
+size = Vector3(1, 4.5, 2.5)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Gate Of Horn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.167, -2.6, 0)
+use_collision = true
+size = Vector3(0.5, 0.5, 3)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Gate Of Horn/CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.167, -0.1, 0)
+size = Vector3(0.5, 0.5, 3)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Gate Of Horn"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.167, -2.6, 0)
+use_collision = true
+size = Vector3(0.5, 0.5, 3)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Gate Of Horn/CSGBox3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.167, -0.1, 0)
+size = Vector3(0.5, 0.5, 3)
+
+[node name="Portal" type="Node3D" parent="Gate Of Horn"]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Gate Of Horn/Portal"]
+transform = Transform3D(-4.37114e-08, 1, -4.56956e-08, -1, -4.37114e-08, -4.37114e-08, -4.37114e-08, 4.56956e-08, 1, 0, 0, 0)
+mesh = SubResource("PlaneMesh_hmjel")

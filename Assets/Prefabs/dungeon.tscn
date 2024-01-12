@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dww5rwyjndisu"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/DungeonGenerator.gd" id="1_briko"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_vx447"]
+properties/0/path = NodePath(".:seed")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
+
+[node name="Dungeon" type="Node"]
+script = ExtResource("1_briko")
+randomSeed = true
+nestLimit = 10
+rootRoomPosition = Vector3(0, -200, 0)
+roomDensity = 500
+bigRoomChance = 500
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_vx447")

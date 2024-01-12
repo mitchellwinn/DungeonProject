@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cxq6p1i8w82y8"]
+
+[ext_resource type="Texture2D" uid="uid://cbw37bd88kf8w" path="res://Assets/Materials/BackRoomsWallpaper/Wallpaper.png" id="1_y0ud3"]
+
+[resource]
+albedo_texture = ExtResource("1_y0ud3")
+uv1_scale = Vector3(0.68, 0.68, 0.68)
+uv1_offset = Vector3(0.555, -0.885, -0.035)
+uv1_triplanar = true

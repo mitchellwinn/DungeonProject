@@ -1,8 +1,63 @@
-[gd_scene load_steps=2 format=3 uid="uid://dxmcs6p2tyw7q"]
+[gd_scene load_steps=7 format=3 uid="uid://dxmcs6p2tyw7q"]
 
-[ext_resource type="Script" path="res://Assets/Scripts/DungeonGenerator.gd" id="1_6cm7d"]
+[ext_resource type="Script" path="res://Assets/Scripts/DungeonGenerator.gd" id="1_jqalt"]
+[ext_resource type="Texture2D" uid="uid://bfurfb2aqi27i" path="res://Assets/HDRIs/kloofendal_48d_partly_cloudy_puresky_1k.exr" id="3_80icl"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_0ih8l"]
+panorama = ExtResource("3_80icl")
+
+[sub_resource type="Sky" id="Sky_f7nel"]
+sky_material = SubResource("PanoramaSkyMaterial_0ih8l")
+
+[sub_resource type="Environment" id="Environment_4wucg"]
+background_mode = 2
+sky = SubResource("Sky_f7nel")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 0.639216, 1)
+ambient_light_sky_contribution = 0.0
+ambient_light_energy = 0.05
+reflected_light_source = 2
+tonemap_mode = 2
+tonemap_exposure = 0.4
+tonemap_white = 0.35
+ssao_enabled = true
+ssil_enabled = true
+ssil_radius = 7.69
+ssil_intensity = 0.83
+ssil_sharpness = 1.0
+sdfgi_read_sky_light = false
+sdfgi_bounce_feedback = 1.0
+sdfgi_cascades = 8
+sdfgi_min_cell_size = 61.9843
+sdfgi_cascade0_distance = 3966.99
+sdfgi_max_distance = 1.01555e+06
+glow_enabled = true
+glow_intensity = 1.18
+glow_strength = 0.83
+glow_bloom = 0.23
+glow_blend_mode = 0
+fog_light_color = Color(0.635294, 0.74902, 0, 1)
+fog_light_energy = 0.7
+fog_sun_scatter = 0.4
+fog_density = 0.008
+volumetric_fog_density = 0.01
+volumetric_fog_albedo = Color(1, 1, 0.823529, 1)
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_h1r6p"]
+exposure_multiplier = 0.37
+dof_blur_far_distance = 20.0
+dof_blur_far_transition = 10.0
+dof_blur_near_enabled = true
+dof_blur_amount = 0.03
 
 [node name="Test" type="Node3D"]
-script = ExtResource("1_6cm7d")
-seed = null
-roomAmount = null
+script = ExtResource("1_jqalt")
+seed = 224159
+randomSeed = true
+nestLimit = 15
+roomDensity = 666
+bigRoomChance = 500
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4wucg")
+camera_attributes = SubResource("CameraAttributesPractical_h1r6p")

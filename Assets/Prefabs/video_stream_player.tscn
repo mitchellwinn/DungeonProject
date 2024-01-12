@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjoi8b1kq5f8t"]
+
+[ext_resource type="VideoStream" path="res://Cyber Distort 23.ogv" id="1_xat3v"]
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+stream = ExtResource("1_xat3v")
+autoplay = true

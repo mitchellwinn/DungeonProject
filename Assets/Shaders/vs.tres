@@ -1,0 +1,48 @@
+[gd_resource type="VisualShader" load_steps=4 format=3 uid="uid://dq5mrdy1iif1o"]
+
+[sub_resource type="VisualShaderNodeInput" id="29"]
+input_name = "screen_uv"
+
+[sub_resource type="VisualShaderNodeInput" id="20"]
+input_name = "screen_texture"
+
+[sub_resource type="VisualShaderNodeTexture" id="22"]
+texture_type = 1
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_disabled;
+
+uniform sampler2D tex_frg_5 : source_color;
+
+
+
+void fragment() {
+// Input:10
+	vec2 n_out10p0 = SCREEN_UV;
+
+
+// Input:3
+	float n_out3p0 = 0.0;
+
+
+// Texture2D:5
+	vec4 n_out5p0 = texture(tex_frg_5, n_out10p0);
+
+
+// Output:0
+	ALBEDO = vec3(n_out5p0.xyz);
+
+
+}
+"
+modes/diffuse = 2
+modes/specular = 2
+nodes/fragment/0/position = Vector2(520, -120)
+nodes/fragment/3/node = SubResource("20")
+nodes/fragment/3/position = Vector2(-760, 140)
+nodes/fragment/5/node = SubResource("22")
+nodes/fragment/5/position = Vector2(-480, 0)
+nodes/fragment/10/node = SubResource("29")
+nodes/fragment/10/position = Vector2(-740, 80)
+nodes/fragment/connections = PackedInt32Array(3, 0, 5, 2, 10, 0, 5, 0, 5, 0, 0, 0)

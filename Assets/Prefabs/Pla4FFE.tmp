@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://uldgeps0kb77"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/CharacterController.gd" id="1_ph60j"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xyitk"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_q5w5a"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/sync = true
+properties/1/watch = false
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera") groups=["player"]]
+collision_layer = 16
+floor_max_angle = 0.872665
+script = ExtResource("1_ph60j")
+camera = NodePath("Camera3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_xyitk")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.664342, 0)
+current = true
+far = 500.0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.467678, 0)
+light_energy = 0.2
+omni_range = 12.17
+omni_attenuation = 0.406126
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.63502, 0)
+light_energy = 1.35
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+size = Vector3(0.75, 2, 0.75)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_q5w5a")

@@ -1,0 +1,20 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://b0xlqe2ge1cpd"]
+
+[ext_resource type="Texture2D" uid="uid://q10kak6k15mm" path="res://Assets/Materials/DirtyCarpet/dirty_carpet_diff_1k.jpg" id="1_3vk2m"]
+[ext_resource type="Texture2D" uid="uid://cvon3loxqisy4" path="res://Assets/Materials/DirtyCarpet/dirty_carpet_nor_gl_1k.png" id="2_i2asj"]
+[ext_resource type="Texture2D" uid="uid://dcx1eh8kkstc5" path="res://Assets/Materials/DirtyCarpet/dirty_carpet_rough_1k.jpg" id="3_hitrn"]
+
+[resource]
+albedo_color = Color(0.976471, 1, 0.0666667, 1)
+albedo_texture = ExtResource("1_3vk2m")
+metallic_specular = 0.26
+roughness_texture = ExtResource("3_hitrn")
+emission = Color(0.368627, 0.360784, 0.14902, 1)
+emission_energy_multiplier = 4.88
+emission_operator = 1
+normal_enabled = true
+normal_texture = ExtResource("2_i2asj")
+rim = 0.25
+rim_tint = 0.0
+clearcoat_roughness = 0.0
+uv1_scale = Vector3(5, 5, 5)

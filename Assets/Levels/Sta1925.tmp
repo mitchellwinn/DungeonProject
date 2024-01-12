@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=3 uid="uid://vwcv7e07yrak"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Menu.gd" id="1_rotlo"]
+
+[node name="Startup" type="Node2D" node_paths=PackedStringArray("ipField")]
+script = ExtResource("1_rotlo")
+ipField = NodePath("UI/TextEdit")
+
+[node name="Level" type="Node" parent="."]
+
+[node name="LevelSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Assets/Levels/Erebos.tscn")
+spawn_path = NodePath("../Level")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextEdit" type="TextEdit" parent="UI"]
+offset_left = 305.0
+offset_top = 38.0
+offset_right = 1118.0
+offset_bottom = 149.0
+theme_override_font_sizes/font_size = 71
+placeholder_text = "ENTER HOST IP"
+
+[node name="Host" type="Button" parent="UI"]
+offset_left = 25.0
+offset_top = 168.0
+offset_right = 269.0
+offset_bottom = 281.0
+theme_override_font_sizes/font_size = 76
+text = "HOST"
+
+[node name="Join" type="Button" parent="UI"]
+offset_left = 25.0
+offset_top = 37.0
+offset_right = 269.0
+offset_bottom = 150.0
+theme_override_font_sizes/font_size = 76
+text = "JOIN"
+
+[connection signal="pressed" from="UI/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="UI/Join" to="." method="_on_join_pressed"]

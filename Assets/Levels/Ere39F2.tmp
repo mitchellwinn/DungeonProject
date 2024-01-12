@@ -1,0 +1,185 @@
+[gd_scene load_steps=18 format=3 uid="uid://buan5yi8ma7tr"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/DungeonGenerator.gd" id="1_a3oe2"]
+[ext_resource type="Texture2D" uid="uid://bfurfb2aqi27i" path="res://Assets/HDRIs/kloofendal_48d_partly_cloudy_puresky_1k.exr" id="2_0tx3h"]
+[ext_resource type="Script" path="res://Assets/Scripts/Portal.gd" id="3_v22fm"]
+[ext_resource type="Shader" path="res://Assets/Shaders/portal.gdshader" id="4_4cwjt"]
+[ext_resource type="PackedScene" uid="uid://cjoi8b1kq5f8t" path="res://Assets/Prefabs/video_stream_player.tscn" id="5_bpi0k"]
+[ext_resource type="PackedScene" uid="uid://uldgeps0kb77" path="res://Assets/Prefabs/Player.tscn" id="5_tr7tt"]
+[ext_resource type="Script" path="res://Assets/Scripts/video_stream_player.gd" id="6_t20tu"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_daxdt"]
+panorama = ExtResource("2_0tx3h")
+
+[sub_resource type="Sky" id="Sky_ety5u"]
+sky_material = SubResource("PanoramaSkyMaterial_daxdt")
+
+[sub_resource type="Environment" id="Environment_k7n8o"]
+background_mode = 2
+sky = SubResource("Sky_ety5u")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 0.639216, 1)
+ambient_light_sky_contribution = 0.0
+ambient_light_energy = 0.05
+reflected_light_source = 2
+tonemap_mode = 2
+ssao_enabled = true
+ssil_enabled = true
+ssil_radius = 7.69
+ssil_intensity = 0.83
+ssil_sharpness = 1.0
+sdfgi_read_sky_light = false
+sdfgi_bounce_feedback = 1.0
+sdfgi_cascades = 8
+sdfgi_min_cell_size = 61.9843
+sdfgi_cascade0_distance = 3966.99
+sdfgi_max_distance = 1.01555e+06
+glow_intensity = 0.68
+glow_strength = 0.54
+glow_bloom = 0.11
+glow_blend_mode = 0
+fog_light_color = Color(0.635294, 0.74902, 0, 1)
+fog_light_energy = 0.7
+fog_sun_scatter = 0.4
+fog_density = 0.008
+volumetric_fog_density = 0.0
+volumetric_fog_albedo = Color(0, 0, 0, 1)
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_gqrw1"]
+exposure_multiplier = 0.37
+dof_blur_far_distance = 20.0
+dof_blur_far_transition = 10.0
+dof_blur_amount = 0.03
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_1yle2"]
+viewport_path = NodePath("Gate Of Horn/RotationParent/Portal/Obfuscation/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q14tj"]
+resource_local_to_scene = true
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_1yle2")
+proximity_fade_distance = 5.0
+distance_fade_mode = 1
+distance_fade_min_distance = 2.0
+distance_fade_max_distance = 5.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_hmjel"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_q14tj")
+size = Vector2(4.5, 2.5)
+subdivide_width = 5
+subdivide_depth = 5
+
+[sub_resource type="ImageTexture" id="ImageTexture_aev72"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cqfgv"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("4_4cwjt")
+shader_parameter/texture_albedo = SubResource("ImageTexture_aev72")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xbeey"]
+size = Vector3(0.174366, 4.47877, 2.60551)
+
+[node name="Erebos" type="Node3D" node_paths=PackedStringArray("gateOfHornPortal")]
+script = ExtResource("1_a3oe2")
+randomSeed = true
+nestLimit = 10
+gateOfHornPortal = NodePath("Gate Of Horn/RotationParent/Portal")
+rootRoomPosition = Vector3(100000, 100000, 100000)
+roomDensity = 500
+bigRoomChance = 500
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_k7n8o")
+camera_attributes = SubResource("CameraAttributesPractical_gqrw1")
+
+[node name="Floor" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25, 0)
+use_collision = true
+size = Vector3(50, 50, 50)
+
+[node name="Gate Of Horn" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.9407e-08, 0, 1, 0, 8.9407e-08, 0, -1, 0, 2.5, 5)
+
+[node name="RotationParent" type="Node3D" parent="Gate Of Horn"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Gate Of Horn/RotationParent"]
+layers = 2
+use_collision = true
+size = Vector3(0.5, 5, 3)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Gate Of Horn/RotationParent/CSGBox3D"]
+layers = 2
+operation = 2
+size = Vector3(1, 4.5, 2.5)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Gate Of Horn/RotationParent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.167, -2.6, 0)
+layers = 2
+use_collision = true
+size = Vector3(0.5, 0.5, 3)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Gate Of Horn/RotationParent/CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.167, -0.1, 0)
+layers = 2
+size = Vector3(0.5, 0.5, 3)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Gate Of Horn/RotationParent"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.167, -2.6, 1.42109e-14)
+layers = 2
+use_collision = true
+size = Vector3(0.5, 0.5, 3)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Gate Of Horn/RotationParent/CSGBox3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.167, -0.1, 0)
+layers = 2
+size = Vector3(0.5, 0.5, 3)
+
+[node name="Portal" type="Node3D" parent="Gate Of Horn/RotationParent" node_paths=PackedStringArray("view", "camera")]
+script = ExtResource("3_v22fm")
+view = NodePath("../../SubViewport")
+camera = NodePath("../../SubViewport/Camera3D")
+
+[node name="TrueImage" type="CSGMesh3D" parent="Gate Of Horn/RotationParent/Portal"]
+transform = Transform3D(-4.37114e-08, 1, -4.56956e-08, -1, -4.37114e-08, -4.37114e-08, -4.37114e-08, 4.56956e-08, 1, 0, 0, 0)
+layers = 2
+mesh = SubResource("PlaneMesh_hmjel")
+material = SubResource("ShaderMaterial_cqfgv")
+
+[node name="Obfuscation" type="CSGMesh3D" parent="Gate Of Horn/RotationParent/Portal"]
+transform = Transform3D(-4.37114e-08, 1, -4.56956e-08, -1, -4.37114e-08, -4.37114e-08, -4.37114e-08, 4.56956e-08, 1, 0.0466547, 0, 2.13186e-09)
+layers = 2
+mesh = SubResource("PlaneMesh_hmjel")
+
+[node name="SubViewport" type="SubViewport" parent="Gate Of Horn/RotationParent/Portal/Obfuscation"]
+size = Vector2i(1920, 1080)
+
+[node name="VideoStreamPlayer" parent="Gate Of Horn/RotationParent/Portal/Obfuscation/SubViewport" instance=ExtResource("5_bpi0k")]
+script = ExtResource("6_t20tu")
+
+[node name="Area3D" type="Area3D" parent="Gate Of Horn/RotationParent/Portal"]
+collision_layer = 2
+collision_mask = 2
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gate Of Horn/RotationParent/Portal/Area3D"]
+shape = SubResource("BoxShape3D_xbeey")
+
+[node name="SubViewport" type="SubViewport" parent="Gate Of Horn"]
+size = Vector2i(3840, 2160)
+
+[node name="Camera3D" type="Camera3D" parent="Gate Of Horn/SubViewport"]
+transform = Transform3D(-1, 0, -8.9407e-08, 0, 1, 0, 8.9407e-08, 0, -1, 0, 2.64902, 5.06243)
+cull_mask = 1048573
+current = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Gate Of Horn/SubViewport/Camera3D"]
+visible = false
+
+[node name="Player" parent="." instance=ExtResource("5_tr7tt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.158, 1, 0.314)
+
+[connection signal="body_entered" from="Gate Of Horn/RotationParent/Portal/Area3D" to="Gate Of Horn/RotationParent/Portal" method="_on_area_3d_body_entered"]

@@ -1,0 +1,371 @@
+[gd_scene load_steps=24 format=3 uid="uid://bw4ggmyfp3y32"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Room.gd" id="1_r3if7"]
+[ext_resource type="PackedScene" uid="uid://c67wf1jvv4peo" path="res://Assets/3Dmodels/Chandeliere/Chandelier_01_1k.glb" id="2_0nnng"]
+[ext_resource type="Script" path="res://Assets/Scripts/Entrance.gd" id="2_4o6ve"]
+[ext_resource type="Material" uid="uid://cxq6p1i8w82y8" path="res://Assets/Materials/BackRoomsWallpaper/Wallpaper.tres" id="3_m1th1"]
+[ext_resource type="Shader" path="res://Assets/Shaders/portal.gdshader" id="6_lw0nl"]
+[ext_resource type="Script" path="res://Assets/Scripts/Portal.gd" id="6_ub4ha"]
+[ext_resource type="PackedScene" uid="uid://cjoi8b1kq5f8t" path="res://Assets/Prefabs/video_stream_player.tscn" id="8_7i3of"]
+[ext_resource type="Script" path="res://Assets/Scripts/video_stream_player.gd" id="9_o7abw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_02gmj"]
+resource_name = "lamps_classic_chandelier_1"
+blend_mode = 1
+cull_mode = 2
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
+roughness = 0.322727
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 16.0
+subsurf_scatter_enabled = true
+subsurf_scatter_strength = 1.0
+backlight_enabled = true
+backlight = Color(1, 1, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_yfkjn"]
+size = Vector3(10, 0.5, 10)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_m33ee"]
+load_path = "res://.godot/imported/dirty_carpet_diff_1k.jpg-7c62357be3eb502ce6874921c95321b4.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kc4go"]
+load_path = "res://.godot/imported/dirty_carpet_nor_gl_1k.png-4459ff5f617beb05cbf7f05741f744f6.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fkhxk"]
+load_path = "res://.godot/imported/dirty_carpet_rough_1k.jpg-da6b1f06efcb6380ecd77185d19f9f44.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lmkub"]
+albedo_color = Color(0.976471, 1, 0.0666667, 1)
+albedo_texture = SubResource("CompressedTexture2D_m33ee")
+metallic_specular = 0.26
+roughness_texture = SubResource("CompressedTexture2D_fkhxk")
+emission = Color(0.368627, 0.360784, 0.14902, 1)
+emission_energy_multiplier = 4.88
+emission_operator = 1
+normal_enabled = true
+normal_texture = SubResource("CompressedTexture2D_kc4go")
+rim = 0.25
+rim_tint = 0.0
+clearcoat_roughness = 0.0
+uv1_scale = Vector3(6, 6, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u2h5k"]
+size = Vector3(2.16153, 3.01519, 1.06539)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sr1bn"]
+size = Vector3(7, 9, 7)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_dgq8q"]
+size = Vector2(4.5, 2.5)
+
+[sub_resource type="ImageTexture" id="ImageTexture_aev72"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u4bid"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("6_lw0nl")
+shader_parameter/texture_albedo = SubResource("ImageTexture_aev72")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_bt773"]
+viewport_path = NodePath("Gate Of Horn/RotationParent/Portal/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tbfnq"]
+resource_local_to_scene = true
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_bt773")
+proximity_fade_distance = 5.0
+distance_fade_mode = 1
+distance_fade_min_distance = 2.0
+distance_fade_max_distance = 5.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_0bkqh"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_tbfnq")
+size = Vector2(4.5, 2.5)
+subdivide_width = 5
+subdivide_depth = 5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uho8s"]
+size = Vector3(0, 4.154, 2.328)
+
+[node name="_Test_Room" type="Node3D" node_paths=PackedStringArray("entrance1", "entrance2", "entrance3", "entrance4", "lightsParent", "roomBoundaries", "gateOfHorn", "gateOfHornPortal")]
+script = ExtResource("1_r3if7")
+entrance1 = NodePath("RoomOuter/NorthEntrance")
+entrance2 = NodePath("RoomOuter/SouthEntrance")
+entrance3 = NodePath("RoomOuter/EastEntrance")
+entrance4 = NodePath("RoomOuter/WestEntrance")
+lightsParent = NodePath("Lights")
+roomBoundaries = NodePath("RoomBoundaries")
+roomType = "Room"
+gateOfHorn = NodePath("Gate Of Horn")
+gateOfHornPortal = NodePath("Gate Of Horn/RotationParent/Portal")
+
+[node name="Lights" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.667299, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(0.999999, 0.000962874, 0.000629219, -0.000962233, 0.999999, -0.0010181, -0.000630198, 0.00101749, 0.999999, -0.0095782, 7.4335, 1.68799)
+light_color = Color(1, 0.729412, 0.584314, 1)
+light_energy = 5.0
+light_volumetric_fog_energy = 5.876
+light_size = 0.285
+light_specular = 7.51
+shadow_enabled = true
+shadow_blur = 5.0
+distance_fade_enabled = true
+omni_range = 13.4551
+omni_attenuation = 2.07053
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(0.999999, 0.000962874, 0.000629219, -0.000962233, 0.999999, -0.0010181, -0.000630198, 0.0010175, 0.999999, 1.51052, 7.4335, 0.879374)
+light_color = Color(1, 0.729412, 0.584314, 1)
+light_energy = 5.0
+light_volumetric_fog_energy = 5.876
+light_size = 0.285
+light_specular = 7.51
+shadow_enabled = true
+shadow_blur = 5.0
+distance_fade_enabled = true
+omni_range = 13.4551
+omni_attenuation = 2.07053
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(-0.474489, 0.00043963, 0.880261, -0.000962231, 0.999999, -0.0010181, -0.880261, -0.00133009, -0.474488, 1.58768, 7.4335, -0.770522)
+light_color = Color(1, 0.729412, 0.584314, 1)
+light_energy = 5.0
+light_volumetric_fog_energy = 5.876
+light_size = 0.285
+light_specular = 7.51
+shadow_enabled = true
+shadow_blur = 5.0
+distance_fade_enabled = true
+omni_range = 13.4551
+omni_attenuation = 2.07053
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(-0.474489, 0.00043963, 0.880261, -0.000962231, 0.999999, -0.0010181, -0.880261, -0.00133009, -0.474488, 0.155213, 7.4335, -1.72583)
+light_color = Color(1, 0.729412, 0.584314, 1)
+light_energy = 5.0
+light_volumetric_fog_energy = 5.876
+light_size = 0.285
+light_specular = 7.51
+shadow_enabled = true
+shadow_blur = 5.0
+distance_fade_enabled = true
+omni_range = 13.4551
+omni_attenuation = 2.07053
+
+[node name="OmniLight3D6" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(-0.999999, -0.000963459, -0.00120521, -0.000962232, 0.999999, -0.0010181, 0.00120619, -0.00101694, -0.999999, -1.5532, 7.4335, -0.843466)
+light_color = Color(1, 0.729412, 0.584314, 1)
+light_energy = 5.0
+light_volumetric_fog_energy = 5.876
+light_size = 0.285
+light_specular = 7.51
+shadow_enabled = true
+shadow_blur = 5.0
+distance_fade_enabled = true
+omni_range = 13.4551
+omni_attenuation = 2.07053
+
+[node name="OmniLight3D7" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(0.474995, -0.000438865, -0.879988, -0.000962229, 0.999999, -0.0010181, 0.879988, 0.00133034, 0.474995, -1.62941, 7.4335, 0.806476)
+light_color = Color(1, 0.729412, 0.584314, 1)
+light_energy = 5.0
+light_volumetric_fog_energy = 5.876
+light_size = 0.285
+light_specular = 7.51
+shadow_enabled = true
+shadow_blur = 5.0
+distance_fade_enabled = true
+omni_range = 13.4551
+omni_attenuation = 2.07053
+
+[node name="Chandelier" parent="." instance=ExtResource("2_0nnng")]
+transform = Transform3D(5, 0.00481436, 0.00314609, -0.00481115, 4.99999, -0.00509048, -0.00315099, 0.00508745, 5, 3.08319e-10, 9.84045, 3.72529e-09)
+
+[node name="Chandelier_01" parent="Chandelier" index="0"]
+surface_material_override/1 = SubResource("StandardMaterial3D_02gmj")
+
+[node name="RoomFloor" type="CSGMesh3D" parent="."]
+use_collision = true
+mesh = SubResource("BoxMesh_yfkjn")
+material = SubResource("StandardMaterial3D_lmkub")
+
+[node name="RoomOuter" type="CSGBox3D" parent="."]
+transform = Transform3D(0.999999, 0.000962871, 0.000629219, -0.00096223, 0.999999, -0.0010181, -0.000630198, 0.00101749, 0.999999, 0, 5, 0)
+material_override = ExtResource("3_m1th1")
+use_collision = true
+size = Vector3(10, 10, 10)
+
+[node name="RoomInner" type="CSGBox3D" parent="RoomOuter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+operation = 2
+size = Vector3(9.5, 10, 9.5)
+
+[node name="NorthEntrance" type="CSGBox3D" parent="RoomOuter" node_paths=PackedStringArray("opening", "area") groups=["entrance"]]
+transform = Transform3D(1, -5.74119e-12, 0, -7.16227e-12, 1, -1.16415e-10, 0, 1.16415e-10, 1, 0, -3.75, 5)
+operation = 2
+size = Vector3(2, 4, 1)
+script = ExtResource("2_4o6ve")
+direction = "north"
+notes = "normal"
+opening = NodePath(".")
+canLinkToOthers = true
+area = NodePath("Area3D")
+
+[node name="Area3D" type="Area3D" parent="RoomOuter/NorthEntrance"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomOuter/NorthEntrance/Area3D"]
+shape = SubResource("BoxShape3D_u2h5k")
+
+[node name="SouthEntrance" type="CSGBox3D" parent="RoomOuter" node_paths=PackedStringArray("opening", "area") groups=["entrance"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.75, -5)
+operation = 2
+size = Vector3(2, 4, 1)
+script = ExtResource("2_4o6ve")
+direction = "south"
+notes = "normal"
+opening = NodePath(".")
+canLinkToOthers = true
+area = NodePath("Area3D")
+
+[node name="Area3D" type="Area3D" parent="RoomOuter/SouthEntrance"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomOuter/SouthEntrance/Area3D"]
+shape = SubResource("BoxShape3D_u2h5k")
+
+[node name="EastEntrance" type="CSGBox3D" parent="RoomOuter" node_paths=PackedStringArray("opening", "area") groups=["entrance"]]
+transform = Transform3D(-4.37722e-08, -7.84439e-12, 1, -1.16415e-10, 1, 5.74119e-12, -1, 0, -4.37722e-08, -5, -3.75, 2.18861e-07)
+operation = 2
+size = Vector3(2, 4, 1)
+script = ExtResource("2_4o6ve")
+direction = "east"
+notes = "normal"
+opening = NodePath(".")
+canLinkToOthers = true
+area = NodePath("Area3D")
+
+[node name="Area3D" type="Area3D" parent="RoomOuter/EastEntrance"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomOuter/EastEntrance/Area3D"]
+shape = SubResource("BoxShape3D_u2h5k")
+
+[node name="WestEntrance" type="CSGBox3D" parent="RoomOuter" node_paths=PackedStringArray("opening", "area") groups=["entrance"]]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5, -3.75, -2.18557e-07)
+operation = 2
+size = Vector3(2, 4, 1)
+script = ExtResource("2_4o6ve")
+direction = "west"
+notes = "normal"
+opening = NodePath(".")
+canLinkToOthers = true
+area = NodePath("Area3D")
+
+[node name="Area3D" type="Area3D" parent="RoomOuter/WestEntrance"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomOuter/WestEntrance/Area3D"]
+shape = SubResource("BoxShape3D_u2h5k")
+
+[node name="RoomBoundaries" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomBoundaries"]
+shape = SubResource("BoxShape3D_sr1bn")
+
+[node name="Gate Of Horn" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.9407e-08, 0, 1, 0, 8.9407e-08, 0, -1, 0, 2.8, 0)
+
+[node name="RotationParent" type="Node3D" parent="Gate Of Horn"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Gate Of Horn/RotationParent"]
+use_collision = true
+size = Vector3(0.5, 5, 3)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Gate Of Horn/RotationParent/CSGBox3D"]
+layers = 2
+operation = 2
+size = Vector3(1, 4.5, 2.5)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Gate Of Horn/RotationParent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.167, -2.6, 0)
+use_collision = true
+size = Vector3(0.5, 0.5, 3)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Gate Of Horn/RotationParent/CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.167, -0.1, 0)
+layers = 2
+size = Vector3(0.5, 0.5, 3)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Gate Of Horn/RotationParent"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.167, -2.6, 1.42109e-14)
+use_collision = true
+size = Vector3(0.5, 0.5, 3)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Gate Of Horn/RotationParent/CSGBox3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.167, -0.1, 0)
+layers = 2
+size = Vector3(0.5, 0.5, 3)
+
+[node name="Portal" type="Node3D" parent="Gate Of Horn/RotationParent" node_paths=PackedStringArray("view", "camera", "gate", "direction")]
+script = ExtResource("6_ub4ha")
+view = NodePath("CamViewport")
+camera = NodePath("CamViewport/Camera3D")
+gate = NodePath("../..")
+direction = NodePath("Direction")
+
+[node name="TrueImage" type="CSGMesh3D" parent="Gate Of Horn/RotationParent/Portal"]
+transform = Transform3D(-4.37114e-08, 1, -4.56956e-08, -1, -4.37114e-08, -4.37114e-08, -4.37114e-08, 4.56956e-08, 1, 0, 0, 0)
+layers = 2
+mesh = SubResource("PlaneMesh_dgq8q")
+material = SubResource("ShaderMaterial_u4bid")
+
+[node name="CamViewport" type="SubViewport" parent="Gate Of Horn/RotationParent/Portal"]
+size = Vector2i(3840, 2160)
+
+[node name="Camera3D" type="Camera3D" parent="Gate Of Horn/RotationParent/Portal/CamViewport"]
+transform = Transform3D(-1, 0, -8.9407e-08, 0, 1, 0, 8.9407e-08, 0, -1, 0, 2.64902, 5.06243)
+cull_mask = 1048573
+current = true
+far = 100.0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Gate Of Horn/RotationParent/Portal/CamViewport/Camera3D"]
+visible = false
+
+[node name="SubViewport" type="SubViewport" parent="Gate Of Horn/RotationParent/Portal"]
+size = Vector2i(1920, 1080)
+
+[node name="VideoStreamPlayer" parent="Gate Of Horn/RotationParent/Portal/SubViewport" instance=ExtResource("8_7i3of")]
+script = ExtResource("9_o7abw")
+
+[node name="Obfuscation" type="CSGMesh3D" parent="Gate Of Horn/RotationParent/Portal"]
+transform = Transform3D(-4.37114e-08, 1, -4.56956e-08, -1, -4.37114e-08, -4.37114e-08, -4.37114e-08, 4.56956e-08, 1, 0.165156, 0, 7.54686e-09)
+layers = 2
+mesh = SubResource("PlaneMesh_0bkqh")
+
+[node name="Area3D" type="Area3D" parent="Gate Of Horn/RotationParent/Portal"]
+collision_layer = 2
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gate Of Horn/RotationParent/Portal/Area3D"]
+shape = SubResource("BoxShape3D_uho8s")
+
+[node name="Direction" type="Node3D" parent="Gate Of Horn/RotationParent/Portal"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[connection signal="body_entered" from="Gate Of Horn/RotationParent/Portal/Area3D" to="Gate Of Horn/RotationParent/Portal" method="_on_area_3d_body_entered"]
+
+[editable path="Chandelier"]
