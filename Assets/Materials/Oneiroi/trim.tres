@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bni8skay8qkkf"]
+
+[resource]
+resource_name = "Trim.001"
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.905882, 0.470588, 0, 1)
+metallic = 0.4
+roughness = 0.272166

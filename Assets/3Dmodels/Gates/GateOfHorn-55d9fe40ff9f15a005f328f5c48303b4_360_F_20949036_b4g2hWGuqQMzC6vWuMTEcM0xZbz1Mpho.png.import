@@ -1,0 +1,36 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://caqoslhxosgap"
+path.s3tc="res://.godot/imported/GateOfHorn-55d9fe40ff9f15a005f328f5c48303b4_360_F_20949036_b4g2hWGuqQMzC6vWuMTEcM0xZbz1Mpho.png-99fa72d9954fb6306dbfc199d33d45f8.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://Assets/3Dmodels/Gates/GateOfHorn-55d9fe40ff9f15a005f328f5c48303b4_360_F_20949036_b4g2hWGuqQMzC6vWuMTEcM0xZbz1Mpho.png"
+dest_files=["res://.godot/imported/GateOfHorn-55d9fe40ff9f15a005f328f5c48303b4_360_F_20949036_b4g2hWGuqQMzC6vWuMTEcM0xZbz1Mpho.png-99fa72d9954fb6306dbfc199d33d45f8.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

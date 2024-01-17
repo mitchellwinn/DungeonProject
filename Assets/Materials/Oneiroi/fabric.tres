@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cd6ytcvjrtc8i"]
+
+[resource]
+resource_name = "Fabric.001"
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 1)
+metallic = 0.4
+subsurf_scatter_enabled = true
+subsurf_scatter_strength = 1.0

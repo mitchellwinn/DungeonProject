@@ -42,7 +42,7 @@ func _on_area_3d_body_entered(body):
 			print("initial pos: "+str(body.global_position))
 			print("initial rot: "+str(body.global_rotation))
 			print("initial vel: "+str(body.velocity))
-			body.global_position = Vector3(targetPortal.global_position.x,body.global_position.y+(targetPortal.global_position.y-global_position.y),targetPortal.global_position.z)
+			body.global_position = Vector3(body.global_position.x+(targetPortal.global_position.x-global_position.x),body.global_position.y+(targetPortal.global_position.y-global_position.y),body.global_position.z+(targetPortal.global_position.z-global_position.z))
 			GameManager.teleportCool=2
 			#var relativeToPortal = global_transform.affine_inverse()*body.global_transform
 			#var movedToTargetPortal = targetPortal.global_transform * relativeToPortal

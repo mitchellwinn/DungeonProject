@@ -227,12 +227,12 @@ distance_fade_enabled = true
 omni_range = 48.9812
 omni_attenuation = 2.2974
 
-[node name="RoomFloor" type="CSGMesh3D" parent="."]
+[node name="RoomFloor" type="CSGMesh3D" parent="." groups=["carpet"]]
 use_collision = true
 mesh = SubResource("BoxMesh_0x37f")
 material = SubResource("StandardMaterial3D_tmt1n")
 
-[node name="BottomEntrance" type="CSGBox3D" parent="RoomFloor" node_paths=PackedStringArray("opening", "area") groups=["entrance"]]
+[node name="BottomEntrance" type="CSGBox3D" parent="RoomFloor" node_paths=PackedStringArray("opening", "area")]
 transform = Transform3D(0.999998, 0, -0.00174533, 0, 1, 0, 0.00174533, 0, 0.999999, 8.66592, -0.241772, -10.7503)
 operation = 2
 size = Vector3(7.22475, 1, 2.87646)
@@ -251,7 +251,7 @@ transform = Transform3D(-0.000630245, -0.000962234, -1, 0.0010175, 0.999999, -0.
 transform = Transform3D(1, 0, 0, 2.32831e-10, 1, -1.18177e-10, 4.54747e-13, -4.34675e-12, 1, 0, 5.685, 5)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase"]
-transform = Transform3D(1, 0, -3.49246e-10, 3.49246e-10, 2.055, 1.03444e-09, 0, -6.57849e-09, 2, -0.0100002, -5.068, -4.941)
+transform = Transform3D(1, 0, -9.31323e-10, 3.49246e-10, 2.055, 1.08093e-09, 0, -6.27597e-09, 2, -0.0100012, -5.068, -4.941)
 material_override = SubResource("StandardMaterial3D_5uxpw")
 size = Vector3(3, 0.2, 0.2)
 
@@ -405,7 +405,7 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D7/Opening/Area3D"]
 shape = SubResource("BoxShape3D_epid2")
 
-[node name="SlopeCollider" type="CSGMesh3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase"]
+[node name="SlopeCollider" type="CSGMesh3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase" groups=["wood"]]
 transform = Transform3D(-5.19212e-08, -2.98023e-08, 1, -1.13137, 0.707107, -2.09548e-09, -1.13137, -0.707107, -4.37074e-08, 0, 0.12, -0.027)
 use_collision = true
 flip_faces = true
@@ -658,7 +658,7 @@ material_override = SubResource("StandardMaterial3D_ppo80")
 use_collision = true
 size = Vector3(0.25, 10, 5)
 
-[node name="SlopeCollider" type="CSGMesh3D" parent="RoomOuter/TopEntrance/Staircase/Staircase"]
+[node name="SlopeCollider" type="CSGMesh3D" parent="RoomOuter/TopEntrance/Staircase/Staircase" groups=["carpet"]]
 transform = Transform3D(-5.19212e-08, -2.98023e-08, 1, -1.13137, 0.707107, -2.09548e-09, -1.13137, -0.707107, -4.37074e-08, 0, 0.115, -0.027)
 use_collision = true
 flip_faces = true

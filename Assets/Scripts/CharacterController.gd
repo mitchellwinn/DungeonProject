@@ -10,16 +10,27 @@ var runToggle = 1
 var moveDirection = Vector3.ZERO
 var velocityLast
 @export var camera: Camera3D
+@export var camContainer: Node3D
 @export var stats: Node
+@export var skeleton: Skeleton3D
+@export var animator: AnimationPlayer
+@export var headSocket: Node3D
+var baseAnimation
+var rng
 
 func _ready():
 	velocityLast = velocity
 	global_position=Vector3(0,1,0)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	rng = RandomNumberGenerator.new()
+	rng.randomize()
 	
 func _enter_tree():
 	set_multiplayer_authority(name.to_int())
 	if !is_multiplayer_authority():
+		for mesh in skeleton.get_children():
+			mesh.set_layer_mask_value(3,false)
+			mesh.set_layer_mask_value(4,true)
 		camera.current = false
 		$OmniLight3D.visible = false
 		$SpotLight3D.visible = false
@@ -46,6 +57,7 @@ func _physics_process(delta):
 	velocityLast = velocity
 	move_and_slide()
 	mouseDelta = Vector2.ZERO
+	animate(delta)
 	
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -98,4 +110,54 @@ func playerFocus():
 	
 func fullyActionable():
 	return true
+	
+func animate(delta):
+	camera.global_position = camera.global_position.lerp(headSocket.global_position,delta*60)
+	#camContainer.global_rotation = camContainer.global_rotation.lerp(headSocket.global_rotation,delta*20)
+	if is_on_floor():
+		if velocity.length()>MOVE_SPEED*1 and runToggle>1:
+			if basis.z.dot(velocity.normalized())>0:
+				baseAnimation = "run"
+				animator.play("root|"+baseAnimation,3,velocity.length()/3,false)
+			else:
+				baseAnimation = "walkBackwards"
+				animator.play("root|"+baseAnimation,3,velocity.length()/3,false)
+		elif velocity.length()>MOVE_SPEED*1:
+			if basis.z.dot(velocity.normalized())>0:
+				baseAnimation = "walk"
+				animator.play("root|"+baseAnimation,3,velocity.length()/3,false)
+			else:
+				baseAnimation = "walkBackwards"
+				animator.play("root|"+baseAnimation,3,velocity.length()/3,false)
+		else:
+			baseAnimation = "idle"
+			animator.play("root|"+baseAnimation,3,1,false)
+	else:
+		pass
+	print(baseAnimation)
 
+
+func getFloorType(floor):
+	if floor.is_in_group("carpet"):
+		return "carpet"
+	if floor.is_in_group("hard"):
+		return "hard"
+	else:
+		return "silent"
+
+func _on_left_footstep_body_entered(body):
+	var family = getFloorType(body)
+	if family == "silent":
+		return
+	var roll = rng.randi_range(1,9)
+	$LeftFootstep.stream = load("res://Assets/SFX/footsteps/"+family+"/"+str(roll)+".mp3")
+	$LeftFootstep.play()
+
+
+func _on_right_footstep_body_entered(body):
+	var family = getFloorType(body)
+	if family == "silent":
+		return
+	var roll = rng.randi_range(1,9)
+	$RightFootstep.stream = load("res://Assets/SFX/footsteps/"+family+"/"+str(roll)+".mp3")
+	$RightFootstep.play()

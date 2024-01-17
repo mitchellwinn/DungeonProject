@@ -1,0 +1,192 @@
+[gd_scene load_steps=8 format=3 uid="uid://uldgeps0kb77"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/CharacterController.gd" id="1_ph60j"]
+[ext_resource type="Script" path="res://Assets/scripts/stats.gd" id="2_ue7er"]
+[ext_resource type="PackedScene" uid="uid://02wrofo348y8" path="res://Assets/3Dmodels/Oneiroi/Oneiroi.fbx" id="3_kqv82"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xyitk"]
+height = 2.5
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_q5w5a"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/sync = true
+properties/1/watch = false
+properties/2/path = NodePath("stats:ign")
+properties/2/spawn = true
+properties/2/sync = true
+properties/2/watch = false
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oihkw"]
+resource_name = "Fabric.001"
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 1)
+metallic_specular = 0.0
+subsurf_scatter_enabled = true
+subsurf_scatter_strength = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_26ygv"]
+resource_name = "Skin"
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 0.716798, 0.4509, 1)
+metallic_specular = 0.42
+roughness = 0.272166
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "stats", "animator") groups=["player"]]
+collision_layer = 16
+floor_max_angle = 0.872665
+script = ExtResource("1_ph60j")
+camera = NodePath("Camera3D")
+stats = NodePath("stats")
+animator = NodePath("Oneiroi/AnimationPlayer")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_xyitk")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.25047, 0)
+cull_mask = 1048571
+current = true
+far = 500.0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.467678, 0)
+light_energy = 0.2
+light_cull_mask = 4294967283
+omni_range = 12.17
+omni_attenuation = 0.406126
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.63502, 0)
+light_energy = 1.35
+light_cull_mask = 4294967283
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+visible = false
+size = Vector3(0.75, 2, 0.75)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_q5w5a")
+
+[node name="NameTag" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.63301, 0)
+visibility_range_begin_margin = 9.0
+visibility_range_end = 10.0
+modulate = Color(1, 1, 0, 1)
+text = "PLAYER NAME"
+font_size = 62
+
+[node name="stats" type="Node" parent="."]
+script = ExtResource("2_ue7er")
+
+[node name="Oneiroi" parent="." instance=ExtResource("3_kqv82")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, -1.25, 0)
+
+[node name="Skeleton3D" parent="Oneiroi/RootNode/root" index="0"]
+bones/0/position = Vector3(0.47928, 0.506447, 0.672746)
+bones/0/rotation = Quaternion(-1.05073e-05, -1.68373e-06, 0.987403, -0.158224)
+bones/1/position = Vector3(-3.95317e-14, -0.0071191, 3.95656)
+bones/1/rotation = Quaternion(0.710544, -2.48586e-06, -2.51014e-06, 0.703653)
+bones/2/position = Vector3(0.381962, 1.69144, -0.280965)
+bones/2/rotation = Quaternion(-0.404785, -0.0506999, 0.0775469, 0.909706)
+bones/3/rotation = Quaternion(0.366434, -0.603665, 0.624016, -0.334543)
+bones/4/rotation = Quaternion(-0.374155, -0.32584, 0.02356, 0.867918)
+bones/5/rotation = Quaternion(0.688782, 0.233875, -0.193364, 0.658401)
+bones/6/position = Vector3(6.10352e-07, 0.647892, -8.39233e-07)
+bones/6/rotation = Quaternion(-0.299862, -0.414391, -0.0994997, 0.8535)
+bones/6/scale = Vector3(1, 1, 1)
+bones/7/position = Vector3(2.88486e-07, 1.28695, -4.57764e-07)
+bones/7/rotation = Quaternion(0.0173185, 0.0359615, 0.00706225, 0.999178)
+bones/8/position = Vector3(-0.381966, 1.69144, -0.28096)
+bones/8/rotation = Quaternion(-0.404793, 0.0506432, -0.0773992, 0.909718)
+bones/9/rotation = Quaternion(-0.366348, -0.60375, 0.624074, 0.334376)
+bones/10/rotation = Quaternion(-0.374214, 0.325815, -0.0236641, 0.867899)
+bones/11/rotation = Quaternion(0.688689, -0.233985, 0.193415, 0.658445)
+bones/12/position = Vector3(-1.52588e-07, 0.64789, 1.52588e-07)
+bones/12/rotation = Quaternion(-0.297605, 0.415054, 0.102801, 0.853577)
+bones/12/scale = Vector3(1, 1, 1)
+bones/13/position = Vector3(4.17233e-08, 1.28695, -3.8147e-07)
+bones/13/rotation = Quaternion(0.0185297, -0.0351728, -0.0110463, 0.999148)
+bones/14/rotation = Quaternion(-0.0419077, -0.00329413, 0.00013846, 0.999116)
+bones/15/rotation = Quaternion(0.00696667, 0.00330133, -2.3e-05, 0.99997)
+bones/17/rotation = Quaternion(0.326138, 0.00635692, 0.00219322, 0.945298)
+bones/18/rotation = Quaternion(-0.242461, -0.00655835, -0.00162262, 0.970138)
+bones/20/rotation = Quaternion(-0.566137, 0.149426, -0.00360078, 0.810646)
+bones/21/rotation = Quaternion(4.75802e-07, -0.37384, 4.59947e-07, 0.927493)
+bones/22/rotation = Quaternion(1.81028e-07, 1.14913e-07, -0.145291, 0.989389)
+bones/23/rotation = Quaternion(-6.02065e-08, -0.0835835, 8.47965e-08, 0.996501)
+bones/24/rotation = Quaternion(-0.0513264, -0.100263, -0.0983469, 0.988757)
+bones/32/rotation = Quaternion(-0.0498473, -0.0344454, 0.0269044, 0.9978)
+bones/35/rotation = Quaternion(-0.0371935, 0.00447269, -0.0452798, 0.998272)
+bones/40/rotation = Quaternion(0.110558, -0.00231772, -0.0366284, 0.993192)
+bones/44/rotation = Quaternion(-0.581868, 0.380922, 0.472058, 0.541746)
+bones/45/rotation = Quaternion(-0.558271, -0.171629, -0.0330706, 0.811038)
+bones/46/rotation = Quaternion(2.75858e-07, 0.377309, -7.24499e-08, 0.926087)
+bones/47/rotation = Quaternion(4.71388e-09, 7.08533e-08, 0.143417, 0.989662)
+bones/48/rotation = Quaternion(-6.20067e-08, 0.0898271, -6.28354e-08, 0.995957)
+bones/49/rotation = Quaternion(-0.0598675, 0.106548, 0.13368, 0.983459)
+bones/57/rotation = Quaternion(-0.0548211, 0.0381255, -0.138987, 0.98804)
+bones/60/rotation = Quaternion(-0.0410099, -0.00473038, 0.0882095, 0.995246)
+bones/65/rotation = Quaternion(-0.0111363, 0.0582604, -0.104868, 0.992716)
+bones/69/rotation = Quaternion(0.94261, 0.0264208, 0.324851, -0.0724967)
+bones/70/rotation = Quaternion(-2.56473e-07, -5.29527e-08, 0.0471043, 0.998889)
+bones/71/rotation = Quaternion(0.217883, 0.738561, -0.487135, 0.412011)
+bones/73/rotation = Quaternion(-1.82872e-09, 0.0715021, 1.32907e-09, 0.99744)
+bones/74/rotation = Quaternion(-5.12209e-07, 0.197724, -2.97737e-07, 0.980258)
+bones/75/rotation = Quaternion(0.89041, -0.121178, -0.436624, 0.0429297)
+bones/76/rotation = Quaternion(4.48728e-08, -1.14491e-07, -0.114564, 0.993416)
+bones/77/rotation = Quaternion(-0.225631, 0.751167, -0.398914, -0.475085)
+bones/78/rotation = Quaternion(-6.26077e-09, 0.994601, 0.10377, 8.02632e-07)
+bones/79/rotation = Quaternion(2.81317e-09, -0.00390915, 1.68698e-09, 0.999992)
+bones/80/rotation = Quaternion(7.25576e-09, -0.0779125, 5.5587e-09, 0.99696)
+
+[node name="Belt" parent="Oneiroi/RootNode/root/Skeleton3D" index="0"]
+layers = 8
+
+[node name="TopPiece" parent="Oneiroi/RootNode/root/Skeleton3D" index="1"]
+layers = 8
+
+[node name="Body" parent="Oneiroi/RootNode/root/Skeleton3D" index="2"]
+layers = 8
+surface_material_override/0 = SubResource("StandardMaterial3D_oihkw")
+surface_material_override/1 = SubResource("StandardMaterial3D_26ygv")
+
+[node name="Hair" parent="Oneiroi/RootNode/root/Skeleton3D" index="3"]
+layers = 4
+
+[node name="Feet" parent="Oneiroi/RootNode/root/Skeleton3D" index="4"]
+layers = 8
+
+[node name="Sandals" parent="Oneiroi/RootNode/root/Skeleton3D" index="5"]
+layers = 8
+
+[node name="Skirt" parent="Oneiroi/RootNode/root/Skeleton3D" index="6"]
+layers = 8
+
+[node name="Head" parent="Oneiroi/RootNode/root/Skeleton3D" index="7"]
+layers = 8
+
+[node name="TopPiece2" parent="Oneiroi/RootNode/root/Skeleton3D" index="8"]
+layers = 8
+
+[node name="Top" parent="Oneiroi/RootNode/root/Skeleton3D" index="9"]
+layers = 8
+
+[node name="Wings" parent="Oneiroi/RootNode/root/Skeleton3D" index="10"]
+layers = 8
+
+[node name="Face" parent="Oneiroi/RootNode/root/Skeleton3D" index="11"]
+layers = 4
+
+[node name="TopPiece_001" parent="Oneiroi/RootNode/root/Skeleton3D" index="12"]
+layers = 8
+
+[editable path="Oneiroi"]
