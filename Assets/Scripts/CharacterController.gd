@@ -140,7 +140,7 @@ func animate(delta):
 func getFloorType(floor):
 	if floor.is_in_group("carpet"):
 		return "carpet"
-	if floor.is_in_group("hard"):
+	if floor.is_in_group("hard") or floor.is_in_group("wood"):
 		return "hard"
 	else:
 		return "silent"

@@ -15,6 +15,10 @@ run/main_scene="res://Assets/Levels/Startup.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+driver/enable_input=true
+
 [autoload]
 
 GameManager="*res://Assets/Scripts/game_manager.gd"

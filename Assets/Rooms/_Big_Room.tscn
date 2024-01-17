@@ -667,7 +667,7 @@ mesh = SubResource("PlaneMesh_bgcol")
 [node name="TopHull" type="Node3D" parent="RoomOuter/TopEntrance"]
 transform = Transform3D(1, -1.31877e-10, -1.16415e-10, 9.86233e-11, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="TopHull" type="CSGMesh3D" parent="RoomOuter/TopEntrance/TopHull"]
+[node name="TopHull" type="CSGMesh3D" parent="RoomOuter/TopEntrance/TopHull" groups=["carpet"]]
 transform = Transform3D(1, -1.35486e-09, -1.39698e-09, 1.55433e-09, 1, 4.65661e-10, 0, -3.49246e-10, 1, -7.89889, -0.232127, -0.00521278)
 use_collision = true
 mesh = SubResource("PlaneMesh_2jerx")

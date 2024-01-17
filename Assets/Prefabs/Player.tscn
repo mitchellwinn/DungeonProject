@@ -236,7 +236,7 @@ layers = 8
 surface_material_override/0 = ExtResource("9_56wic")
 
 [node name="HeadSocket" type="BoneAttachment3D" parent="Oneiroi/RootNode/root/Skeleton3D" index="13"]
-transform = Transform3D(1, 1.86265e-09, -6.79931e-05, -6.75777e-05, -0.110323, -0.993896, -7.50413e-06, 0.993895, -0.110323, -1.1374e-08, 0.0107611, 5.85224)
+transform = Transform3D(1, 1.44355e-08, -6.79968e-05, -6.75749e-05, -0.110324, -0.993896, -7.51438e-06, 0.993895, -0.110324, -8.13119e-09, 0.010761, 5.85224)
 bone_name = "head.x"
 bone_idx = 18
 
@@ -244,7 +244,7 @@ bone_idx = 18
 transform = Transform3D(1, -9.09495e-13, 1.45519e-11, 3.18323e-12, 1, 2.23517e-08, 1.45519e-11, 5.21541e-08, 1, 4.36333e-05, 0.233244, 0.499046)
 
 [node name="LeftFootSocket" type="BoneAttachment3D" parent="Oneiroi/RootNode/root/Skeleton3D" index="14"]
-transform = Transform3D(-0.949931, 0.254644, 0.181079, -0.312464, -0.774151, -0.550505, -1.49012e-08, -0.579522, 0.814956, 0.479281, 0.506448, 0.672746)
+transform = Transform3D(-0.949931, 0.254643, 0.181079, -0.312464, -0.774151, -0.550505, 8.19564e-07, -0.579522, 0.814956, 0.479281, 0.506448, 0.672747)
 bone_name = "foot.l"
 bone_idx = 71
 
@@ -259,7 +259,7 @@ transform = Transform3D(1, 0, -9.31323e-10, 2.98023e-08, 1, 0, 4.65661e-09, 0, 1
 shape = SubResource("BoxShape3D_jjbi7")
 
 [node name="RightFootSocket" type="BoneAttachment3D" parent="Oneiroi/RootNode/root/Skeleton3D" index="15"]
-transform = Transform3D(-0.980344, -0.160793, -0.114343, 0.197304, -0.798937, -0.568128, -2.17929e-06, -0.579522, 0.814957, -0.634655, -0.263973, 0.672745)
+transform = Transform3D(-0.980344, -0.160793, -0.114344, 0.197304, -0.798937, -0.568128, -2.73623e-06, -0.579521, 0.814957, -0.634655, -0.263974, 0.672745)
 bone_name = "foot.r"
 bone_idx = 77
 
@@ -282,6 +282,14 @@ emission_angle_enabled = true
 emission_angle_degrees = 90.0
 
 [node name="RightFootstep" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1.20258, 0)
+stream = SubResource("AudioStream_xt2ru")
+volume_db = -20.0
+max_distance = 20.0
+emission_angle_enabled = true
+emission_angle_degrees = 90.0
+
+[node name="Voice" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1.20258, 0)
 stream = SubResource("AudioStream_xt2ru")
 volume_db = -20.0

@@ -40,9 +40,10 @@ sdfgi_min_cell_size = 61.9843
 sdfgi_cascade0_distance = 3966.99
 sdfgi_max_distance = 1.01555e+06
 glow_enabled = true
-glow_intensity = 2.54
+glow_normalized = true
+glow_intensity = 8.0
 glow_strength = 0.54
-glow_bloom = 0.11
+glow_bloom = 1.0
 glow_blend_mode = 0
 fog_light_color = Color(0.635294, 0.74902, 0, 1)
 fog_light_energy = 0.7
@@ -267,7 +268,6 @@ transform = Transform3D(13, 0, 0, 0, 13, 0, 0, 0, 13, 0, 8.21021, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_3xvcy")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Cave/Cube" index="0" groups=["hard"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Cave/Cube/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_cr0e5")
