@@ -7,36 +7,52 @@ var targetPortal
 @export var direction: Node3D
 var playerCamRelativeToPortal
 var movedToTargetPortal
+var on = false
+var parent = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	camera.environment = get_viewport().world_3d.environment.duplicate()
 	camera.environment.tonemap_mode = Environment.TONE_MAPPER_LINEAR
 	camera.environment.tonemap_exposure = 1
+	camera.environment.tonemap_exposure = 1
+	camera.environment.glow_enabled = false
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	if targetPortal and GameManager.activePlayer:
-		if (global_position - GameManager.activePlayer.camera.global_position).length()>5:
-			targetPortal.camera.current = false
-		else:
-			if (targetPortal.camera.global_position-GameManager.activePlayer.camera.global_position).length()>1:
-				targetPortal.camera.current = true
+	if targetPortal and GameManager.activePlayer and on and GameManager.dungeonExists:
+		#if (global_position - GameManager.activePlayer.camera.global_position).length()>5:
+		#	targetPortal.camera.current = false#can't see to faraway camera
+		#else:
+		#	targetPortal.camera.current = true
 		var playerCamRelativeToPortal = gate.global_transform.affine_inverse()*GameManager.activePlayer.camera.global_transform
 		var movedToTargetPortal = targetPortal.gate.global_transform * playerCamRelativeToPortal
 		targetPortal.camera.global_transform = movedToTargetPortal
 		get_child(0).material.set_shader_parameter("texture_albedo",targetPortal.view.get_texture())
+		get_child(1).material.set("albedo_texture", GameManager.portalStatic.get_texture())
+		get_child(0).visible = true
+		get_child(1).visible = true
+	if !on:
+		get_child(0).visible = false
+		get_child(1).visible = false
+		
 		
 
 func link(portal):
+	parent = true
 	targetPortal = portal
 	targetPortal.targetPortal = self
+	targetPortal.camera.current = true
+	on = true
+	if targetPortal.gate.name != "Gate Of Ivory":
+		targetPortal.on = true
+	print("target portal of "+gate.name+" ("+gate.get_parent().name+") has been linked to "+targetPortal.gate.name+" ("+targetPortal.gate.get_parent().name+")")
 
 func _on_area_3d_body_entered(body):
 	print(body.name)
 	#return
-	if targetPortal:
+	if targetPortal and on:
 		if body.velocity.normalized().dot(direction.global_transform.basis.z)>0 and GameManager.teleportCool<0:
 			print("TELEPORT")
 			print("initial pos: "+str(body.global_position))

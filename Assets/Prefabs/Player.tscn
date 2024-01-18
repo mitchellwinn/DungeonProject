@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://uldgeps0kb77"]
+[gd_scene load_steps=18 format=3 uid="uid://uldgeps0kb77"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/CharacterController.gd" id="1_ph60j"]
 [ext_resource type="Script" path="res://Assets/scripts/stats.gd" id="2_ue7er"]
@@ -9,6 +9,7 @@
 [ext_resource type="Material" uid="uid://c610nsja71bri" path="res://Assets/Materials/Oneiroi/skin.tres" id="7_k0sub"]
 [ext_resource type="Material" uid="uid://sb4cnc8372mb" path="res://Assets/Materials/Oneiroi/sandals.tres" id="8_or8mn"]
 [ext_resource type="Material" uid="uid://leydxctn8kk1" path="res://Assets/Materials/Oneiroi/wings.tres" id="9_56wic"]
+[ext_resource type="Script" path="res://Assets/Scripts/VOIP.gd" id="10_ap7iq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xyitk"]
 radius = 0.367273
@@ -27,11 +28,11 @@ properties/2/path = NodePath("stats:ign")
 properties/2/spawn = true
 properties/2/sync = true
 properties/2/watch = false
-properties/3/path = NodePath("Oneiroi/AnimationPlayer:current_animation")
+properties/3/path = NodePath("stats:baseAnimation")
 properties/3/spawn = true
 properties/3/sync = true
 properties/3/watch = false
-properties/4/path = NodePath("Oneiroi/AnimationPlayer:speed_scale")
+properties/4/path = NodePath("stats:animSpeed")
 properties/4/spawn = true
 properties/4/sync = true
 properties/4/watch = false
@@ -59,11 +60,13 @@ size = Vector3(0.511855, 1, 0.222978)
 
 [sub_resource type="AudioStream" id="AudioStream_xt2ru"]
 
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_oe57v"]
+
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "camContainer", "stats", "skeleton", "animator", "headSocket") groups=["player"]]
 collision_layer = 16
 floor_max_angle = 0.872665
 script = ExtResource("1_ph60j")
-camera = NodePath("CamContainer/Camera3D")
+camera = NodePath("Camera3D")
 camContainer = NodePath("CamContainer")
 stats = NodePath("stats")
 skeleton = NodePath("Oneiroi/RootNode/root/Skeleton3D")
@@ -71,12 +74,6 @@ animator = NodePath("Oneiroi/AnimationPlayer")
 headSocket = NodePath("Oneiroi/RootNode/root/Skeleton3D/HeadSocket/Offset")
 
 [node name="CamContainer" type="Node3D" parent="."]
-
-[node name="Camera3D" type="Camera3D" parent="CamContainer"]
-transform = Transform3D(-0.999803, 6.87196e-05, 0.0198501, 0.000819077, 0.999285, 0.0377954, -0.0198334, 0.0378042, -0.999088, -2.41937e-06, 1.06882, 0.0427742)
-cull_mask = 1048571
-current = true
-far = 500.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_xyitk")
@@ -116,68 +113,66 @@ script = ExtResource("2_ue7er")
 transform = Transform3D(0.38, 0, 0, 0, 0.38, 0, 0, 0, 0.38, 0, -1.25, 0)
 
 [node name="Skeleton3D" parent="Oneiroi/RootNode/root" index="0"]
-bones/0/position = Vector3(0.47928, 0.506447, 0.672746)
-bones/0/rotation = Quaternion(-1.05073e-05, -1.68373e-06, 0.987403, -0.158224)
-bones/1/position = Vector3(-3.95317e-14, 0.0154269, 3.96217)
-bones/1/rotation = Quaternion(0.707107, -2.49792e-06, -2.4979e-06, 0.707107)
-bones/2/position = Vector3(0.381962, 1.69144, -0.280965)
-bones/2/rotation = Quaternion(-0.404825, -0.0503768, 0.0768066, 0.909769)
+bones/0/position = Vector3(0.479199, 1.47472, 2.05871)
+bones/0/rotation = Quaternion(-0.00728827, -0.788446, 0.615061, -0.000102266)
+bones/1/position = Vector3(-5.3314e-06, -0.361762, 3.6807)
+bones/1/rotation = Quaternion(0.791832, -4.97727e-07, -5.54254e-06, 0.610738)
+bones/2/position = Vector3(0.382327, 1.72605, -0.1356)
+bones/2/rotation = Quaternion(-0.427514, -0.200129, 0.0623063, 0.879373)
 bones/3/rotation = Quaternion(0.366107, -0.603986, 0.624236, -0.333911)
-bones/4/position = Vector3(-1.31607e-06, 0.481747, -1.52588e-07)
-bones/4/rotation = Quaternion(-0.374539, -0.325674, 0.0242441, 0.867796)
-bones/5/position = Vector3(9.05991e-08, 0.24047, -3.43323e-07)
-bones/5/rotation = Quaternion(0.688306, 0.234436, -0.193624, 0.658623)
-bones/6/position = Vector3(6.10352e-07, 0.647892, -8.39233e-07)
-bones/6/rotation = Quaternion(-0.301008, -0.413767, -0.0989515, 0.853463)
+bones/4/position = Vector3(-9.44138e-07, 0.481748, -6.4373e-08)
+bones/5/position = Vector3(5.68434e-16, 0.240471, 2.00272e-07)
+bones/6/position = Vector3(0.173226, 0.383058, -0.0837448)
+bones/6/rotation = Quaternion(-0.450695, -0.323992, 0.0509526, 0.830245)
 bones/6/scale = Vector3(1, 1, 1)
-bones/7/position = Vector3(2.88486e-07, 1.28695, -4.57764e-07)
-bones/7/rotation = Quaternion(0.0167648, 0.036847, 0.00560675, 0.999165)
-bones/8/position = Vector3(-0.381966, 1.69144, -0.28096)
-bones/8/rotation = Quaternion(-0.404826, 0.0503834, -0.0768038, 0.909769)
-bones/9/rotation = Quaternion(-0.366107, -0.603986, 0.624236, 0.333911)
-bones/10/position = Vector3(1.90735e-08, 0.481748, -1.52588e-07)
-bones/10/rotation = Quaternion(-0.374539, 0.325674, -0.0242441, 0.867796)
-bones/11/position = Vector3(-1.05381e-06, 0.240471, 2.28882e-07)
-bones/11/rotation = Quaternion(0.688306, -0.234436, 0.193624, 0.658624)
-bones/12/position = Vector3(-1.52588e-07, 0.64789, 1.52588e-07)
-bones/12/rotation = Quaternion(-0.298048, 0.414685, 0.103112, 0.853564)
+bones/7/position = Vector3(0.0550692, 1.28058, -0.00424653)
+bones/7/rotation = Quaternion(0.00214115, 0.036363, 0.10861, 0.993417)
+bones/8/position = Vector3(-0.382329, 1.72605, -0.135594)
+bones/8/rotation = Quaternion(-0.427515, 0.200136, -0.0623033, 0.879372)
+bones/9/rotation = Quaternion(-0.366107, -0.603986, 0.624236, 0.33391)
+bones/10/position = Vector3(9.63211e-07, 0.481747, -7.39098e-08)
+bones/11/position = Vector3(-4.91142e-07, 0.24047, -1.19209e-07)
+bones/12/position = Vector3(-0.173227, 0.383059, -0.0837452)
+bones/12/rotation = Quaternion(-0.450702, 0.323983, -0.0509676, 0.830244)
 bones/12/scale = Vector3(1, 1, 1)
-bones/13/position = Vector3(4.17233e-08, 1.28695, -3.8147e-07)
-bones/13/rotation = Quaternion(0.0183439, -0.035748, -0.0107362, 0.999135)
-bones/14/rotation = Quaternion(-0.036354, -0.00329558, 0.000120144, 0.999334)
-bones/15/rotation = Quaternion(2.23525e-08, 0.00330141, -1.05097e-10, 0.999995)
-bones/16/rotation = Quaternion(-3.72529e-08, -1.19472e-07, -6.31159e-12, 1)
-bones/17/rotation = Quaternion(0.33135, 0.00634612, 0.00222874, 0.943484)
-bones/18/rotation = Quaternion(-0.243623, -0.00655641, -0.00163039, 0.969846)
-bones/19/rotation = Quaternion(-0.581868, -0.380922, -0.472058, 0.541746)
-bones/20/rotation = Quaternion(-0.564623, 0.154373, 0.00359319, 0.810775)
-bones/21/rotation = Quaternion(3.86749e-07, -0.374916, 3.53308e-07, 0.927059)
-bones/22/rotation = Quaternion(9.9354e-08, 8.86359e-08, -0.152335, 0.988329)
-bones/23/rotation = Quaternion(-9.37158e-08, -0.0838089, 9.21214e-08, 0.996482)
-bones/24/rotation = Quaternion(-0.051626, -0.100422, -0.102383, 0.988316)
-bones/32/rotation = Quaternion(-0.0498473, -0.0344454, 0.0269044, 0.9978)
-bones/35/rotation = Quaternion(-0.0371935, 0.00447269, -0.0452798, 0.998272)
-bones/40/rotation = Quaternion(0.110558, -0.00231772, -0.0366284, 0.993192)
-bones/44/rotation = Quaternion(-0.581868, 0.380922, 0.472058, 0.541746)
-bones/45/rotation = Quaternion(-0.55706, -0.17482, -0.037887, 0.810979)
-bones/46/rotation = Quaternion(2.88318e-07, 0.37751, 1.27861e-07, 0.926005)
-bones/47/rotation = Quaternion(3.04754e-07, 1.5513e-08, 0.149271, 0.988796)
-bones/48/rotation = Quaternion(-1.17191e-07, 0.0885359, -4.75531e-08, 0.996073)
-bones/49/rotation = Quaternion(-0.0592182, 0.105858, 0.122749, 0.984997)
-bones/57/rotation = Quaternion(-0.0548211, 0.0381255, -0.138987, 0.98804)
-bones/60/rotation = Quaternion(-0.0410099, -0.00473038, 0.0882095, 0.995246)
-bones/65/rotation = Quaternion(-0.0111363, 0.0582604, -0.104868, 0.992716)
-bones/69/rotation = Quaternion(0.941668, 0.0170743, 0.327226, -0.0767691)
-bones/70/rotation = Quaternion(-1.83978e-07, -1.70767e-08, 0.0295019, 0.999565)
-bones/71/rotation = Quaternion(0.212638, 0.740823, -0.480122, 0.418868)
-bones/72/rotation = Quaternion(2.41279e-07, 0.994601, 0.103771, -9.11992e-07)
-bones/73/rotation = Quaternion(-1.60264e-07, 0.0677775, -1.80502e-08, 0.9977)
-bones/74/rotation = Quaternion(-3.27773e-07, 0.195161, -2.2345e-07, 0.980771)
-bones/75/rotation = Quaternion(0.890965, -0.110238, -0.438968, 0.0365585)
-bones/76/rotation = Quaternion(-3.09684e-08, -1.81907e-07, -0.0927132, 0.995693)
-bones/77/rotation = Quaternion(-0.217361, 0.753999, -0.39081, -0.481153)
-bones/79/rotation = Quaternion(6.62316e-10, -0.00199894, -1.34575e-07, 0.999998)
-bones/80/rotation = Quaternion(-3.3008e-08, -0.0758899, -2.00524e-07, 0.997116)
+bones/13/position = Vector3(-0.05474, 1.28092, -0.00422064)
+bones/13/rotation = Quaternion(0.000875539, -0.0373694, -0.104623, 0.993809)
+bones/14/position = Vector3(-1.93939e-07, 0.427056, -0.0287791)
+bones/14/rotation = Quaternion(-0.0389328, -0.12715, 0.0415976, 0.990246)
+bones/15/rotation = Quaternion(0.0235125, 0.0610539, -0.0142637, 0.997755)
+bones/16/rotation = Quaternion(-0.00526716, -0.000190622, 0.000164961, 0.999986)
+bones/17/rotation = Quaternion(0.331353, 0.00614663, 0.00276058, 0.943483)
+bones/18/rotation = Quaternion(-0.395983, 0.0483055, -0.0450662, 0.915878)
+bones/19/rotation = Quaternion(0.510599, 0.449819, 0.557883, -0.475097)
+bones/20/rotation = Quaternion(-0.569175, -0.0481071, 0.114803, 0.81274)
+bones/21/rotation = Quaternion(3.93363e-07, -0.148462, -3.90441e-08, 0.988918)
+bones/22/rotation = Quaternion(1.91816e-07, 2.40352e-07, -0.625702, 0.780062)
+bones/23/rotation = Quaternion(-3.88764e-08, 0.00414265, 2.11734e-08, 0.999991)
+bones/24/rotation = Quaternion(-0.16007, 0.000373867, -0.322741, 0.932853)
+bones/32/rotation = Quaternion(-0.0498885, -0.0344886, 0.0284276, 0.997754)
+bones/35/rotation = Quaternion(-0.0372548, 0.00447439, -0.0459519, 0.998238)
+bones/40/rotation = Quaternion(0.10887, -0.00283937, -0.0346288, 0.993448)
+bones/44/rotation = Quaternion(-0.580987, 0.381917, 0.473334, 0.540876)
+bones/45/rotation = Quaternion(-0.506306, -0.236174, -0.118244, 0.82091)
+bones/46/rotation = Quaternion(6.36872e-08, 0.398567, -1.62524e-07, 0.917139)
+bones/47/rotation = Quaternion(-1.4433e-07, 1.08583e-07, 0.229727, 0.973255)
+bones/48/rotation = Quaternion(-5.39943e-08, 0.00793379, -9.31497e-08, 0.999969)
+bones/49/rotation = Quaternion(-0.0688038, 0.0258375, 0.12061, 0.989976)
+bones/57/rotation = Quaternion(-0.0546784, 0.0380375, -0.136671, 0.988374)
+bones/60/rotation = Quaternion(-0.040925, -0.00472108, 0.0872284, 0.995336)
+bones/65/rotation = Quaternion(-0.00870152, 0.0567546, -0.102086, 0.993116)
+bones/69/rotation = Quaternion(0.674476, 0.0686466, 0.733758, 0.0443626)
+bones/70/rotation = Quaternion(-2.58256e-07, -2.36367e-07, 0.678995, 0.734143)
+bones/71/rotation = Quaternion(0.223936, 0.654918, -0.277179, 0.666414)
+bones/72/rotation = Quaternion(-4.1681e-07, 0.994602, 0.103762, -8.46768e-07)
+bones/73/rotation = Quaternion(-1.81369e-08, -0.215952, 1.72141e-07, 0.976402)
+bones/74/rotation = Quaternion(2.23091e-07, -0.288303, 6.10087e-07, 0.957539)
+bones/75/rotation = Quaternion(0.683255, -0.329655, -0.575849, 0.304775)
+bones/76/rotation = Quaternion(8.33183e-08, -7.90005e-08, -0.284539, 0.958665)
+bones/77/rotation = Quaternion(0.348047, -0.633743, 0.418137, 0.549905)
+bones/78/rotation = Quaternion(7.54671e-06, 0.994604, 0.103749, 1.45661e-06)
+bones/79/rotation = Quaternion(-7.30408e-08, 0.151413, 1.32439e-07, 0.988468)
+bones/80/rotation = Quaternion(2.84839e-08, 0.156541, -4.65098e-08, 0.98767)
 
 [node name="Belt" parent="Oneiroi/RootNode/root/Skeleton3D" index="0"]
 layers = 8
@@ -236,7 +231,7 @@ layers = 8
 surface_material_override/0 = ExtResource("9_56wic")
 
 [node name="HeadSocket" type="BoneAttachment3D" parent="Oneiroi/RootNode/root/Skeleton3D" index="13"]
-transform = Transform3D(1, 1.44355e-08, -6.79968e-05, -6.75749e-05, -0.110324, -0.993896, -7.51438e-06, 0.993895, -0.110324, -8.13119e-09, 0.010761, 5.85224)
+transform = Transform3D(0.999975, 0.000448644, -0.00711951, -0.00706849, -0.0721712, -0.997367, -0.000961334, 0.997391, -0.0721662, -0.104838, -0.870348, 5.49637)
 bone_name = "head.x"
 bone_idx = 18
 
@@ -244,7 +239,7 @@ bone_idx = 18
 transform = Transform3D(1, -9.09495e-13, 1.45519e-11, 3.18323e-12, 1, 2.23517e-08, 1.45519e-11, 5.21541e-08, 1, 4.36333e-05, 0.233244, 0.499046)
 
 [node name="LeftFootSocket" type="BoneAttachment3D" parent="Oneiroi/RootNode/root/Skeleton3D" index="14"]
-transform = Transform3D(-0.949931, 0.254643, 0.181079, -0.312464, -0.774151, -0.550505, 8.19564e-07, -0.579522, 0.814956, 0.479281, 0.506448, 0.672747)
+transform = Transform3D(-0.999887, 0.0151225, -0.00110228, 0.0122172, 0.760469, -0.649259, -0.00898025, -0.649198, -0.760565, 0.480758, 1.47567, 2.05898)
 bone_name = "foot.l"
 bone_idx = 71
 
@@ -259,7 +254,7 @@ transform = Transform3D(1, 0, -9.31323e-10, 2.98023e-08, 1, 0, 4.65661e-09, 0, 1
 shape = SubResource("BoxShape3D_jjbi7")
 
 [node name="RightFootSocket" type="BoneAttachment3D" parent="Oneiroi/RootNode/root/Skeleton3D" index="15"]
-transform = Transform3D(-0.980344, -0.160793, -0.114344, 0.197304, -0.798937, -0.568128, -2.73623e-06, -0.579521, 0.814957, -0.634655, -0.263974, 0.672745)
+transform = Transform3D(-1, -0.00111966, -0.001073, 0.00140163, -0.948553, -0.316614, -0.00066348, -0.316616, 0.948553, -0.476307, -1.46193, 0.702135)
 bone_name = "foot.r"
 bone_idx = 77
 
@@ -289,13 +284,28 @@ max_distance = 20.0
 emission_angle_enabled = true
 emission_angle_degrees = 90.0
 
-[node name="Voice" type="AudioStreamPlayer3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1.20258, 0)
+[node name="VOIP" type="Node3D" parent="." node_paths=PackedStringArray("input", "output")]
+script = ExtResource("10_ap7iq")
+input = NodePath("MicInput")
+output = NodePath("VoiceOutput")
+
+[node name="MicInput" type="AudioStreamPlayer3D" parent="VOIP"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.02635, 0)
 stream = SubResource("AudioStream_xt2ru")
-volume_db = -20.0
 max_distance = 20.0
+bus = &"Record"
 emission_angle_enabled = true
 emission_angle_degrees = 90.0
+
+[node name="VoiceOutput" type="AudioStreamPlayer3D" parent="VOIP"]
+stream = SubResource("AudioStreamGenerator_oe57v")
+autoplay = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.999803, 6.87191e-05, 0.0198502, 0.000819077, 0.999285, 0.0377954, -0.0198334, 0.0378042, -0.999088, -2.41937e-06, 1.06882, 0.0427742)
+cull_mask = 1048571
+current = true
+far = 500.0
 
 [connection signal="body_entered" from="Oneiroi/RootNode/root/Skeleton3D/LeftFootSocket/Offset/LeftFootstep" to="." method="_on_left_footstep_body_entered"]
 [connection signal="body_entered" from="Oneiroi/RootNode/root/Skeleton3D/RightFootSocket/Offset/RightFootstep" to="." method="_on_right_footstep_body_entered"]

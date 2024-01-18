@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dlo3lbd0ggulv"]
+
+[ext_resource type="Shader" path="res://Assets/Shaders/_Benji_Screen_Space_Camera_Ripple.gdshader" id="1_p6080"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_p6080")
+shader_parameter/lighting = true
+shader_parameter/_VertexAmplitudeMult = 1.0
+shader_parameter/_VertexAmplitude = 0.033
+shader_parameter/_VertexFrequencyMult = 1.0
+shader_parameter/_VertexFrequency = 2.977
+shader_parameter/_VertexWavelengthMult = 0.978
+shader_parameter/_VertexWavelength = 0.237
+shader_parameter/_VertexPeakWidth = 1.0

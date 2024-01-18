@@ -15,7 +15,6 @@ var velocityLast
 @export var skeleton: Skeleton3D
 @export var animator: AnimationPlayer
 @export var headSocket: Node3D
-var baseAnimation
 var rng
 
 func _ready():
@@ -28,7 +27,11 @@ func _ready():
 func _enter_tree():
 	set_multiplayer_authority(name.to_int())
 	if !is_multiplayer_authority():
+		$NameTag.set_layer_mask_value(3,false)
+		$NameTag.set_layer_mask_value(4,true)
 		for mesh in skeleton.get_children():
+			if mesh is BoneAttachment3D:
+				continue
 			mesh.set_layer_mask_value(3,false)
 			mesh.set_layer_mask_value(4,true)
 		camera.current = false
@@ -43,6 +46,7 @@ func _physics_process(delta):
 	$NameTag.text = stats.ign
 	$NameTag.global_transform.basis = GameManager.activePlayer.camera.global_transform.basis
 	if !is_multiplayer_authority():
+		animateRemote()
 		return
 	if Input.is_action_just_pressed("tab"):
 		match Input.get_mouse_mode():
@@ -117,25 +121,28 @@ func animate(delta):
 	if is_on_floor():
 		if velocity.length()>MOVE_SPEED*1 and runToggle>1:
 			if basis.z.dot(velocity.normalized())>0:
-				baseAnimation = "run"
-				animator.play("root|"+baseAnimation,3,velocity.length()/3,false)
+				stats.animSpeed = velocity.length()/3
+				stats.baseAnimation = "run"
 			else:
-				baseAnimation = "walkBackwards"
-				animator.play("root|"+baseAnimation,3,velocity.length()/3,false)
+				stats.animSpeed = velocity.length()/3
+				stats.baseAnimation = "walkBackwards"
 		elif velocity.length()>MOVE_SPEED*1:
 			if basis.z.dot(velocity.normalized())>0:
-				baseAnimation = "walk"
-				animator.play("root|"+baseAnimation,3,velocity.length()/3,false)
+				stats.animSpeed = velocity.length()/3
+				stats.baseAnimation = "walk"
 			else:
-				baseAnimation = "walkBackwards"
-				animator.play("root|"+baseAnimation,3,velocity.length()/3,false)
+				stats.animSpeed = velocity.length()/3
+				stats.baseAnimation = "walkBackwards"
 		else:
-			baseAnimation = "idle"
-			animator.play("root|"+baseAnimation,3,1,false)
+			stats.baseAnimation = "idle"
+			stats.animSpeed = 1
 	else:
 		pass
-	print(baseAnimation)
+	animator.play("root|"+stats.baseAnimation,3,stats.animSpeed,false)
+	#print(baseAnimation)
 
+func animateRemote():
+	animator.play("root|"+stats.baseAnimation,3,stats.animSpeed,false)
 
 func getFloorType(floor):
 	if floor.is_in_group("carpet"):

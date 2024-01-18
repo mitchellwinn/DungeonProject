@@ -23,6 +23,7 @@ var entrances: Array
 @export var gateOfIvory: Node3D
 @export var gateOfHornPortal: Node3D
 @export var gateOfIvoryPortal: Node3D
+var activeEntranceCount
 
 func initializeRoom(root):
 	appendEntrancesToGroup()
@@ -36,10 +37,11 @@ func initializeRoom(root):
 	sceneRoot = root
 	for light in lightsParent.get_children():
 		light.light_energy = root.rng.randf_range(0,5)
-	var activeEntranceCount = 0
+	activeEntranceCount = 0
 	for entrance in entrances:
 		#print(entrance.name)
 		activeEntranceCount += testEntranceGeneration(entrance)
+		
 	#print("this room has "+str(activeEntranceCount)+" active entrances.")
 
 func appendEntrancesToGroup():

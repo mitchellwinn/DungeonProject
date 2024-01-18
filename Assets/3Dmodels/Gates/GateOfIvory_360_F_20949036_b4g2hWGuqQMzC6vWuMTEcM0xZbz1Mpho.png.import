@@ -2,17 +2,18 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://daxn40girkrqp"
-path.s3tc="res://.godot/imported/pillarDISPLACE.png-1212adaa882679159c722bbfa98fe8e5.s3tc.ctex"
+uid="uid://dd4jfsi0gsrob"
+path.s3tc="res://.godot/imported/GateOfIvory_360_F_20949036_b4g2hWGuqQMzC6vWuMTEcM0xZbz1Mpho.png-d898cd74dfbb439307d8a7e85c2601df.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={}
 
 [deps]
 
-source_file="res://Assets/Materials/Pillar/pillarDISPLACE.png"
-dest_files=["res://.godot/imported/pillarDISPLACE.png-1212adaa882679159c722bbfa98fe8e5.s3tc.ctex"]
+source_file="res://Assets/3Dmodels/Gates/GateOfIvory_360_F_20949036_b4g2hWGuqQMzC6vWuMTEcM0xZbz1Mpho.png"
+dest_files=["res://.godot/imported/GateOfIvory_360_F_20949036_b4g2hWGuqQMzC6vWuMTEcM0xZbz1Mpho.png-d898cd74dfbb439307d8a7e85c2601df.s3tc.ctex"]
 
 [params]
 

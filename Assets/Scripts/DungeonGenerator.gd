@@ -13,7 +13,9 @@ var rooms: Array
 var timeSinceLastCompletion = 0
 const _test_room = preload("res://Assets/Rooms/_Test_Room.tscn")
 const _big_room = preload("res://Assets/Rooms/_Big_Room.tscn")
+var ivoryConnection = false
 var complete = false
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,6 +23,7 @@ func _ready():
 	await generate()
 	await removeLooseExits()
 	print ("generation complete!")
+	GameManager.dungeonExists = true
 		
 func saveGeneratedMap():
 	var node_to_save = get_node("RootRoom")
@@ -32,6 +35,15 @@ func saveGeneratedMap():
 	scene.pack(node_to_save)
 	ResourceSaver.save(scene, "res://Assets/Rooms/RoomGenerationTest.tscn")	
 	#get_tree().quit()
+
+func portalPopulation(room):
+	if room.nestLevel > 0 and !ivoryConnection and room.activeEntranceCount<=1:
+		room.gateOfIvory.visible = true
+		ivoryConnection = true
+		await get_tree().physics_frame
+		gateOfIvoryPortal.link(room.gateOfIvoryPortal)
+	else:
+		room.gateOfIvory.queue_free()
 
 func generate():
 	if randomSeed and multiplayer.is_server():
@@ -124,13 +136,15 @@ func removeLooseExits():
 	var i = 0
 	#print("Room generation ended on index "+str(rooms.size()))
 	while i < rooms.size():
-		#print("room"+str(i)+" "+rooms[i].name)
+		#print("room"+str(i)+" "+rooms[i].name) 
 		for entrance in rooms[i].entrances:
 			if !entrance.hasConnection or entranceOverlappingNothing(entrance):
 				#print("Removed "+entrance.direction+entrance.notes+" entrance.")
 				#entrance.scale = Vector3.ZERO
 				#entrance.visible = false
 				entrance.queue_free()
+				rooms[i].activeEntranceCount-=1
+		portalPopulation(rooms[i])
 		i+=1
 
 func entranceOverlappingNothing(entrance):

@@ -2,13 +2,14 @@ extends Node2D
 
 @export var ipField: TextEdit
 @export var nameEntry: TextEdit
+@export var portalStaticViewport: SubViewport
 var hostIP = ""
 
 var peer = ENetMultiplayerPeer.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	GameManager.portalStatic = portalStaticViewport
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

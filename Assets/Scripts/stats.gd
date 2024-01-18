@@ -2,6 +2,8 @@ extends Node
 
 
 @export var ign: String
+@export var baseAnimation: String
+@export var animSpeed: int
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

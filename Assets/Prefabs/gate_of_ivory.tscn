@@ -1,0 +1,164 @@
+[gd_scene load_steps=21 format=3 uid="uid://bdopk35decpw7"]
+
+[ext_resource type="PackedScene" uid="uid://mbhomh065sop" path="res://Assets/3Dmodels/Gates/GateOfIvory.glb" id="1_lfs76"]
+[ext_resource type="Texture2D" uid="uid://daxn40girkrqp" path="res://Assets/Materials/Pillar/pillarDISPLACE.png" id="2_afku7"]
+[ext_resource type="Texture2D" uid="uid://cntvy1dnjxg0k" path="res://Assets/3Dmodels/Gates/GateOfIvory_pillarnormal.png" id="3_dbbrc"]
+[ext_resource type="Texture2D" uid="uid://dd4jfsi0gsrob" path="res://Assets/3Dmodels/Gates/GateOfIvory_360_F_20949036_b4g2hWGuqQMzC6vWuMTEcM0xZbz1Mpho.png" id="4_keydc"]
+[ext_resource type="Texture2D" uid="uid://bf1rmhf2wubow" path="res://Assets/3Dmodels/Gates/GateOfIvory_2062-normal.png" id="5_dou2w"]
+[ext_resource type="Script" path="res://Assets/Scripts/Portal.gd" id="6_lxi6v"]
+[ext_resource type="Shader" path="res://Assets/Shaders/portal.gdshader" id="7_6ll5j"]
+[ext_resource type="PackedScene" uid="uid://cjoi8b1kq5f8t" path="res://Assets/Prefabs/video_stream_player.tscn" id="8_ca2sh"]
+[ext_resource type="Script" path="res://Assets/Scripts/video_stream_player.gd" id="9_lbcxa"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yd758"]
+resource_name = "Material.001"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.318998, 0.326657, 0.225353, 1)
+roughness = 0.5
+normal_enabled = true
+normal_texture = ExtResource("3_dbbrc")
+heightmap_enabled = true
+heightmap_scale = -2.059
+heightmap_texture = ExtResource("2_afku7")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6j2s2"]
+resource_name = "Material.004"
+cull_mode = 2
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 0.435294, 0, 1)
+albedo_texture = ExtResource("4_keydc")
+metallic = 1.0
+roughness = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x44ln"]
+resource_name = "Material"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_color = Color(0, 0, 0, 1)
+metallic = 0.425197
+roughness = 0.5
+normal_enabled = true
+normal_texture = ExtResource("5_dou2w")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vaexk"]
+resource_name = "Material"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_color = Color(0, 0, 0, 1)
+metallic = 0.425197
+roughness = 0.5
+normal_enabled = true
+normal_texture = ExtResource("5_dou2w")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_hmb2q"]
+size = Vector2(4.25, 2.5)
+
+[sub_resource type="ImageTexture" id="ImageTexture_57hpy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cqfgv"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("7_6ll5j")
+shader_parameter/texture_albedo = SubResource("ImageTexture_57hpy")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_1yle2"]
+viewport_path = NodePath("Gate Of Horn/RotationParent/Portal/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ym03h"]
+resource_local_to_scene = true
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_1yle2")
+proximity_fade_distance = 5.0
+distance_fade_mode = 1
+distance_fade_min_distance = 2.0
+distance_fade_max_distance = 5.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_hmjel"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_ym03h")
+size = Vector2(4.25, 2.5)
+subdivide_width = 5
+subdivide_depth = 5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wwrxm"]
+size = Vector3(0, 4.154, 2.328)
+
+[node name="Gate Of Ivory" type="Node3D"]
+transform = Transform3D(-1, 0, -8.9407e-08, 0, 1, 0, 8.9407e-08, 0, -1, -5, 2.071, 5)
+
+[node name="Model" parent="." instance=ExtResource("1_lfs76")]
+
+[node name="Cube" parent="Model" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_yd758")
+
+[node name="Cone" parent="Model" index="1"]
+transform = Transform3D(1.09589, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2496, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_6j2s2")
+
+[node name="Top" parent="Model" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_x44ln")
+
+[node name="Cube_002" parent="Model" index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vaexk")
+
+[node name="RotationParent" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="Portal" type="Node3D" parent="RotationParent" node_paths=PackedStringArray("view", "camera", "gate", "direction")]
+script = ExtResource("6_lxi6v")
+view = NodePath("")
+camera = NodePath("")
+gate = NodePath("")
+direction = NodePath("")
+
+[node name="TrueImage" type="CSGMesh3D" parent="RotationParent/Portal"]
+transform = Transform3D(-4.37114e-08, 1, -4.56956e-08, -1, -4.37114e-08, -4.37114e-08, -4.37114e-08, 4.56956e-08, 1, 0, 0.0398178, 0)
+layers = 2
+mesh = SubResource("PlaneMesh_hmb2q")
+material = SubResource("ShaderMaterial_cqfgv")
+
+[node name="CamViewport" type="SubViewport" parent="RotationParent/Portal"]
+size = Vector2i(3840, 2160)
+
+[node name="Camera3D" type="Camera3D" parent="RotationParent/Portal/CamViewport"]
+transform = Transform3D(-1, 0, -8.9407e-08, 0, 1, 0, 8.9407e-08, 0, -1, 0, 2.64902, 5.06243)
+cull_mask = 1048573
+current = true
+far = 100.0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="RotationParent/Portal/CamViewport/Camera3D"]
+visible = false
+
+[node name="SubViewport" type="SubViewport" parent="RotationParent/Portal"]
+size = Vector2i(1920, 1080)
+
+[node name="VideoStreamPlayer" parent="RotationParent/Portal/SubViewport" instance=ExtResource("8_ca2sh")]
+script = ExtResource("9_lbcxa")
+
+[node name="Obfuscation" type="CSGMesh3D" parent="RotationParent/Portal"]
+transform = Transform3D(-4.37114e-08, 1, -4.56956e-08, -1, -4.37114e-08, -4.37114e-08, -4.37114e-08, 4.56956e-08, 1, 0.165, 0.0398178, 0)
+layers = 2
+mesh = SubResource("PlaneMesh_hmjel")
+
+[node name="Area3D" type="Area3D" parent="RotationParent/Portal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.273192, 0)
+collision_layer = 2
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RotationParent/Portal/Area3D"]
+shape = SubResource("BoxShape3D_wwrxm")
+
+[node name="Direction" type="Node3D" parent="RotationParent/Portal"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="Step" type="CSGBox3D" parent="RotationParent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.45534, 0)
+use_collision = true
+size = Vector3(1.37, 1, 2.58)
+
+[connection signal="body_entered" from="RotationParent/Portal/Area3D" to="RotationParent/Portal" method="_on_area_3d_body_entered"]
+
+[editable path="Model"]
