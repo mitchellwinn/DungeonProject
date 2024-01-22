@@ -23,15 +23,19 @@ func interact():
 			await get_tree().create_timer(.35).timeout
 	elif GameManager.dungeonExists and GameManager.network.dreamDilatorInUse == "":
 		GameManager.network.rpcDreamDilatorUsage(GameManager.activePlayer.name)
-		await useDreamDilator()
+		await useDreamDilatorInDream()
+	elif !GameManager.dungeonExists and GameManager.network.dreamDilatorInUse == "":
+		GameManager.network.rpcDreamDilatorUsage(GameManager.activePlayer.name)
+		await useDreamDilatorInDream()
 	await get_tree().physics_frame
 	return false	
 
-func useDreamDilator():
+func useDreamDilatorInDream():
 	print("using dilator")
 	var looping = true
 	while looping:
-		GameManager.activePlayer.get_node("UI").visible = false
+		GameManager.activePlayer.get_node("UI/Main").visible = false
+		GameManager.activePlayer.get_node("UI/DreamDilator").visible = true
 		$Camera3D.current = true
 		GameManager.activePlayer.camera.current = false
 		await get_tree().physics_frame
@@ -40,5 +44,6 @@ func useDreamDilator():
 	print("done using dilator")
 	GameManager.activePlayer.camera.current = true
 	$Camera3D.current = false
-	GameManager.activePlayer.get_node("UI").visible = true
+	GameManager.activePlayer.get_node("UI/Main").visible = true
+	GameManager.activePlayer.get_node("UI/DreamDilator").visible = false
 	GameManager.network.rpcDreamDilatorUsage("")

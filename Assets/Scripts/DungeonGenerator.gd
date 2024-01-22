@@ -26,22 +26,15 @@ var complete = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	#generationMain()
+	pass
+		
+func generationMain():
 	print("Beginning dungeon generation...")
-	await generate()
+	await generateStart()
 	await removeLooseExits()
 	print ("generation complete!")
 	GameManager.dungeonExists = true
-		
-func saveGeneratedMap():
-	var node_to_save = get_node("RootRoom")
-	#print("Attempting to save  " + node_to_save.name + "\nWhich includes:")
-	for child in node_to_save.get_children():
-		child.set_owner(node_to_save)
-		#print(child.name)
-	var scene = PackedScene.new()
-	scene.pack(node_to_save)
-	ResourceSaver.save(scene, "res://Assets/Rooms/RoomGenerationTest.tscn")	
-	#get_tree().quit()
 
 func portalPopulation(room):
 	if room.nestLevel > nestLimit*.75 and !ivoryConnection and room.activeEntranceCount==1:
@@ -72,7 +65,7 @@ func ideaPopulation(room):
 			print(":-p")
 			await get_tree().physics_frame
 
-func generate():
+func generateStart():
 	if randomSeed and multiplayer.is_server():
 		rng.randomize()
 		seed = rng.seed

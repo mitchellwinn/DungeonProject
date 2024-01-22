@@ -16,6 +16,7 @@ func _ready():
 func add_player(id: int):
 	while !GameManager.dungeonExists:
 		await get_tree().physics_frame
+		break
 	var player = GameManager.player.instantiate()
 	player.name = str(id)
 	call_deferred("add_child",player)

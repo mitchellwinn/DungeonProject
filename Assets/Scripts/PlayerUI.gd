@@ -8,4 +8,4 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	$IdeasCount.text = "[center]\n"+str(GameManager.activePlayer.stats.ideas.size())+" IDEAS"
+	$Main/IdeasCount.text = "[center]\n"+str(GameManager.activePlayer.stats.ideas.size())+" IDEAS"

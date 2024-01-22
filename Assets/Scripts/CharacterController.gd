@@ -84,7 +84,7 @@ func checkInteract():
 			interacting = true
 			interacting = await camera.get_node("InteractCast").get_collider().interact()
 	else:
-		$UI/Target.text = ""
+		$UI/Main/Target.text = ""
 	
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:

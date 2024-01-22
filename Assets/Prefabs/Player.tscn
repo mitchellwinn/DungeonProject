@@ -337,16 +337,24 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("11_h5c6q")
 
-[node name="IdeasCount" type="RichTextLabel" parent="UI"]
+[node name="Main" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="IdeasCount" type="RichTextLabel" parent="UI/Main"]
 layout_direction = 1
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -578.0
-offset_top = 3.0
-offset_right = 573.0
-offset_bottom = 99.0
+offset_left = -573.0
+offset_top = -27.0
+offset_right = 578.0
+offset_bottom = 69.0
 grow_horizontal = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0.137255, 0, 0.25098, 0.384314)
@@ -364,7 +372,7 @@ text = "[center]
 0 IDEAS"
 fit_content = true
 
-[node name="Target" type="RichTextLabel" parent="UI"]
+[node name="Target" type="RichTextLabel" parent="UI/Main"]
 layout_direction = 1
 layout_mode = 1
 anchors_preset = 8
@@ -372,10 +380,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -575.0
-offset_top = -66.0
-offset_right = 576.0
-offset_bottom = 30.0
+offset_left = -570.0
+offset_top = 7.0
+offset_right = 581.0
+offset_bottom = 103.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
@@ -392,6 +400,42 @@ theme_override_font_sizes/normal_font_size = 21
 bbcode_enabled = true
 text = "[center]
 TARGET"
+fit_content = true
+
+[node name="DreamDilator" type="Control" parent="UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="IdeasCount" type="RichTextLabel" parent="UI/DreamDilator"]
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -573.0
+offset_top = -27.0
+offset_right = 578.0
+offset_bottom = 69.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.137255, 0, 0.25098, 0.384314)
+theme_override_colors/font_outline_color = Color(0.615686, 0.709804, 0, 1)
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 30
+theme_override_constants/line_separation = 0
+theme_override_constants/table_h_separation = 0
+theme_override_constants/table_v_separation = 0
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("11_a5ree")
+theme_override_font_sizes/normal_font_size = 46
+bbcode_enabled = true
+text = "[center]
+0 DEPOSITED IDEAS"
 fit_content = true
 
 [connection signal="body_entered" from="Oneiroi/RootNode/root/Skeleton3D/LeftFootSocket/Offset/LeftFootstep" to="." method="_on_left_footstep_body_entered"]
