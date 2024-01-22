@@ -10,11 +10,18 @@ var rooms: Array
 @export var rootRoomPosition: Vector3
 @export var roomDensity: int #adjusts the likelihood of each room having entrances to more rooms (1-1000)
 @export var bigRoomChance: int #adjusts the likelihood of each room being a big room instead (1-1000)
+@export var longConfusingRoomChance: int
+@export var departmentStoreChance: int
+@export var ideaChance: int
 var timeSinceLastCompletion = 0
 const _test_room = preload("res://Assets/Rooms/_Test_Room.tscn")
 const _big_room = preload("res://Assets/Rooms/_Big_Room.tscn")
+const _long_confusing_room = preload("res://Assets/Rooms/_Long_Confusing_Room.tscn")
+const _department_store = preload("res://Assets/Rooms/_Department_Store.tscn")
 var ivoryConnection = false
 var complete = false
+#ideas
+@export var good_idea = preload("res://Assets/Prefabs/good_idea.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -37,13 +44,33 @@ func saveGeneratedMap():
 	#get_tree().quit()
 
 func portalPopulation(room):
-	if room.nestLevel > 0 and !ivoryConnection and room.activeEntranceCount<=1:
+	if room.nestLevel > nestLimit*.75 and !ivoryConnection and room.activeEntranceCount==1:
+		print("Gate of Ivory room chosen!")
+		print("Of said room, nest level: "+str(room.nestLevel)+", entrance amount: "+str(room.activeEntranceCount))
 		room.gateOfIvory.visible = true
 		ivoryConnection = true
 		await get_tree().physics_frame
 		gateOfIvoryPortal.link(room.gateOfIvoryPortal)
 	else:
 		room.gateOfIvory.queue_free()
+
+func ideaPopulation(room):
+	while rng.randi_range(0,1000)>(1000-(ideaChance+room.nestLevel*10)):
+		var idea = good_idea.instantiate()
+		room.add_child(idea)
+		idea.position = Vector3.ZERO
+		idea.global_position.x += rng.randf_range(-room.get_node("RoomOuter").size.x/2+1,room.get_node("RoomOuter").size.x/2-1)
+		idea.global_position.z += rng.randf_range(-room.get_node("RoomOuter").size.z/2+1,room.get_node("RoomOuter").size.z/2-1)
+		idea.global_position.y+=2
+		print(idea.global_position)
+		await get_tree().physics_frame
+		while idea.get_node("area").get_overlapping_bodies().size()>0:
+			idea.position = Vector3.ZERO
+			idea.global_position.x += rng.randf_range(-room.get_node("RoomOuter").size.x/2+1,room.get_node("RoomOuter").size.x/2-1)
+			idea.global_position.z += rng.randf_range(-room.get_node("RoomOuter").size.z/2+1,room.get_node("RoomOuter").size.z/2-1)
+			idea.global_position.y+=2
+			print(":-p")
+			await get_tree().physics_frame
 
 func generate():
 	if randomSeed and multiplayer.is_server():
@@ -59,13 +86,16 @@ func generate():
 func generateRoom(_position, nestLevel):
 	#print("Attempting to generate root room")
 	var roomInstance = _test_room.instantiate()
+	roomInstance.appendEntrancesToGroup()
+	roomInstance.segregateEntrances()
+	roomInstance.sceneRoot = self
 	rooms.append(roomInstance)
 	roomInstance.name = "RootRoom"
 	roomInstance.nestLevel = nestLevel
 	add_child(roomInstance)
 	#await get_tree().process_frame
 	roomInstance.global_position = _position
-	roomInstance.initializeRoom(self)
+	roomInstance.initializeRoom()
 	await get_tree().physics_frame
 	gateOfHornPortal.link(roomInstance.gateOfHornPortal)
 	#print("Generated root room")
@@ -73,63 +103,79 @@ func generateRoom(_position, nestLevel):
 	#print("Attempting to generate children rooms for room "+str(rooms.size()))
 	for entrance in roomInstance.entrances:
 		if entrance.visible and !entrance.hasConnection:
-			await generateRoomChild(roomInstance,entrance,nestLevel+1)
+			await generateRoomChild(roomInstance,entrance,nestLevel+1,true)
 
-func decideRoomType():
+func decideRoomType(parent, retry, nestLevel):
 	var roomInstance
-	if rng.randi_range(0,1000)>(1000-bigRoomChance):
+	if rng.randi_range(0,1000)>(1000-departmentStoreChance):
+		roomInstance = _department_store.instantiate()
+	elif rng.randi_range(0,1000)>(1000-longConfusingRoomChance) and nestLevel<nestLimit*.7 and nestLevel>nestLimit*.2:
+		roomInstance = _long_confusing_room.instantiate()
+	elif rng.randi_range(0,1000)>(1000-bigRoomChance):
 		roomInstance = _big_room.instantiate()
 	else:
 		roomInstance = _test_room.instantiate()
 	return roomInstance
 
-func generateRoomChild(parentRoom ,parentEntrance,nestLevel):
+func generateRoomChild(parentRoom ,parentEntrance,nestLevel,retry):
 	#await get_tree().physics_frame
 	if nestLevel>nestLimit:
 		#print("Hit the nest limit")
-		return -1
+		return
 	#print("Attempting to generate child room "+str(rooms.size()))
-	var roomInstance = decideRoomType()
-	#await get_tree().physics_frame
+	var roomInstance = decideRoomType(parentRoom,retry,nestLevel)
+	roomInstance.appendEntrancesToGroup()
+	roomInstance.segregateEntrances()
+	roomInstance.sceneRoot = self
 	rooms.append(roomInstance)
 	roomInstance.parentEntrance = parentEntrance
 	roomInstance.parentRoom = parentRoom
 	roomInstance.name = "ChildRoom"+str(rooms.size()-1)
 	roomInstance.nestLevel = nestLevel
 	get_node("RootRoom").add_child(roomInstance)
-	var direction = (Vector3(parentEntrance.opening.global_position.x-parentEntrance.forwardsOffset,0,parentEntrance.opening.global_position.z-parentEntrance.sidewaysOffset)-parentEntrance.get_parent().get_parent().global_position)
-	direction.y = 0
-	direction = direction.normalized()
+	roomInstance.rotateRoom(rng.randi_range(0,3))
+	#await get_tree().physics_frame
+	#var direction = (Vector3(parentEntrance.opening.global_position.x-parentEntrance.forwardsOffset,0,parentEntrance.opening.global_position.z-parentEntrance.sidewaysOffset)-parentEntrance.get_parent().get_parent().global_position)
+	#direction.y = 0
+	#direction = direction.normalized()
 	#print("Direction: "+str(direction))
 	#################################### POSITION OF NEWLY SPAWNED CHILD ROOM!
-	roomInstance.global_position = Vector3(parentEntrance.forwardsOffset,parentEntrance.heightOffset,parentEntrance.sidewaysOffset)+parentRoom.global_position+direction*(roomInstance.get_node("RoomOuter").size.x/2+parentRoom.get_node("RoomOuter").size.x/2)
+	var connectingEntrance = roomInstance.getRandomEntranceOfDirection(parentEntrance.direction)
+	print (connectingEntrance.notes)
+	roomInstance.connectingEntrance = connectingEntrance
+	roomInstance.initializeRoom()
+	#original position algorithm based on offset variables
+	#roomInstance.global_position = Vector3(parentEntrance.forwardsOffset,parentEntrance.heightOffset,parentEntrance.sidewaysOffset)-Vector3(connectingEntrance.forwardsOffset,connectingEntrance.heightOffset,connectingEntrance.sidewaysOffset)+parentRoom.global_position+direction*(roomInstance.get_node("RoomOuter").size.x/2+parentRoom.get_node("RoomOuter").size.x/2)
+	#new position algorithm based on space
+	roomInstance.global_position = \
+		Vector3(parentEntrance.opening.global_position.x-parentRoom.global_position.x,\
+		parentEntrance.heightOffset,\
+		parentEntrance.opening.global_position.z-parentRoom.global_position.z)\
+		-Vector3(connectingEntrance.opening.global_position.x-roomInstance.global_position.x,\
+		connectingEntrance.heightOffset,\
+		connectingEntrance.opening.global_position.z-roomInstance.global_position.z)\
+		+parentRoom.global_position
 	await get_tree().physics_frame
-	####################################
-	roomInstance.initializeRoom(self)
-	#print("at "+str(roomInstance.global_position))
-	await get_tree().physics_frame
-	#print("Testing to see if a room already exists here...")
+	#testing to see if room already exists
 	for overlappingArea in roomInstance.roomBoundaries.get_overlapping_areas():
-		#print("Boundary of "+roomInstance.get_name()+" overlapped with something during the test!")
-		#print("Its parent entrance happened to be of entrance type"+" "+parentEntrance.notes+" leading into this room.")
-		#print ("Overlapped with "+overlappingArea.get_parent().get_name())
-		#print("A room already exists here. Removing the current room.")
-		#rooms.pop_back()
+		#parentEntrance.hasConnection = false
+		#parentEntrance.visible = false
+		#parentEntrance.active = false
 		rooms.erase(roomInstance)
 		roomInstance.queue_free()
 		await get_tree().physics_frame
-		#room generation failed so we now want to try to link our room to what is already there
 		overlappingArea.get_parent().linkRooms(parentRoom,parentEntrance)
 		return
-	#print("No room was found to be in the way.")
-	#roomDensity=roomDensity*.9
-	#print("Successfully initialized child room "+str(rooms.size()))
+	####################################
+	#print("at "+str(roomInstance.global_position))
+	await get_tree().physics_frame
 	timeSinceLastCompletion = 0
-	#print("Attempting to generate children rooms for child room "+str(rooms.size()))
 	for entrance in roomInstance.entrances:
 		if entrance.visible and !entrance.hasConnection:
-			await generateRoomChild(roomInstance,entrance,nestLevel+1)
-
+			await generateRoomChild(roomInstance,entrance,nestLevel+1,false)
+	return 0
+	
+#important function
 func removeLooseExits():
 	await get_tree().physics_frame
 	#print("Attempting to remove loose exits from entrances that lead to nowhere.")
@@ -138,15 +184,23 @@ func removeLooseExits():
 	while i < rooms.size():
 		#print("room"+str(i)+" "+rooms[i].name) 
 		for entrance in rooms[i].entrances:
-			if !entrance.hasConnection or entranceOverlappingNothing(entrance):
+			#break
+			if (entranceOverlappingNothing(entrance) or !entrance.hasConnection):
 				#print("Removed "+entrance.direction+entrance.notes+" entrance.")
 				#entrance.scale = Vector3.ZERO
 				#entrance.visible = false
-				entrance.queue_free()
 				rooms[i].activeEntranceCount-=1
+				print("removing entrance of type "+entrance.notes)
+				entrance.queue_free()
 		portalPopulation(rooms[i])
+		if is_multiplayer_authority():
+			ideaPopulation(rooms[i])
 		i+=1
 
 func entranceOverlappingNothing(entrance):
 	if entrance.area.get_overlapping_areas().size()==0:
 		return true
+	for area in entrance.area.get_overlapping_areas():
+		if area.get_parent().room != entrance.room:
+			return false
+	return true

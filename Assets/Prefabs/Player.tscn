@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://uldgeps0kb77"]
+[gd_scene load_steps=20 format=3 uid="uid://uldgeps0kb77"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/CharacterController.gd" id="1_ph60j"]
 [ext_resource type="Script" path="res://Assets/scripts/stats.gd" id="2_ue7er"]
@@ -10,6 +10,8 @@
 [ext_resource type="Material" uid="uid://sb4cnc8372mb" path="res://Assets/Materials/Oneiroi/sandals.tres" id="8_or8mn"]
 [ext_resource type="Material" uid="uid://leydxctn8kk1" path="res://Assets/Materials/Oneiroi/wings.tres" id="9_56wic"]
 [ext_resource type="Script" path="res://Assets/Scripts/VOIP.gd" id="10_ap7iq"]
+[ext_resource type="FontFile" uid="uid://bkerjrmlfwpsq" path="res://Assets/Fonts/RUBBBB__.TTF" id="11_a5ree"]
+[ext_resource type="Script" path="res://Assets/Scripts/PlayerUI.gd" id="11_h5c6q"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xyitk"]
 radius = 0.367273
@@ -54,13 +56,18 @@ vertex_color_use_as_albedo = true
 albedo_color = Color(1, 0.716798, 0.4509, 1)
 metallic_specular = 0.42
 roughness = 0.272166
+subsurf_scatter_enabled = true
+subsurf_scatter_strength = 1.0
+subsurf_scatter_skin_mode = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jjbi7"]
 size = Vector3(0.511855, 1, 0.222978)
 
 [sub_resource type="AudioStream" id="AudioStream_xt2ru"]
 
-[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_oe57v"]
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_yfi24"]
+mix_rate = 16500.0
+buffer_length = 1.0
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "camContainer", "stats", "skeleton", "animator", "headSocket") groups=["player"]]
 collision_layer = 16
@@ -273,6 +280,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1.
 stream = SubResource("AudioStream_xt2ru")
 volume_db = -20.0
 max_distance = 20.0
+bus = &"Physical"
 emission_angle_enabled = true
 emission_angle_degrees = 90.0
 
@@ -281,13 +289,15 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1.
 stream = SubResource("AudioStream_xt2ru")
 volume_db = -20.0
 max_distance = 20.0
+bus = &"Physical"
 emission_angle_enabled = true
 emission_angle_degrees = 90.0
 
-[node name="VOIP" type="Node3D" parent="." node_paths=PackedStringArray("input", "output")]
+[node name="VOIP" type="Node3D" parent="." node_paths=PackedStringArray("input", "output", "ceilingRay")]
 script = ExtResource("10_ap7iq")
 input = NodePath("MicInput")
 output = NodePath("VoiceOutput")
+ceilingRay = NodePath("../RayCast3D")
 
 [node name="MicInput" type="AudioStreamPlayer3D" parent="VOIP"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.02635, 0)
@@ -298,14 +308,74 @@ emission_angle_enabled = true
 emission_angle_degrees = 90.0
 
 [node name="VoiceOutput" type="AudioStreamPlayer3D" parent="VOIP"]
-stream = SubResource("AudioStreamGenerator_oe57v")
+stream = SubResource("AudioStreamGenerator_yfi24")
 autoplay = true
+max_distance = 20.0
+bus = &"Physical"
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-0.999803, 6.87191e-05, 0.0198502, 0.000819077, 0.999285, 0.0377954, -0.0198334, 0.0378042, -0.999088, -2.41937e-06, 1.06882, 0.0427742)
 cull_mask = 1048571
 current = true
 far = 500.0
+
+[node name="InteractCast" type="RayCast3D" parent="Camera3D"]
+transform = Transform3D(0.999573, 0.0212691, -0.0200304, -0.0199341, -0.00472805, -0.99979, -0.0213593, 0.999762, -0.00430205, 0, 0, 0)
+target_position = Vector3(0, -2, 0)
+collision_mask = 256
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 50, 0)
+debug_shape_custom_color = Color(1, 0, 0, 1)
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("11_h5c6q")
+
+[node name="IdeasCount" type="RichTextLabel" parent="UI"]
+layout_mode = 0
+offset_top = -22.0
+offset_right = 1151.0
+offset_bottom = 74.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.137255, 0, 0.25098, 0.384314)
+theme_override_colors/font_outline_color = Color(0.615686, 0.709804, 0, 1)
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 30
+theme_override_constants/line_separation = 0
+theme_override_constants/table_h_separation = 0
+theme_override_constants/table_v_separation = 0
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("11_a5ree")
+theme_override_font_sizes/normal_font_size = 46
+bbcode_enabled = true
+text = "[center]
+0 IDEAS"
+fit_content = true
+
+[node name="Target" type="RichTextLabel" parent="UI"]
+layout_mode = 0
+offset_top = 295.0
+offset_right = 1151.0
+offset_bottom = 391.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.137255, 0, 0.25098, 0.384314)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 10
+theme_override_constants/line_separation = 0
+theme_override_constants/table_h_separation = 0
+theme_override_constants/table_v_separation = 0
+theme_override_constants/outline_size = 3
+theme_override_fonts/normal_font = ExtResource("11_a5ree")
+theme_override_font_sizes/normal_font_size = 21
+bbcode_enabled = true
+text = "[center]
+TARGET"
+fit_content = true
 
 [connection signal="body_entered" from="Oneiroi/RootNode/root/Skeleton3D/LeftFootSocket/Offset/LeftFootstep" to="." method="_on_left_footstep_body_entered"]
 [connection signal="body_entered" from="Oneiroi/RootNode/root/Skeleton3D/RightFootSocket/Offset/RightFootstep" to="." method="_on_right_footstep_body_entered"]

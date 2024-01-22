@@ -3,18 +3,26 @@ extends Node2D
 @export var ipField: TextEdit
 @export var nameEntry: TextEdit
 @export var portalStaticViewport: SubViewport
+@export var deviceDropdown: ItemList
+var network = preload("res://Assets/Prefabs/Network.tscn")
 var hostIP = ""
+var devices
 
 var peer = ENetMultiplayerPeer.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GameManager.portalStatic = portalStaticViewport
+	populateInputDropdown()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
+func populateInputDropdown():
+	devices = Utils.getInputDeviceList()
+	for device in devices:
+		deviceDropdown.add_item(str(device),null,true)
 
 func _on_host_pressed():
 	hostGame()
@@ -41,6 +49,7 @@ func start_game():
 	GameManager.activePlayerName = nameEntry.text
 	$UI.visible=false	
 	if multiplayer.is_server():
+		add_child(network.instantiate())
 		change_level.call_deferred(load("res://Assets/Levels/Erebos.tscn"))
 
 
@@ -50,3 +59,7 @@ func change_level(scene :PackedScene):
 		level.remove_child(c)
 		c.queue_free()
 	level.add_child(scene.instantiate())
+
+
+func _on_item_list_item_selected(index):
+	AudioServer.input_device = str(devices[index])

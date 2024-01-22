@@ -1,19 +1,44 @@
-[gd_resource type="AudioBusLayout" load_steps=3 format=3 uid="uid://c2bxgqo3ovh7w"]
+[gd_resource type="AudioBusLayout" load_steps=5 format=3 uid="uid://c2bxgqo3ovh7w"]
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_mp2s3"]
+resource_name = "Reverb"
+room_size = 0.29
 
 [sub_resource type="AudioEffectCapture" id="AudioEffectCapture_ka2ru"]
 resource_name = "Capture"
 
-[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_p5e7n"]
-resource_name = "Reverb"
+[sub_resource type="AudioEffectEQ" id="AudioEffectEQ_q77op"]
+resource_name = "EQ"
+band_db/32_hz = -38.0
+band_db/100_hz = -26.0
+band_db/320_hz = -22.7
+band_db/3200_hz = 4.4
+band_db/10000_hz = -5.5
+
+[sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_ip7ml"]
+resource_name = "Compressor"
+threshold = -7.6
+ratio = 8.2
+gain = 4.6
 
 [resource]
-bus/1/name = &"Record"
+bus/1/name = &"Physical"
 bus/1/solo = false
 bus/1/mute = false
 bus/1/bypass_fx = false
 bus/1/volume_db = 0.0
 bus/1/send = &"Master"
-bus/1/effect/0/effect = SubResource("AudioEffectCapture_ka2ru")
+bus/1/effect/0/effect = SubResource("AudioEffectReverb_mp2s3")
 bus/1/effect/0/enabled = true
-bus/1/effect/1/effect = SubResource("AudioEffectReverb_p5e7n")
-bus/1/effect/1/enabled = false
+bus/2/name = &"Record"
+bus/2/solo = false
+bus/2/mute = false
+bus/2/bypass_fx = false
+bus/2/volume_db = -80.0
+bus/2/send = &"Physical"
+bus/2/effect/0/effect = SubResource("AudioEffectCapture_ka2ru")
+bus/2/effect/0/enabled = true
+bus/2/effect/1/effect = SubResource("AudioEffectEQ_q77op")
+bus/2/effect/1/enabled = true
+bus/2/effect/2/effect = SubResource("AudioEffectCompressor_ip7ml")
+bus/2/effect/2/enabled = true

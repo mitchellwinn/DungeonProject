@@ -8,5 +8,7 @@ extends Node
 @export var sidewaysOffset: float
 @export var forwardsOffset: float
 @export var area: Area3D
+var room
+var active = false
 var hasConnection = false
 

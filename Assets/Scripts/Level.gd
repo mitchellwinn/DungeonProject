@@ -11,7 +11,7 @@ func _ready():
 	
 	for id in multiplayer.get_peers():
 		add_player(id)
-	add_player(1)
+	add_player(1)#host
 		
 func add_player(id: int):
 	while !GameManager.dungeonExists:
@@ -26,7 +26,7 @@ func add_player(id: int):
 
 func del_player(id: int):
 	if not $Players.has_node(str(id)):
-		return
+		return 
 	$Players.get_node(str(id)).queue_free()
 
 func _exit_tree():
@@ -34,3 +34,7 @@ func _exit_tree():
 		return
 	multiplayer.peer_connected.disconnect(add_player)
 	multiplayer.peer_disconnected.disconnect(del_player)
+
+func _on_boundaries_body_entered(body):
+	if body == GameManager.activePlayer:
+		Utils.setVolumetricFogDensity(.07)

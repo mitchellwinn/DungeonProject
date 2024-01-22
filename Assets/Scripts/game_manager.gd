@@ -4,6 +4,7 @@ const player = preload("res://Assets/Prefabs/Player.tscn")
 
 var portalStatic
 var activePlayer
+var network
 var activePlayerName
 var teleportCool = 0
 var dungeonExists = false

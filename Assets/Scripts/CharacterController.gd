@@ -9,6 +9,7 @@ var mouseDelta: Vector2
 var runToggle = 1
 var moveDirection = Vector3.ZERO
 var velocityLast
+var interacting = false
 @export var camera: Camera3D
 @export var camContainer: Node3D
 @export var stats: Node
@@ -26,6 +27,7 @@ func _ready():
 	
 func _enter_tree():
 	set_multiplayer_authority(name.to_int())
+	$VOIP.set_multiplayer_authority(name.to_int())
 	if !is_multiplayer_authority():
 		$NameTag.set_layer_mask_value(3,false)
 		$NameTag.set_layer_mask_value(4,true)
@@ -43,6 +45,8 @@ func _enter_tree():
 		GameManager.activePlayer = self
 	
 func _physics_process(delta):
+	if !GameManager.activePlayer:
+		return
 	$NameTag.text = stats.ign
 	$NameTag.global_transform.basis = GameManager.activePlayer.camera.global_transform.basis
 	if !is_multiplayer_authority():
@@ -58,10 +62,27 @@ func _physics_process(delta):
 	gravity(delta)
 	if playerFocus() and fullyActionable():
 		moveInputs(delta)
+		checkInteract()
+	if true:#DRAG
+		velocity.x = lerpf(velocity.x,0.0,clamp(delta*DRAG,0,1))
+		velocity.z = lerpf(velocity.z,0.0,clamp(delta*DRAG,0,1))
+		#print("velocity: "+str(velocity))
 	velocityLast = velocity
 	move_and_slide()
 	mouseDelta = Vector2.ZERO
 	animate(delta)
+	
+func checkInteract():
+	if interacting:
+		return
+	if camera.get_node("InteractCast").is_colliding():
+		$UI/Target.text = "[center]\n"+camera.get_node("InteractCast").get_collider().displayName
+		if Input.is_action_just_pressed("interact"):
+			print("interact")
+			interacting = true
+			interacting = await camera.get_node("InteractCast").get_collider().interact()
+	else:
+		$UI/Target.text = ""
 	
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -79,9 +100,9 @@ func gravity(delta):
 		velocity.y-=delta*FALL_SPEED
 		
 func moveInputs(delta):
-	moveDirection = Vector3.ZERO
 	rotation.y -= mouseDelta.x * TURN_SPEED * delta
 	camera.rotation.x+=(-mouseDelta.y * TURN_SPEED * delta)
+	moveDirection = Vector3.ZERO
 	if camera.rotation.x > 1.1 :
 		camera.rotation.x = 1.1
 	elif camera.rotation.x < -1.1 :
@@ -98,10 +119,6 @@ func moveInputs(delta):
 	velocity += moveDirection*runToggle*delta*60
 	velocity.x = clamp(velocity.x,-MAX_SPEED,MAX_SPEED)
 	velocity.z = clamp(velocity.z,-MAX_SPEED,MAX_SPEED)
-	if true:#DRAG
-		velocity.x = lerpf(velocity.x,0.0,clamp(delta*DRAG,0,1))
-		velocity.z = lerpf(velocity.z,0.0,clamp(delta*DRAG,0,1))
-		#print("velocity: "+str(velocity))
 		
 func playerFocus():
 	match Input.get_mouse_mode():

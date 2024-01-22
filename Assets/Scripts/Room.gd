@@ -12,7 +12,12 @@ var nestLevel
 @export var entrance6: Node3D
 @export var entrance7: Node3D
 @export var entrance8: Node3D
+var northEntrances: Array
+var southEntrances: Array
+var eastEntrances: Array
+var westEntrances: Array
 var entrances: Array
+var connectingEntrance
 @export var lightsParent: Node3D
 @export var roomBoundaries: Area3D
 @export var roomType: String
@@ -23,10 +28,10 @@ var entrances: Array
 @export var gateOfIvory: Node3D
 @export var gateOfHornPortal: Node3D
 @export var gateOfIvoryPortal: Node3D
+@export var fogAmt: float
 var activeEntranceCount
 
-func initializeRoom(root):
-	appendEntrancesToGroup()
+func initializeRoom():
 	if parentRoom:
 		if gateOfHorn:
 			gateOfHorn.queue_free()
@@ -34,14 +39,32 @@ func initializeRoom(root):
 		determineWalls()
 	if parentEntrance:
 		parentEntrance.hasConnection = true
-	sceneRoot = root
+	var strength = 0
 	for light in lightsParent.get_children():
-		light.light_energy = root.rng.randf_range(0,5)
+		var strengthBoost = 0
+		match roomType:
+			"DepartmentStore":
+				strengthBoost = 10
+		strength = sceneRoot.rng.randf_range(-5,5)
+		strength = strength + strengthBoost
+		if strength<0:
+			strength = 0
+		if light.is_in_group("led"):
+			light.material = light.material.duplicate()
+			light.material.set("emission_energy_multiplier", strength*10)
+		elif light.is_in_group("light"):
+			if strength<0:
+				light.queue_free()
+			light.light_energy = strength/10
 	activeEntranceCount = 0
-	for entrance in entrances:
-		#print(entrance.name)
-		activeEntranceCount += testEntranceGeneration(entrance)
-		
+	while activeEntranceCount<3 and nestLevel<=sceneRoot.nestLimit:
+		for entrance in entrances:
+			entrance.room = self
+			#print(entrance.name)
+			if entrance.active:
+				continue
+			activeEntranceCount += testEntranceGeneration(entrance)
+			
 	#print("this room has "+str(activeEntranceCount)+" active entrances.")
 
 func appendEntrancesToGroup():
@@ -79,9 +102,7 @@ func determineWalls():
 func linkRooms(parentRoom,parentEntrance):
 	#print("Attempting to link rooms...")
 	for entrance in entrances:
-		if !parentEntrance.canLinkToOthers:
-			continue
-		if (entrance.opening.global_position-parentEntrance.opening.global_position).length()>.5:
+		if (entrance.opening.global_position-parentEntrance.opening.global_position).length()>1.5:
 			continue
 		match entrance.direction:
 				"north":
@@ -93,9 +114,10 @@ func linkRooms(parentRoom,parentEntrance):
 							duplicateEntrance.hasConnection = true
 							#print("matched duplicate with parent entrance")
 						else:
-							entrance.scale = Vector3.ONE
+							entrance.scale = parentEntrance.scale
 							entrance.visible = true
 							entrance.hasConnection = true
+							parentEntrance.hasConnection = true
 							#print("matched with parent entrance")
 							#print("parent entrance was of type"+" "+parentEntrance.notes)
 						return
@@ -108,9 +130,10 @@ func linkRooms(parentRoom,parentEntrance):
 							duplicateEntrance.hasConnection = true
 							#print("matched duplicate with parent entrance")
 						else:
-							entrance.scale = Vector3.ONE
+							entrance.scale = parentEntrance.scale
 							entrance.visible = true
 							entrance.hasConnection = true
+							parentEntrance.hasConnection = true
 							#print("matched with parent entrance")
 							#print("parent entrance was of type"+" "+parentEntrance.notes)
 						return
@@ -123,9 +146,10 @@ func linkRooms(parentRoom,parentEntrance):
 							duplicateEntrance.hasConnection = true
 							#print("matched duplicate with parent entrance")
 						else:
-							entrance.scale = Vector3.ONE
+							entrance.scale = parentEntrance.scale
 							entrance.visible = true
 							entrance.hasConnection = true
+							parentEntrance.hasConnection = true
 							#print("matched with parent entrance")
 							#print("parent entrance was of type"+" "+parentEntrance.notes)
 						return
@@ -138,9 +162,10 @@ func linkRooms(parentRoom,parentEntrance):
 							duplicateEntrance.hasConnection = true
 							#print("matched duplicate with parent entrance")
 						else:
-							entrance.scale = Vector3.ONE
+							entrance.scale = parentEntrance.scale
 							entrance.visible = true
 							entrance.hasConnection = true
+							parentEntrance.hasConnection = true
 							#print("matched with parent entrance")
 							#print("parent entrance was of type"+" "+parentEntrance.notes)
 						return
@@ -151,45 +176,111 @@ func linkRooms(parentRoom,parentEntrance):
 	parentEntrance.visible = false
 	
 func testEntranceGeneration(entrance):
-	if parentEntrance:
-		#creates an entrance to match the entrance leading into the room
-		if parentEntrance.opening.global_position.y-entrance.opening.global_position.y<=.5:
-			match entrance.direction:
-				"north":
-					if parentEntrance.direction == "south":
-						entrance.visible = true
-						entrance.scale = Vector3.ONE
-						entrance.hasConnection = true
-						#print("matched with parent entrance")
-						return 1
-				"south":
-					if parentEntrance.direction == "north":
-						entrance.visible = true
-						entrance.scale = Vector3.ONE
-						entrance.hasConnection = true
-						#print("matched with parent entrance")
-						return 1
-				"east":
-					if parentEntrance.direction == "west":
-						entrance.visible = true
-						entrance.scale = Vector3.ONE
-						entrance.hasConnection = true
-						#print("matched with parent entrance")
-						return 1
-				"west":
-					if parentEntrance.direction == "east":
-						entrance.visible = true
-						entrance.scale = Vector3.ONE
-						entrance.hasConnection = true
-						#print("matched with parent entrance")
-						return 1
-	if sceneRoot.rng.randi_range(0,1000)>(1000-sceneRoot.roomDensity):
+	if connectingEntrance:
+		if connectingEntrance == entrance:
+			entrance.visible = true
+			if entrance.heightOffset==0 and parentEntrance.heightOffset==0:
+				entrance.scale = Vector3(sceneRoot.rng.randf_range(1.0,4.0),10,sceneRoot.rng.randi_range(1,4))
+				parentEntrance.scale = entrance.scale
+			else:
+				parentEntrance.scale = Vector3.ONE
+				entrance.scale = Vector3.ONE
+			entrance.hasConnection = true
+			entrance.active = true
+			parentEntrance.hasConnection = true
+			#print("matched with parent entrance")
+			return 1
+	var density = sceneRoot.roomDensity
+	if roomType == "LongConfusing":
+		density = density*2
+	if sceneRoot.rng.randi_range(0,1000)>(1000-density):
 		entrance.visible = true
 		entrance.scale = Vector3.ONE
+		entrance.active = true
 		#print("created new entrance")
 		return 1
 	else:
 		entrance.visible = false
 		entrance.scale = Vector3.ZERO
+		entrance.active = false
 		#print("closed off entrance")
 		return 0
+
+func segregateEntrances():
+	entrances.shuffle()
+	for entrance in entrances:
+		match entrance.direction:
+			"north":
+				northEntrances.append(entrance)
+			"south":
+				southEntrances.append(entrance)
+			"east":
+				eastEntrances.append(entrance)
+			"west":
+				westEntrances.append(entrance)
+
+func getRandomEntranceOfDirection(direction):
+	match direction:
+		"north":
+			return southEntrances[sceneRoot.rng.randi_range(0,southEntrances.size()-1)]
+		"south":
+			return northEntrances[sceneRoot.rng.randi_range(0,northEntrances.size())-1]
+		"east":
+			return westEntrances[sceneRoot.rng.randi_range(0,westEntrances.size())-1]
+		"west":
+			return eastEntrances[sceneRoot.rng.randi_range(0,eastEntrances.size())-1]
+
+func rotateRoom(quadrants):
+	match quadrants:
+		1:
+			rotate(Vector3.UP,-1.5708*quadrants)
+			for entrance in entrances:
+				match entrance.direction:
+					"north":
+						entrance.direction = "east"
+					"east":
+						entrance.direction = "south"
+					"south":
+						entrance.direction = "west"
+					"west":
+						entrance.direction = "north"
+		2:
+			rotate(Vector3.UP,-1.5708*quadrants)
+			for entrance in entrances:
+				match entrance.direction:
+					"north":
+						entrance.direction = "south"
+					"east":
+						entrance.direction = "west"
+					"south":
+						entrance.direction = "north"
+					"west":
+						entrance.direction = "east"
+		3:
+			rotate(Vector3.UP,-1.5708*quadrants)
+			for entrance in entrances:
+				match entrance.direction:
+					"north":
+						entrance.direction = "west"
+					"east":
+						entrance.direction = "north"
+					"south":
+						entrance.direction = "east"
+					"west":
+						entrance.direction = "south"
+	regroupRooms()
+	print("rotated room by "+str(quadrants)+" quadrants")
+	for entrance in entrances:
+		print(entrance.name+" is now pointing "+entrance.direction)
+		
+func regroupRooms():
+	northEntrances.clear()
+	southEntrances.clear()
+	eastEntrances.clear()
+	westEntrances.clear()
+	segregateEntrances()
+
+
+func _on_room_boundaries_body_entered(body):
+	if body == GameManager.activePlayer:
+		Utils.setVolumetricFogDensity(fogAmt)
