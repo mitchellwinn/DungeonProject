@@ -11,7 +11,7 @@ func _ready():
 func _process(delta):
 	pass
 
-@rpc ("reliable")
+@rpc ("any_peer", "reliable")
 func rpcDreamDilatorUsage(id):
 	dreamDilatorInUse = id
 	

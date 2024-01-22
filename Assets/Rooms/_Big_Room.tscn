@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://d2c7mytcoyrn0"]
+[gd_scene load_steps=64 format=3 uid="uid://d2c7mytcoyrn0"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Room.gd" id="1_m6m58"]
 [ext_resource type="Script" path="res://Assets/Scripts/Entrance.gd" id="2_8b2ei"]
@@ -22,7 +22,11 @@
 [ext_resource type="Texture2D" uid="uid://bf1rmhf2wubow" path="res://Assets/3Dmodels/Gates/GateOfIvory_2062-normal.png" id="19_vga1v"]
 [ext_resource type="Script" path="res://Assets/Scripts/Portal.gd" id="20_k7v2f"]
 [ext_resource type="Shader" path="res://Assets/Shaders/portal.gdshader" id="21_bt4fa"]
+[ext_resource type="PackedScene" uid="uid://qtkg0wa0qhdj" path="res://Assets/3Dmodels/fancyFrame/NB.glb" id="24_0q04f"]
 [ext_resource type="Material" uid="uid://ddxfrm54ao5c8" path="res://Assets/Materials/PortalObfuscation/Static.tres" id="24_skhlm"]
+[ext_resource type="Texture2D" uid="uid://bb7y3sxo66k3l" path="res://Assets/3Dmodels/fancyFrame/NB_IMG_0274.png" id="25_ym65p"]
+[ext_resource type="Texture2D" uid="uid://0hom8ctgir6a" path="res://Assets/3Dmodels/fancyFrame/NB_fancy_picture_frame_01_canvas_rough.png" id="26_tsd8c"]
+[ext_resource type="Texture2D" uid="uid://bv3gcpdm2be2s" path="res://Assets/3Dmodels/fancyFrame/NB_fancy_picture_frame_01_canvas_nor_gl.png" id="27_ruo85"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xjh22"]
 albedo_color = Color(0, 0, 0, 1)
@@ -221,6 +225,24 @@ subdivide_depth = 5
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tmywk"]
 size = Vector3(0, 4.154, 2.328)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1y8bm"]
+resource_name = "fancy_picture_frame_01_canvas"
+cull_mode = 2
+diffuse_mode = 3
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("25_ym65p")
+metallic_texture = ExtResource("26_tsd8c")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("26_tsd8c")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("27_ruo85")
+rim_enabled = true
+clearcoat_enabled = true
+subsurf_scatter_enabled = true
+subsurf_scatter_strength = 0.38
+subsurf_scatter_skin_mode = true
 
 [node name="_Big_Room" type="Node3D" node_paths=PackedStringArray("entrance1", "entrance2", "entrance3", "entrance4", "entrance5", "entrance6", "lightsParent", "roomBoundaries", "wall1", "wall2", "wall3", "gateOfIvory", "gateOfIvoryPortal")]
 script = ExtResource("1_m6m58")
@@ -679,13 +701,13 @@ use_collision = true
 mesh = SubResource("PlaneMesh_2jerx")
 
 [node name="CSGBox3D7" type="CSGBox3D" parent="RoomCeiling/TopEntrance/TopHull"]
-transform = Transform3D(-0.000630244, -0.000962236, -1, 0.0010175, 0.999999, -0.000962873, 0.999999, -0.0010181, -0.000629263, -4.27941, 2.25303, -1.54962)
+transform = Transform3D(-0.000630244, -0.000962236, -1, 0.0010175, 0.999999, -0.000962873, 0.999999, -0.0010181, -0.000629263, -4.27938, 2.28498, -1.54959)
 material_override = ExtResource("9_hxpfh")
 use_collision = true
 size = Vector3(0.25, 5, 15.73)
 
 [node name="CSGBox3D8" type="CSGBox3D" parent="RoomCeiling/TopEntrance/TopHull"]
-transform = Transform3D(-0.000630244, -0.000962236, -1, 0.0010175, 0.999999, -0.000962873, 0.999999, -0.0010181, -0.000629263, -4.28138, 2.25303, 1.57675)
+transform = Transform3D(-0.000630244, -0.000962236, -1, 0.0010175, 0.999999, -0.000962873, 0.999999, -0.0010181, -0.000629263, -4.28135, 2.28498, 1.57678)
 material_override = ExtResource("9_hxpfh")
 use_collision = true
 size = Vector3(0.25, 5, 15.73)
@@ -1157,7 +1179,15 @@ visible = false
 use_collision = true
 size = Vector3(1.37, 1, 2.58)
 
+[node name="NB" parent="." instance=ExtResource("24_0q04f")]
+transform = Transform3D(-3.49691e-07, 0, -8, 0, 8, 0, 8, 0, -3.49691e-07, 14.7427, 4.40682, -10.6426)
+visible = false
+
+[node name="fancy_picture_frame_01_canvas" parent="NB" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_1y8bm")
+
 [connection signal="body_entered" from="RoomBoundaries" to="." method="_on_room_boundaries_body_entered"]
 [connection signal="body_entered" from="Gate Of Ivory/RotationParent/Portal/Area3D" to="Gate Of Ivory/RotationParent/Portal" method="_on_area_3d_body_entered"]
 
 [editable path="Gate Of Ivory/Model"]
+[editable path="NB"]

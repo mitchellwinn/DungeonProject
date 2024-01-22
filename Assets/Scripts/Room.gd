@@ -37,6 +37,8 @@ func initializeRoom():
 			gateOfHorn.queue_free()
 	if roomType == "BigRoom":
 		determineWalls()
+		if sceneRoot.rng.randi_range(0,1000)>(1000-999):
+			$NB.visible = true
 	if parentEntrance:
 		parentEntrance.hasConnection = true
 	var strength = 0
@@ -207,7 +209,6 @@ func testEntranceGeneration(entrance):
 		return 0
 
 func segregateEntrances():
-	entrances.shuffle()
 	for entrance in entrances:
 		match entrance.direction:
 			"north":
@@ -269,9 +270,9 @@ func rotateRoom(quadrants):
 					"west":
 						entrance.direction = "south"
 	regroupRooms()
-	print("rotated room by "+str(quadrants)+" quadrants")
-	for entrance in entrances:
-		print(entrance.name+" is now pointing "+entrance.direction)
+	#print("rotated room by "+str(quadrants)+" quadrants")
+	#for entrance in entrances:
+		#print(entrance.name+" is now pointing "+entrance.direction)
 		
 func regroupRooms():
 	northEntrances.clear()

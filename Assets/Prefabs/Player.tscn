@@ -314,7 +314,7 @@ max_distance = 20.0
 bus = &"Physical"
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.999803, 6.87191e-05, 0.0198502, 0.000819077, 0.999285, 0.0377954, -0.0198334, 0.0378042, -0.999088, -2.41937e-06, 1.06882, 0.0427742)
+transform = Transform3D(-0.999803, 6.8719e-05, 0.0198502, 0.000819077, 0.999285, 0.0377954, -0.0198334, 0.0378042, -0.999088, -2.41937e-06, 1.06882, -0.161261)
 cull_mask = 1048571
 current = true
 far = 500.0
@@ -328,17 +328,24 @@ collision_mask = 256
 target_position = Vector3(0, 50, 0)
 debug_shape_custom_color = Color(1, 0, 0, 1)
 
-[node name="UI" type="Node" parent="."]
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("11_h5c6q")
 
 [node name="IdeasCount" type="RichTextLabel" parent="UI"]
 layout_direction = 1
+layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -575.5
+offset_left = -578.0
 offset_top = 3.0
-offset_right = 575.5
+offset_right = 573.0
 offset_bottom = 99.0
 grow_horizontal = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
@@ -358,15 +365,17 @@ text = "[center]
 fit_content = true
 
 [node name="Target" type="RichTextLabel" parent="UI"]
+layout_direction = 1
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -575.5
-offset_top = -48.0
-offset_right = 575.5
-offset_bottom = 48.0
+offset_left = -575.0
+offset_top = -66.0
+offset_right = 576.0
+offset_bottom = 30.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)

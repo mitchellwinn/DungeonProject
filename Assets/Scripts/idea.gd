@@ -2,6 +2,7 @@ extends Node3D
 
 @export var collector: Node3D
 var orbitAngle = 0
+var targetHeight = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,10 +14,10 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	if collector:
-		orbit(delta, collector,1.5,5)
+		orbit(delta, collector,1.5,5,targetHeight)
 
-func orbit(delta, target, distance, speed):
-	var point = target.global_position
+func orbit(delta, target, distance, speed, heightOffset):
+	var point = target.global_position+heightOffset*Vector3.UP
 	orbitAngle += delta*speed
 	global_position = global_position.lerp(point + Vector3(cos(orbitAngle),0, sin(orbitAngle)) * distance,delta*10)
 

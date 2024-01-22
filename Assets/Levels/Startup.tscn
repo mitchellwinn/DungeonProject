@@ -84,6 +84,8 @@ size = Vector2i(1920, 1080)
 script = ExtResource("3_55jj6")
 
 [node name="NetworkSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Assets/Prefabs/Network.tscn")
+spawn_path = NodePath("..")
 spawn_limit = 1
 
 [connection signal="pressed" from="UI/Host" to="." method="_on_host_pressed"]

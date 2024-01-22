@@ -591,7 +591,7 @@ collision_mask = 2
 shape = SubResource("BoxShape3D_u2h5k")
 
 [node name="NorthEntrance" type="CSGBox3D" parent="RoomOuter" node_paths=PackedStringArray("opening", "area") groups=["entrance"]]
-transform = Transform3D(1, -6.99174e-12, 0, -7.16227e-12, 1, -1.16415e-09, 0, 1.16415e-09, 1, 13.3694, -3.75, 25.0013)
+transform = Transform3D(1, -6.42331e-12, 0, -7.16227e-12, 1, -1.28057e-09, 0, 1.28057e-09, 1, 13.3694, -3.75, 25.0013)
 operation = 2
 size = Vector3(2, 4, 1)
 script = ExtResource("4_0j5m5")
@@ -619,7 +619,7 @@ notes = "normal"
 opening = NodePath(".")
 canLinkToOthers = true
 forwardsOffset = 21.17
-area = NodePath("../NorthEntrance/Area3D")
+area = NodePath("Area3D")
 
 [node name="Area3D" type="Area3D" parent="RoomOuter/NorthEntrance2"]
 collision_layer = 2
@@ -638,7 +638,7 @@ notes = "normal"
 opening = NodePath(".")
 canLinkToOthers = true
 forwardsOffset = 5.76
-area = NodePath("../NorthEntrance/Area3D")
+area = NodePath("Area3D")
 
 [node name="Area3D" type="Area3D" parent="RoomOuter/NorthEntrance3"]
 collision_layer = 2
@@ -657,7 +657,7 @@ notes = "normal"
 opening = NodePath(".")
 canLinkToOthers = true
 forwardsOffset = 5.76
-area = NodePath("../NorthEntrance/Area3D")
+area = NodePath("Area3D")
 
 [node name="Area3D" type="Area3D" parent="RoomOuter/NorthEntrance4"]
 collision_layer = 2
@@ -676,7 +676,7 @@ notes = "normal"
 opening = NodePath(".")
 canLinkToOthers = true
 forwardsOffset = -15.019
-area = NodePath("../NorthEntrance/Area3D")
+area = NodePath("Area3D")
 
 [node name="Area3D" type="Area3D" parent="RoomOuter/EastEntrance2"]
 collision_layer = 2

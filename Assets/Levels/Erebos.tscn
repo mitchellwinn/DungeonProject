@@ -14,8 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://cntvy1dnjxg0k" path="res://Assets/3Dmodels/Gates/GateOfIvory_pillarnormal.png" id="11_cw5w1"]
 [ext_resource type="Texture2D" uid="uid://dd4jfsi0gsrob" path="res://Assets/3Dmodels/Gates/GateOfIvory_360_F_20949036_b4g2hWGuqQMzC6vWuMTEcM0xZbz1Mpho.png" id="12_s1g4t"]
 [ext_resource type="Texture2D" uid="uid://bf1rmhf2wubow" path="res://Assets/3Dmodels/Gates/GateOfIvory_2062-normal.png" id="13_t3lpn"]
+[ext_resource type="Script" path="res://Assets/scripts/DreamDilator.gd" id="16_r3wcj"]
 [ext_resource type="PackedScene" uid="uid://cl7ibmdeubwb4" path="res://Assets/3Dmodels/BrassGoblets/brass_goblet_1k.glb" id="17_okry5"]
-[ext_resource type="Script" path="res://Assets/Scripts/Interactable.gd" id="18_sf7iq"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Benji_Water.gdshader" id="19_uajir"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_wiqy8"]
@@ -594,21 +594,21 @@ transform = Transform3D(12, 0, 0, 0, 12, 0, 0, 0, 12, -2.89244, 2.72876, -4.3795
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DreamDilator/brass_goblet_02/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_0s7up")
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="DreamDilator/brass_goblet_02" index="1"]
+[node name="DreamDilator" type="StaticBody3D" parent="DreamDilator/brass_goblet_02" index="1"]
 collision_layer = 256
 collision_mask = 0
-script = ExtResource("18_sf7iq")
+script = ExtResource("16_r3wcj")
 displayName = "Dream Dilator"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DreamDilator/brass_goblet_02/StaticBody3D2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DreamDilator/brass_goblet_02/DreamDilator"]
 shape = SubResource("BoxShape3D_203t8")
 
-[node name="Camera3D" type="Camera3D" parent="DreamDilator"]
+[node name="Camera3D" type="Camera3D" parent="DreamDilator/brass_goblet_02/DreamDilator"]
 transform = Transform3D(-0.0833333, 4.25051e-09, -5.91674e-09, -8.52247e-10, 0.0615272, 0.0562037, 7.23521e-09, 0.0562037, -0.0615272, 0, 0.635164, -0.557445)
 projection = 2
 fov = 30.0
-size = 0.03
-frustum_offset = Vector2(0, -0.003)
+size = 0.05
+frustum_offset = Vector2(0, 0.003)
 
 [node name="MeshInstance3D" type="CSGMesh3D" parent="DreamDilator"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2294, 0)

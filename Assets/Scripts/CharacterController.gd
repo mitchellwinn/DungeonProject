@@ -44,11 +44,13 @@ func _enter_tree():
 		camera.current = true
 		GameManager.activePlayer = self
 	
-func _physics_process(delta):
+func _process(delta):
 	if !GameManager.activePlayer:
 		return
 	$NameTag.text = stats.ign
-	$NameTag.global_transform.basis = GameManager.activePlayer.camera.global_transform.basis
+	$NameTag.global_transform.basis = get_viewport().get_camera_3d().global_transform.basis
+
+func _physics_process(delta):
 	if !is_multiplayer_authority():
 		animateRemote()
 		return
