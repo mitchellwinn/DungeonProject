@@ -328,18 +328,19 @@ collision_mask = 256
 target_position = Vector3(0, 50, 0)
 debug_shape_custom_color = Color(1, 0, 0, 1)
 
-[node name="UI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="UI" type="Node" parent="."]
 script = ExtResource("11_h5c6q")
 
 [node name="IdeasCount" type="RichTextLabel" parent="UI"]
-layout_mode = 0
-offset_top = -22.0
-offset_right = 1151.0
-offset_bottom = 74.0
+layout_direction = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -575.5
+offset_top = 3.0
+offset_right = 575.5
+offset_bottom = 99.0
+grow_horizontal = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0.137255, 0, 0.25098, 0.384314)
 theme_override_colors/font_outline_color = Color(0.615686, 0.709804, 0, 1)
@@ -357,10 +358,17 @@ text = "[center]
 fit_content = true
 
 [node name="Target" type="RichTextLabel" parent="UI"]
-layout_mode = 0
-offset_top = 295.0
-offset_right = 1151.0
-offset_bottom = 391.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -575.5
+offset_top = -48.0
+offset_right = 575.5
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0.137255, 0, 0.25098, 0.384314)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
