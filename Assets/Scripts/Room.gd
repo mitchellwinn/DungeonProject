@@ -44,7 +44,7 @@ func initializeRoom():
 		var strengthBoost = 0
 		match roomType:
 			"DepartmentStore":
-				strengthBoost = 10
+				strengthBoost = 2
 		strength = sceneRoot.rng.randf_range(-5,5)
 		strength = strength + strengthBoost
 		if strength<0:

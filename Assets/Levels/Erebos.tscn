@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://buan5yi8ma7tr"]
+[gd_scene load_steps=64 format=3 uid="uid://buan5yi8ma7tr"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/DungeonGenerator.gd" id="1_a3oe2"]
 [ext_resource type="Script" path="res://Assets/Scripts/Level.gd" id="1_xagfq"]
@@ -8,8 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://dkodooleadsiy" path="res://Assets/3Dmodels/Gates/GateOfHorn.glb" id="3_x5bnc"]
 [ext_resource type="Shader" path="res://Assets/Shaders/portal.gdshader" id="4_4cwjt"]
 [ext_resource type="Texture2D" uid="uid://pwy5qhbtb3b4" path="res://Assets/3Dmodels/Gates/GateOfHorn_pillarnormal.png" id="4_unmp1"]
-[ext_resource type="PackedScene" uid="uid://cjoi8b1kq5f8t" path="res://Assets/Prefabs/video_stream_player.tscn" id="5_bpi0k"]
-[ext_resource type="Script" path="res://Assets/Scripts/video_stream_player.gd" id="6_t20tu"]
 [ext_resource type="PackedScene" uid="uid://duwrpybbumlay" path="res://Assets/3Dmodels/Cave/Cave.glb" id="8_b5gxu"]
 [ext_resource type="PackedScene" uid="uid://mbhomh065sop" path="res://Assets/3Dmodels/Gates/GateOfIvory.glb" id="9_4qalh"]
 [ext_resource type="Texture2D" uid="uid://daxn40girkrqp" path="res://Assets/Materials/Pillar/pillarDISPLACE.png" id="10_33v0w"]
@@ -421,12 +419,6 @@ far = 100.0
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Gate Of Horn/RotationParent/Portal/CamViewport/Camera3D"]
 visible = false
-
-[node name="SubViewport" type="SubViewport" parent="Gate Of Horn/RotationParent/Portal"]
-size = Vector2i(1920, 1080)
-
-[node name="VideoStreamPlayer" parent="Gate Of Horn/RotationParent/Portal/SubViewport" instance=ExtResource("5_bpi0k")]
-script = ExtResource("6_t20tu")
 
 [node name="Area3D" type="Area3D" parent="Gate Of Horn/RotationParent/Portal"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.273192, 0)

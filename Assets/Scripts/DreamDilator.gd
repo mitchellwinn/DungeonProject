@@ -12,6 +12,7 @@ func _process(delta):
 	pass
 	
 func interact():
+	print("interact function called")
 	if GameManager.activePlayer.stats.ideas>0:
 		for idea in GameManager.activePlayer.stats.ideas:
 			GameManager.activePlayer.stats.ideas.erase(idea)

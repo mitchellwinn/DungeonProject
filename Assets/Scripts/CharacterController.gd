@@ -130,7 +130,8 @@ func playerFocus():
 				return false
 	
 func fullyActionable():
-	return true
+	if !interacting:
+		return true
 	
 func animate(delta):
 	camera.global_position = camera.global_position.lerp(headSocket.global_position,delta*60)
