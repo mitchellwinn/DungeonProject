@@ -77,6 +77,15 @@ offset_top = 385.0
 offset_right = 1120.0
 offset_bottom = 494.0
 
+[node name="PublicIP" type="RichTextLabel" parent="UI"]
+layout_mode = 0
+offset_left = 316.0
+offset_top = 186.0
+offset_right = 814.0
+offset_bottom = 289.0
+theme_override_font_sizes/normal_font_size = 51
+text = "PUBLIC IP"
+
 [node name="Static" type="SubViewport" parent="."]
 size = Vector2i(1920, 1080)
 

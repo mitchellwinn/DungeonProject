@@ -7,6 +7,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if !GameManager.activePlayer or !GameManager.network:
+		return
 	$Main/IdeasCount.text = "[center]\n"+str(GameManager.activePlayer.stats.ideas.size())+" IDEAS"
 	if GameManager.activePlayer.stats.ideas.size()==1:
 		$Main/IdeasCount.text = "[center]\n"+str(GameManager.activePlayer.stats.ideas.size())+" IDEA"
