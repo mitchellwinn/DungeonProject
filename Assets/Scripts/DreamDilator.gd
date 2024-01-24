@@ -25,7 +25,7 @@ func interact():
 
 func depositIdeas():
 	for idea in GameManager.activePlayer.stats.ideas:
-		idea.rpc("depositIdea")
+		idea.rpc("rpcDepositIdea")
 		idea.set_multiplayer_authority(int(1))
 		await get_tree().create_timer(.35).timeout
 	GameManager.activePlayer.stats.ideas.clear()

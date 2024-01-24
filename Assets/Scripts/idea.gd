@@ -23,16 +23,20 @@ func orbit(delta, target, distance, speed, heightOffset):
 	global_position = global_position.lerp(point + Vector3(cos(orbitAngle),0, sin(orbitAngle)) * distance,delta*10)
 
 func _on_area_body_entered(body):
-	if !is_multiplayer_authority():
-		return
 	if GameManager.activePlayer:
 		if body == GameManager.activePlayer:
 			if !collector:
-				collector = GameManager.activePlayer
+				rpc("rpcUpdateCollector",GameManager.activePlayer.name)
 				set_multiplayer_authority(int(str(body.name)))
 				GameManager.activePlayer.stats.ideas.append(self)
 
-@rpc ("any_peer", "reliable")
+@rpc ("any_peer", "call_local", "reliable")
+func rpcUpdateCollector(playerName):
+	for player in GameManager.players.get_children():
+		if player.name==playerName and !collector:
+			collector = player
+
+@rpc ("any_peer", "call_local", "reliable")
 func rpcDepositIdea():
 	collector = GameManager.dreamDilator
 	targetHeight = 3+GameManager.dreamDilator.ideas.size()*.5

@@ -3,6 +3,7 @@ extends Node
 @export var dreamDilatorInUse: String
 @export var ideaQuota: int
 @export var dreamTimer: float 
+var dreamLength = 60*7
 
 #idea storage
 @export var goodIdeaCount: int
@@ -29,7 +30,7 @@ func _process(delta):
 	if !is_multiplayer_authority():
 		return
 	dreamTimer+=delta
-	if dreamTimer>1020:
+	if dreamTimer>dreamLength:
 		rpc("rpcAbort",ideaQuota)
 
 @rpc ("any_peer","call_local", "reliable")

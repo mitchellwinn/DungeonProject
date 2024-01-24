@@ -3,9 +3,9 @@ extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	GameManager.players = $Players
 	if not multiplayer.is_server():
 		return
-	
 	multiplayer.peer_connected.connect(add_player)
 	multiplayer.peer_disconnected.connect(del_player)
 	

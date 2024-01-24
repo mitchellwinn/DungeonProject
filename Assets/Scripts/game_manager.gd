@@ -11,6 +11,7 @@ var dungeonExists = false
 var dreamDilator
 var generatingDungeon = false
 var dungeon
+var players
 
 func _physics_process(delta):
 	GameManager.teleportCool-=1
