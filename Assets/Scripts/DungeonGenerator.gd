@@ -225,35 +225,3 @@ func entranceOverlappingNothing(entrance):
 		if area.get_parent().room != entrance.room:
 			return false
 	return true
-
-func rpcActivate(goodModifier,badModifier):
-	GameManager.dungeon.generationMain()
-	GameManager.network.dungeonLive = true
-	GameManager.network.goodModifier = goodModifier
-	GameManager.network.goodIdeaCount -= goodModifier
-	GameManager.network.badModifier = badModifier
-	GameManager.network.badIdeaCount -= badModifier
-	GameManager.activePlayer.get_node("UI/Main/Message").visible=true
-	GameManager.activePlayer.get_node("UI/Main/GenerationMessage").visible=true
-	while GameManager.generatingDungeon:
-		await get_tree().physics_frame
-	GameManager.activePlayer.get_node("UI/Main/Message").visible=false
-	GameManager.activePlayer.get_node("UI/Main/GenerationMessage").visible=false
-
-@rpc ("any_peer", "reliable")	
-func rpcAbort(newQuota):
-	GameManager.network.ideaQuota = newQuota
-	for idea in GameManager.dreamDilator.ideas:
-		match idea.ideaType:
-			"good":
-				GameManager.network.goodIdeaCount+=1
-			"bad":
-				GameManager.network.badIdeaCount+=1
-		idea.queue_free()
-	GameManager.dreamDilator.ideas.clear()
-	GameManager.dungeon.delete()
-	GameManager.network.dungeonLive = false
-	if GameManager.activePlayer.global_position.y<-10:
-		GameManager.activePlayer.global_position = Vector3(0,5,0)
-	for idea in GameManager.activePlayer.stats.ideas:
-		idea.queue_free()

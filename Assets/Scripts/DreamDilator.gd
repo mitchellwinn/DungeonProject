@@ -15,20 +15,17 @@ func interact():
 	print("interact function called")
 	if GameManager.activePlayer.stats.ideas.size()>0:
 		await depositIdeas()
-	elif GameManager.dungeonExists and GameManager.network.dreamDilatorInUse == "":
-		GameManager.network.rpcDreamDilatorUsage(GameManager.activePlayer.name)
-		await useDreamDilator()
-	elif !GameManager.dungeonExists and GameManager.network.dreamDilatorInUse == "":
-		GameManager.network.rpcDreamDilatorUsage(GameManager.activePlayer.name)
+	elif GameManager.network.dreamDilatorInUse == "":
+		GameManager.network.rpc("rpcDreamDilatorUsage",GameManager.activePlayer.name)
 		while GameManager.network.dreamDilatorInUse == "":
 			await get_tree().physics_frame
 		await useDreamDilator()
-	await get_tree().physics_frame
-	return false	
+		await get_tree().physics_frame
+	return false
 
 func depositIdeas():
 	for idea in GameManager.activePlayer.stats.ideas:
-		idea.rpcDepositIdea()
+		idea.rpc("depositIdea")
 		idea.set_multiplayer_authority(int(1))
 		await get_tree().create_timer(.35).timeout
 	GameManager.activePlayer.stats.ideas.clear()
@@ -51,7 +48,7 @@ func useDreamDilator():
 	$Camera3D2.current = false
 	GameManager.activePlayer.get_node("UI/Main").visible = true
 	GameManager.activePlayer.get_node("UI/DreamDilator").visible = false
-	GameManager.network.rpcDreamDilatorUsage("")
+	GameManager.network.rpc("rpcDreamDilatorUsage","")
 	
 func inDream():
 	var looping = true

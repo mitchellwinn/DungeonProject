@@ -18,7 +18,6 @@ func _process(delta):
 	$DreamDilator/OutDream/IdeasCount.text = "[center]"+str(GameManager.network.ideaQuota)+" IDEAS NEEDED TO OPEN GATES" 
 
 #DREAM ACTIVATION
-@rpc ("any_peer", "reliable")
 func _on_activate_pressed():
 	GameManager.network.rpcDreamDilatorUsage("")
 	#modifiers
@@ -31,10 +30,10 @@ func _on_activate_pressed():
 				goodModifier += icon.amount
 			"bad":
 				badModifier += icon.amount
-	GameManager.dungeon.rpcActivate(goodModifier,badModifier)
+	GameManager.network.rpc("rpcActivate",goodModifier,badModifier)
 	
 #DREAM CEASE
 func _on_abort_pressed():
-	GameManager.network.rpcDreamDilatorUsage("")
-	GameManager.dungeon.rpcAbort(GameManager.network.ideaQuota+(GameManager.network.ideaQuota*.5)+5*(GameManager.network.ideaQuota/10))
-	GameManager.network.rpcResetDilatorOptions()
+	GameManager.network.rpc("rpcDreamDilatorUsage","",)
+	GameManager.network.rpc("rpcAbort",(GameManager.network.ideaQuota+(GameManager.network.ideaQuota*.5)+5*(GameManager.network.ideaQuota/10)))
+	GameManager.network.rpc("rpcResetDilatorOptions")

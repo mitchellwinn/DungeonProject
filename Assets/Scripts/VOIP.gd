@@ -28,7 +28,7 @@ func _process(delta):
 	reverbCalculator()
 	#bufferSize = effect.get_frames_available()
 	if (effect.can_get_buffer(bufferSize) && playback.can_push_buffer(bufferSize)):
-		sendData(effect.get_buffer(bufferSize))
+		rpc("sendData",(effect.get_buffer(bufferSize)))
 	effect.clear_buffer()
 	#playback.clear_buffer()
 
