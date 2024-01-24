@@ -4,6 +4,7 @@ extends Node2D
 @export var nameEntry: TextEdit
 @export var portalStaticViewport: SubViewport
 @export var deviceDropdown: ItemList
+var external_ip
 var network = preload("res://Assets/Prefabs/Network.tscn")
 var hostIP = ""
 var devices
@@ -27,6 +28,10 @@ func populateInputDropdown():
 
 func portMap():
 	var upnp = UPNP.new()
+	
+	upnp.delete_port_mapping(9999,"UDP")
+	upnp.delete_port_mapping(9999,"TCP")
+	
 	var discover_result = upnp.discover()
 	
 	if discover_result == UPNP.UPNP_RESULT_SUCCESS:
@@ -40,10 +45,10 @@ func portMap():
 			if not map_result_tcp == UPNP.UPNP_RESULT_SUCCESS:
 				upnp.add_port_mapping(9999,9999,"","TCP")
 	
-	var external_ip = upnp.query_external_address()
+	external_ip = upnp.query_external_address()
 	
-	upnp.delete_port_mapping(9999,"UDP")
-	upnp.delete_port_mapping(9999,"TCP")
+	#upnp.delete_port_mapping(9999,"UDP")
+	#upnp.delete_port_mapping(9999,"TCP")
 	
 	$UI/PublicIP.text = str(external_ip)
 
@@ -87,3 +92,7 @@ func change_level(scene :PackedScene):
 
 func _on_item_list_item_selected(index):
 	AudioServer.input_device = str(devices[index])
+
+
+func _on_copy_pressed():
+	DisplayServer.clipboard_set(external_ip)

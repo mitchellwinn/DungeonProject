@@ -70,6 +70,15 @@ theme_override_font_sizes/font_size = 76
 text = "JOIN"
 metadata/_edit_use_anchors_ = true
 
+[node name="Copy" type="Button" parent="UI"]
+layout_mode = 0
+offset_left = 317.0
+offset_top = 227.0
+offset_right = 465.0
+offset_bottom = 279.0
+theme_override_font_sizes/font_size = 31
+text = "COPY IP"
+
 [node name="ItemList" type="ItemList" parent="UI"]
 layout_mode = 0
 offset_left = 304.0
@@ -80,9 +89,9 @@ offset_bottom = 494.0
 [node name="PublicIP" type="RichTextLabel" parent="UI"]
 layout_mode = 0
 offset_left = 316.0
-offset_top = 186.0
+offset_top = 154.0
 offset_right = 814.0
-offset_bottom = 289.0
+offset_bottom = 224.0
 theme_override_font_sizes/normal_font_size = 51
 text = "PUBLIC IP"
 
@@ -99,4 +108,5 @@ spawn_limit = 1
 
 [connection signal="pressed" from="UI/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="UI/Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="UI/Copy" to="." method="_on_copy_pressed"]
 [connection signal="item_selected" from="UI/ItemList" to="." method="_on_item_list_item_selected"]
