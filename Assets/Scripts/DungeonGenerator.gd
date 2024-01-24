@@ -214,8 +214,7 @@ func removeLooseExits():
 				print("removing entrance of type "+entrance.notes)
 				entrance.queue_free()
 		portalPopulation(rooms[i])
-		if is_multiplayer_authority():
-			ideaPopulation(rooms[i])
+		ideaPopulation(rooms[i])
 		i+=1
 
 func entranceOverlappingNothing(entrance):
