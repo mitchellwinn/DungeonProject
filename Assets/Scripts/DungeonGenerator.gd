@@ -47,6 +47,7 @@ func delete():
 	GameManager.dungeonExists = false
 	gateOfHornPortal.delink()
 	gateOfIvoryPortal.delink()
+	ivoryConnection = false
 	for room in rooms:
 		rooms.erase(room)
 		room.queue_free()
@@ -74,11 +75,10 @@ func ideaPopulation(room):
 		print(idea.global_position)
 		await get_tree().physics_frame
 		while idea.get_node("area").get_overlapping_bodies().size()>0:
-			idea.position = Vector3.ZERO
+			idea.global_position = room.global_position
 			idea.global_position.x += rng.randf_range(-room.get_node("RoomOuter").size.x/2+1,room.get_node("RoomOuter").size.x/2-1)
 			idea.global_position.z += rng.randf_range(-room.get_node("RoomOuter").size.z/2+1,room.get_node("RoomOuter").size.z/2-1)
 			idea.global_position.y+=2
-			print(":-p")
 			await get_tree().physics_frame
 
 func decideIdeaType():
@@ -182,6 +182,8 @@ func generateRoomChild(parentRoom ,parentEntrance,nestLevel,retry):
 		#parentEntrance.hasConnection = false
 		#parentEntrance.visible = false
 		#parentEntrance.active = false
+		if !overlappingArea.name=="RoomBoundaries":
+			return
 		rooms.erase(roomInstance)
 		roomInstance.queue_free()
 		await get_tree().physics_frame

@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=5 format=3 uid="uid://c2bxgqo3ovh7w"]
+[gd_resource type="AudioBusLayout" load_steps=6 format=3 uid="uid://c2bxgqo3ovh7w"]
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_mp2s3"]
 resource_name = "Reverb"
@@ -21,6 +21,9 @@ threshold = -7.6
 ratio = 8.2
 gain = 4.6
 
+[sub_resource type="AudioEffectPhaser" id="AudioEffectPhaser_gbnua"]
+resource_name = "Phaser"
+
 [resource]
 bus/1/name = &"Physical"
 bus/1/solo = false
@@ -42,3 +45,11 @@ bus/2/effect/1/effect = SubResource("AudioEffectEQ_q77op")
 bus/2/effect/1/enabled = true
 bus/2/effect/2/effect = SubResource("AudioEffectCompressor_ip7ml")
 bus/2/effect/2/enabled = true
+bus/3/name = &"Ambiance"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = 0.0
+bus/3/send = &"Master"
+bus/3/effect/0/effect = SubResource("AudioEffectPhaser_gbnua")
+bus/3/effect/0/enabled = true

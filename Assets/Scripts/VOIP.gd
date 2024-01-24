@@ -43,8 +43,8 @@ func reverbCalculator():
 	var physicalidx = AudioServer.get_bus_index("Physical")
 	var reverbEffect = AudioServer.get_bus_effect(physicalidx, 0)
 	if ceilingRay.is_colliding():
-		reverbEffect.wet = (ceilingRay.get_collision_point()-global_position).length()/50
-		reverbEffect.room_size = (ceilingRay.get_collision_point()-global_position).length()/50
+		reverbEffect.wet = (ceilingRay.get_collision_point()-global_position).length()/100
+		reverbEffect.room_size = (ceilingRay.get_collision_point()-global_position).length()/100
 	else:
 		reverbEffect.wet = 0
 

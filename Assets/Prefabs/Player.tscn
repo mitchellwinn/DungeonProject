@@ -96,10 +96,10 @@ colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_sqwy5"]
 gradient = SubResource("Gradient_cw80n")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_e2ef8"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_tseha"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_2n5uc"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_2y2ph"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="QuadMesh" id="QuadMesh_idr8m"]
@@ -329,7 +329,7 @@ shape = SubResource("BoxShape3D_jjbi7")
 [node name="LeftFootstep" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1.20258, 0)
 stream = SubResource("AudioStream_xt2ru")
-volume_db = -20.0
+volume_db = -30.0
 max_distance = 20.0
 bus = &"Physical"
 emission_angle_enabled = true
@@ -338,7 +338,7 @@ emission_angle_degrees = 90.0
 [node name="RightFootstep" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1.20258, 0)
 stream = SubResource("AudioStream_xt2ru")
-volume_db = -20.0
+volume_db = -30.0
 max_distance = 20.0
 bus = &"Physical"
 emission_angle_enabled = true
@@ -496,10 +496,11 @@ scale = Vector2(0.109137, 0.109137)
 texture = ExtResource("14_its14")
 
 [node name="ProgressBar" type="ProgressBar" parent="UI/Main"]
+modulate = Color(0.909804, 0, 0, 1)
 layout_mode = 0
-offset_left = 43.0
+offset_left = 51.0
 offset_top = 35.0
-offset_right = 85.0
+offset_right = 83.0
 offset_bottom = 576.0
 value = 100.0
 fill_mode = 3
@@ -580,7 +581,8 @@ grow_vertical = 2
 [node name="Good_Idea_Icon" parent="UI/DreamDilator/OutDream" instance=ExtResource("13_q20ia")]
 position = Vector2(159, 181)
 scale = Vector2(0.25, 0.25)
-texture = SubResource("ViewportTexture_ffaov")
+texture = SubResource("ViewportTexture_tseha")
+
 
 [node name="idea" parent="UI/DreamDilator/OutDream/Good_Idea_Icon" index="0"]
 transform = Transform3D(0.236453, 0, 0.0811786, 0, 0.25, 0, -0.0811786, 0, 0.236453, 5, 0.647767, 0)
@@ -591,7 +593,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.672845, 1.48044)
 [node name="Bad_Idea_Icon" parent="UI/DreamDilator/OutDream" instance=ExtResource("13_5i5yv")]
 position = Vector2(159, 288)
 scale = Vector2(0.25, 0.25)
-texture = SubResource("ViewportTexture_oyx4h")
+texture = SubResource("ViewportTexture_2y2ph")
 
 [node name="IdeasCount" type="RichTextLabel" parent="UI/DreamDilator/OutDream"]
 layout_direction = 1

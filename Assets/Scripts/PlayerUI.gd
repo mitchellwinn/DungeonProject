@@ -19,7 +19,7 @@ func _process(delta):
 	if GameManager.dungeonExists:
 		$Main/ProgressBar.visible = true
 		$Main/Skull.visible = true
-		$Main/ProgressBar.value = 100-(GameManager.network.dreamTimer/GameManager.network.dreamLength)
+		$Main/ProgressBar.value = 100-(GameManager.network.dreamTimer/GameManager.network.dreamLength)*100
 	else:
 		$Main/ProgressBar.visible = false
 		$Main/Skull.visible = false
