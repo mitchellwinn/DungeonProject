@@ -87,6 +87,7 @@ size = Vector3(0.511855, 1, 0.222978)
 [sub_resource type="AudioStream" id="AudioStream_xt2ru"]
 
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_yfi24"]
+buffer_length = 0.25
 
 [sub_resource type="Gradient" id="Gradient_cw80n"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
