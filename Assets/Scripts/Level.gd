@@ -28,6 +28,8 @@ func add_player(id: int):
 func del_player(id: int):
 	if not $Players.has_node(str(id)):
 		return 
+	for idea in $Players.get_node(str(id)).stats.ideas:
+		idea.queue_free()
 	$Players.get_node(str(id)).queue_free()
 
 func _exit_tree():

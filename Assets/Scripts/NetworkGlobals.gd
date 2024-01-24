@@ -41,7 +41,7 @@ func _process(delta):
 
 @rpc ("any_peer","call_local","reliable")
 func rpcBGM(track):
-	$BGM.stream = load("res://Assets/Music/ambient#"+track+".mp3")
+	$BGM.stream = load("res://Assets/Music/ambient#"+str(track)+".mp3")
 	$BGM.play()
 
 @rpc ("any_peer","call_local","reliable")
@@ -84,8 +84,8 @@ func rpcAbort(newQuota):
 	GameManager.dreamDilator.ideas.clear()
 	GameManager.dungeon.delete()
 	GameManager.network.dungeonLive = false
-	dreamSequence = 0
-	dreamTimer = 0
+	GameManager.network.dreamSequence = 0
+	GameManager.network.dreamTimer = 0
 	if GameManager.activePlayer.global_position.y<-10:
 		GameManager.activePlayer.global_position = Vector3(0,5,0)
 	for idea in GameManager.activePlayer.stats.ideas:

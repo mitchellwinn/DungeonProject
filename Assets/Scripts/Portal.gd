@@ -46,6 +46,8 @@ func link(portal):
 	parent = true
 	targetPortal = portal
 	targetPortal.targetPortal = self
+	if portal.get_parent().global_rotation == targetPortal.get_parent().global_rotation:
+		targetPortal.get_parent().rotate(Vector3.UP,deg_to_rad(180))
 	#targetPortal.camera.current = true
 	on = true
 	if targetPortal.gate.name != "Gate Of Ivory":
@@ -71,7 +73,7 @@ func _on_area_3d_body_entered(body):
 			print("initial rot: "+str(body.global_rotation))
 			print("initial vel: "+str(body.velocity))
 			#body.global_position = Vector3(body.global_position.x+(targetPortal.global_position.x-global_position.x),body.global_position.y+(targetPortal.global_position.y-global_position.y),body.global_position.z+(targetPortal.global_position.z-global_position.z))
-			#GameManager.teleportCool=2
+			GameManager.teleportCool=2
 			var relativeToPortal = gate.global_transform.affine_inverse()*body.global_transform
 			var movedToTargetPortal = targetPortal.gate.global_transform * relativeToPortal
 			body.global_transform = movedToTargetPortal

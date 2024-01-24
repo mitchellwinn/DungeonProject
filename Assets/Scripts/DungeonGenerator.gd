@@ -14,6 +14,8 @@ var rooms: Array
 @export var departmentStoreChance: int
 @export var ideaChance: int
 var timeSinceLastCompletion = 0
+#const gOh = preload("res://Assets/Prefabs/gate_of_horn.tscn")
+#const gOi = preload("res://Assets/Prefabs/gate_of_ivory.tscn")
 const _test_room = preload("res://Assets/Rooms/_Test_Room.tscn")
 const _big_room = preload("res://Assets/Rooms/_Big_Room.tscn")
 const _long_confusing_room = preload("res://Assets/Rooms/_Long_Confusing_Room.tscn")

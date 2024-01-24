@@ -17,10 +17,10 @@ func interact():
 		await depositIdeas()
 	elif GameManager.network.dreamDilatorInUse == "":
 		GameManager.network.rpc("rpcDreamDilatorUsage",GameManager.activePlayer.name)
-		while GameManager.network.dreamDilatorInUse == "":
+		while GameManager.network.dreamDilatorInUse != GameManager.activePlayer.name:
 			await get_tree().physics_frame
 		await useDreamDilator()
-		await get_tree().physics_frame
+		#await get_tree().physics_frame
 	return false
 
 func depositIdeas():
@@ -32,8 +32,6 @@ func depositIdeas():
 	
 func useDreamDilator():
 	print("using dilator")
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	var looping = true
 	GameManager.activePlayer.get_node("UI/Main").visible = false
 	GameManager.activePlayer.get_node("UI/DreamDilator").visible = true
 	GameManager.activePlayer.camera.current = false
@@ -54,7 +52,8 @@ func inDream():
 	var looping = true
 	$Camera3D.current = true
 	GameManager.activePlayer.get_node("UI/DreamDilator/InDream").visible = true
-	while looping and GameManager.network.dreamDilatorInUse!="":
+	while looping and GameManager.network.dreamDilatorInUse == GameManager.activePlayer.name:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		await get_tree().physics_frame
 		if Input.is_action_just_pressed("interact"):
 			looping = false
@@ -63,7 +62,8 @@ func outDream():
 	var looping = true
 	$Camera3D2.current = true
 	GameManager.activePlayer.get_node("UI/DreamDilator/OutDream").visible = true
-	while looping  and GameManager.network.dreamDilatorInUse!="":
+	while looping  and GameManager.network.dreamDilatorInUse == GameManager.activePlayer.name:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		await get_tree().physics_frame
 		if queuedIdeas>=GameManager.network.ideaQuota:
 			GameManager.activePlayer.get_node("UI/DreamDilator/OutDream/Activate").visible = true

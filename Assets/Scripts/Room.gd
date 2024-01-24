@@ -24,12 +24,19 @@ var connectingEntrance
 @export var wall1: CSGBox3D
 @export var wall2: CSGBox3D
 @export var wall3: CSGBox3D
+@export var gateSpawnOffset = Vector3(0,2.3,0)
 @export var gateOfHorn: Node3D
 @export var gateOfIvory: Node3D
 @export var gateOfHornPortal: Node3D
 @export var gateOfIvoryPortal: Node3D
 @export var fogAmt: float
 var activeEntranceCount
+
+func _ready():
+	if gateOfHorn:
+		gateOfHornPortal = gateOfHorn.portal
+	if gateOfIvory:
+		gateOfHornPortal = gateOfIvory.portal
 
 func initializeRoom():
 	if parentRoom:
