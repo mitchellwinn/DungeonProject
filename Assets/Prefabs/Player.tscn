@@ -86,8 +86,6 @@ size = Vector3(0.511855, 1, 0.222978)
 [sub_resource type="AudioStream" id="AudioStream_xt2ru"]
 
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_yfi24"]
-mix_rate = 44500.0
-buffer_length = 1.0
 
 [sub_resource type="Gradient" id="Gradient_cw80n"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
@@ -95,10 +93,10 @@ colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_sqwy5"]
 gradient = SubResource("Gradient_cw80n")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_e6q3d"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_aw38s"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_iwjdg"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_kql04"]
 viewport_path = NodePath("SubViewport")
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "camContainer", "stats", "skeleton", "animator", "headSocket") groups=["player"]]
@@ -545,7 +543,7 @@ grow_vertical = 2
 [node name="Good_Idea_Icon" parent="UI/DreamDilator/OutDream" instance=ExtResource("13_q20ia")]
 position = Vector2(159, 181)
 scale = Vector2(0.25, 0.25)
-texture = SubResource("ViewportTexture_e6q3d")
+texture = SubResource("ViewportTexture_aw38s")
 
 [node name="idea" parent="UI/DreamDilator/OutDream/Good_Idea_Icon" index="0"]
 transform = Transform3D(0.236453, 0, 0.0811786, 0, 0.25, 0, -0.0811786, 0, 0.236453, 5, 0.647767, 0)
@@ -556,7 +554,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.672845, 1.48044)
 [node name="Bad_Idea_Icon" parent="UI/DreamDilator/OutDream" instance=ExtResource("13_5i5yv")]
 position = Vector2(159, 288)
 scale = Vector2(0.25, 0.25)
-texture = SubResource("ViewportTexture_iwjdg")
+texture = SubResource("ViewportTexture_kql04")
 
 [node name="IdeasCount" type="RichTextLabel" parent="UI/DreamDilator/OutDream"]
 layout_direction = 1
