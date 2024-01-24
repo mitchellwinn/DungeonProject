@@ -64,7 +64,7 @@ func portalPopulation(room):
 		room.gateOfIvory.queue_free()
 
 func ideaPopulation(room):
-	while rng.randi_range(0,1000)>(1000-(ideaChance+room.nestLevel*10)):
+	while rng.randi_range(0,1000)>(1000-(ideaChance+room.nestLevel*15)):
 		var idea = decideIdeaType()
 		self.add_child(idea)
 		idea.global_position = room.global_position

@@ -24,7 +24,7 @@ func orbit(delta, target, distance, speed, heightOffset):
 
 func _on_area_body_entered(body):
 	if GameManager.activePlayer:
-		if body == GameManager.activePlayer:
+		if body.stats:
 			if !collector:
 				rpc("rpcUpdateCollector",GameManager.activePlayer.name)
 				set_multiplayer_authority(int(str(body.name)))
