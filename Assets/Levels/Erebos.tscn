@@ -553,7 +553,11 @@ ideaChance = 200
 replication_config = SubResource("SceneReplicationConfig_vx447")
 
 [node name="DungeonSpawner" type="MultiplayerSpawner" parent="Dungeon"]
-_spawnable_scenes = PackedStringArray("res://Assets/Prefabs/good_idea.tscn")
+_spawnable_scenes = PackedStringArray("res://Assets/Levels/Erebos.tscn")
+spawn_path = NodePath("..")
+
+[node name="IdeaSpawner" type="MultiplayerSpawner" parent="Dungeon"]
+_spawnable_scenes = PackedStringArray("res://Assets/Prefabs/good_idea.tscn", "res://Assets/Prefabs/bad_idea.tscn")
 spawn_path = NodePath("..")
 
 [node name="Players" type="Node3D" parent="."]

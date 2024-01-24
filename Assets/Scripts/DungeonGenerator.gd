@@ -66,8 +66,8 @@ func portalPopulation(room):
 func ideaPopulation(room):
 	while rng.randi_range(0,1000)>(1000-(ideaChance+room.nestLevel*10)):
 		var idea = decideIdeaType()
-		room.add_child(idea)
-		idea.position = Vector3.ZERO
+		self.add_child(idea)
+		idea.global_position = room.global_position
 		idea.global_position.x += rng.randf_range(-room.get_node("RoomOuter").size.x/2+1,room.get_node("RoomOuter").size.x/2-1)
 		idea.global_position.z += rng.randf_range(-room.get_node("RoomOuter").size.z/2+1,room.get_node("RoomOuter").size.z/2-1)
 		idea.global_position.y+=2
@@ -214,7 +214,8 @@ func removeLooseExits():
 				print("removing entrance of type "+entrance.notes)
 				entrance.queue_free()
 		portalPopulation(rooms[i])
-		ideaPopulation(rooms[i])
+		if is_multiplayer_authority():
+			ideaPopulation(rooms[i])
 		i+=1
 
 func entranceOverlappingNothing(entrance):
