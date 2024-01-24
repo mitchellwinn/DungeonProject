@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://bw16euhd8q32i"
-path="res://.godot/imported/RUBBBBO_.TTF-049dc79cd77710e12e504c58d8ee43e8.fontdata"
+path="res://.godot/imported/RUBBBBO_.TTF-e8781d5f4704d7574d7e42ff2fe7574e.fontdata"
 
 [deps]
 
-source_file="res://Assets/scripts/RUBBBBO_.TTF"
-dest_files=["res://.godot/imported/RUBBBBO_.TTF-049dc79cd77710e12e504c58d8ee43e8.fontdata"]
+source_file="res://Assets/Scripts/RUBBBBO_.TTF"
+dest_files=["res://.godot/imported/RUBBBBO_.TTF-e8781d5f4704d7574d7e42ff2fe7574e.fontdata"]
 
 [params]
 

@@ -54,7 +54,7 @@ func _physics_process(delta):
 	if !is_multiplayer_authority():
 		animateRemote()
 		return
-	if Input.is_action_just_pressed("tab"):
+	if Input.is_action_just_pressed("tab") and GameManager.network.dreamDilatorInUse == "":
 		match Input.get_mouse_mode():
 			Input.MOUSE_MODE_CAPTURED:
 				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -78,7 +78,7 @@ func checkInteract():
 	if interacting:
 		return
 	if camera.get_node("InteractCast").is_colliding():
-		$UI/Target.text = "[center]\n"+camera.get_node("InteractCast").get_collider().displayName
+		$UI/Main/Target.text = "[center]\n"+camera.get_node("InteractCast").get_collider().displayName
 		if Input.is_action_just_pressed("interact"):
 			print("interact")
 			interacting = true
@@ -87,7 +87,7 @@ func checkInteract():
 		$UI/Main/Target.text = ""
 	
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and fullyActionable(): 
 		mouseDelta.x = event.relative.x
 		mouseDelta.y = event.relative.y
 	
@@ -132,7 +132,7 @@ func playerFocus():
 				return false
 	
 func fullyActionable():
-	if !interacting:
+	if !interacting and !GameManager.generatingDungeon:
 		return true
 	
 func animate(delta):

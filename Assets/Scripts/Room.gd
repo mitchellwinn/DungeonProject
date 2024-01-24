@@ -35,10 +35,7 @@ func initializeRoom():
 	if parentRoom:
 		if gateOfHorn:
 			gateOfHorn.queue_free()
-	if roomType == "BigRoom":
-		determineWalls()
-		if sceneRoot.rng.randi_range(0,1000)>(1000-999):
-			$NB.visible = true
+	propsPopulation()
 	if parentEntrance:
 		parentEntrance.hasConnection = true
 	var strength = 0
@@ -46,7 +43,7 @@ func initializeRoom():
 		var strengthBoost = 0
 		match roomType:
 			"DepartmentStore":
-				strengthBoost = 2
+				strengthBoost = 0
 		strength = sceneRoot.rng.randf_range(-5,5)
 		strength = strength + strengthBoost
 		if strength<0:
@@ -68,6 +65,12 @@ func initializeRoom():
 			activeEntranceCount += testEntranceGeneration(entrance)
 			
 	#print("this room has "+str(activeEntranceCount)+" active entrances.")
+
+func propsPopulation():
+	if roomType == "BigRoom":
+		determineWalls()
+		if sceneRoot.rng.randi_range(0,1000)>(1000-50):
+			$NB.visible = true
 
 func appendEntrancesToGroup():
 	if entrance1:

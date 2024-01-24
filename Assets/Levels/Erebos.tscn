@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://cntvy1dnjxg0k" path="res://Assets/3Dmodels/Gates/GateOfIvory_pillarnormal.png" id="11_cw5w1"]
 [ext_resource type="Texture2D" uid="uid://dd4jfsi0gsrob" path="res://Assets/3Dmodels/Gates/GateOfIvory_360_F_20949036_b4g2hWGuqQMzC6vWuMTEcM0xZbz1Mpho.png" id="12_s1g4t"]
 [ext_resource type="Texture2D" uid="uid://bf1rmhf2wubow" path="res://Assets/3Dmodels/Gates/GateOfIvory_2062-normal.png" id="13_t3lpn"]
-[ext_resource type="Script" path="res://Assets/scripts/DreamDilator.gd" id="16_r3wcj"]
+[ext_resource type="Script" path="res://Assets/Scripts/DreamDilator.gd" id="16_jm156"]
 [ext_resource type="PackedScene" uid="uid://cl7ibmdeubwb4" path="res://Assets/3Dmodels/BrassGoblets/brass_goblet_1k.glb" id="17_okry5"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Benji_Water.gdshader" id="19_uajir"]
 
@@ -413,7 +413,7 @@ size = Vector2i(3840, 2160)
 
 [node name="Camera3D" type="Camera3D" parent="Gate Of Horn/RotationParent/Portal/CamViewport"]
 transform = Transform3D(-1, 0, -8.9407e-08, 0, 1, 0, 8.9407e-08, 0, -1, 0, 2.64902, 5.06243)
-cull_mask = 1048573
+cull_mask = 524285
 current = true
 far = 100.0
 
@@ -547,7 +547,7 @@ roomDensity = 700
 bigRoomChance = 600
 longConfusingRoomChance = 400
 departmentStoreChance = 50
-ideaChance = 100
+ideaChance = 200
 
 [node name="DungeonSynchronizer" type="MultiplayerSynchronizer" parent="Dungeon"]
 replication_config = SubResource("SceneReplicationConfig_vx447")
@@ -597,7 +597,7 @@ shape = SubResource("ConcavePolygonShape3D_0s7up")
 [node name="DreamDilator" type="StaticBody3D" parent="DreamDilator/brass_goblet_02" index="1"]
 collision_layer = 256
 collision_mask = 0
-script = ExtResource("16_r3wcj")
+script = ExtResource("16_jm156")
 displayName = "Dream Dilator"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DreamDilator/brass_goblet_02/DreamDilator"]
@@ -605,10 +605,19 @@ shape = SubResource("BoxShape3D_203t8")
 
 [node name="Camera3D" type="Camera3D" parent="DreamDilator/brass_goblet_02/DreamDilator"]
 transform = Transform3D(-0.0833333, 4.25051e-09, -5.91674e-09, -8.52247e-10, 0.0615272, 0.0562037, 7.23521e-09, 0.0562037, -0.0615272, 0, 0.635164, -0.557445)
+cull_mask = 524287
 projection = 2
 fov = 30.0
 size = 0.05
 frustum_offset = Vector2(0, 0.003)
+
+[node name="Camera3D2" type="Camera3D" parent="DreamDilator/brass_goblet_02/DreamDilator"]
+transform = Transform3D(-0.0833333, 4.25051e-09, -5.91674e-09, -8.52247e-10, 0.0615272, 0.0562037, 7.23521e-09, 0.0562037, -0.0615272, 2.98023e-08, 0.275058, -0.0731798)
+cull_mask = 524287
+projection = 2
+fov = 30.0
+size = 0.025
+frustum_offset = Vector2(0, 0.018)
 
 [node name="MeshInstance3D" type="CSGMesh3D" parent="DreamDilator"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2294, 0)

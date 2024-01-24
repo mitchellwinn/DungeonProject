@@ -52,6 +52,15 @@ func link(portal):
 		targetPortal.on = true
 	print("target portal of "+gate.name+" ("+gate.get_parent().name+") has been linked to "+targetPortal.gate.name+" ("+targetPortal.gate.get_parent().name+")")
 
+func delink():
+	if targetPortal:
+		targetPortal.targetPortal = null
+		targetPortal.parent = false
+		targetPortal.on = false
+	targetPortal = null
+	parent = false
+	on = false
+
 func _on_area_3d_body_entered(body):
 	print(body.name)
 	#return

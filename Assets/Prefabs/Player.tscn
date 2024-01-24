@@ -1,7 +1,6 @@
-[gd_scene load_steps=20 format=3 uid="uid://uldgeps0kb77"]
+[gd_scene load_steps=26 format=3 uid="uid://uldgeps0kb77"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/CharacterController.gd" id="1_ph60j"]
-[ext_resource type="Script" path="res://Assets/scripts/stats.gd" id="2_ue7er"]
 [ext_resource type="PackedScene" uid="uid://02wrofo348y8" path="res://Assets/3Dmodels/Oneiroi/Oneiroi.fbx" id="3_kqv82"]
 [ext_resource type="Material" uid="uid://bni8skay8qkkf" path="res://Assets/Materials/Oneiroi/trim.tres" id="4_msixf"]
 [ext_resource type="Material" uid="uid://cd6ytcvjrtc8i" path="res://Assets/Materials/Oneiroi/fabric.tres" id="5_ag0gt"]
@@ -12,6 +11,8 @@
 [ext_resource type="Script" path="res://Assets/Scripts/VOIP.gd" id="10_ap7iq"]
 [ext_resource type="FontFile" uid="uid://bkerjrmlfwpsq" path="res://Assets/Fonts/RUBBBB__.TTF" id="11_a5ree"]
 [ext_resource type="Script" path="res://Assets/Scripts/PlayerUI.gd" id="11_h5c6q"]
+[ext_resource type="PackedScene" uid="uid://cyug4oein5tgi" path="res://Assets/Prefabs/bad_idea_icon.tscn" id="13_5i5yv"]
+[ext_resource type="PackedScene" uid="uid://ccv53y31lvtg" path="res://Assets/Prefabs/good_idea_icon.tscn" id="13_q20ia"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xyitk"]
 radius = 0.367273
@@ -38,6 +39,25 @@ properties/4/path = NodePath("stats:animSpeed")
 properties/4/spawn = true
 properties/4/sync = true
 properties/4/watch = false
+
+[sub_resource type="GDScript" id="GDScript_sns15"]
+script/source = "extends Node
+
+
+@export var ign: String
+@export var baseAnimation: String
+@export var animSpeed: int
+@export var ideas: Array
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oihkw"]
 resource_name = "Fabric.001"
@@ -68,6 +88,18 @@ size = Vector3(0.511855, 1, 0.222978)
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_yfi24"]
 mix_rate = 16500.0
 buffer_length = 1.0
+
+[sub_resource type="Gradient" id="Gradient_cw80n"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sqwy5"]
+gradient = SubResource("Gradient_cw80n")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_01aou"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_hqc0v"]
+viewport_path = NodePath("SubViewport")
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "camContainer", "stats", "skeleton", "animator", "headSocket") groups=["player"]]
 collision_layer = 16
@@ -114,7 +146,7 @@ text = "PLAYER NAME"
 font_size = 62
 
 [node name="stats" type="Node" parent="."]
-script = ExtResource("2_ue7er")
+script = SubResource("GDScript_sns15")
 
 [node name="Oneiroi" parent="." instance=ExtResource("3_kqv82")]
 transform = Transform3D(0.38, 0, 0, 0, 0.38, 0, 0, 0, 0.38, 0, -1.25, 0)
@@ -315,7 +347,7 @@ bus = &"Physical"
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-0.999803, 6.8719e-05, 0.0198502, 0.000819077, 0.999285, 0.0377954, -0.0198334, 0.0378042, -0.999088, -2.41937e-06, 1.06882, -0.161261)
-cull_mask = 1048571
+cull_mask = 524283
 current = true
 far = 500.0
 
@@ -372,6 +404,42 @@ text = "[center]
 0 IDEAS"
 fit_content = true
 
+[node name="Message" type="RichTextLabel" parent="UI/Main"]
+visible = false
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -573.0
+offset_top = 231.0
+offset_right = 578.0
+offset_bottom = 327.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.137255, 0, 0.25098, 0.384314)
+theme_override_colors/font_outline_color = Color(0.615686, 0.709804, 0, 1)
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 30
+theme_override_constants/line_separation = 0
+theme_override_constants/table_h_separation = 0
+theme_override_constants/table_v_separation = 0
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("11_a5ree")
+theme_override_font_sizes/normal_font_size = 46
+bbcode_enabled = true
+text = "[center]
+GENERATING DUNGEON"
+fit_content = true
+
+[node name="GenerationMessage" type="Sprite2D" parent="UI/Main"]
+visible = false
+modulate = Color(1, 1, 1, 0.47451)
+z_index = -10
+position = Vector2(575, 332.5)
+scale = Vector2(18.1875, 10.3594)
+texture = SubResource("GradientTexture2D_sqwy5")
+
 [node name="Target" type="RichTextLabel" parent="UI/Main"]
 layout_direction = 1
 layout_mode = 1
@@ -411,7 +479,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="IdeasCount" type="RichTextLabel" parent="UI/DreamDilator"]
+[node name="InDream" type="Control" parent="UI/DreamDilator"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="IdeasCount" type="RichTextLabel" parent="UI/DreamDilator/InDream"]
 layout_direction = 1
 layout_mode = 1
 anchors_preset = 5
@@ -438,7 +515,102 @@ text = "[center]
 0 DEPOSITED IDEAS"
 fit_content = true
 
+[node name="Abort" type="Button" parent="UI/DreamDilator/InDream"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -240.0
+offset_top = -158.0
+offset_right = 240.0
+offset_bottom = -55.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 25
+theme_override_font_sizes/font_size = 56
+text = "ABORT DREAM"
+
+[node name="OutDream" type="Control" parent="UI/DreamDilator"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Good_Idea_Icon" parent="UI/DreamDilator/OutDream" instance=ExtResource("13_q20ia")]
+position = Vector2(159, 181)
+scale = Vector2(0.25, 0.25)
+texture = SubResource("ViewportTexture_01aou")
+
+[node name="idea" parent="UI/DreamDilator/OutDream/Good_Idea_Icon" index="0"]
+transform = Transform3D(0.236453, 0, 0.0811786, 0, 0.25, 0, -0.0811786, 0, 0.236453, 5, 0.647767, 0)
+
+[node name="Camera3D" parent="UI/DreamDilator/OutDream/Good_Idea_Icon/SubViewport" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.672845, 1.48044)
+
+[node name="Bad_Idea_Icon" parent="UI/DreamDilator/OutDream" instance=ExtResource("13_5i5yv")]
+position = Vector2(159, 288)
+scale = Vector2(0.25, 0.25)
+texture = SubResource("ViewportTexture_hqc0v")
+
+[node name="IdeasCount" type="RichTextLabel" parent="UI/DreamDilator/OutDream"]
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -573.0
+offset_top = 25.0
+offset_right = 578.0
+offset_bottom = 121.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.137255, 0, 0.25098, 0.384314)
+theme_override_colors/font_outline_color = Color(0.615686, 0.709804, 0, 1)
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 30
+theme_override_constants/line_separation = 0
+theme_override_constants/table_h_separation = 0
+theme_override_constants/table_v_separation = 0
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("11_a5ree")
+theme_override_font_sizes/normal_font_size = 46
+bbcode_enabled = true
+text = "[center]IDEA CATALOGUE
+"
+fit_content = true
+
+[node name="Activate" type="Button" parent="UI/DreamDilator/OutDream"]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -240.0
+offset_top = -158.0
+offset_right = 240.0
+offset_bottom = -55.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 25
+theme_override_font_sizes/font_size = 56
+text = "ACTIVATE GATES"
+
 [connection signal="body_entered" from="Oneiroi/RootNode/root/Skeleton3D/LeftFootSocket/Offset/LeftFootstep" to="." method="_on_left_footstep_body_entered"]
 [connection signal="body_entered" from="Oneiroi/RootNode/root/Skeleton3D/RightFootSocket/Offset/RightFootstep" to="." method="_on_right_footstep_body_entered"]
+[connection signal="pressed" from="UI/DreamDilator/InDream/Abort" to="UI" method="_on_abort_pressed"]
+[connection signal="pressed" from="UI/DreamDilator/OutDream/Activate" to="UI" method="_on_activate_pressed"]
 
 [editable path="Oneiroi"]
+[editable path="UI/DreamDilator/OutDream/Good_Idea_Icon"]
+[editable path="UI/DreamDilator/OutDream/Good_Idea_Icon/idea"]
+[editable path="UI/DreamDilator/OutDream/Bad_Idea_Icon"]
+[editable path="UI/DreamDilator/OutDream/Bad_Idea_Icon/idea"]

@@ -1,0 +1,155 @@
+[gd_scene load_steps=11 format=3 uid="uid://da6h2nvx8jnpt"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Idea.gd" id="1_34i3w"]
+[ext_resource type="PackedScene" uid="uid://brj1mgq6dx3sx" path="res://Assets/3Dmodels/Idea/idea.glb" id="2_t3ikl"]
+
+[sub_resource type="Gradient" id="Gradient_kbuc5"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nsb0g"]
+gradient = SubResource("Gradient_kbuc5")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j148t"]
+resource_name = "Material.001"
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.6, 0.6, 0.6, 1)
+metallic = 1.0
+metallic_specular = 1.0
+roughness = 0.0
+emission_enabled = true
+emission = Color(0.0588235, 0, 0.12549, 1)
+emission_energy_multiplier = 6.35
+emission_operator = 1
+normal_enabled = true
+normal_scale = -2.06
+rim_enabled = true
+clearcoat_enabled = true
+clearcoat = 0.04
+clearcoat_roughness = 0.0
+subsurf_scatter_strength = 1.0
+subsurf_scatter_texture = SubResource("GradientTexture1D_nsb0g")
+backlight = Color(0, 0, 1, 1)
+refraction_enabled = true
+refraction_scale = 0.29
+texture_filter = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k07fu"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="Animation" id="Animation_pnsyh"]
+resource_name = "Hover"
+length = 1.9
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("area/idea:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 12.5664, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("area:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -0.5, 0), Vector3(0, 0.5, 0), Vector3(0, -0.5, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_pb161"]
+resource_name = "Spin"
+length = 1.9
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("idea:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 12.5664, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3k3bd"]
+_data = {
+"Hover": SubResource("Animation_pnsyh"),
+"Spin": SubResource("Animation_pb161")
+}
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_omliw"]
+properties/0/path = NodePath("AnimationPlayer:current_animation")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
+properties/1/path = NodePath(".:position")
+properties/1/spawn = true
+properties/1/sync = true
+properties/1/watch = false
+
+[node name="Bad_Idea" type="Node3D"]
+script = ExtResource("1_34i3w")
+ideaType = "bad"
+
+[node name="area" type="Area3D" parent="."]
+transform = Transform3D(-0.0702969, 0, -0.16026, 0, 0.175, 0, 0.16026, 0, -0.0702969, 0, 0.5, 0)
+collision_mask = 17
+
+[node name="idea" parent="area" instance=ExtResource("2_t3ikl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59107, 0)
+
+[node name="Cone" parent="area/idea" index="0"]
+transform = Transform3D(-0.821, -8.63332e-07, -2.44677e-08, 3.19709e-07, -2.217, 7.9726e-15, -2.44677e-08, -4.20037e-15, 0.821, 0, 0, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_j148t")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="area/idea"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+light_color = Color(1, 0.423529, 0.282353, 1)
+light_energy = 3.0
+shadow_enabled = true
+omni_range = 36.724
+omni_attenuation = 3.24901
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="area"]
+transform = Transform3D(-1.60678, 0, 3.66309, 0, 4, 0, -3.66309, 0, -1.60678, 0, 0.892, 0)
+shape = SubResource("BoxShape3D_k07fu")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+target_position = Vector3(0, -13, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+speed_scale = 0.4
+method_call_mode = 1
+libraries = {
+"": SubResource("AnimationLibrary_3k3bd")
+}
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_omliw")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.672845, 1.48044)
+projection = 1
+
+[connection signal="body_entered" from="area" to="." method="_on_area_body_entered"]
+
+[editable path="area/idea"]

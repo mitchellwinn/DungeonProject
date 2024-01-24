@@ -462,7 +462,7 @@ gateOfHorn = NodePath("Gate Of Horn")
 gateOfIvory = NodePath("Gate Of Ivory")
 gateOfHornPortal = NodePath("Gate Of Horn/RotationParent/Portal")
 gateOfIvoryPortal = NodePath("Gate Of Ivory/RotationParent/Portal")
-fogAmt = 0.5
+fogAmt = 0.35
 
 [node name="Wall" type="CSGBox3D" parent="."]
 transform = Transform3D(0.000629177, 0.000962873, -0.999999, -0.0010181, 1, 0.000962231, 1, 0.00101749, 0.000630155, 17.3906, 4.88495, 4.25659)
@@ -771,7 +771,7 @@ size = Vector2i(3840, 2160)
 
 [node name="Camera3D" type="Camera3D" parent="Gate Of Horn/RotationParent/Portal/CamViewport"]
 transform = Transform3D(-1, 0, -8.9407e-08, 0, 1, 0, 8.9407e-08, 0, -1, 0, 2.64902, 5.06243)
-cull_mask = 1048573
+cull_mask = 524285
 current = true
 far = 100.0
 

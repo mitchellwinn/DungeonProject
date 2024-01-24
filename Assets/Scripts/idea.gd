@@ -1,5 +1,6 @@
 extends Node3D
 
+@export var ideaType: String
 @export var collector: Node3D
 var orbitAngle = 0
 var targetHeight = 0
@@ -21,7 +22,6 @@ func orbit(delta, target, distance, speed, heightOffset):
 	orbitAngle += delta*speed
 	global_position = global_position.lerp(point + Vector3(cos(orbitAngle),0, sin(orbitAngle)) * distance,delta*10)
 
-
 func _on_area_body_entered(body):
 	if !is_multiplayer_authority():
 		return
@@ -31,3 +31,9 @@ func _on_area_body_entered(body):
 				collector = GameManager.activePlayer
 				set_multiplayer_authority(int(str(body.name)))
 				GameManager.activePlayer.stats.ideas.append(self)
+
+@rpc ("any_peer", "reliable")
+func rpcDepositIdea():
+	collector = GameManager.dreamDilator
+	targetHeight = 3+GameManager.dreamDilator.ideas.size()*.5
+	GameManager.dreamDilator.ideas.append(self)

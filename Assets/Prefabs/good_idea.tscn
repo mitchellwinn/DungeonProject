@@ -1,7 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://cshybdkyoxci1"]
+[gd_scene load_steps=11 format=3 uid="uid://cshybdkyoxci1"]
 
 [ext_resource type="PackedScene" uid="uid://brj1mgq6dx3sx" path="res://Assets/3Dmodels/Idea/idea.glb" id="1_ipqkj"]
-[ext_resource type="Script" path="res://Assets/Scripts/idea.gd" id="1_nuvwx"]
+[ext_resource type="Script" path="res://Assets/Scripts/Idea.gd" id="1_kcb0d"]
 
 [sub_resource type="Gradient" id="Gradient_kbuc5"]
 
@@ -69,9 +69,27 @@ tracks/1/keys = {
 "values": [Vector3(0, -0.5, 0), Vector3(0, 0.5, 0), Vector3(0, -0.5, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_pb161"]
+resource_name = "Spin"
+length = 1.9
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("area/idea:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 12.5664, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3k3bd"]
 _data = {
-"Hover": SubResource("Animation_pnsyh")
+"Hover": SubResource("Animation_pnsyh"),
+"Spin": SubResource("Animation_pb161")
 }
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_omliw"]
@@ -85,14 +103,15 @@ properties/1/sync = true
 properties/1/watch = false
 
 [node name="Good_Idea" type="Node3D"]
-script = ExtResource("1_nuvwx")
+script = ExtResource("1_kcb0d")
+ideaType = "good"
 
 [node name="area" type="Area3D" parent="."]
 transform = Transform3D(-0.100424, 0, -0.228943, 0, 0.25, 0, 0.228943, 0, -0.100424, 0, 0.5, 0)
 collision_mask = 17
 
 [node name="idea" parent="area" instance=ExtResource("1_ipqkj")]
-transform = Transform3D(0.945817, 0, -0.324699, 0, 1, 0, 0.324699, 0, 0.945817, 0, 0.59107, 0)
+transform = Transform3D(0.628716, 0, 0.777635, 0, 1, 0, -0.777635, 0, 0.628716, 0, 0.59107, 0)
 
 [node name="Cone" parent="area/idea" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_j08gh")
@@ -122,6 +141,13 @@ libraries = {
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_omliw")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.672845, 1.48044)
+projection = 1
 
 [connection signal="body_entered" from="area" to="." method="_on_area_body_entered"]
 

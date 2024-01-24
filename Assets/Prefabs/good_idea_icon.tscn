@@ -1,0 +1,150 @@
+[gd_scene load_steps=10 format=3 uid="uid://ccv53y31lvtg"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/IdeaIcon.gd" id="1_umptu"]
+[ext_resource type="PackedScene" uid="uid://brj1mgq6dx3sx" path="res://Assets/3Dmodels/Idea/idea.glb" id="2_o6prs"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_f54qe"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="Gradient" id="Gradient_kbuc5"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vraj8"]
+gradient = SubResource("Gradient_kbuc5")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dplje"]
+resource_name = "Material.001"
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 0.564706, 0.00784314, 1)
+metallic = 1.0
+metallic_specular = 1.0
+roughness = 0.0
+emission_enabled = true
+emission = Color(0.643137, 0, 0.0313726, 1)
+emission_energy_multiplier = 6.35
+emission_operator = 1
+normal_enabled = true
+normal_scale = -2.06
+rim_enabled = true
+clearcoat_enabled = true
+clearcoat = 0.04
+clearcoat_roughness = 0.0
+subsurf_scatter_strength = 1.0
+subsurf_scatter_texture = SubResource("GradientTexture1D_vraj8")
+backlight = Color(0, 0, 1, 1)
+refraction_enabled = true
+refraction_scale = 0.29
+texture_filter = 2
+
+[sub_resource type="Animation" id="Animation_pnsyh"]
+resource_name = "Hover"
+length = 1.9
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("idea:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 12.5664, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_pb161"]
+resource_name = "Spin"
+length = 1.9
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("idea:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 12.5664, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3k3bd"]
+_data = {
+"Hover": SubResource("Animation_pnsyh"),
+"Spin": SubResource("Animation_pb161")
+}
+
+[node name="Good_Idea_Icon" type="Sprite2D" groups=["ideaIcon"]]
+texture = SubResource("ViewportTexture_f54qe")
+script = ExtResource("1_umptu")
+ideaType = "good"
+
+[node name="idea" parent="." instance=ExtResource("2_o6prs")]
+transform = Transform3D(0.222316, 0, -0.114349, 0, 0.25, 0, 0.114349, 0, 0.222316, 0, 0.647767, 0)
+
+[node name="Cone" parent="idea" index="0"]
+layers = 524288
+surface_material_override/0 = SubResource("StandardMaterial3D_dplje")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+speed_scale = 0.4
+method_call_mode = 1
+libraries = {
+"": SubResource("AnimationLibrary_3k3bd")
+}
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.672845, 1.48044)
+cull_mask = 524288
+projection = 1
+
+[node name="plus" type="Button" parent="."]
+offset_left = -237.0
+offset_top = -89.0
+offset_right = -144.0
+offset_bottom = 105.0
+theme_override_font_sizes/font_size = 136
+text = "+"
+metadata/_edit_use_anchors_ = true
+
+[node name="minus" type="Button" parent="."]
+offset_left = -343.0
+offset_top = -89.0
+offset_right = -250.0
+offset_bottom = 105.0
+theme_override_font_sizes/font_size = 136
+text = "-
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="Queue" type="RichTextLabel" parent="."]
+anchors_preset = -1
+anchor_right = 1.16992
+offset_left = 151.0
+offset_top = -152.0
+offset_right = 721.0
+offset_bottom = 180.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.85098)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.890196)
+theme_override_constants/shadow_offset_x = 15
+theme_override_constants/shadow_offset_y = 10
+theme_override_constants/shadow_outline_size = 85
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/normal_font_size = 221
+bbcode_enabled = true
+text = "0"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="plus" to="." method="_on_plus_pressed"]
+[connection signal="pressed" from="minus" to="." method="_on_minus_pressed"]
+
+[editable path="idea"]

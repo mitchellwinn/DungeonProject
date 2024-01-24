@@ -22,19 +22,35 @@ var ivoryConnection = false
 var complete = false
 #ideas
 @export var good_idea = preload("res://Assets/Prefabs/good_idea.tscn")
+@export var bad_idea = preload("res://Assets/Prefabs/bad_idea.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#generationMain()
+	GameManager.dungeon = self
+	while !GameManager.network:
+		await get_tree().physics_frame
+	if GameManager.network.dungeonLive and (!GameManager.generatingDungeon or GameManager.dungeonExists):
+		GameManager.dungeon.generationMain()
 	pass
 		
 func generationMain():
+	GameManager.generatingDungeon = true
 	print("Beginning dungeon generation...")
 	await generateStart()
 	await removeLooseExits()
 	print ("generation complete!")
 	GameManager.dungeonExists = true
+	GameManager.generatingDungeon = false
+	
+func delete():
+	GameManager.dungeonExists = false
+	gateOfHornPortal.delink()
+	gateOfIvoryPortal.delink()
+	for room in rooms:
+		rooms.erase(room)
+		room.queue_free()
+	rooms.clear()
 
 func portalPopulation(room):
 	if room.nestLevel > nestLimit*.75 and !ivoryConnection and room.activeEntranceCount==1:
@@ -49,7 +65,7 @@ func portalPopulation(room):
 
 func ideaPopulation(room):
 	while rng.randi_range(0,1000)>(1000-(ideaChance+room.nestLevel*10)):
-		var idea = good_idea.instantiate()
+		var idea = decideIdeaType()
 		room.add_child(idea)
 		idea.position = Vector3.ZERO
 		idea.global_position.x += rng.randf_range(-room.get_node("RoomOuter").size.x/2+1,room.get_node("RoomOuter").size.x/2-1)
@@ -64,6 +80,14 @@ func ideaPopulation(room):
 			idea.global_position.y+=2
 			print(":-p")
 			await get_tree().physics_frame
+
+func decideIdeaType():
+	var idea
+	if rng.randi_range(0,1000)>(500-GameManager.network.goodModifier*10):
+		idea = good_idea.instantiate()
+	else:
+		idea = bad_idea.instantiate()
+	return idea
 
 func generateStart():
 	if randomSeed and multiplayer.is_server():
@@ -100,11 +124,15 @@ func generateRoom(_position, nestLevel):
 
 func decideRoomType(parent, retry, nestLevel):
 	var roomInstance
-	if rng.randi_range(0,1000)>(1000-departmentStoreChance):
+	if rng.randi_range(0,1000)>(1000-departmentStoreChance\
+	-GameManager.network.goodModifier*3):
 		roomInstance = _department_store.instantiate()
-	elif rng.randi_range(0,1000)>(1000-longConfusingRoomChance) and nestLevel<nestLimit*.7 and nestLevel>nestLimit*.2:
+	elif rng.randi_range(0,1000)>(1000-longConfusingRoomChance\
+	-GameManager.network.goodModifier*5)\
+	and nestLevel<nestLimit*.7 and nestLevel>nestLimit*.2:
 		roomInstance = _long_confusing_room.instantiate()
-	elif rng.randi_range(0,1000)>(1000-bigRoomChance):
+	elif rng.randi_range(0,1000)>(1000-bigRoomChance\
+	-GameManager.network.goodModifier*10):
 		roomInstance = _big_room.instantiate()
 	else:
 		roomInstance = _test_room.instantiate()
@@ -197,3 +225,35 @@ func entranceOverlappingNothing(entrance):
 		if area.get_parent().room != entrance.room:
 			return false
 	return true
+
+func rpcActivate(goodModifier,badModifier):
+	GameManager.dungeon.generationMain()
+	GameManager.network.dungeonLive = true
+	GameManager.network.goodModifier = goodModifier
+	GameManager.network.goodIdeaCount -= goodModifier
+	GameManager.network.badModifier = badModifier
+	GameManager.network.badIdeaCount -= badModifier
+	GameManager.activePlayer.get_node("UI/Main/Message").visible=true
+	GameManager.activePlayer.get_node("UI/Main/GenerationMessage").visible=true
+	while GameManager.generatingDungeon:
+		await get_tree().physics_frame
+	GameManager.activePlayer.get_node("UI/Main/Message").visible=false
+	GameManager.activePlayer.get_node("UI/Main/GenerationMessage").visible=false
+
+@rpc ("any_peer", "reliable")	
+func rpcAbort(newQuota):
+	GameManager.network.ideaQuota = newQuota
+	for idea in GameManager.dreamDilator.ideas:
+		match idea.ideaType:
+			"good":
+				GameManager.network.goodIdeaCount+=1
+			"bad":
+				GameManager.network.badIdeaCount+=1
+		idea.queue_free()
+	GameManager.dreamDilator.ideas.clear()
+	GameManager.dungeon.delete()
+	GameManager.network.dungeonLive = false
+	if GameManager.activePlayer.global_position.y<-10:
+		GameManager.activePlayer.global_position = Vector3(0,5,0)
+	for idea in GameManager.activePlayer.stats.ideas:
+		idea.queue_free()
