@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dxtt4wsq57lco"]
+[gd_scene load_steps=4 format=3 uid="uid://dxtt4wsq57lco"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/NetworkGlobals.gd" id="1_jmraf"]
+[ext_resource type="AudioStream" uid="uid://c7thl5b02cepx" path="res://Assets/Music/ambient#1.mp3" id="2_45m3e"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_lk8cn"]
 properties/0/path = NodePath(".:dreamDilatorInUse")
@@ -33,3 +34,8 @@ script = ExtResource("1_jmraf")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_lk8cn")
+
+[node name="Ambient1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_45m3e")
+volume_db = -30.0
+bus = &"Ambiance"

@@ -3,6 +3,7 @@ extends Node
 @export var dreamDilatorInUse: String
 @export var ideaQuota: int
 @export var dreamTimer: float 
+@export var dreamSequence: int
 var dreamLength = 60*7
 
 #idea storage
@@ -29,8 +30,13 @@ func _ready():
 func _process(delta):
 	if !is_multiplayer_authority():
 		return
-	dreamTimer+=delta
-	if dreamTimer>dreamLength:
+	if GameManager.dungeonExists:
+		dreamTimer+=delta
+	if dreamTimer>dreamLength*.05 and dreamSequence == 0:
+		dreamSequence+=1
+		if GameManager.activePlayer.global_position.y<-10:
+				$Ambient1.play()
+	if dreamTimer>=dreamLength:
 		rpc("rpcAbort",ideaQuota)
 
 @rpc ("any_peer","call_local", "reliable")
@@ -73,6 +79,7 @@ func rpcAbort(newQuota):
 	GameManager.dreamDilator.ideas.clear()
 	GameManager.dungeon.delete()
 	GameManager.network.dungeonLive = false
+	dreamTimer = 0
 	if GameManager.activePlayer.global_position.y<-10:
 		GameManager.activePlayer.global_position = Vector3(0,5,0)
 	for idea in GameManager.activePlayer.stats.ideas:

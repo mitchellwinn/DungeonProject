@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://da6h2nvx8jnpt"]
+[gd_scene load_steps=12 format=3 uid="uid://da6h2nvx8jnpt"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Idea.gd" id="1_34i3w"]
 [ext_resource type="PackedScene" uid="uid://brj1mgq6dx3sx" path="res://Assets/3Dmodels/Idea/idea.glb" id="2_t3ikl"]
+[ext_resource type="AudioStream" uid="uid://b0k16oov12x8o" path="res://Assets/SFX/ideas/badIdeaGet.wav" id="3_7eqtp"]
 
 [sub_resource type="Gradient" id="Gradient_kbuc5"]
 
@@ -149,6 +150,11 @@ transparent_bg = true
 [node name="Camera3D" type="Camera3D" parent="SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.672845, 1.48044)
 projection = 1
+
+[node name="Get" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_7eqtp")
+volume_db = -5.0
+bus = &"Physical"
 
 [connection signal="body_entered" from="area" to="." method="_on_area_body_entered"]
 

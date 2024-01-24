@@ -24,7 +24,7 @@ func orbit(delta, target, distance, speed, heightOffset):
 
 func _on_area_body_entered(body):
 	if GameManager.activePlayer:
-		if body.stats:
+		if body is CharacterBody3D:
 			if !collector:
 				rpc("rpcUpdateCollector",GameManager.activePlayer.name)
 				set_multiplayer_authority(int(str(body.name)))
@@ -32,6 +32,7 @@ func _on_area_body_entered(body):
 
 @rpc ("any_peer", "call_local", "reliable")
 func rpcUpdateCollector(playerName):
+	$Get.play()
 	for player in GameManager.players.get_children():
 		if player.name==playerName and !collector:
 			collector = player
