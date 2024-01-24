@@ -2,6 +2,7 @@ extends Node
 
 @export var dreamDilatorInUse: String
 @export var ideaQuota: int
+@export var dreamTimer: float 
 
 #idea storage
 @export var goodIdeaCount: int
@@ -25,7 +26,11 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if !is_multiplayer_authority():
+		return
+	dreamTimer+=delta
+	if dreamTimer>1020:
+		rpc("rpcAbort",ideaQuota)
 
 @rpc ("any_peer","call_local", "reliable")
 func rpcDreamDilatorUsage(id):
@@ -44,6 +49,7 @@ func rpcActivate(goodModifier,badModifier):
 	GameManager.network.badIdeaCount -= badModifier
 	GameManager.dungeon.generationMain()
 	GameManager.network.dungeonLive = true
+	GameManager.network.dreamTimer = 0
 	GameManager.network.goodModifier = goodModifier
 	GameManager.network.goodIdeaCount -= goodModifier
 	GameManager.activePlayer.get_node("UI/Main/Message").visible=true

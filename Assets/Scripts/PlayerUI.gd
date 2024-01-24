@@ -16,6 +16,13 @@ func _process(delta):
 	if GameManager.dreamDilator.ideas.size()==1:
 		$DreamDilator/InDream/IdeasCount.text = "[center]\n"+str(GameManager.dreamDilator.ideas.size())+" IDEA DEPOSITED"
 	$DreamDilator/OutDream/IdeasCount.text = "[center]"+str(GameManager.network.ideaQuota)+" IDEAS NEEDED TO OPEN GATES" 
+	if GameManager.dungeonExists:
+		$Main/ProgressBar.visible = true
+		$Main/Skull.visible = true
+		$Main/ProgressBar.value = 100-(GameManager.network.dreamTimer/1020)
+	else:
+		$Main/ProgressBar.visible = false
+		$Main/Skull.visible = false
 
 #DREAM ACTIVATION
 func _on_activate_pressed():

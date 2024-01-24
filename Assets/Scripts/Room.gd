@@ -287,4 +287,4 @@ func regroupRooms():
 
 func _on_room_boundaries_body_entered(body):
 	if body == GameManager.activePlayer:
-		Utils.setVolumetricFogDensity(fogAmt)
+		Utils.setVolumetricFogDensity(fogAmt*GameManager.network.dreamTimer/2000)

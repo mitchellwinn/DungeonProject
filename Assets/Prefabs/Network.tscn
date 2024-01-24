@@ -23,6 +23,10 @@ properties/4/path = NodePath(".:badIdeaCount")
 properties/4/spawn = true
 properties/4/sync = true
 properties/4/watch = false
+properties/5/path = NodePath(".:dreamTimer")
+properties/5/spawn = true
+properties/5/sync = true
+properties/5/watch = false
 
 [node name="Network" type="Node"]
 script = ExtResource("1_jmraf")

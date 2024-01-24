@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://uldgeps0kb77"]
+[gd_scene load_steps=27 format=3 uid="uid://uldgeps0kb77"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/CharacterController.gd" id="1_ph60j"]
 [ext_resource type="PackedScene" uid="uid://02wrofo348y8" path="res://Assets/3Dmodels/Oneiroi/Oneiroi.fbx" id="3_kqv82"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://Assets/Scripts/PlayerUI.gd" id="11_h5c6q"]
 [ext_resource type="PackedScene" uid="uid://cyug4oein5tgi" path="res://Assets/Prefabs/bad_idea_icon.tscn" id="13_5i5yv"]
 [ext_resource type="PackedScene" uid="uid://ccv53y31lvtg" path="res://Assets/Prefabs/good_idea_icon.tscn" id="13_q20ia"]
+[ext_resource type="Texture2D" uid="uid://caag76heiq7pb" path="res://Assets/Materials/MISC/584acf56f9777273048b87db.png" id="14_its14"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xyitk"]
 radius = 0.367273
@@ -93,10 +94,10 @@ colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_sqwy5"]
 gradient = SubResource("Gradient_cw80n")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_aw38s"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_qsh10"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_kql04"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_clfrq"]
 viewport_path = NodePath("SubViewport")
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "camContainer", "stats", "skeleton", "animator", "headSocket") groups=["player"]]
@@ -468,6 +469,21 @@ text = "[center]
 TARGET"
 fit_content = true
 
+[node name="Skull" type="Sprite2D" parent="UI/Main"]
+position = Vector2(69, 562)
+scale = Vector2(0.109137, 0.109137)
+texture = ExtResource("14_its14")
+
+[node name="ProgressBar" type="ProgressBar" parent="UI/Main"]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 35.0
+offset_right = 85.0
+offset_bottom = 576.0
+value = 100.0
+fill_mode = 3
+show_percentage = false
+
 [node name="DreamDilator" type="Control" parent="UI"]
 visible = false
 layout_mode = 1
@@ -543,7 +559,7 @@ grow_vertical = 2
 [node name="Good_Idea_Icon" parent="UI/DreamDilator/OutDream" instance=ExtResource("13_q20ia")]
 position = Vector2(159, 181)
 scale = Vector2(0.25, 0.25)
-texture = SubResource("ViewportTexture_aw38s")
+texture = SubResource("ViewportTexture_qsh10")
 
 [node name="idea" parent="UI/DreamDilator/OutDream/Good_Idea_Icon" index="0"]
 transform = Transform3D(0.236453, 0, 0.0811786, 0, 0.25, 0, -0.0811786, 0, 0.236453, 5, 0.647767, 0)
@@ -554,7 +570,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.672845, 1.48044)
 [node name="Bad_Idea_Icon" parent="UI/DreamDilator/OutDream" instance=ExtResource("13_5i5yv")]
 position = Vector2(159, 288)
 scale = Vector2(0.25, 0.25)
-texture = SubResource("ViewportTexture_kql04")
+texture = SubResource("ViewportTexture_clfrq")
 
 [node name="IdeasCount" type="RichTextLabel" parent="UI/DreamDilator/OutDream"]
 layout_direction = 1
