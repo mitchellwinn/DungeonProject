@@ -14,6 +14,10 @@ deviceDropdown = NodePath("UI/ItemList")
 
 [node name="Level" type="Node" parent="."]
 
+[node name="NetworkSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Assets/Prefabs/Network.tscn")
+spawn_path = NodePath("..")
+
 [node name="LevelSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Assets/Levels/Erebos.tscn")
 spawn_path = NodePath("../Level")
@@ -100,10 +104,6 @@ size = Vector2i(1920, 1080)
 
 [node name="VideoStreamPlayer" parent="Static" instance=ExtResource("2_s3gr8")]
 script = ExtResource("3_55jj6")
-
-[node name="NetworkSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Assets/Prefabs/Network.tscn")
-spawn_path = NodePath("..")
 
 [connection signal="pressed" from="UI/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="UI/Join" to="." method="_on_join_pressed"]

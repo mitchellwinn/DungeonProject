@@ -77,8 +77,8 @@ func start_game():
 	GameManager.activePlayerName = nameEntry.text
 	$UI.visible=false	
 	if multiplayer.is_server():
-		GameManager.network = network.instantiate()
-		add_child(GameManager.network)
+		var net = network.instantiate()
+		add_child(net)
 		change_level.call_deferred(load("res://Assets/Levels/Erebos.tscn"))
 
 

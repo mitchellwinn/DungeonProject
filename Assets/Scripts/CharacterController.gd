@@ -29,6 +29,7 @@ func _enter_tree():
 	set_multiplayer_authority(name.to_int())
 	$VOIP.set_multiplayer_authority(name.to_int())
 	if !is_multiplayer_authority():
+		$UI.visible = false
 		$NameTag.set_layer_mask_value(3,false)
 		$NameTag.set_layer_mask_value(4,true)
 		for mesh in skeleton.get_children():

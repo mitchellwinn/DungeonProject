@@ -20,6 +20,8 @@ func interact():
 		await useDreamDilator()
 	elif !GameManager.dungeonExists and GameManager.network.dreamDilatorInUse == "":
 		GameManager.network.rpcDreamDilatorUsage(GameManager.activePlayer.name)
+		while GameManager.network.dreamDilatorInUse == "":
+			await get_tree().physics_frame
 		await useDreamDilator()
 	await get_tree().physics_frame
 	return false	
