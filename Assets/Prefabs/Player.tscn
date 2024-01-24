@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://uldgeps0kb77"]
+[gd_scene load_steps=30 format=3 uid="uid://uldgeps0kb77"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/CharacterController.gd" id="1_ph60j"]
 [ext_resource type="PackedScene" uid="uid://02wrofo348y8" path="res://Assets/3Dmodels/Oneiroi/Oneiroi.fbx" id="3_kqv82"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cyug4oein5tgi" path="res://Assets/Prefabs/bad_idea_icon.tscn" id="13_5i5yv"]
 [ext_resource type="PackedScene" uid="uid://ccv53y31lvtg" path="res://Assets/Prefabs/good_idea_icon.tscn" id="13_q20ia"]
 [ext_resource type="Texture2D" uid="uid://caag76heiq7pb" path="res://Assets/Materials/MISC/584acf56f9777273048b87db.png" id="14_its14"]
+[ext_resource type="Shader" path="res://Assets/Shaders/_Benji_Screen_Space_Camera_Ripple.gdshader" id="15_dkvdb"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xyitk"]
 radius = 0.367273
@@ -100,6 +101,24 @@ viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_2n5uc"]
 viewport_path = NodePath("SubViewport")
+
+[sub_resource type="QuadMesh" id="QuadMesh_idr8m"]
+flip_faces = true
+size = Vector2(2, 2)
+subdivide_width = 100
+subdivide_depth = 100
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fpp4k"]
+render_priority = 0
+shader = ExtResource("15_dkvdb")
+shader_parameter/lighting = true
+shader_parameter/_VertexAmplitudeMult = 0.853
+shader_parameter/_VertexAmplitude = 0.819
+shader_parameter/_VertexFrequencyMult = 0.382
+shader_parameter/_VertexFrequency = 0.746
+shader_parameter/_VertexWavelengthMult = 0.157
+shader_parameter/_VertexWavelength = 0.112
+shader_parameter/_VertexPeakWidth = 0.0
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "camContainer", "stats", "skeleton", "animator", "headSocket") groups=["player"]]
 collision_layer = 16
@@ -561,7 +580,7 @@ grow_vertical = 2
 [node name="Good_Idea_Icon" parent="UI/DreamDilator/OutDream" instance=ExtResource("13_q20ia")]
 position = Vector2(159, 181)
 scale = Vector2(0.25, 0.25)
-texture = SubResource("ViewportTexture_e2ef8")
+texture = SubResource("ViewportTexture_ffaov")
 
 [node name="idea" parent="UI/DreamDilator/OutDream/Good_Idea_Icon" index="0"]
 transform = Transform3D(0.236453, 0, 0.0811786, 0, 0.25, 0, -0.0811786, 0, 0.236453, 5, 0.647767, 0)
@@ -572,7 +591,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.672845, 1.48044)
 [node name="Bad_Idea_Icon" parent="UI/DreamDilator/OutDream" instance=ExtResource("13_5i5yv")]
 position = Vector2(159, 288)
 scale = Vector2(0.25, 0.25)
-texture = SubResource("ViewportTexture_2n5uc")
+texture = SubResource("ViewportTexture_oyx4h")
 
 [node name="IdeasCount" type="RichTextLabel" parent="UI/DreamDilator/OutDream"]
 layout_direction = 1
@@ -619,6 +638,11 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 25
 theme_override_font_sizes/font_size = 56
 text = "ACTIVATE GATES"
+
+[node name="ScreenSpace" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.75589)
+mesh = SubResource("QuadMesh_idr8m")
+surface_material_override/0 = SubResource("ShaderMaterial_fpp4k")
 
 [connection signal="body_entered" from="Oneiroi/RootNode/root/Skeleton3D/LeftFootSocket/Offset/LeftFootstep" to="." method="_on_left_footstep_body_entered"]
 [connection signal="body_entered" from="Oneiroi/RootNode/root/Skeleton3D/RightFootSocket/Offset/RightFootstep" to="." method="_on_right_footstep_body_entered"]
