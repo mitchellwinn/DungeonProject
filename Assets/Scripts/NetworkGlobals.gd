@@ -32,25 +32,30 @@ func _process(delta):
 		return
 	if GameManager.dungeonExists:
 		dreamTimer+=delta
-	if dreamTimer>dreamLength*.05 and dreamSequence == 0:
+	if dreamTimer>dreamLength*.1 and dreamSequence == 0:
 		dreamSequence+=1
-		if GameManager.activePlayer.global_position.y<-10:
-				$Ambient1.play()
+		var track = RandomNumberGenerator.new().randi_range(1,3)
+		rpc("rpcBGM",track)
 	if dreamTimer>=dreamLength:
 		rpc("rpcAbort",ideaQuota)
 
-@rpc ("any_peer","call_local", "reliable")
+@rpc ("any_peer","call_local","reliable")
+func rpcBGM(track):
+	$BGM.stream = load("res://Assets/Music/ambient#"+track+".mp3")
+	$BGM.play()
+
+@rpc ("any_peer","call_local","reliable")
 func rpcDreamDilatorUsage(id):
 	dreamDilatorInUse = id
 	
-@rpc ("any_peer","call_local", "reliable")
+@rpc ("any_peer","call_local","reliable")
 func rpcResetDilatorOptions():
 	GameManager.dreamDilator.queuedIdeas = 0
 	var ideaIcons = get_tree().get_nodes_in_group("ideaIcon")
 	for icon in ideaIcons:
 		icon.amount = 0
 
-@rpc ("any_peer","call_local", "reliable")	
+@rpc ("any_peer","call_local", "reliable")
 func rpcActivate(goodModifier,badModifier):
 	GameManager.network.badModifier = badModifier
 	GameManager.network.badIdeaCount -= badModifier
@@ -79,6 +84,7 @@ func rpcAbort(newQuota):
 	GameManager.dreamDilator.ideas.clear()
 	GameManager.dungeon.delete()
 	GameManager.network.dungeonLive = false
+	dreamSequence = 0
 	dreamTimer = 0
 	if GameManager.activePlayer.global_position.y<-10:
 		GameManager.activePlayer.global_position = Vector3(0,5,0)

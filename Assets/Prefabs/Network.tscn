@@ -35,7 +35,7 @@ script = ExtResource("1_jmraf")
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_lk8cn")
 
-[node name="Ambient1" type="AudioStreamPlayer" parent="."]
+[node name="BGM" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_45m3e")
 volume_db = -30.0
 bus = &"Ambiance"

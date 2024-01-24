@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://bw4ggmyfp3y32"]
+[gd_scene load_steps=73 format=3 uid="uid://bw4ggmyfp3y32"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Room.gd" id="1_r3if7"]
 [ext_resource type="PackedScene" uid="uid://c67wf1jvv4peo" path="res://Assets/3Dmodels/Chandeliere/Chandelier_01_1k.glb" id="2_0nnng"]
@@ -16,7 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://dd4jfsi0gsrob" path="res://Assets/3Dmodels/Gates/GateOfIvory_360_F_20949036_b4g2hWGuqQMzC6vWuMTEcM0xZbz1Mpho.png" id="16_qohci"]
 [ext_resource type="Texture2D" uid="uid://bf1rmhf2wubow" path="res://Assets/3Dmodels/Gates/GateOfIvory_2062-normal.png" id="17_5oeie"]
 [ext_resource type="Texture2D" uid="uid://bph8gbvhdglys" path="res://Assets/Materials/MISC/32WM95-A0090-1_v2.jpeg" id="17_luqw3"]
-[ext_resource type="Shader" path="res://Assets/Shaders/Benji_Screen_Space_Camera_Ripple.gdshader" id="18_vw156"]
 [ext_resource type="Material" uid="uid://ddxfrm54ao5c8" path="res://Assets/Materials/PortalObfuscation/Static.tres" id="18_wx1rp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_02gmj"]
@@ -342,7 +341,7 @@ render_priority = 0
 shader = ExtResource("6_lw0nl")
 shader_parameter/texture_albedo = SubResource("ImageTexture_wagcf")
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_43uyr"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_s4cui"]
 resource_local_to_scene = true
 size = Vector2(4.25, 2.5)
 subdivide_width = 5
@@ -351,7 +350,7 @@ subdivide_depth = 5
 [sub_resource type="ViewportTexture" id="ViewportTexture_25333"]
 viewport_path = NodePath("Gate Of Horn/RotationParent/Portal/SubViewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wfoql"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qbaki"]
 resource_local_to_scene = true
 shading_mode = 0
 albedo_texture = SubResource("ViewportTexture_25333")
@@ -451,24 +450,6 @@ size = Vector2(10, 10)
 cull_mode = 2
 albedo_texture = ExtResource("17_luqw3")
 uv1_scale = Vector3(5, 5, 5)
-
-[sub_resource type="QuadMesh" id="QuadMesh_ueowe"]
-flip_faces = true
-size = Vector2(2, 2)
-subdivide_width = 100
-subdivide_depth = 100
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tgwo8"]
-render_priority = 0
-shader = ExtResource("18_vw156")
-shader_parameter/lighting = false
-shader_parameter/_VertexAmplitudeMult = 1.082
-shader_parameter/_VertexAmplitude = 0.031
-shader_parameter/_VertexFrequencyMult = 1.0
-shader_parameter/_VertexFrequency = 1.768
-shader_parameter/_VertexWavelengthMult = 1.0
-shader_parameter/_VertexWavelength = 0.414
-shader_parameter/_VertexPeakWidth = 0.0
 
 [node name="_Test_Room" type="Node3D" node_paths=PackedStringArray("entrance1", "entrance2", "entrance3", "entrance4", "lightsParent", "roomBoundaries", "gateOfHorn", "gateOfIvory", "gateOfHornPortal", "gateOfIvoryPortal")]
 script = ExtResource("1_r3if7")
@@ -738,8 +719,8 @@ material = SubResource("ShaderMaterial_lvhlj")
 [node name="Obfuscation" type="CSGMesh3D" parent="Gate Of Horn/RotationParent/Portal"]
 transform = Transform3D(-4.37114e-08, 1, -4.56956e-08, -1, -4.37114e-08, -4.37114e-08, -4.37114e-08, 4.56956e-08, 1, 0.165, 0.0398178, 0)
 layers = 2
-mesh = SubResource("PlaneMesh_43uyr")
-material = SubResource("StandardMaterial3D_wfoql")
+mesh = SubResource("PlaneMesh_s4cui")
+material = SubResource("StandardMaterial3D_qbaki")
 
 [node name="CamViewport" type="SubViewport" parent="Gate Of Horn/RotationParent/Portal"]
 size = Vector2i(3840, 2160)
@@ -873,10 +854,6 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 9.9
 use_collision = true
 mesh = SubResource("QuadMesh_852hj")
 material = SubResource("StandardMaterial3D_y3x5l")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("QuadMesh_ueowe")
-surface_material_override/0 = SubResource("ShaderMaterial_tgwo8")
 
 [connection signal="body_entered" from="RoomBoundaries" to="." method="_on_room_boundaries_body_entered"]
 [connection signal="body_entered" from="Gate Of Horn/RotationParent/Portal/Area3D" to="Gate Of Horn/RotationParent/Portal" method="_on_area_3d_body_entered"]
