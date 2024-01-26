@@ -29,6 +29,8 @@ var complete = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	gateOfHornPortal = get_parent().get_node("Gate Of Horn").portal
+	gateOfIvoryPortal = get_parent().get_node("Gate Of Ivory").portal
 	GameManager.dungeon = self
 	while !GameManager.network:
 		await get_tree().physics_frame
@@ -60,9 +62,10 @@ func portalPopulation(room):
 		print("Gate of Ivory room chosen!")
 		print("Of said room, nest level: "+str(room.nestLevel)+", entrance amount: "+str(room.activeEntranceCount))
 		room.gateOfIvory.visible = true
+		room.gateOfIvoryPortal = room.gateOfIvory.portal
 		ivoryConnection = true
 		await get_tree().physics_frame
-		gateOfIvoryPortal.link(room.gateOfIvoryPortal)
+		gateOfIvoryPortal.link(room.gateOfIvoryPortal,false)
 	else:
 		room.gateOfIvory.queue_free()
 
@@ -116,7 +119,7 @@ func generateRoom(_position, nestLevel):
 	roomInstance.global_position = _position
 	roomInstance.initializeRoom()
 	await get_tree().physics_frame
-	gateOfHornPortal.link(roomInstance.gateOfHornPortal)
+	gateOfHornPortal.link(roomInstance.gateOfHornPortal,true)
 	#print("Generated root room")
 	#print("at "+str(roomInstance.global_position))
 	#print("Attempting to generate children rooms for room "+str(rooms.size()))

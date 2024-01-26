@@ -108,7 +108,7 @@ script = ExtResource("1_34i3w")
 ideaType = "bad"
 
 [node name="area" type="Area3D" parent="."]
-transform = Transform3D(-0.0702969, 0, -0.16026, 0, 0.175, 0, 0.16026, 0, -0.0702969, 0, 0.5, 0)
+transform = Transform3D(-0.0702969, 0, -0.16026, 0, 0.175, 0, 0.16026, 0, -0.0702969, 0, -0.5, 0)
 collision_mask = 17
 
 [node name="idea" parent="area" instance=ExtResource("2_t3ikl")]
@@ -120,7 +120,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_j148t")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="area/idea"]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
-light_color = Color(1, 0.423529, 0.282353, 1)
 light_energy = 3.0
 shadow_enabled = true
 omni_range = 36.724

@@ -1,11 +1,30 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://bgninvisa0yv6"]
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://bgninvisa0yv6"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_uhsvj"]
+noise_type = 4
+seed = 700
+frequency = 0.0025
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xrl28"]
+noise = SubResource("FastNoiseLite_uhsvj")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_63h26"]
+noise_type = 4
+seed = -150
+frequency = 0.043
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mrps0"]
+noise = SubResource("FastNoiseLite_63h26")
 
 [resource]
 resource_name = "Fabric.001"
 diffuse_mode = 3
 specular_mode = 1
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 metallic = 0.4
+roughness = 0.45
+roughness_texture = SubResource("NoiseTexture2D_mrps0")
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_xrl28")
 subsurf_scatter_enabled = true
 subsurf_scatter_strength = 1.0

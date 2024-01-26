@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bfmy3nct4pgbi"]
+[gd_scene load_steps=20 format=3 uid="uid://bfmy3nct4pgbi"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Room.gd" id="1_57sdj"]
 [ext_resource type="Script" path="res://Assets/Scripts/ConfusingWall.gd" id="3_mybg2"]
@@ -17,6 +17,9 @@ size = Vector3(50, 0.5, 50)
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_m33ee"]
 load_path = "res://.godot/imported/dirty_carpet_diff_1k.jpg-7c62357be3eb502ce6874921c95321b4.s3tc.ctex"
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_s6xs7"]
+load_path = "res://.godot/imported/dirty_carpet_diff_1k.jpg-7c62357be3eb502ce6874921c95321b4.s3tc.ctex"
+
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kc4go"]
 load_path = "res://.godot/imported/dirty_carpet_nor_gl_1k.png-4459ff5f617beb05cbf7f05741f744f6.s3tc.ctex"
 
@@ -24,16 +27,16 @@ load_path = "res://.godot/imported/dirty_carpet_nor_gl_1k.png-4459ff5f617beb05cb
 load_path = "res://.godot/imported/dirty_carpet_rough_1k.jpg-da6b1f06efcb6380ecd77185d19f9f44.s3tc.ctex"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_we6q5"]
-albedo_color = Color(0.494118, 0.505882, 0, 1)
 albedo_texture = SubResource("CompressedTexture2D_m33ee")
-metallic_specular = 0.26
-roughness = 0.75
+metallic_specular = 0.0
 roughness_texture = SubResource("CompressedTexture2D_fkhxk")
+emission_enabled = true
 emission = Color(0.368627, 0.360784, 0.14902, 1)
-emission_energy_multiplier = 4.88
+emission_energy_multiplier = 10.0
 emission_operator = 1
+emission_texture = SubResource("CompressedTexture2D_s6xs7")
 normal_enabled = true
-normal_scale = 5.06
+normal_scale = 0.8
 normal_texture = SubResource("CompressedTexture2D_kc4go")
 rim = 0.25
 rim_tint = 0.0

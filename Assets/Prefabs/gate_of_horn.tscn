@@ -158,12 +158,6 @@ shape = SubResource("BoxShape3D_wwrxm")
 [node name="Direction" type="Node3D" parent="RotationParent/Portal"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 
-[node name="Step" type="CSGBox3D" parent="RotationParent"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.45534, 0)
-layers = 0
-use_collision = true
-size = Vector3(1.37, 1, 2.58)
-
 [connection signal="body_entered" from="RotationParent/Portal/Area3D" to="RotationParent/Portal" method="_on_area_3d_body_entered"]
 
 [editable path="Model"]

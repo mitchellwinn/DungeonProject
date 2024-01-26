@@ -42,9 +42,10 @@ func _physics_process(delta):
 		
 		
 
-func link(portal):
+func link(portal, status):
 	parent = true
 	targetPortal = portal
+	targetPortal.on = status
 	targetPortal.targetPortal = self
 	if portal.get_parent().global_rotation == targetPortal.get_parent().global_rotation:
 		targetPortal.get_parent().rotate(Vector3.UP,deg_to_rad(180))
@@ -77,6 +78,7 @@ func _on_area_3d_body_entered(body):
 			var relativeToPortal = gate.global_transform.affine_inverse()*body.global_transform
 			var movedToTargetPortal = targetPortal.gate.global_transform * relativeToPortal
 			body.global_transform = movedToTargetPortal
+			#body.global_position+=Vector3.UP*.2
 			var r = targetPortal.gate.global_transform.basis.get_euler() - gate.global_transform.basis.get_euler()
 			body.velocity = body.velocity \
 				.rotated(Vector3(1,0,0),r.x) \

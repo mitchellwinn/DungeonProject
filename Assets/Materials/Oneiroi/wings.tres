@@ -1,8 +1,10 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://leydxctn8kk1"]
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://leydxctn8kk1"]
+
+[ext_resource type="Texture2D" uid="uid://y7o0ogte766q" path="res://Assets/3Dmodels/Oneiroi/black demon wings like wings of a bat or win.. (3151910126) (Ba.png" id="1_argaq"]
 
 [resource]
 resource_name = "Material.001"
 cull_mode = 2
 shading_mode = 0
 vertex_color_use_as_albedo = true
-albedo_color = Color(0, 0, 0, 1)
+albedo_texture = ExtResource("1_argaq")

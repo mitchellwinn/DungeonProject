@@ -24,35 +24,35 @@ subsurf_scatter_strength = 1.0
 backlight_enabled = true
 backlight = Color(1, 1, 1, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_ap6py"]
-size = Vector3(10, 0.5, 10)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_m33ee"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xwb6l"]
 load_path = "res://.godot/imported/dirty_carpet_diff_1k.jpg-7c62357be3eb502ce6874921c95321b4.s3tc.ctex"
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kc4go"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_06g5j"]
 load_path = "res://.godot/imported/dirty_carpet_nor_gl_1k.png-4459ff5f617beb05cbf7f05741f744f6.s3tc.ctex"
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fkhxk"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5qwhj"]
 load_path = "res://.godot/imported/dirty_carpet_rough_1k.jpg-da6b1f06efcb6380ecd77185d19f9f44.s3tc.ctex"
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jilqb"]
-albedo_color = Color(0.494118, 0.505882, 0, 1)
-albedo_texture = SubResource("CompressedTexture2D_m33ee")
-metallic_specular = 0.26
-roughness = 0.75
-roughness_texture = SubResource("CompressedTexture2D_fkhxk")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nhbx2"]
+albedo_texture = SubResource("CompressedTexture2D_xwb6l")
+metallic_specular = 0.0
+roughness_texture = SubResource("CompressedTexture2D_5qwhj")
+emission_enabled = true
 emission = Color(0.368627, 0.360784, 0.14902, 1)
-emission_energy_multiplier = 4.88
+emission_energy_multiplier = 10.0
 emission_operator = 1
+emission_texture = SubResource("CompressedTexture2D_xwb6l")
 normal_enabled = true
-normal_scale = 5.06
-normal_texture = SubResource("CompressedTexture2D_kc4go")
+normal_scale = -0.8
+normal_texture = SubResource("CompressedTexture2D_06g5j")
 rim = 0.25
 rim_tint = 0.0
 clearcoat_roughness = 0.0
 heightmap_enabled = true
 uv1_scale = Vector3(18, 18, 18)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ap6py"]
+size = Vector3(10, 0.5, 10)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_u2h5k"]
 size = Vector3(2.16153, 3.01519, 1.06539)
@@ -169,9 +169,9 @@ transform = Transform3D(5, 0.00481436, 0.00314609, -0.00481115, 4.99999, -0.0050
 surface_material_override/1 = SubResource("StandardMaterial3D_02gmj")
 
 [node name="RoomFloor" type="CSGMesh3D" parent="." groups=["carpet"]]
+material_override = SubResource("StandardMaterial3D_nhbx2")
 use_collision = true
 mesh = SubResource("BoxMesh_ap6py")
-material = SubResource("StandardMaterial3D_jilqb")
 
 [node name="RoomOuter" type="CSGBox3D" parent="."]
 transform = Transform3D(0.999999, 0.000962871, 0.000629219, -0.00096223, 0.999999, -0.0010181, -0.000630198, 0.00101749, 0.999999, 0, 5, 0)
@@ -200,6 +200,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RoomOuter/NorthEntrance/Area3D"]
+transform = Transform3D(1, -5.91172e-12, 0, -7.21911e-12, 1, -2.32831e-10, 0, 2.32831e-10, 1, 0, 0, 0)
 shape = SubResource("BoxShape3D_u2h5k")
 
 [node name="SouthEntrance" type="CSGBox3D" parent="RoomOuter" node_paths=PackedStringArray("opening", "area") groups=["entrance"]]

@@ -20,7 +20,7 @@ func interact():
 		while GameManager.network.dreamDilatorInUse != GameManager.activePlayer.name:
 			await get_tree().physics_frame
 		await useDreamDilator()
-		#await get_tree().physics_frame
+		await get_tree().physics_frame
 	return false
 
 func depositIdeas():

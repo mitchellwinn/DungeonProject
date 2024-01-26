@@ -45,13 +45,13 @@ uv1_scale = Vector3(0.68, 0.68, 0.68)
 uv1_offset = Vector3(0.555, -0.755, 0.105)
 uv1_triplanar = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pl4if"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ysbdp"]
 transparency = 1
 cull_mode = 1
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_bgcol"]
 lightmap_size_hint = Vector2i(44, 17)
-material = SubResource("StandardMaterial3D_pl4if")
+material = SubResource("StandardMaterial3D_ysbdp")
 flip_faces = true
 size = Vector2(8.63, 3)
 
@@ -78,27 +78,27 @@ size = Vector2(8.58, 3)
 [sub_resource type="BoxMesh" id="BoxMesh_0x37f"]
 size = Vector3(30, 0.5, 30)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_m33ee"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xwb6l"]
 load_path = "res://.godot/imported/dirty_carpet_diff_1k.jpg-7c62357be3eb502ce6874921c95321b4.s3tc.ctex"
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kc4go"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_06g5j"]
 load_path = "res://.godot/imported/dirty_carpet_nor_gl_1k.png-4459ff5f617beb05cbf7f05741f744f6.s3tc.ctex"
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fkhxk"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5qwhj"]
 load_path = "res://.godot/imported/dirty_carpet_rough_1k.jpg-da6b1f06efcb6380ecd77185d19f9f44.s3tc.ctex"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xbrow"]
-albedo_color = Color(0.494118, 0.505882, 0, 1)
-albedo_texture = SubResource("CompressedTexture2D_m33ee")
-metallic_specular = 0.26
-roughness = 0.75
-roughness_texture = SubResource("CompressedTexture2D_fkhxk")
+albedo_texture = SubResource("CompressedTexture2D_xwb6l")
+metallic_specular = 0.0
+roughness_texture = SubResource("CompressedTexture2D_5qwhj")
+emission_enabled = true
 emission = Color(0.368627, 0.360784, 0.14902, 1)
-emission_energy_multiplier = 4.88
+emission_energy_multiplier = 10.0
 emission_operator = 1
+emission_texture = SubResource("CompressedTexture2D_xwb6l")
 normal_enabled = true
-normal_scale = 5.06
-normal_texture = SubResource("CompressedTexture2D_kc4go")
+normal_scale = -0.8
+normal_texture = SubResource("CompressedTexture2D_06g5j")
 rim = 0.25
 rim_tint = 0.0
 clearcoat_roughness = 0.0

@@ -90,6 +90,7 @@ func rpcAbort(newQuota):
 		GameManager.activePlayer.global_position = Vector3(0,5,0)
 	for idea in GameManager.activePlayer.stats.ideas:
 		idea.queue_free()
+	GameManager.activePlayer.stats.ideas.clear()
 
 func initialize():
 	ideaQuota = 3
