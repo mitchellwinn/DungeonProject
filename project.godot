@@ -67,6 +67,10 @@ interact={
 ]
 }
 
+[navigation]
+
+3d/default_edge_connection_margin=1.0
+
 [physics]
 
 common/physics_ticks_per_second=120

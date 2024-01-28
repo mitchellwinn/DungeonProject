@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://d2c7mytcoyrn0"]
+[gd_scene load_steps=42 format=3 uid="uid://d2c7mytcoyrn0"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Room.gd" id="1_m6m58"]
 [ext_resource type="Script" path="res://Assets/Scripts/Entrance.gd" id="2_8b2ei"]
@@ -21,6 +21,36 @@
 [ext_resource type="Texture2D" uid="uid://bb7y3sxo66k3l" path="res://Assets/3Dmodels/fancyFrame/NB_IMG_0274.png" id="25_ym65p"]
 [ext_resource type="Texture2D" uid="uid://0hom8ctgir6a" path="res://Assets/3Dmodels/fancyFrame/NB_fancy_picture_frame_01_canvas_rough.png" id="26_tsd8c"]
 [ext_resource type="Texture2D" uid="uid://bv3gcpdm2be2s" path="res://Assets/3Dmodels/fancyFrame/NB_fancy_picture_frame_01_canvas_nor_gl.png" id="27_ruo85"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1y8bm"]
+resource_name = "fancy_picture_frame_01_canvas"
+cull_mode = 2
+diffuse_mode = 3
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("25_ym65p")
+metallic_texture = ExtResource("26_tsd8c")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("26_tsd8c")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("27_ruo85")
+rim_enabled = true
+clearcoat_enabled = true
+subsurf_scatter_enabled = true
+subsurf_scatter_strength = 0.38
+subsurf_scatter_skin_mode = true
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_4my34"]
+vertices = PackedVector3Array(0.935762, 0.324944, -14.2145, 0.585763, 0.324944, -14.5145, -0.564238, 0.324944, -14.5145, -0.914237, 0.324944, -14.2145, -1.31424, 0.324944, -7.01453, 1.33576, 0.324944, -7.01453, -0.914237, 0.324944, -14.2145, -1.31424, 0.324944, -14.2145, -1.31424, 0.324944, -7.01453, 1.33576, 0.324944, -7.01453, 1.33576, 0.324944, -14.2145, 0.935762, 0.324944, -14.2145, -14.2142, 0.324944, -9.26453, -10.6642, 0.324944, -9.21453, -10.5642, 0.324944, -9.71453, -14.2142, 0.324944, -9.26453, -10.5642, 0.324944, -9.71453, -10.2142, 0.324944, -9.96453, -9.96424, 0.324944, -14.2145, -14.2142, 0.324944, -14.2145, -10.2142, 0.324944, -9.96453, -9.91424, 0.324944, -9.96453, -9.96424, 0.324944, -14.2145, -9.91424, 0.324944, -9.96453, -9.36424, 0.324944, -9.96453, -9.31424, 0.324944, -14.2145, -9.96424, 0.324944, -14.2145, -9.31424, 0.324944, -14.2145, -9.36424, 0.324944, -9.96453, -8.86424, 0.324944, -9.86452, -9.31424, 0.324944, -14.2145, -8.86424, 0.324944, -9.86452, -8.61424, 0.324944, -9.51453, -1.31424, 0.324944, -7.01453, -1.31424, 0.324944, -14.2145, -8.61424, 0.324944, -9.51453, -8.61424, 0.324944, -7.01453, -1.31424, 0.324944, -7.01453, 6.23576, 0.324944, -12.6145, 6.63576, 0.324944, -12.6145, 6.63576, 0.324944, -14.2145, 6.03576, 0.324944, -12.5145, 6.23576, 0.324944, -12.6145, 6.63576, 0.324944, -14.2145, 5.93576, -0.525057, -9.66453, 6.23576, -0.525057, -9.86452, 6.23576, -0.525057, -11.6145, 5.93576, -0.525057, -11.8145, 6.48576, 0.324944, -7.01453, 6.53576, 0.324944, -8.86452, 6.03576, 0.324944, -8.96453, 5.83576, 0.424944, -9.26453, 5.93576, -0.525057, -9.66453, 5.93576, -0.525057, -11.8145, 5.83576, 0.424944, -12.2145, 1.33576, 0.324944, -14.2145, 1.33576, 0.324944, -7.01453, 5.42667, 0.324944, -9.05998, 5.38576, 0.324944, -12.4145, 5.83576, 0.424944, -12.2145, 6.03576, 0.324944, -12.5145, 6.63576, 0.324944, -14.2145, 1.33576, 0.324944, -14.2145, 5.38576, 0.324944, -12.4145, 6.48576, 0.324944, -7.01453, 6.03576, 0.324944, -8.96453, 5.83576, 0.424944, -9.26453, 1.33576, 0.324944, -7.01453, 5.42667, 0.324944, -9.05998, 6.63576, 0.324944, -12.6145, 11.6358, 0.324944, -12.6145, 11.6358, 0.324944, -14.2145, 6.63576, 0.324944, -14.2145, 11.6358, 0.324944, -14.2145, 11.6358, 0.324944, -12.6145, 12.0358, 0.324944, -12.6145, 12.4858, 0.324944, -12.1645, 12.4858, 0.324944, -11.8645, 14.2358, 0.324944, -11.9145, 11.6358, 0.324944, -14.2145, 12.0358, 0.324944, -12.6145, 12.2358, 0.324944, -12.5145, 12.2358, 0.324944, -12.5145, 12.4858, 0.324944, -12.1645, 14.2358, 0.324944, -11.9145, 14.2358, 0.324944, -14.2145, 11.6358, 0.324944, -14.2145, 12.4858, 0.324944, -11.8645, 12.4858, 0.324944, -9.61452, 14.2358, 0.324944, -9.56453, 14.2358, 0.324944, -11.9145, 14.3358, -8.87506, -11.4645, 14.2858, -8.72506, -11.6145, 13.8858, -8.32506, -11.6645, 14.5858, -9.12506, -11.3145, 14.3358, -8.87506, -11.4645, 13.8858, -8.32506, -11.6645, 14.2358, -8.72506, -11.4895, 14.3358, -8.87506, -10.0145, 14.5858, -9.12506, -10.1645, 14.5858, -9.12506, -11.3145, 14.2858, -8.72506, -9.81453, 14.3358, -8.87506, -10.0145, 14.5858, -9.12506, -11.3145, 13.8858, -8.32506, -11.6645, 6.23576, -0.525057, -11.6145, 6.23576, -0.525057, -9.86452, 6.70929, -1.32506, -9.86158, 9.07694, -3.37506, -9.84688, 9.55047, -4.12506, -9.84394, 11.4446, -5.82506, -9.83217, 11.9181, -6.47506, -9.82923, 14.2358, -8.72506, -11.4895, 13.4076, -7.87506, -11.6614, 11.4951, -6.07506, -11.6489, 11.017, -5.42506, -11.6458, 10.0608, -4.62506, -11.6395, 9.10451, -3.67506, -11.6333, 8.62639, -2.97506, -11.6301, 6.71389, -1.32506, -11.6177, 7.9898, -2.57506, -10.5122, 6.9858, -1.32506, -10.5166, 7.4828, -2.12506, -10.5144, 6.98076, -1.32506, -11.0195, 7.48777, -2.12506, -11.0173, 11.4888, -6.07506, -10.5168, 10.9818, -5.42506, -10.519, 8.98877, -3.37506, -11.0107, 9.48577, -4.07506, -11.0185, 13.4818, -8.07506, -11.011, 12.9848, -7.47506, -11.0132, 13.4868, -8.07506, -10.518, 12.4828, -7.07506, -10.5124, 12.9898, -7.47506, -10.5102, 7.98477, -2.57506, -11.0151, 14.2358, 0.324944, -9.56453, 12.4858, 0.324944, -9.61452, 12.4858, 0.324944, -9.31453, 12.2358, 0.324944, -8.96453, 11.7358, 0.324944, -8.86452, 11.7858, 0.324944, -7.01453, 14.2358, 0.324944, -9.56453, 12.4858, 0.324944, -9.31453, 12.2358, 0.324944, -8.96453, 11.7858, 0.324944, -7.01453, 14.2358, 0.324944, -7.01453, -14.2142, 0.324944, -1.21453, -10.6642, 0.324944, -1.16453, -10.6642, 0.324944, -9.21453, -14.2142, 0.324944, -9.26453, 6.48576, 0.324944, -7.01453, 11.7858, 0.324944, -7.01453, 11.7358, 0.324944, -8.86452, 6.53576, 0.324944, -8.86452, 10.2358, 0.324944, 5.03548, 10.3858, 0.324944, 5.13547, 10.8358, 0.324944, 4.88547, 11.6858, 0.324944, 5.13547, 11.7858, 0.424944, 5.38547, 13.1858, 0.424944, 5.38547, 13.2858, 0.324944, 5.13547, 14.2358, 0.324944, 0.935474, 14.5358, 0.324944, 0.585475, 14.5358, 0.324944, -0.564526, 14.2358, 0.324944, -0.914525, 10.2358, 0.324944, 5.03548, 10.8358, 0.324944, 4.88547, 10.2358, 0.324944, 5.03548, 14.2358, 0.324944, -0.914525, 14.2358, 0.324944, -4.96453, 2.78576, 0.324944, -4.96453, 10.8358, 0.324944, 4.88547, 11.3358, 0.324944, 4.88547, 14.2358, 0.324944, 0.935474, 11.3358, 0.324944, 4.88547, 11.6858, 0.324944, 5.13547, 13.2858, 0.324944, 5.13547, 13.6358, 0.324944, 4.88547, 14.2358, 0.324944, 0.935474, -8.61424, 0.324944, 5.03548, 10.2358, 0.324944, 5.03548, 2.78576, 0.324944, -4.96453, -8.61424, 0.324944, -4.96453, 13.6358, 0.324944, 4.88547, 14.2358, 0.324944, 4.93548, 14.2358, 0.324944, 0.935474, -14.2142, 0.324944, -0.914525, -14.5142, 0.324944, -0.564526, -14.5142, 0.324944, 0.585475, -14.2142, 0.324944, 0.935474, -10.6642, 0.324944, 1.18548, -10.6642, 0.324944, -1.16453, -14.2142, 0.324944, 0.935474, -14.2142, 0.324944, 1.23547, -10.6642, 0.324944, 1.18548, -10.6642, 0.324944, -1.16453, -14.2142, 0.324944, -1.21453, -14.2142, 0.324944, -0.914525, -14.2142, 0.324944, 1.23547, -14.2142, 0.324944, 5.03548, -10.6642, 0.324944, 5.03548, -10.6642, 0.324944, 1.18548, 13.1858, 0.324944, 6.88547, 13.1858, 0.424944, 6.63547, 11.7858, 0.424944, 6.63547, 12.7191, 0.424944, 6.80214, 13.1858, 0.324944, 6.88547, 11.7858, 0.424944, 6.63547, 11.6858, 0.324944, 7.08547, 13.4358, 0.324944, 7.23547, 12.7191, 0.424944, 6.80214, 11.3358, 0.324944, 7.33547, 10.8858, 0.324944, 7.33547, 6.98576, 0.324944, 9.73547, 13.6358, 0.324944, 7.33547, 13.4358, 0.324944, 7.23547, 11.6858, 0.324944, 7.08547, 11.3358, 0.324944, 7.33547, 14.2358, 0.324944, 14.2355, 14.2358, 0.324944, 7.23547, 14.0858, 0.324944, 7.33547, 10.8858, 0.324944, 7.33547, 10.3858, 0.324944, 7.03548, 6.98576, 0.324944, 7.08547, 6.98576, 0.324944, 9.73547, 6.73576, 0.324944, 10.0855, 6.23576, 0.324944, 10.1855, 6.28576, 0.324944, 14.2355, 6.98576, 0.324944, 9.73547, 6.73576, 0.324944, 10.0855, 6.28576, 0.324944, 14.2355, 14.2358, 0.324944, 14.2355, 13.6358, 0.324944, 7.33547, 11.3358, 0.324944, 7.33547, 14.2358, 0.324944, 14.2355, 14.0858, 0.324944, 7.33547, 13.6358, 0.324944, 7.33547, -0.564238, 15.1249, 6.78548, -0.564238, 15.1249, 9.18548, 14.5358, 15.0749, 9.18548, 14.5358, 15.0749, 6.78548, -3.61424, 0.324944, 8.88547, -3.21424, 0.624944, 8.88547, -3.21424, 0.624944, 7.08547, -3.41424, 0.324944, 7.98547, -3.81424, 0.324944, 8.98547, -3.61424, 0.324944, 8.88547, -3.21424, 0.624944, 7.08547, -3.36424, 0.374944, 7.56048, -3.41424, 0.324944, 7.98547, -4.06424, 0.324944, 9.33547, -3.81424, 0.324944, 8.98547, -3.21424, 0.624944, 7.08547, -14.2142, 0.324944, 7.08547, -3.36424, 0.374944, 7.56048, -3.6925, 0.324944, 7.08547, -3.36424, 0.324944, 14.2355, -3.31424, 0.324944, 10.1855, -3.61424, 0.324944, 10.1855, -3.36424, 0.324944, 14.2355, -3.61424, 0.324944, 10.1855, -3.96424, 0.324944, 9.93548, -3.36424, 0.324944, 14.2355, -3.96424, 0.324944, 9.93548, -4.06424, 0.324944, 9.73547, -14.2142, 0.324944, 7.08547, -14.2142, 0.324944, 14.2355, -4.06424, 0.324944, 9.73547, -4.06424, 0.324944, 9.33547, -14.2142, 0.324944, 7.08547, 14.5358, 10.0749, 8.58547, 14.5358, 10.0749, 7.43548, 14.3358, 10.0749, 7.28548, 14.5358, 10.0749, 8.58547, 14.3358, 10.0749, 7.28548, 14.2858, 10.0749, 7.08547, -3.21424, 0.624944, 7.08547, -3.21424, 0.624944, 8.88547, 14.2858, 10.0749, 8.88547, 6.38254, 10.0749, 7.08547, 5.2535, 9.27494, 7.08547, 4.68899, 8.42494, 7.08547, 4.12447, 8.02494, 7.08547, 3.55996, 7.27494, 7.08547, 2.43092, 6.37494, 7.08547, 1.86641, 5.57494, 7.08547, 1.30189, 5.17494, 7.08547, 0.737375, 4.47494, 7.08547, 0.172859, 3.92494, 7.08547, -0.391657, 3.52494, 7.08547, -0.956173, 2.77494, 7.08547, -2.64972, 1.07494, 7.08547, -2.64972, 1.07494, 8.88547, -0.956173, 2.77494, 8.88547, -0.391657, 3.52494, 8.88547, 0.172859, 3.92494, 8.88547, 1.30189, 5.12494, 8.88547, 1.86641, 5.57494, 8.88547, 2.43092, 6.37494, 8.88547, 3.55996, 7.22494, 8.88547, 4.12447, 8.02494, 8.88547, 4.68899, 8.42494, 8.88547, 5.2535, 9.27494, 8.88547, 6.38254, 10.0749, 8.88547, 5.9898, 10.0749, 7.98783, 5.4828, 9.27494, 7.98563, 1.98378, 5.97494, 7.99025, 3.98179, 8.02494, 7.98904, 3.48479, 7.22494, 7.98684, -2.01223, 1.87494, 7.98267, 1.48678, 5.22494, 7.98805, -0.511228, 3.22494, 7.98926, -0.014225, 3.92494, 7.98146, -2.51924, 1.22494, 7.98048, 0.989779, 4.72494, 7.98586, -1.06424, 0.324944, 7.08547, -1.06424, 0.324944, 8.88547, 5.93576, 0.324944, 8.88547, 5.93576, 0.324944, 7.08547, -1.21424, 0.324944, 14.2355, -1.16424, 0.324944, 10.1855, -3.31424, 0.324944, 10.1855, -3.36424, 0.324944, 14.2355, -0.914237, 0.324944, 14.2355, -0.564238, 0.324944, 14.5355, 0.585763, 0.324944, 14.5355, 0.935762, 0.324944, 14.2355, 1.18576, 0.324944, 10.1855, -1.16424, 0.324944, 10.1855, -1.16424, 0.324944, 10.1855, -1.21424, 0.324944, 14.2355, -0.914237, 0.324944, 14.2355, 0.935762, 0.324944, 14.2355, 1.23576, 0.324944, 14.2355, 1.18576, 0.324944, 10.1855, 1.23576, 0.324944, 14.2355, 6.28576, 0.324944, 14.2355, 6.23576, 0.324944, 10.1855, 1.18576, 0.324944, 10.1855)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(3, 0, 5), PackedInt32Array(3, 5, 4), PackedInt32Array(8, 7, 6), PackedInt32Array(11, 10, 9), PackedInt32Array(14, 13, 12), PackedInt32Array(16, 15, 17), PackedInt32Array(17, 15, 18), PackedInt32Array(18, 15, 19), PackedInt32Array(22, 21, 20), PackedInt32Array(23, 26, 24), PackedInt32Array(24, 26, 25), PackedInt32Array(29, 28, 27), PackedInt32Array(31, 30, 32), PackedInt32Array(32, 30, 34), PackedInt32Array(32, 34, 33), PackedInt32Array(37, 36, 35), PackedInt32Array(40, 39, 38), PackedInt32Array(43, 42, 41), PackedInt32Array(45, 44, 46), PackedInt32Array(46, 44, 47), PackedInt32Array(50, 49, 48), PackedInt32Array(51, 57, 52), PackedInt32Array(52, 57, 53), PackedInt32Array(53, 57, 54), PackedInt32Array(54, 57, 58), PackedInt32Array(58, 57, 55), PackedInt32Array(55, 57, 56), PackedInt32Array(59, 63, 60), PackedInt32Array(60, 63, 61), PackedInt32Array(61, 63, 62), PackedInt32Array(66, 65, 68), PackedInt32Array(68, 65, 64), PackedInt32Array(68, 64, 67), PackedInt32Array(72, 71, 69), PackedInt32Array(69, 71, 70), PackedInt32Array(73, 75, 74), PackedInt32Array(76, 78, 77), PackedInt32Array(79, 81, 80), PackedInt32Array(83, 82, 84), PackedInt32Array(84, 82, 85), PackedInt32Array(85, 82, 86), PackedInt32Array(87, 90, 88), PackedInt32Array(88, 90, 89), PackedInt32Array(93, 92, 91), PackedInt32Array(94, 97, 95), PackedInt32Array(95, 97, 96), PackedInt32Array(100, 99, 98), PackedInt32Array(105, 121, 106), PackedInt32Array(106, 121, 107), PackedInt32Array(107, 120, 108), PackedInt32Array(108, 128, 109), PackedInt32Array(109, 126, 110), PackedInt32Array(110, 125, 111), PackedInt32Array(111, 133, 101), PackedInt32Array(101, 131, 102), PackedInt32Array(102, 131, 103), PackedInt32Array(103, 129, 112), PackedInt32Array(112, 129, 104), PackedInt32Array(104, 129, 113), PackedInt32Array(113, 130, 114), PackedInt32Array(114, 125, 115), PackedInt32Array(115, 126, 116), PackedInt32Array(116, 128, 117), PackedInt32Array(117, 127, 118), PackedInt32Array(118, 124, 119), PackedInt32Array(119, 123, 105), PackedInt32Array(105, 123, 121), PackedInt32Array(121, 122, 107), PackedInt32Array(120, 127, 108), PackedInt32Array(107, 122, 120), PackedInt32Array(128, 126, 109), PackedInt32Array(108, 127, 128), PackedInt32Array(126, 125, 110), PackedInt32Array(125, 132, 111), PackedInt32Array(133, 131, 101), PackedInt32Array(111, 132, 133), PackedInt32Array(131, 129, 103), PackedInt32Array(129, 130, 113), PackedInt32Array(130, 132, 114), PackedInt32Array(125, 126, 115), PackedInt32Array(114, 132, 125), PackedInt32Array(126, 128, 116), PackedInt32Array(128, 127, 117), PackedInt32Array(127, 134, 118), PackedInt32Array(124, 123, 119), PackedInt32Array(118, 134, 124), PackedInt32Array(123, 124, 121), PackedInt32Array(121, 124, 122), PackedInt32Array(120, 134, 127), PackedInt32Array(122, 134, 120), PackedInt32Array(133, 129, 131), PackedInt32Array(132, 130, 133), PackedInt32Array(129, 133, 130), PackedInt32Array(134, 122, 124), PackedInt32Array(137, 136, 135), PackedInt32Array(140, 139, 138), PackedInt32Array(142, 141, 143), PackedInt32Array(143, 141, 145), PackedInt32Array(143, 145, 144), PackedInt32Array(149, 148, 146), PackedInt32Array(146, 148, 147), PackedInt32Array(153, 152, 150), PackedInt32Array(150, 152, 151), PackedInt32Array(156, 155, 154), PackedInt32Array(158, 157, 159), PackedInt32Array(159, 157, 160), PackedInt32Array(162, 161, 163), PackedInt32Array(163, 161, 164), PackedInt32Array(164, 161, 166), PackedInt32Array(164, 166, 165), PackedInt32Array(168, 167, 169), PackedInt32Array(169, 167, 170), PackedInt32Array(173, 172, 171), PackedInt32Array(176, 175, 177), PackedInt32Array(177, 175, 174), PackedInt32Array(177, 174, 178), PackedInt32Array(182, 181, 179), PackedInt32Array(179, 181, 180), PackedInt32Array(185, 184, 183), PackedInt32Array(187, 186, 188), PackedInt32Array(188, 186, 189), PackedInt32Array(189, 186, 191), PackedInt32Array(189, 191, 190), PackedInt32Array(194, 193, 192), PackedInt32Array(197, 196, 195), PackedInt32Array(199, 198, 200), PackedInt32Array(200, 198, 201), PackedInt32Array(202, 205, 203), PackedInt32Array(203, 205, 204), PackedInt32Array(206, 209, 210), PackedInt32Array(210, 209, 207), PackedInt32Array(207, 209, 208), PackedInt32Array(213, 212, 211), PackedInt32Array(215, 214, 216), PackedInt32Array(216, 214, 217), PackedInt32Array(220, 219, 218), PackedInt32Array(222, 221, 223), PackedInt32Array(223, 221, 224), PackedInt32Array(227, 226, 225), PackedInt32Array(229, 228, 230), PackedInt32Array(230, 228, 233), PackedInt32Array(230, 233, 232), PackedInt32Array(230, 232, 231), PackedInt32Array(236, 235, 234), PackedInt32Array(240, 239, 237), PackedInt32Array(237, 239, 238), PackedInt32Array(241, 244, 242), PackedInt32Array(242, 244, 243), PackedInt32Array(247, 249, 248), PackedInt32Array(248, 249, 246), PackedInt32Array(248, 246, 245), PackedInt32Array(252, 254, 255), PackedInt32Array(255, 254, 251), PackedInt32Array(255, 251, 250), PackedInt32Array(255, 250, 253), PackedInt32Array(258, 257, 256), PackedInt32Array(261, 260, 259), PackedInt32Array(263, 262, 264), PackedInt32Array(264, 262, 266), PackedInt32Array(264, 266, 265), PackedInt32Array(267, 269, 268), PackedInt32Array(272, 271, 270), PackedInt32Array(303, 279, 278), PackedInt32Array(278, 274, 273), PackedInt32Array(274, 278, 275), PackedInt32Array(275, 278, 279), PackedInt32Array(279, 304, 280), PackedInt32Array(280, 305, 281), PackedInt32Array(281, 307, 282), PackedInt32Array(282, 307, 283), PackedInt32Array(283, 308, 284), PackedInt32Array(284, 306, 285), PackedInt32Array(285, 310, 286), PackedInt32Array(286, 314, 287), PackedInt32Array(287, 312, 288), PackedInt32Array(288, 312, 289), PackedInt32Array(289, 311, 290), PackedInt32Array(290, 309, 291), PackedInt32Array(291, 313, 276), PackedInt32Array(276, 313, 277), PackedInt32Array(277, 313, 292), PackedInt32Array(292, 309, 293), PackedInt32Array(293, 311, 294), PackedInt32Array(294, 312, 295), PackedInt32Array(295, 314, 296), PackedInt32Array(296, 310, 297), PackedInt32Array(297, 306, 298), PackedInt32Array(298, 308, 299), PackedInt32Array(299, 307, 300), PackedInt32Array(300, 307, 301), PackedInt32Array(301, 305, 302), PackedInt32Array(302, 304, 303), PackedInt32Array(303, 304, 279), PackedInt32Array(304, 305, 280), PackedInt32Array(305, 307, 281), PackedInt32Array(307, 308, 283), PackedInt32Array(308, 306, 284), PackedInt32Array(306, 310, 285), PackedInt32Array(310, 314, 286), PackedInt32Array(314, 312, 287), PackedInt32Array(312, 311, 289), PackedInt32Array(311, 309, 290), PackedInt32Array(309, 313, 291), PackedInt32Array(313, 309, 292), PackedInt32Array(309, 311, 293), PackedInt32Array(311, 312, 294), PackedInt32Array(312, 314, 295), PackedInt32Array(314, 310, 296), PackedInt32Array(310, 306, 297), PackedInt32Array(306, 308, 298), PackedInt32Array(308, 307, 299), PackedInt32Array(307, 305, 301), PackedInt32Array(305, 304, 302), PackedInt32Array(318, 317, 315), PackedInt32Array(315, 317, 316), PackedInt32Array(322, 321, 319), PackedInt32Array(319, 321, 320), PackedInt32Array(324, 323, 325), PackedInt32Array(325, 323, 326), PackedInt32Array(326, 323, 328), PackedInt32Array(326, 328, 327), PackedInt32Array(331, 330, 329), PackedInt32Array(332, 334, 333), PackedInt32Array(338, 337, 335), PackedInt32Array(335, 337, 336)]
+cell_size = 0.05
+cell_height = 0.05
+agent_max_climb = 1.0
+agent_max_slope = 50.0
+region_min_size = 1.0
+region_merge_size = 5.0
+edge_max_length = 20.0
+detail_sample_distance = 10.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xjh22"]
 albedo_color = Color(0, 0, 0, 1)
@@ -126,46 +156,38 @@ size = Vector3(29.7, 10, 29.7)
 [sub_resource type="BoxShape3D" id="BoxShape3D_sr1bn"]
 size = Vector3(9.6088, 10, 3.28941)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1y8bm"]
-resource_name = "fancy_picture_frame_01_canvas"
-cull_mode = 2
-diffuse_mode = 3
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("25_ym65p")
-metallic_texture = ExtResource("26_tsd8c")
-metallic_texture_channel = 2
-roughness_texture = ExtResource("26_tsd8c")
-roughness_texture_channel = 1
-normal_enabled = true
-normal_texture = ExtResource("27_ruo85")
-rim_enabled = true
-clearcoat_enabled = true
-subsurf_scatter_enabled = true
-subsurf_scatter_strength = 0.38
-subsurf_scatter_skin_mode = true
-
 [node name="_Big_Room" type="Node3D" node_paths=PackedStringArray("entrance1", "entrance2", "entrance3", "entrance4", "entrance5", "entrance6", "lightsParent", "roomBoundaries", "wall1", "wall2", "wall3", "gateOfHorn", "gateOfIvory")]
 script = ExtResource("1_m6m58")
-entrance1 = NodePath("RoomOuter/NorthEntrance")
-entrance2 = NodePath("RoomOuter/SouthEntrance")
-entrance3 = NodePath("RoomOuter/EastEntrance")
-entrance4 = NodePath("RoomOuter/WestEntrance")
-entrance5 = NodePath("RoomCeiling/TopEntrance")
-entrance6 = NodePath("RoomFloor/BottomEntrance")
-lightsParent = NodePath("Lights")
-roomBoundaries = NodePath("RoomBoundaries")
+entrance1 = NodePath("NavigationRegion3D/RoomOuter/NorthEntrance")
+entrance2 = NodePath("NavigationRegion3D/RoomOuter/SouthEntrance")
+entrance3 = NodePath("NavigationRegion3D/RoomOuter/EastEntrance")
+entrance4 = NodePath("NavigationRegion3D/RoomOuter/WestEntrance")
+entrance5 = NodePath("NavigationRegion3D/RoomCeiling/TopEntrance")
+entrance6 = NodePath("NavigationRegion3D/RoomFloor/BottomEntrance")
+lightsParent = NodePath("NavigationRegion3D/Lights")
+roomBoundaries = NodePath("NavigationRegion3D/RoomBoundaries")
 roomType = "BigRoom"
-wall1 = NodePath("Wall1")
-wall2 = NodePath("Wall2")
-wall3 = NodePath("Wall3")
-gateOfHorn = NodePath("Gate Of Horn")
-gateOfIvory = NodePath("Gate Of Ivory")
+wall1 = NodePath("NavigationRegion3D/Wall1")
+wall2 = NodePath("NavigationRegion3D/Wall2")
+wall3 = NodePath("NavigationRegion3D/Wall3")
+gateOfHorn = NodePath("NavigationRegion3D/Gate Of Horn")
+gateOfIvory = NodePath("NavigationRegion3D/Gate Of Ivory")
 fogAmt = 0.15
 
-[node name="Lights" type="Node3D" parent="."]
+[node name="NB" parent="." instance=ExtResource("24_0q04f")]
+transform = Transform3D(-3.49691e-07, 0, -8, 0, 8, 0, 8, 0, -3.49691e-07, 14.7427, 4.40682, -10.6426)
+visible = false
+
+[node name="fancy_picture_frame_01_canvas" parent="NB" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_1y8bm")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_4my34")
+
+[node name="Lights" type="Node3D" parent="NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0230985, 0)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Lights"]
+[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/Lights"]
 transform = Transform3D(1, 9.5747e-10, -4.03417e-10, 4.03417e-10, -4.40606e-08, 1, 9.5747e-10, -1, -4.40606e-08, -5.94453, 9.67257, 1.61505)
 light_energy = 5.37
 light_indirect_energy = 0.0
@@ -176,7 +198,7 @@ spot_attenuation = 1.31951
 spot_angle = 75.0
 spot_angle_attenuation = 0.435275
 
-[node name="SpotLight3D2" type="SpotLight3D" parent="Lights"]
+[node name="SpotLight3D2" type="SpotLight3D" parent="NavigationRegion3D/Lights"]
 transform = Transform3D(1, 9.5747e-10, -4.03417e-10, 4.03417e-10, -4.40606e-08, 1, 9.5747e-10, -1, -4.40606e-08, -5.94453, 9.67257, 4.36761)
 light_energy = 5.37
 light_indirect_energy = 0.0
@@ -187,7 +209,7 @@ spot_attenuation = 1.31951
 spot_angle = 75.0
 spot_angle_attenuation = 0.435275
 
-[node name="SpotLight3D3" type="SpotLight3D" parent="Lights"]
+[node name="SpotLight3D3" type="SpotLight3D" parent="NavigationRegion3D/Lights"]
 transform = Transform3D(1, 9.5747e-10, -4.03417e-10, 4.03417e-10, -4.40606e-08, 1, 9.5747e-10, -1, -4.40606e-08, -5.94453, 9.67257, -4.31689)
 light_energy = 5.37
 light_indirect_energy = 0.0
@@ -198,7 +220,7 @@ spot_attenuation = 1.31951
 spot_angle = 75.0
 spot_angle_attenuation = 0.435275
 
-[node name="SpotLight3D4" type="SpotLight3D" parent="Lights"]
+[node name="SpotLight3D4" type="SpotLight3D" parent="NavigationRegion3D/Lights"]
 transform = Transform3D(1, 9.5747e-10, -4.03417e-10, 4.03417e-10, -4.40606e-08, 1, 9.5747e-10, -1, -4.40606e-08, 0.0389974, 9.67257, 1.61505)
 light_energy = 5.37
 light_indirect_energy = 0.0
@@ -209,7 +231,7 @@ spot_attenuation = 1.31951
 spot_angle = 75.0
 spot_angle_attenuation = 0.435275
 
-[node name="SpotLight3D5" type="SpotLight3D" parent="Lights"]
+[node name="SpotLight3D5" type="SpotLight3D" parent="NavigationRegion3D/Lights"]
 transform = Transform3D(1, 9.5747e-10, -4.03417e-10, 4.03417e-10, -4.40606e-08, 1, 9.5747e-10, -1, -4.40606e-08, 0.0389974, 9.67257, 4.33876)
 light_energy = 5.37
 light_indirect_energy = 0.0
@@ -220,7 +242,7 @@ spot_attenuation = 1.31951
 spot_angle = 75.0
 spot_angle_attenuation = 0.435275
 
-[node name="SpotLight3D6" type="SpotLight3D" parent="Lights"]
+[node name="SpotLight3D6" type="SpotLight3D" parent="NavigationRegion3D/Lights"]
 transform = Transform3D(1, 9.5747e-10, -4.03417e-10, 4.03417e-10, -4.40606e-08, 1, 9.5747e-10, -1, -4.40606e-08, 0.0389974, 9.67257, -4.33772)
 light_energy = 5.37
 light_indirect_energy = 0.0
@@ -231,7 +253,7 @@ spot_attenuation = 1.31951
 spot_angle = 75.0
 spot_angle_attenuation = 0.435275
 
-[node name="SpotLight3D7" type="SpotLight3D" parent="Lights"]
+[node name="SpotLight3D7" type="SpotLight3D" parent="NavigationRegion3D/Lights"]
 transform = Transform3D(1, 9.5747e-10, -4.03417e-10, 4.03417e-10, -4.40606e-08, 1, 9.5747e-10, -1, -4.40606e-08, -5.94453, 9.67257, -1.55129)
 light_energy = 5.37
 light_indirect_energy = 0.0
@@ -242,7 +264,7 @@ spot_attenuation = 1.31951
 spot_angle = 75.0
 spot_angle_attenuation = 0.435275
 
-[node name="SpotLight3D8" type="SpotLight3D" parent="Lights"]
+[node name="SpotLight3D8" type="SpotLight3D" parent="NavigationRegion3D/Lights"]
 transform = Transform3D(1, 9.5747e-10, -4.03417e-10, 4.03417e-10, -4.40606e-08, 1, 9.5747e-10, -1, -4.40606e-08, 0.0389974, 9.67257, -1.55129)
 light_energy = 5.37
 light_indirect_energy = 0.0
@@ -253,7 +275,7 @@ spot_attenuation = 1.31951
 spot_angle = 75.0
 spot_angle_attenuation = 0.435275
 
-[node name="SpotLight3D9" type="SpotLight3D" parent="Lights"]
+[node name="SpotLight3D9" type="SpotLight3D" parent="NavigationRegion3D/Lights"]
 transform = Transform3D(1, 9.5747e-10, -4.03417e-10, 4.03417e-10, -4.40606e-08, 1, 9.5747e-10, -1, -4.40606e-08, 5.82642, 9.67257, 1.61505)
 light_energy = 5.37
 light_indirect_energy = 0.0
@@ -264,7 +286,7 @@ spot_attenuation = 1.31951
 spot_angle = 75.0
 spot_angle_attenuation = 0.435275
 
-[node name="SpotLight3D10" type="SpotLight3D" parent="Lights"]
+[node name="SpotLight3D10" type="SpotLight3D" parent="NavigationRegion3D/Lights"]
 transform = Transform3D(1, 9.5747e-10, -4.03417e-10, 4.03417e-10, -4.40606e-08, 1, 9.5747e-10, -1, -4.40606e-08, 5.82642, 9.67257, 4.36761)
 light_energy = 5.37
 light_indirect_energy = 0.0
@@ -275,7 +297,7 @@ spot_attenuation = 1.31951
 spot_angle = 75.0
 spot_angle_attenuation = 0.435275
 
-[node name="SpotLight3D11" type="SpotLight3D" parent="Lights"]
+[node name="SpotLight3D11" type="SpotLight3D" parent="NavigationRegion3D/Lights"]
 transform = Transform3D(1, 9.5747e-10, -4.03417e-10, 4.03417e-10, -4.40606e-08, 1, 9.5747e-10, -1, -4.40606e-08, 5.82642, 9.67257, -4.31689)
 light_energy = 5.37
 light_indirect_energy = 0.0
@@ -286,7 +308,7 @@ spot_attenuation = 1.31951
 spot_angle = 75.0
 spot_angle_attenuation = 0.435275
 
-[node name="SpotLight3D12" type="SpotLight3D" parent="Lights"]
+[node name="SpotLight3D12" type="SpotLight3D" parent="NavigationRegion3D/Lights"]
 transform = Transform3D(1, 9.5747e-10, -4.03417e-10, 4.03417e-10, -4.40606e-08, 1, 9.5747e-10, -1, -4.40606e-08, 11.8099, 9.67257, 1.61505)
 light_energy = 5.37
 light_indirect_energy = 0.0
@@ -297,7 +319,7 @@ spot_attenuation = 1.31951
 spot_angle = 75.0
 spot_angle_attenuation = 0.435275
 
-[node name="SpotLight3D13" type="SpotLight3D" parent="Lights"]
+[node name="SpotLight3D13" type="SpotLight3D" parent="NavigationRegion3D/Lights"]
 transform = Transform3D(1, 9.5747e-10, -4.03417e-10, 4.03417e-10, -4.40606e-08, 1, 9.5747e-10, -1, -4.40606e-08, 11.8099, 9.67257, 4.33876)
 light_energy = 5.37
 light_indirect_energy = 0.0
@@ -308,7 +330,7 @@ spot_attenuation = 1.31951
 spot_angle = 75.0
 spot_angle_attenuation = 0.435275
 
-[node name="SpotLight3D14" type="SpotLight3D" parent="Lights"]
+[node name="SpotLight3D14" type="SpotLight3D" parent="NavigationRegion3D/Lights"]
 transform = Transform3D(1, 9.5747e-10, -4.03417e-10, 4.03417e-10, -4.40606e-08, 1, 9.5747e-10, -1, -4.40606e-08, 11.8099, 9.67257, -4.33772)
 light_energy = 5.37
 light_indirect_energy = 0.0
@@ -319,7 +341,7 @@ spot_attenuation = 1.31951
 spot_angle = 75.0
 spot_angle_attenuation = 0.435275
 
-[node name="SpotLight3D15" type="SpotLight3D" parent="Lights"]
+[node name="SpotLight3D15" type="SpotLight3D" parent="NavigationRegion3D/Lights"]
 transform = Transform3D(1, 9.5747e-10, -4.03417e-10, 4.03417e-10, -4.40606e-08, 1, 9.5747e-10, -1, -4.40606e-08, 5.82642, 9.67257, -1.55129)
 light_energy = 5.37
 light_indirect_energy = 0.0
@@ -330,7 +352,7 @@ spot_attenuation = 1.31951
 spot_angle = 75.0
 spot_angle_attenuation = 0.435275
 
-[node name="SpotLight3D16" type="SpotLight3D" parent="Lights"]
+[node name="SpotLight3D16" type="SpotLight3D" parent="NavigationRegion3D/Lights"]
 transform = Transform3D(1, 9.5747e-10, -4.03417e-10, 4.03417e-10, -4.40606e-08, 1, 9.5747e-10, -1, -4.40606e-08, 11.8099, 9.67257, -1.55129)
 light_energy = 5.37
 light_indirect_energy = 0.0
@@ -341,93 +363,93 @@ spot_attenuation = 1.31951
 spot_angle = 75.0
 spot_angle_attenuation = 0.435275
 
-[node name="LedPannel" type="CSGBox3D" parent="Lights" groups=["led"]]
+[node name="LedPannel" type="CSGBox3D" parent="NavigationRegion3D/Lights" groups=["led"]]
 transform = Transform3D(1, 3.17186e-10, 0, 8.62315e-11, 1, 3.49246e-10, 6.40284e-10, -3.72529e-09, 1, -5.94453, 9.61317, 1.61505)
 size = Vector3(5, 0.05, 2)
 material = SubResource("StandardMaterial3D_xjh22")
 
-[node name="LedPannel2" type="CSGBox3D" parent="Lights" groups=["led"]]
+[node name="LedPannel2" type="CSGBox3D" parent="NavigationRegion3D/Lights" groups=["led"]]
 transform = Transform3D(1, 3.17186e-10, 0, 8.62315e-11, 1, 3.49246e-10, 6.40284e-10, -3.72529e-09, 1, -5.94453, 9.61317, 4.36761)
 size = Vector3(5, 0.05, 2)
 material = SubResource("StandardMaterial3D_xjh22")
 
-[node name="LedPannel3" type="CSGBox3D" parent="Lights" groups=["led"]]
+[node name="LedPannel3" type="CSGBox3D" parent="NavigationRegion3D/Lights" groups=["led"]]
 transform = Transform3D(1, 3.17186e-10, 0, 8.62315e-11, 1, 3.49246e-10, 6.40284e-10, -3.72529e-09, 1, -5.94453, 9.61317, -4.31689)
 size = Vector3(5, 0.05, 2)
 material = SubResource("StandardMaterial3D_xjh22")
 
-[node name="LedPannel4" type="CSGBox3D" parent="Lights" groups=["led"]]
+[node name="LedPannel4" type="CSGBox3D" parent="NavigationRegion3D/Lights" groups=["led"]]
 transform = Transform3D(1, 3.17186e-10, 0, 8.62315e-11, 1, 3.49246e-10, 6.40284e-10, -3.72529e-09, 1, 0.0389974, 9.61317, 1.61505)
 size = Vector3(5, 0.05, 2)
 material = SubResource("StandardMaterial3D_xjh22")
 
-[node name="LedPannel5" type="CSGBox3D" parent="Lights" groups=["led"]]
+[node name="LedPannel5" type="CSGBox3D" parent="NavigationRegion3D/Lights" groups=["led"]]
 transform = Transform3D(1, 3.17186e-10, 0, 8.62315e-11, 1, 3.49246e-10, 6.40284e-10, -3.72529e-09, 1, 0.0389974, 9.61317, 4.33876)
 size = Vector3(5, 0.05, 2)
 material = SubResource("StandardMaterial3D_xjh22")
 
-[node name="LedPannel6" type="CSGBox3D" parent="Lights" groups=["led"]]
+[node name="LedPannel6" type="CSGBox3D" parent="NavigationRegion3D/Lights" groups=["led"]]
 transform = Transform3D(1, 3.17186e-10, 0, 8.62315e-11, 1, 3.49246e-10, 6.40284e-10, -3.72529e-09, 1, 0.0389974, 9.61317, -4.33772)
 size = Vector3(5, 0.05, 2)
 material = SubResource("StandardMaterial3D_xjh22")
 
-[node name="LedPannel7" type="CSGBox3D" parent="Lights" groups=["led"]]
+[node name="LedPannel7" type="CSGBox3D" parent="NavigationRegion3D/Lights" groups=["led"]]
 transform = Transform3D(1, 3.17186e-10, 0, 8.62315e-11, 1, 3.49246e-10, 6.40284e-10, -3.72529e-09, 1, -5.94453, 9.61317, -1.55129)
 size = Vector3(5, 0.05, 2)
 material = SubResource("StandardMaterial3D_xjh22")
 
-[node name="LedPannel8" type="CSGBox3D" parent="Lights" groups=["led"]]
+[node name="LedPannel8" type="CSGBox3D" parent="NavigationRegion3D/Lights" groups=["led"]]
 transform = Transform3D(1, 3.17186e-10, 0, 8.62315e-11, 1, 3.49246e-10, 6.40284e-10, -3.72529e-09, 1, 0.0389974, 9.61317, -1.55129)
 size = Vector3(5, 0.05, 2)
 material = SubResource("StandardMaterial3D_xjh22")
 
-[node name="LedPannel9" type="CSGBox3D" parent="Lights" groups=["led"]]
+[node name="LedPannel9" type="CSGBox3D" parent="NavigationRegion3D/Lights" groups=["led"]]
 transform = Transform3D(1, 3.17186e-10, 0, 8.62315e-11, 1, 3.49246e-10, 6.40284e-10, -3.72529e-09, 1, 5.82642, 9.61317, 1.61505)
 size = Vector3(5, 0.05, 2)
 material = SubResource("StandardMaterial3D_xjh22")
 
-[node name="LedPannel10" type="CSGBox3D" parent="Lights" groups=["led"]]
+[node name="LedPannel10" type="CSGBox3D" parent="NavigationRegion3D/Lights" groups=["led"]]
 transform = Transform3D(1, 3.17186e-10, 0, 8.62315e-11, 1, 3.49246e-10, 6.40284e-10, -3.72529e-09, 1, 5.82642, 9.61317, 4.36761)
 size = Vector3(5, 0.05, 2)
 material = SubResource("StandardMaterial3D_xjh22")
 
-[node name="LedPannel11" type="CSGBox3D" parent="Lights" groups=["led"]]
+[node name="LedPannel11" type="CSGBox3D" parent="NavigationRegion3D/Lights" groups=["led"]]
 transform = Transform3D(1, 3.17186e-10, 0, 8.62315e-11, 1, 3.49246e-10, 6.40284e-10, -3.72529e-09, 1, 5.82642, 9.61317, -4.31689)
 size = Vector3(5, 0.05, 2)
 material = SubResource("StandardMaterial3D_xjh22")
 
-[node name="LedPannel12" type="CSGBox3D" parent="Lights" groups=["led"]]
+[node name="LedPannel12" type="CSGBox3D" parent="NavigationRegion3D/Lights" groups=["led"]]
 transform = Transform3D(1, 3.17186e-10, 0, 8.62315e-11, 1, 3.49246e-10, 6.40284e-10, -3.72529e-09, 1, 11.8099, 9.61317, 1.61505)
 size = Vector3(5, 0.05, 2)
 material = SubResource("StandardMaterial3D_xjh22")
 
-[node name="LedPannel13" type="CSGBox3D" parent="Lights" groups=["led"]]
+[node name="LedPannel13" type="CSGBox3D" parent="NavigationRegion3D/Lights" groups=["led"]]
 transform = Transform3D(1, 3.17186e-10, 0, 8.62315e-11, 1, 3.49246e-10, 6.40284e-10, -3.72529e-09, 1, 11.8099, 9.61317, 4.33876)
 size = Vector3(5, 0.05, 2)
 material = SubResource("StandardMaterial3D_xjh22")
 
-[node name="LedPannel14" type="CSGBox3D" parent="Lights" groups=["led"]]
+[node name="LedPannel14" type="CSGBox3D" parent="NavigationRegion3D/Lights" groups=["led"]]
 transform = Transform3D(1, 3.17186e-10, 0, 8.62315e-11, 1, 3.49246e-10, 6.40284e-10, -3.72529e-09, 1, 11.8099, 9.61317, -4.33772)
 size = Vector3(5, 0.05, 2)
 material = SubResource("StandardMaterial3D_xjh22")
 
-[node name="LedPannel15" type="CSGBox3D" parent="Lights" groups=["led"]]
+[node name="LedPannel15" type="CSGBox3D" parent="NavigationRegion3D/Lights" groups=["led"]]
 transform = Transform3D(1, 3.17186e-10, 0, 8.62315e-11, 1, 3.49246e-10, 6.40284e-10, -3.72529e-09, 1, 5.82642, 9.61317, -1.55129)
 size = Vector3(5, 0.05, 2)
 material = SubResource("StandardMaterial3D_xjh22")
 
-[node name="LedPannel16" type="CSGBox3D" parent="Lights" groups=["led"]]
+[node name="LedPannel16" type="CSGBox3D" parent="NavigationRegion3D/Lights" groups=["led"]]
 transform = Transform3D(1, 3.17186e-10, 0, 8.62315e-11, 1, 3.49246e-10, 6.40284e-10, -3.72529e-09, 1, 11.8099, 9.61317, -1.55129)
 size = Vector3(5, 0.05, 2)
 material = SubResource("StandardMaterial3D_xjh22")
 
-[node name="RoomCeiling" type="CSGMesh3D" parent="."]
+[node name="RoomCeiling" type="CSGMesh3D" parent="NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 9.98327, 0)
 use_collision = true
 mesh = SubResource("QuadMesh_hfs2o")
 material = SubResource("StandardMaterial3D_8h7ql")
 
-[node name="TopEntrance" type="CSGBox3D" parent="RoomCeiling" node_paths=PackedStringArray("opening", "area")]
+[node name="TopEntrance" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling" node_paths=PackedStringArray("opening", "area")]
 transform = Transform3D(-0.999999, 0.000962874, -0.000629309, 0.000630285, 0.00101745, -0.999999, -0.00096223, -0.999999, -0.00101806, 2.812, 8.004, -0.25)
 operation = 2
 size = Vector3(7.22475, 1, 2.87646)
@@ -440,208 +462,210 @@ heightOffset = 9.75
 sidewaysOffset = 8.0
 area = NodePath("Area3D")
 
-[node name="Area3D" type="Area3D" parent="RoomCeiling/TopEntrance"]
+[node name="Area3D" type="Area3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance"]
 transform = Transform3D(-4.17349e-08, -2.50282e-10, 1, -4.88944e-09, 1, 5.78831e-09, -1, 2.79397e-09, -4.35975e-08, -12.0503, 1.21016, -0.0124569)
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomCeiling/TopEntrance/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/Area3D"]
 shape = SubResource("BoxShape3D_epid2")
 
-[node name="Staircase" type="Node3D" parent="RoomCeiling/TopEntrance"]
+[node name="Staircase" type="Node3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance"]
 transform = Transform3D(-0.000630245, -0.000962234, -1, 0.0010175, 0.999999, -0.000962872, 0.999999, -0.0010181, -0.000629263, 6.26199, -10.223, -0.0453086)
 
-[node name="Staircase" type="Node3D" parent="RoomCeiling/TopEntrance/Staircase"]
+[node name="Staircase" type="Node3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/Staircase"]
 transform = Transform3D(1, 0, 0, 2.32831e-10, 1, -1.18177e-10, 4.54747e-13, -4.34675e-12, 1, 4.76837e-07, 5, 5)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomCeiling/TopEntrance/Staircase/Staircase"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/Staircase/Staircase"]
 transform = Transform3D(1, 0, -3.18323e-12, 0, 2.055, 2.3262e-09, 2.27374e-12, -5.11643e-09, 2, -0.0100002, -5.068, -4.941)
 material_override = ExtResource("4_wrq32")
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, -4.54747e-13, 0, 1, -8.38529e-12, 1.13687e-13, 2.35767e-10, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 material_override = ExtResource("2_updwm")
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 2.32831e-10, 1, -1.18177e-10, 4.54747e-13, -4.34675e-12, 1, 0, 0.200001, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="RoomCeiling/TopEntrance/Staircase/Staircase"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/Staircase/Staircase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 2.4)
 material_override = SubResource("StandardMaterial3D_ppo80")
 use_collision = true
 size = Vector3(0.25, 10, 5)
 
-[node name="CSGBox3D6" type="CSGBox3D" parent="RoomCeiling/TopEntrance/Staircase/Staircase"]
+[node name="CSGBox3D6" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/Staircase/Staircase"]
 transform = Transform3D(-4.37092e-08, 0, 1, 2.1862e-09, 1, 0, -1, -4.34586e-12, -4.37049e-08, 0.0238357, 0.00171995, 4.90646)
 material_override = SubResource("StandardMaterial3D_ppo80")
 use_collision = true
 size = Vector3(0.002, 9.753, 3.219)
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="RoomCeiling/TopEntrance/Staircase/Staircase"]
+[node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/Staircase/Staircase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, -2.6)
 material_override = SubResource("StandardMaterial3D_ppo80")
 use_collision = true
 size = Vector3(0.25, 10, 5)
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="RoomCeiling/TopEntrance/Staircase/Staircase"]
+[node name="CSGBox3D4" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/Staircase/Staircase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.62636, 0, 2.4)
 material_override = SubResource("StandardMaterial3D_ppo80")
 use_collision = true
 size = Vector3(0.25, 10, 5)
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="RoomCeiling/TopEntrance/Staircase/Staircase"]
+[node name="CSGBox3D5" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/Staircase/Staircase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.62636, 0, -2.6)
 material_override = SubResource("StandardMaterial3D_ppo80")
 use_collision = true
 size = Vector3(0.25, 10, 5)
 
-[node name="SlopeCollider" type="CSGMesh3D" parent="RoomCeiling/TopEntrance/Staircase/Staircase" groups=["carpet"]]
+[node name="SlopeCollider" type="CSGMesh3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/Staircase/Staircase" groups=["carpet"]]
 transform = Transform3D(-5.19212e-08, -2.98023e-08, 1, -1.13137, 0.707107, -2.09548e-09, -1.13137, -0.707107, -4.37074e-08, 0, 0.115, -0.027)
 use_collision = true
+collision_layer = 33
 flip_faces = true
 mesh = SubResource("PlaneMesh_bgcol")
 
-[node name="TopHull" type="Node3D" parent="RoomCeiling/TopEntrance"]
+[node name="TopHull" type="Node3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance"]
 transform = Transform3D(1, -1.31877e-10, -1.16415e-10, 9.86233e-11, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="TopHull" type="CSGMesh3D" parent="RoomCeiling/TopEntrance/TopHull" groups=["carpet"]]
+[node name="TopHull" type="CSGMesh3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/TopHull" groups=["carpet"]]
 transform = Transform3D(1, -1.35464e-09, -1.45519e-09, 1.67086e-09, 1, 6.98492e-10, -1.16415e-10, -5.82077e-10, 1, -7.89889, -0.232127, -0.00521278)
+layers = 33
 use_collision = true
 mesh = SubResource("PlaneMesh_2jerx")
 
-[node name="CSGBox3D7" type="CSGBox3D" parent="RoomCeiling/TopEntrance/TopHull"]
+[node name="CSGBox3D7" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/TopHull"]
 transform = Transform3D(-0.000630244, -0.000962236, -1, 0.0010175, 0.999999, -0.000962873, 0.999999, -0.0010181, -0.000629263, -4.27938, 2.28498, -1.54959)
 material_override = ExtResource("9_hxpfh")
 use_collision = true
 size = Vector3(0.25, 5, 15.73)
 
-[node name="CSGBox3D8" type="CSGBox3D" parent="RoomCeiling/TopEntrance/TopHull"]
+[node name="CSGBox3D8" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/TopHull"]
 transform = Transform3D(-0.000630244, -0.000962236, -1, 0.0010175, 0.999999, -0.000962873, 0.999999, -0.0010181, -0.000629263, -4.28135, 2.28498, 1.57678)
 material_override = ExtResource("9_hxpfh")
 use_collision = true
 size = Vector3(0.25, 5, 15.73)
 
-[node name="CSGBox3D9" type="CSGBox3D" parent="RoomCeiling/TopEntrance/TopHull"]
+[node name="CSGBox3D9" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/TopHull"]
 transform = Transform3D(1, -0.00107398, -0.000630092, 0.00107213, 0.999996, -0.00294324, 0.000633252, 0.00294257, 0.999997, 3.737, 2.24687, 0.054544)
 material_override = ExtResource("9_hxpfh")
 use_collision = true
 size = Vector3(0.25, 5, 3.15387)
 
-[node name="CSGBox3D10" type="CSGBox3D" parent="RoomCeiling/TopEntrance/TopHull"]
+[node name="CSGBox3D10" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/TopHull"]
 transform = Transform3D(-0.00107282, -1, 0.00129546, 1, -0.00107413, -0.0010173, 0.00101869, 0.00129437, 1, -4.15839, 4.66584, 0.052032)
 material_override = ExtResource("9_hxpfh")
 use_collision = true
 size = Vector3(0.25, 15.9601, 3.15387)
 
-[node name="CSGBox3D11" type="CSGBox3D" parent="RoomCeiling/TopEntrance/TopHull"]
+[node name="CSGBox3D11" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/TopHull"]
 transform = Transform3D(1, -0.00107398, -0.000630092, 0.00107213, 0.999997, -0.00294324, 0.000633252, 0.00294257, 0.999997, -12.0749, 2.26209, 0.0445962)
 material_override = ExtResource("9_hxpfh")
 use_collision = true
 size = Vector3(0.25, 5, 3.15387)
 
-[node name="Opening" type="CSGBox3D" parent="RoomCeiling/TopEntrance/TopHull/CSGBox3D11"]
+[node name="Opening" type="CSGBox3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/TopHull/CSGBox3D11"]
 transform = Transform3D(-0.000633291, 0.00107212, 0.999998, -0.00294256, 0.999995, -0.00107398, -0.999995, -0.00294324, -0.000630136, 0.0234823, -1.05212, -0.0539727)
 operation = 2
 size = Vector3(2, 3.1, 1)
 
-[node name="pull_chain_light_socket" parent="RoomCeiling/TopEntrance" instance=ExtResource("10_megvm")]
+[node name="pull_chain_light_socket" parent="NavigationRegion3D/RoomCeiling/TopEntrance" instance=ExtResource("10_megvm")]
 transform = Transform3D(8, -7.10543e-09, -2.79397e-09, 8.70841e-09, 8, 1.30385e-08, 9.31323e-10, -1.30385e-08, 8, -5.93374, 4.55228, 0.000892162)
 
-[node name="lightbulb_01" parent="RoomCeiling/TopEntrance/pull_chain_light_socket" instance=ExtResource("11_81hwm")]
+[node name="lightbulb_01" parent="NavigationRegion3D/RoomCeiling/TopEntrance/pull_chain_light_socket" instance=ExtResource("11_81hwm")]
 transform = Transform3D(1, 6.98606e-11, 0, 2.16346e-10, -1, 8.69622e-08, -2.32831e-10, -8.69622e-08, -1, -4.30346e-05, -0.044717, -4.55379e-05)
 
-[node name="OmniLight3D" type="OmniLight3D" parent="RoomCeiling/TopEntrance/pull_chain_light_socket/lightbulb_01"]
+[node name="OmniLight3D" type="OmniLight3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/pull_chain_light_socket/lightbulb_01"]
 transform = Transform3D(0.125, -3.48663e-11, 3.20142e-10, -1.87619e-10, 0.125, -4.94765e-10, 0, -1.45519e-11, 0.125, 0.00297058, 0.17884, -0.000218987)
 light_color = Color(1, 0.772549, 0.678431, 1)
 light_energy = 7.002
@@ -651,7 +675,7 @@ shadow_blur = 2.01
 omni_range = 25.6973
 omni_attenuation = 1.6245
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="RoomCeiling/TopEntrance/pull_chain_light_socket/lightbulb_01"]
+[node name="OmniLight3D2" type="OmniLight3D" parent="NavigationRegion3D/RoomCeiling/TopEntrance/pull_chain_light_socket/lightbulb_01"]
 transform = Transform3D(0.125, -1.30385e-11, 3.20142e-10, -2.09447e-10, 0.125, -4.80213e-10, 0, -2.91038e-11, 0.125, 0.00309193, 0.0524839, -0.000347674)
 light_color = Color(1, 0.772549, 0.678431, 1)
 light_energy = 16.0
@@ -663,12 +687,13 @@ shadow_blur = 2.143
 omni_range = 25.6973
 omni_attenuation = 1.36604
 
-[node name="RoomFloor" type="CSGMesh3D" parent="." groups=["carpet"]]
+[node name="RoomFloor" type="CSGMesh3D" parent="NavigationRegion3D" groups=["carpet"]]
 use_collision = true
+collision_layer = 33
 mesh = SubResource("BoxMesh_0x37f")
 material = SubResource("StandardMaterial3D_xbrow")
 
-[node name="BottomEntrance" type="CSGBox3D" parent="RoomFloor" node_paths=PackedStringArray("opening", "area")]
+[node name="BottomEntrance" type="CSGBox3D" parent="NavigationRegion3D/RoomFloor" node_paths=PackedStringArray("opening", "area")]
 transform = Transform3D(0.999998, 0, -0.00174533, 0, 1, 0, 0.00174533, 0, 0.999999, 8.66592, -0.241772, -10.7503)
 operation = 2
 size = Vector3(7.22475, 1, 2.87646)
@@ -681,159 +706,159 @@ heightOffset = -9.75
 sidewaysOffset = -10.75
 area = NodePath("Area3D")
 
-[node name="Area3D" type="Area3D" parent="RoomFloor/BottomEntrance"]
+[node name="Area3D" type="Area3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance"]
 transform = Transform3D(0.000631032, -5.52258e-05, 1, 0.00192515, 0.999998, 5.40112e-05, -0.999999, 0.00192512, 0.000631136, 6.22548, -7.81094, 0.00211048)
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomFloor/BottomEntrance/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Area3D"]
 shape = SubResource("BoxShape3D_epid2")
 
-[node name="Staircase" type="Node3D" parent="RoomFloor/BottomEntrance"]
+[node name="Staircase" type="Node3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance"]
 transform = Transform3D(-0.000630245, -0.000962234, -1, 0.0010175, 0.999999, -0.000962872, 0.999999, -0.0010181, -0.000629263, 6.262, -10.193, -0.045)
 
-[node name="Staircase" type="Node3D" parent="RoomFloor/BottomEntrance/Staircase"]
+[node name="Staircase" type="Node3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Staircase"]
 transform = Transform3D(1, 0, 0, 2.32831e-10, 1, -1.18177e-10, 4.54747e-13, -4.34675e-12, 1, 0, 5.685, 5)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Staircase/Staircase"]
 transform = Transform3D(1, 0, -9.31323e-10, 3.49246e-10, 2.055, 1.08093e-09, 0, -6.27597e-09, 2, -0.0100012, -5.068, -4.941)
 material_override = SubResource("StandardMaterial3D_5uxpw")
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, -4.54747e-13, 0, 1, -8.38529e-12, 1.13687e-13, 2.35767e-10, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 material_override = ExtResource("2_updwm")
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 2.32831e-10, 1, -1.18177e-10, 4.54747e-13, -4.34675e-12, 1, 0, 0.200001, 0.2)
 size = Vector3(3, 0.2, 0.2)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Staircase/Staircase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -0.015, 2.4)
 material_override = ExtResource("9_hxpfh")
 use_collision = true
 size = Vector3(0.25, 10, 5)
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase"]
+[node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Staircase/Staircase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, -2.6)
 material_override = ExtResource("9_hxpfh")
 use_collision = true
 size = Vector3(0.25, 10, 5)
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase"]
+[node name="CSGBox3D4" type="CSGBox3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Staircase/Staircase"]
 transform = Transform3D(1, -3.49246e-10, -1.16415e-09, 5.82077e-10, 1, 1.50067e-11, 0, 0, 1, 1.62, -0.0149989, 2.4)
 material_override = ExtResource("9_hxpfh")
 use_collision = true
 size = Vector3(0.25, 10, 5)
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase"]
+[node name="CSGBox3D5" type="CSGBox3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Staircase/Staircase"]
 transform = Transform3D(1, -3.49246e-10, -1.39698e-09, 6.98492e-10, 1, 1.5234e-11, 0, 0, 1, 1.62, -0.027, -2.6)
 material_override = ExtResource("9_hxpfh")
 use_collision = true
 size = Vector3(0.25, 10, 5)
 
-[node name="CSGBox3D6" type="CSGBox3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase"]
+[node name="CSGBox3D6" type="CSGBox3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Staircase/Staircase"]
 transform = Transform3D(9.88133e-07, 5.46261e-05, -1, 0.00198037, 0.999998, 5.46273e-05, 0.999998, -0.00198037, 8.81962e-07, 0.0526762, 4.68019, -2.48251)
 material_override = ExtResource("9_hxpfh")
 use_collision = true
 size = Vector3(0.25, 0.635997, 3.0298)
 
-[node name="CSGBox3D7" type="CSGBox3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase"]
+[node name="CSGBox3D7" type="CSGBox3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Staircase/Staircase"]
 transform = Transform3D(9.91393e-07, 0.00294265, 0.999997, -0.000908863, 0.999995, -0.00294265, -1, -0.000908858, 3.66394e-06, 0.059268, -0.00296974, -4.9688)
 material_override = ExtResource("9_hxpfh")
 use_collision = true
 size = Vector3(0.25, 10, 3.33964)
 
-[node name="Opening" type="CSGBox3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D7" node_paths=PackedStringArray("opening")]
+[node name="Opening" type="CSGBox3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Staircase/Staircase/CSGBox3D7" node_paths=PackedStringArray("opening")]
 transform = Transform3D(-4.35975e-08, -2.11458e-10, 1, 2.32831e-10, 1, 4.718e-11, -1, 1.16415e-10, -4.35975e-08, -1.90735e-06, -3.3, 0)
 operation = 2
 size = Vector3(2, 3.1, 1)
@@ -843,38 +868,39 @@ notes = "normal"
 opening = NodePath("../../../../../../RoomOuter/WestEntrance")
 canLinkToOthers = true
 
-[node name="SlopeCollider" type="CSGMesh3D" parent="RoomFloor/BottomEntrance/Staircase/Staircase" groups=["wood"]]
+[node name="SlopeCollider" type="CSGMesh3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Staircase/Staircase" groups=["wood"]]
 transform = Transform3D(-5.19212e-08, -2.98023e-08, 1, -1.13137, 0.707107, -2.09548e-09, -1.13137, -0.707107, -4.37074e-08, 0, 0.12, -0.027)
 use_collision = true
+collision_layer = 33
 flip_faces = true
 mesh = SubResource("PlaneMesh_bgcol")
 
-[node name="Rim" type="Node3D" parent="RoomFloor/BottomEntrance"]
+[node name="Rim" type="Node3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance"]
 transform = Transform3D(0.9, 0, 2.32831e-10, 0, 0.9, 0, 0, 0, 0.9, -0.18459, 0, 0.000322342)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RoomFloor/BottomEntrance/Rim"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Rim"]
 transform = Transform3D(1, 0, 5.82077e-10, 0, 1, 0, -5.82077e-10, 0, 1, 0.147302, 0.513694, -0.000260353)
 material_override = SubResource("StandardMaterial3D_nkx4q")
 size = Vector3(7.99658, 0.322512, 3.50997)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="RoomFloor/BottomEntrance/Rim/CSGBox3D"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/RoomFloor/BottomEntrance/Rim/CSGBox3D"]
 transform = Transform3D(0.885, 0, 2.32831e-10, 0, 0.885, 0, -3.49246e-10, 0, 0.885, -0.261547, 0, 0.00045681)
 operation = 2
 size = Vector3(9.15417, 2.72291, 3.50997)
 
-[node name="RoomOuter" type="CSGBox3D" parent="."]
+[node name="RoomOuter" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(0.999999, 0.000962871, 0.000629219, -0.00096223, 0.999999, -0.0010181, -0.000630198, 0.00101749, 0.999999, 0, 5, 0)
 material_override = ExtResource("2_updwm")
 operation = 2
 use_collision = true
 size = Vector3(30, 10, 30)
 
-[node name="RoomInner" type="CSGBox3D" parent="RoomOuter"]
+[node name="RoomInner" type="CSGBox3D" parent="NavigationRegion3D/RoomOuter"]
 transform = Transform3D(1, -6.59384e-12, 0, -7.16227e-12, 1, -1.16415e-09, 0, 1.16415e-09, 1, -8.8816e-05, 0.0922995, -9.397e-05)
 operation = 2
 size = Vector3(29.5, 10.1979, 29.5)
 
-[node name="NorthEntrance" type="CSGBox3D" parent="RoomOuter" node_paths=PackedStringArray("opening", "area")]
+[node name="NorthEntrance" type="CSGBox3D" parent="NavigationRegion3D/RoomOuter" node_paths=PackedStringArray("opening", "area")]
 transform = Transform3D(1, -5.85487e-12, 0, -7.16227e-12, 1, -2.32831e-10, 0, 2.32831e-10, 1, 0, -3.75, 15)
 operation = 2
 size = Vector3(2, 4, 1)
@@ -885,14 +911,14 @@ opening = NodePath(".")
 canLinkToOthers = true
 area = NodePath("Area3D")
 
-[node name="Area3D" type="Area3D" parent="RoomOuter/NorthEntrance"]
+[node name="Area3D" type="Area3D" parent="NavigationRegion3D/RoomOuter/NorthEntrance"]
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomOuter/NorthEntrance/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/RoomOuter/NorthEntrance/Area3D"]
 shape = SubResource("BoxShape3D_epid2")
 
-[node name="SouthEntrance" type="CSGBox3D" parent="RoomOuter" node_paths=PackedStringArray("opening", "area")]
+[node name="SouthEntrance" type="CSGBox3D" parent="NavigationRegion3D/RoomOuter" node_paths=PackedStringArray("opening", "area")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.75, -15)
 operation = 2
 size = Vector3(2, 4, 1)
@@ -903,14 +929,14 @@ opening = NodePath(".")
 canLinkToOthers = true
 area = NodePath("Area3D")
 
-[node name="Area3D" type="Area3D" parent="RoomOuter/SouthEntrance"]
+[node name="Area3D" type="Area3D" parent="NavigationRegion3D/RoomOuter/SouthEntrance"]
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomOuter/SouthEntrance/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/RoomOuter/SouthEntrance/Area3D"]
 shape = SubResource("BoxShape3D_epid2")
 
-[node name="EastEntrance" type="CSGBox3D" parent="RoomOuter" node_paths=PackedStringArray("opening", "area")]
+[node name="EastEntrance" type="CSGBox3D" parent="NavigationRegion3D/RoomOuter" node_paths=PackedStringArray("opening", "area")]
 transform = Transform3D(-4.37722e-08, -5.74119e-12, 1, -1.16415e-10, 1, 6.53699e-12, -1, 1.16415e-10, -4.37722e-08, -15, -3.75, 0)
 operation = 2
 size = Vector3(2, 4, 1)
@@ -921,14 +947,14 @@ opening = NodePath(".")
 canLinkToOthers = true
 area = NodePath("Area3D")
 
-[node name="Area3D" type="Area3D" parent="RoomOuter/EastEntrance"]
+[node name="Area3D" type="Area3D" parent="NavigationRegion3D/RoomOuter/EastEntrance"]
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomOuter/EastEntrance/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/RoomOuter/EastEntrance/Area3D"]
 shape = SubResource("BoxShape3D_epid2")
 
-[node name="WestEntrance" type="CSGBox3D" parent="RoomOuter" node_paths=PackedStringArray("opening", "area")]
+[node name="WestEntrance" type="CSGBox3D" parent="NavigationRegion3D/RoomOuter" node_paths=PackedStringArray("opening", "area")]
 transform = Transform3D(-4.3714e-08, -5.74119e-12, 1, 0, 1, 6.59384e-12, -1, 1.16415e-10, -4.3714e-08, 15, -3.3, 0)
 operation = 2
 size = Vector3(2, 3.1, 1)
@@ -939,60 +965,55 @@ opening = NodePath(".")
 canLinkToOthers = true
 area = NodePath("Area3D")
 
-[node name="Area3D" type="Area3D" parent="RoomOuter/WestEntrance"]
+[node name="Area3D" type="Area3D" parent="NavigationRegion3D/RoomOuter/WestEntrance"]
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomOuter/WestEntrance/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/RoomOuter/WestEntrance/Area3D"]
 shape = SubResource("BoxShape3D_epid2")
 
-[node name="Wall1" type="CSGBox3D" parent="."]
+[node name="RoomBoundaries" type="Area3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+collision_mask = 17
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/RoomBoundaries"]
+shape = SubResource("BoxShape3D_yvmwy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="NavigationRegion3D/RoomBoundaries"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.90365, -9.82721, -10.6772)
+shape = SubResource("BoxShape3D_sr1bn")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="NavigationRegion3D/RoomBoundaries"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.70401, 4.93522, 8)
+shape = SubResource("BoxShape3D_sr1bn")
+
+[node name="Wall1" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.34558, 5, 6.06092)
 use_collision = true
 size = Vector3(25, 9.75, 1)
 material = ExtResource("2_updwm")
 
-[node name="Wall2" type="CSGBox3D" parent="."]
+[node name="Wall2" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.346, 5, -6)
 use_collision = true
 size = Vector3(25, 9.75, 1)
 material = ExtResource("2_updwm")
 
-[node name="Wall3" type="CSGBox3D" parent="."]
+[node name="Wall3" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.66303, 5, -1.94235)
 use_collision = true
 size = Vector3(15, 9.75, 1)
 material = ExtResource("2_updwm")
 
-[node name="RoomBoundaries" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
-collision_mask = 17
-input_ray_pickable = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomBoundaries"]
-shape = SubResource("BoxShape3D_yvmwy")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="RoomBoundaries"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.90365, -9.82721, -10.6772)
-shape = SubResource("BoxShape3D_sr1bn")
-
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="RoomBoundaries"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.70401, 4.93522, 8)
-shape = SubResource("BoxShape3D_sr1bn")
-
-[node name="Gate Of Horn" parent="." instance=ExtResource("16_b8da5")]
+[node name="Gate Of Horn" parent="NavigationRegion3D" instance=ExtResource("16_b8da5")]
 transform = Transform3D(-1, 0, -8.9407e-08, 0, 1, 0, 8.9407e-08, 0, -1, 12.491, 2.3, 6.095)
-
-[node name="Gate Of Ivory" parent="." instance=ExtResource("17_f2s74")]
-transform = Transform3D(-1, 0, -8.9407e-08, 0, 1, 0, 8.9407e-08, 0, -1, 12.491, 2.3, 6.095)
-
-[node name="NB" parent="." instance=ExtResource("24_0q04f")]
-transform = Transform3D(-3.49691e-07, 0, -8, 0, 8, 0, 8, 0, -3.49691e-07, 14.7427, 4.40682, -10.6426)
 visible = false
 
-[node name="fancy_picture_frame_01_canvas" parent="NB" index="1"]
-surface_material_override/0 = SubResource("StandardMaterial3D_1y8bm")
+[node name="Gate Of Ivory" parent="NavigationRegion3D" instance=ExtResource("17_f2s74")]
+transform = Transform3D(-1, 0, -8.9407e-08, 0, 1, 0, 8.9407e-08, 0, -1, 12.491, 2.3, 6.095)
+visible = false
 
-[connection signal="body_entered" from="RoomBoundaries" to="." method="_on_room_boundaries_body_entered"]
+[connection signal="body_entered" from="NavigationRegion3D/RoomBoundaries" to="." method="_on_room_boundaries_body_entered"]
 
 [editable path="NB"]

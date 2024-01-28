@@ -10,6 +10,7 @@ var runToggle = 1
 var moveDirection = Vector3.ZERO
 var velocityLast
 var interacting = false
+@export var inDungeon: bool
 @export var camera: Camera3D
 @export var camContainer: Node3D
 @export var stats: Node
@@ -165,27 +166,21 @@ func animate(delta):
 func animateRemote():
 	animator.play("root|"+stats.baseAnimation,3,stats.animSpeed,false)
 
-func getFloorType(floor):
-	if floor.is_in_group("carpet"):
-		return "carpet"
-	if floor.is_in_group("hard") or floor.is_in_group("wood"):
-		return "hard"
-	else:
-		return "silent"
-
 func _on_left_footstep_body_entered(body):
-	var family = getFloorType(body)
+	var family = Utils.getFloorType(body)
 	if family == "silent":
 		return
 	var roll = rng.randi_range(1,9)
 	$LeftFootstep.stream = load("res://Assets/SFX/footsteps/"+family+"/"+str(roll)+".mp3")
-	$LeftFootstep.play()
+	if !$LeftFootstep.is_playing():
+		$LeftFootstep.play()
 
 
 func _on_right_footstep_body_entered(body):
-	var family = getFloorType(body)
+	var family = Utils.getFloorType(body)
 	if family == "silent":
 		return
 	var roll = rng.randi_range(1,9)
 	$RightFootstep.stream = load("res://Assets/SFX/footsteps/"+family+"/"+str(roll)+".mp3")
-	$RightFootstep.play()
+	if !$RightFootstep.is_playing():
+		$RightFootstep.play()

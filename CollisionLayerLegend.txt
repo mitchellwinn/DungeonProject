@@ -1,0 +1,11 @@
+Layers
+	1:	General non-passable bodies, floor, walls, etc
+	5: Players
+	6: Floors only
+	7:	Breaks that create empty spaces in walls
+
+
+Masks
+	1: Entities or Players that must collide with solid objects
+	6: Feet collision bodies of players and entities to play footstep sounds
+	7: Navigation obstacle chunk associated with part of a wall

@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=6 format=3 uid="uid://c2bxgqo3ovh7w"]
+[gd_resource type="AudioBusLayout" load_steps=7 format=3 uid="uid://c2bxgqo3ovh7w"]
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_mp2s3"]
 resource_name = "Reverb"
@@ -22,6 +22,9 @@ ratio = 8.2
 gain = 4.6
 
 [sub_resource type="AudioEffectPhaser" id="AudioEffectPhaser_gbnua"]
+resource_name = "Phaser"
+
+[sub_resource type="AudioEffectPhaser" id="AudioEffectPhaser_y1yha"]
 resource_name = "Phaser"
 
 [resource]
@@ -53,3 +56,11 @@ bus/3/volume_db = 0.0
 bus/3/send = &"Master"
 bus/3/effect/0/effect = SubResource("AudioEffectPhaser_gbnua")
 bus/3/effect/0/enabled = true
+bus/4/name = &"Reptal"
+bus/4/solo = false
+bus/4/mute = false
+bus/4/bypass_fx = false
+bus/4/volume_db = 0.0
+bus/4/send = &"Master"
+bus/4/effect/0/effect = SubResource("AudioEffectPhaser_y1yha")
+bus/4/effect/0/enabled = true

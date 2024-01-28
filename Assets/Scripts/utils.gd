@@ -14,3 +14,11 @@ func getInputDeviceList():
 
 func setVolumetricFogDensity(density):
 	targetFogDensity = density
+
+func getFloorType(floor):
+	if floor.is_in_group("carpet"):
+		return "carpet"
+	if floor.is_in_group("hard") or floor.is_in_group("wood"):
+		return "hard"
+	else:
+		return "silent"

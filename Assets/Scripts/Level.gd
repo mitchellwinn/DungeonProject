@@ -40,4 +40,5 @@ func _exit_tree():
 
 func _on_boundaries_body_entered(body):
 	if body == GameManager.activePlayer:
+		GameManager.activePlayer.inDungeon = false
 		Utils.setVolumetricFogDensity(.07)

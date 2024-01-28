@@ -26,9 +26,14 @@ var complete = false
 @export var good_idea = preload("res://Assets/Prefabs/good_idea.tscn")
 @export var bad_idea = preload("res://Assets/Prefabs/bad_idea.tscn")
 
+var maxPowerLevel = 0
+var currentPowerLevel = 0
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if is_multiplayer_authority():
+		$Timer.timeout.connect(spawnEntity)
 	gateOfHornPortal = get_parent().get_node("Gate Of Horn").portal
 	gateOfIvoryPortal = get_parent().get_node("Gate Of Ivory").portal
 	GameManager.dungeon = self
@@ -37,16 +42,74 @@ func _ready():
 	if GameManager.network.dungeonLive and (!GameManager.generatingDungeon or GameManager.dungeonExists):
 		GameManager.dungeon.generationMain()
 	pass
-		
+
+func spawnEntity():
+	var space_state = GameManager.activePlayer.get_world_3d().direct_space_state
+	for player in GameManager.players.get_children():
+		print("Trying to spawn entity for "+player.name)
+		if !player.inDungeon:
+			print(player.name+" is not in the dungeon so they cannot spawn entities")
+			continue
+		print("player is in the dungeon")
+		if rng.randf_range(0, GameManager.players.get_child_count()) < GameManager.players.get_child_count()*.75:
+			var entity = decideEntityType()
+			entity.visible = false
+			add_child(entity)
+			print("entity decided")
+			#await get_tree().physics_frame
+			if currentPowerLevel+entity.powerLevel>maxPowerLevel:
+				print("entity freed because it exceeded the power limit")
+				entity.queue_free()
+				break
+			var direction = Vector3(rng.randf_range(-1,1),0,rng.randf_range(-1,1))
+			entity.global_position = player.global_position + direction*20
+			while true:
+				print("rerolling entity position")
+				direction = Vector3(rng.randf_range(-1,1),0,rng.randf_range(-1,1))
+				entity.global_position = player.global_position + direction*20
+				await get_tree().physics_frame
+				if !entity.get_node("RayCast3D").is_colliding():
+					print("Entity spawned out of bounds!")
+					continue
+				for player_ in GameManager.players.get_children():
+					var occlusionCast = PhysicsRayQueryParameters3D.create(player_.camera.global_position,entity.global_position)
+					occlusionCast.collide_with_areas = true
+					var result = space_state.intersect_ray(occlusionCast)
+					if result:
+						if result.collider == entity:
+							if (entity.global_position-player_.camera.global_position).normalized().dot(player_.camera.basis.z)>0: #
+								print("Entity was seen!")
+								continue
+				break
+			currentPowerLevel+=entity.powerLevel
+			entity.visible = true
+			print("entity successfully spawned")
+		else:
+			print("did not roll an entity")
+	$Timer.start(60)
+	
+func decideEntityType():
+	var entity = preload("res://Assets/Enemies/Reptal.tscn")
+	var entityToSpawn = entity.instantiate()
+	return entityToSpawn
+
 func generationMain():
 	GameManager.generatingDungeon = true
 	print("Beginning dungeon generation...")
 	await generateStart()
-	await removeLooseExits()
+	await finalizeDungeon()
+	dungeonPowerLevel()
 	print ("generation complete!")
 	GameManager.dungeonExists = true
+	$Timer.start(60)
 	GameManager.generatingDungeon = false
-	
+
+func dungeonPowerLevel():
+	var maxPower = 0
+	maxPower += GameManager.network.badModifier
+	maxPower +=GameManager.network.goodModifier/2
+	maxPowerLevel = maxPower
+
 func delete():
 	GameManager.dungeonExists = false
 	gateOfHornPortal.delink()
@@ -56,6 +119,7 @@ func delete():
 		rooms.erase(room)
 		room.queue_free()
 	rooms.clear()
+	$Timer.stop()
 
 func portalPopulation(room):
 	if room.nestLevel > nestLimit*.75 and !ivoryConnection and room.activeEntranceCount==1:
@@ -74,15 +138,15 @@ func ideaPopulation(room):
 		var idea = decideIdeaType()
 		self.add_child(idea)
 		idea.global_position = room.global_position
-		idea.global_position.x += rng.randf_range(-room.get_node("RoomOuter").size.x/2+1,room.get_node("RoomOuter").size.x/2-1)
-		idea.global_position.z += rng.randf_range(-room.get_node("RoomOuter").size.z/2+1,room.get_node("RoomOuter").size.z/2-1)
+		idea.global_position.x += rng.randf_range(-room.get_node("NavigationRegion3D/RoomOuter").size.x/2+1,room.get_node("NavigationRegion3D/RoomOuter").size.x/2-1)
+		idea.global_position.z += rng.randf_range(-room.get_node("NavigationRegion3D/RoomOuter").size.z/2+1,room.get_node("NavigationRegion3D/RoomOuter").size.z/2-1)
 		idea.global_position.y+=2
 		print(idea.global_position)
 		await get_tree().physics_frame
 		while idea.get_node("area").get_overlapping_bodies().size()>0:
 			idea.global_position = room.global_position
-			idea.global_position.x += rng.randf_range(-room.get_node("RoomOuter").size.x/2+1,room.get_node("RoomOuter").size.x/2-1)
-			idea.global_position.z += rng.randf_range(-room.get_node("RoomOuter").size.z/2+1,room.get_node("RoomOuter").size.z/2-1)
+			idea.global_position.x += rng.randf_range(-room.get_node("NavigationRegion3D/RoomOuter").size.x/2+1,room.get_node("NavigationRegion3D/RoomOuter").size.x/2-1)
+			idea.global_position.z += rng.randf_range(-room.get_node("NavigationRegion3D/RoomOuter").size.z/2+1,room.get_node("NavigationRegion3D/RoomOuter").size.z/2-1)
 			idea.global_position.y+=2
 			await get_tree().physics_frame
 
@@ -192,7 +256,7 @@ func generateRoomChild(parentRoom ,parentEntrance,nestLevel,retry):
 		rooms.erase(roomInstance)
 		roomInstance.queue_free()
 		await get_tree().physics_frame
-		overlappingArea.get_parent().linkRooms(parentRoom,parentEntrance)
+		overlappingArea.get_parent().get_parent().linkRooms(parentRoom,parentEntrance)
 		return
 	####################################
 	#print("at "+str(roomInstance.global_position))
@@ -204,7 +268,7 @@ func generateRoomChild(parentRoom ,parentEntrance,nestLevel,retry):
 	return 0
 	
 #important function
-func removeLooseExits():
+func finalizeDungeon():
 	await get_tree().physics_frame
 	#print("Attempting to remove loose exits from entrances that lead to nowhere.")
 	var i = 0
@@ -223,6 +287,7 @@ func removeLooseExits():
 		portalPopulation(rooms[i])
 		if is_multiplayer_authority():
 			ideaPopulation(rooms[i])
+		rooms[i].get_node("NavigationRegion3D").bake_navigation_mesh()
 		i+=1
 
 func entranceOverlappingNothing(entrance):

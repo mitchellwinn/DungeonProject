@@ -3,7 +3,7 @@ extends Node3D
 @export var ideaType: String
 @export var collector: Node3D
 var orbitAngle = 0
-var targetHeight = 0
+var targetHeight = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

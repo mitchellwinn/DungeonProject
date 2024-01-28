@@ -114,7 +114,7 @@ func determineWalls():
 func linkRooms(parentRoom,parentEntrance):
 	#print("Attempting to link rooms...")
 	for entrance in entrances:
-		if (entrance.opening.global_position-parentEntrance.opening.global_position).length()>1.5:
+		if (entrance.opening.global_position-parentEntrance.opening.global_position).length()>.5:
 			continue
 		match entrance.direction:
 				"north":
@@ -294,4 +294,5 @@ func regroupRooms():
 
 func _on_room_boundaries_body_entered(body):
 	if body == GameManager.activePlayer:
+		GameManager.activePlayer.inDungeon = true
 		Utils.setVolumetricFogDensity(fogAmt*.8+.2*GameManager.network.dreamTimer/GameManager.network.dreamLength)

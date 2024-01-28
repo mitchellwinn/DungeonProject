@@ -43,6 +43,10 @@ properties/4/path = NodePath("stats:animSpeed")
 properties/4/spawn = true
 properties/4/sync = true
 properties/4/watch = false
+properties/5/path = NodePath(".:inDungeon")
+properties/5/spawn = true
+properties/5/sync = true
+properties/5/watch = false
 
 [sub_resource type="GDScript" id="GDScript_sns15"]
 script/source = "extends Node
@@ -157,24 +161,26 @@ animator = NodePath("Oneiroi/AnimationPlayer")
 headSocket = NodePath("Oneiroi/RootNode/root/Skeleton3D/HeadSocket/Offset")
 
 [node name="CamContainer" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25588, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.999995, -0.00301941, 0, 0.00301941, 0.999995, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(0.999995, -0.00301941, 0, 0.00301941, 0.999995, 0, 0, 0, 1, 0, 1.25588, 0)
 shape = SubResource("CapsuleShape3D_xyitk")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.467678, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.72356, 0)
 light_energy = 0.1
 light_cull_mask = 4294967283
 omni_range = 12.17
 omni_attenuation = 0.406126
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.63502, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.8909, 0)
 light_energy = 1.35
 light_cull_mask = 4294967283
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25588, 0)
 visible = false
 size = Vector3(0.75, 2, 0.75)
 
@@ -182,7 +188,7 @@ size = Vector3(0.75, 2, 0.75)
 replication_config = SubResource("SceneReplicationConfig_q5w5a")
 
 [node name="NameTag" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.63301, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.88889, 0)
 layers = 4
 visibility_range_begin_margin = 9.0
 visibility_range_end = 10.0
@@ -194,7 +200,7 @@ font_size = 62
 script = SubResource("GDScript_sns15")
 
 [node name="Oneiroi" parent="." instance=ExtResource("3_kqv82")]
-transform = Transform3D(0.38, 0, 0, 0, 0.38, 0, 0, 0, 0.38, 0, -1.25, 0)
+transform = Transform3D(0.38, 0, 0, 0, 0.38, 0, 0, 0, 0.38, 0, 0.00587857, 0)
 
 [node name="Skeleton3D" parent="Oneiroi/RootNode/root" index="0"]
 bones/0/position = Vector3(0.478434, 1.25773, 1.2739)
@@ -351,7 +357,7 @@ transform = Transform3D(1, 0, -9.31323e-10, 2.98023e-08, 1, 0, 4.65661e-09, 0, 1
 shape = SubResource("BoxShape3D_jjbi7")
 
 [node name="LeftFootstep" type="AudioStreamPlayer3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1.20258, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.0532986, 0)
 stream = SubResource("AudioStream_xt2ru")
 volume_db = -30.0
 max_distance = 20.0
@@ -360,7 +366,7 @@ emission_angle_enabled = true
 emission_angle_degrees = 90.0
 
 [node name="RightFootstep" type="AudioStreamPlayer3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1.20258, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.0532986, 0)
 stream = SubResource("AudioStream_xt2ru")
 volume_db = -30.0
 max_distance = 20.0
@@ -369,6 +375,7 @@ emission_angle_enabled = true
 emission_angle_degrees = 90.0
 
 [node name="VOIP" type="Node3D" parent="." node_paths=PackedStringArray("input", "output", "ceilingRay")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25588, 0)
 script = ExtResource("10_ap7iq")
 input = NodePath("MicInput")
 output = NodePath("VoiceOutput")
@@ -389,7 +396,7 @@ max_distance = 20.0
 bus = &"Physical"
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.999803, 6.8719e-05, 0.0198502, 0.000819077, 0.999285, 0.0377954, -0.0198334, 0.0378042, -0.999088, -2.41937e-06, 1.06882, -0.161261)
+transform = Transform3D(-0.999803, 6.8719e-05, 0.0198502, 0.000819077, 0.999285, 0.0377954, -0.0198334, 0.0378042, -0.999088, -2.41937e-06, 2.3247, -0.161261)
 cull_mask = 524283
 current = true
 far = 500.0
@@ -400,6 +407,7 @@ target_position = Vector3(0, -2, 0)
 collision_mask = 256
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25588, 0)
 target_position = Vector3(0, 50, 0)
 debug_shape_custom_color = Color(1, 0, 0, 1)
 
@@ -663,8 +671,6 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 25
 theme_override_font_sizes/font_size = 56
 text = "ACTIVATE GATES"
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 
 [connection signal="body_entered" from="Oneiroi/RootNode/root/Skeleton3D/LeftFootSocket/Offset/LeftFootstep" to="." method="_on_left_footstep_body_entered"]
 [connection signal="body_entered" from="Oneiroi/RootNode/root/Skeleton3D/RightFootSocket/Offset/RightFootstep" to="." method="_on_right_footstep_body_entered"]
