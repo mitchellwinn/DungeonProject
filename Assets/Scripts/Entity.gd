@@ -1,10 +1,16 @@
 extends CharacterBody3D
 class_name Entity
 
+var prioList: Array
+var carrying: CharacterBody3D
+
 @export var powerLevel: int
 @export var animator: AnimationPlayer
 @export var stats: Node
 @export var stateMachine: Node
+@export var vocalsDirectory: String
+@export var screamDirectory: String
+@export var offensiveDirectory: String
 
 var rng = RandomNumberGenerator.new()
 
@@ -26,22 +32,32 @@ func animate(delta):
 	if !stateMachine.current_state:
 		return
 	if is_on_floor():
-		if stateMachine.current_state is EntityRoam:
+		#Chase
+		if stateMachine.current_state is EntityChase:
 			if velocity.length()>2:
-				stats.baseAnimation = "Roam"
-				stats.animSpeed = velocity.length()/3
-			elif velocity.length()>.5:
+				stats.baseAnimation = "Run"
+				stats.animSpeed = .5+float(velocity.length())/2
+			elif velocity.length()>.05:
 				stats.baseAnimation = "Investigate"
 				stats.animSpeed = velocity.length()/3
 			else:
 				stats.baseAnimation = "Idle"
 				stats.animSpeed = 1
+		#Idle
 		elif  stateMachine.current_state is EntityIdle:
-			if velocity.length()>.5:
+			if velocity.length()>.01:
+				stats.baseAnimation = "Investigate"
+				stats.animSpeed = .5+float(velocity.length())/2
+			else:
+				stats.baseAnimation = "Idle"
+				stats.animSpeed = 1
+		#Scan
+		elif  stateMachine.current_state is EntityScan:
+			if velocity.length()>.05:
 				stats.baseAnimation = "Investigate"
 				stats.animSpeed = velocity.length()/2
 			else:
-				stats.baseAnimation = "Idle"
+				stats.baseAnimation = "Scan"
 				stats.animSpeed = 1
 	else:
 		pass
@@ -70,3 +86,14 @@ func _on_right_footstep_body_entered(body):
 	$RightFootstep.stream = load("res://Assets/SFX/footsteps/"+family+"/"+str(roll)+".mp3")
 	if !$RightFootstep.is_playing():
 		$RightFootstep.play()
+
+
+@rpc("any_peer" , "call_local")
+func play_sound(streamer, sound, pitch):
+	streamer = get_node(streamer)
+	streamer.stream = load(sound)
+	streamer.pitch_scale = pitch
+	streamer.play()
+	
+
+	

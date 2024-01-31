@@ -14,14 +14,12 @@ func _ready():
 	add_player(1)#host
 		
 func add_player(id: int):
-	while !GameManager.dungeonExists:
-		await get_tree().physics_frame
-		break
 	var player = GameManager.player.instantiate()
 	player.name = str(id)
 	call_deferred("add_child",player)
 	print ("Spawned client player "+player.name)
 	player.stats.ign = GameManager.activePlayerName
+	player.stats.id = id
 	#player.global_position = Vector3(0,5,0)
 	$Players.add_child(player)
 

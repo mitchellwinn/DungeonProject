@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 const MOVE_SPEED = 1
 const MAX_SPEED = 20
+const JUMP_POWER = 10
 const FALL_SPEED = 50
 const TURN_SPEED = 1
 const DRAG = 10
@@ -10,6 +11,7 @@ var runToggle = 1
 var moveDirection = Vector3.ZERO
 var velocityLast
 var interacting = false
+var grappled = false
 @export var inDungeon: bool
 @export var camera: Camera3D
 @export var camContainer: Node3D
@@ -17,6 +19,7 @@ var interacting = false
 @export var skeleton: Skeleton3D
 @export var animator: AnimationPlayer
 @export var headSocket: Node3D
+@export var torsoSocket: BoneAttachment3D
 var rng
 
 func _ready():
@@ -53,6 +56,10 @@ func _process(delta):
 	$NameTag.global_transform.basis = get_viewport().get_camera_3d().global_transform.basis
 
 func _physics_process(delta):
+	if stats.bleeding:
+		bleedAnimate(true)
+	else:
+		bleedAnimate(false)
 	if !is_multiplayer_authority():
 		animateRemote()
 		return
@@ -63,6 +70,7 @@ func _physics_process(delta):
 			Input.MOUSE_MODE_VISIBLE:
 				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	checkRun()
+	jump()
 	gravity(delta)
 	if playerFocus() and fullyActionable():
 		moveInputs(delta)
@@ -75,7 +83,12 @@ func _physics_process(delta):
 	move_and_slide()
 	mouseDelta = Vector2.ZERO
 	animate(delta)
-	
+
+func bleedAnimate(on):
+	torsoSocket.get_node("Blood1").emitting = on
+	torsoSocket.get_node("Blood2").emitting = on
+	torsoSocket.get_node("Blood3").emitting = on
+
 func checkInteract():
 	if interacting:
 		return
@@ -98,9 +111,14 @@ func checkRun():
 		runToggle = 1.75
 	else:
 		runToggle = 1
+
+func jump():
+	if is_on_floor() and Input.is_action_pressed("jump"):
+		velocity.y+=JUMP_POWER
 		
+
 func gravity(delta):
-	if !is_on_floor():
+	if !is_on_floor() and !grappled:
 		velocity.y-=delta*FALL_SPEED
 		
 func moveInputs(delta):
@@ -134,13 +152,16 @@ func playerFocus():
 				return false
 	
 func fullyActionable():
-	if !interacting and !GameManager.generatingDungeon:
+	if !interacting and !GameManager.generatingDungeon and !grappled:
 		return true
 	
 func animate(delta):
 	camera.global_position = camera.global_position.lerp(headSocket.global_position,delta*60)
 	#camContainer.global_rotation = camContainer.global_rotation.lerp(headSocket.global_rotation,delta*20)
-	if is_on_floor():
+	if grappled:
+		stats.animSpeed = 2
+		stats.baseAnimation = "flailing"
+	elif is_on_floor():
 		if velocity.length()>MOVE_SPEED*1 and runToggle>1:
 			if basis.z.dot(velocity.normalized())>0:
 				stats.animSpeed = velocity.length()/3
@@ -159,7 +180,12 @@ func animate(delta):
 			stats.baseAnimation = "idle"
 			stats.animSpeed = 1
 	else:
-		pass
+		if velocity.y>=0:
+			stats.animSpeed = 1
+			stats.baseAnimation = "jump"
+		else:
+			stats.animSpeed = 1
+			stats.baseAnimation = "fall"
 	animator.play("root|"+stats.baseAnimation,3,stats.animSpeed,false)
 	#print(baseAnimation)
 

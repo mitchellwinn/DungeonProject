@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dww5rwyjndisu"]
+[gd_scene load_steps=3 format=3 uid="uid://bqscug5fpud2n"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/DungeonGenerator.gd" id="1_briko"]
 
