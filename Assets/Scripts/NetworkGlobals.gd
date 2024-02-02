@@ -75,6 +75,8 @@ func rpcActivate(goodModifier,badModifier):
 
 @rpc ("any_peer","call_local", "reliable")	
 func rpcAbort(newQuota):
+	for entity in GameManager.entities.get_children():
+		entity.queue_free()
 	resetIdeaDeposit.emit()
 	GameManager.network.ideaQuota = newQuota
 	for idea in GameManager.dreamDilator.ideas:

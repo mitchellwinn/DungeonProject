@@ -54,7 +54,7 @@ func spawnEntity():
 		if rng.randf_range(0, GameManager.players.get_child_count()) < GameManager.players.get_child_count()*.75:
 			var entity = decideEntityType()
 			entity.visible = false
-			add_child(entity)
+			GameManager.entities.add_child(entity)
 			print("entity decided")
 			#await get_tree().physics_frame
 			if currentPowerLevel+entity.powerLevel>maxPowerLevel:

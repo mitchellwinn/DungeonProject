@@ -53,8 +53,6 @@ func _process(delta):
 		return
 	$NameTag.text = stats.ign
 	$NameTag.global_transform.basis = get_viewport().get_camera_3d().global_transform.basis
-
-func _physics_process(delta):
 	if stats.bleeding and !stats.bleedingLast:
 		bleedAnimate(true)
 	elif !stats.bleeding and stats.bleedingLast:
@@ -62,6 +60,8 @@ func _physics_process(delta):
 	if !is_multiplayer_authority():
 		animateRemote()
 		return
+
+func _physics_process(delta):
 	if Input.is_action_just_pressed("tab") and GameManager.network.dreamDilatorInUse == "":
 		match Input.get_mouse_mode():
 			Input.MOUSE_MODE_CAPTURED:
