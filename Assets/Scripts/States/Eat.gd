@@ -7,15 +7,14 @@ var scanTimer = 0
 func Enter():
 	entity.play_sound("Eat","res://Assets/SFX/dramaticStab.mp3",rng.randf_range(.9,1.1))
 	entity.carrying.set_multiplayer_authority(1)
-	await get_tree().physics_frame
 	randomize_wander()
 	print("enter eat state")
-	entity.carrying.grappled = true
+	entity.carrying.stats.grappled = true
 	entity.get_node("Offensive").stop()
 	entity.carrying.stats.bleeding = true
 	
 func Exit():
-	entity.carrying.grappled = false
+	entity.carrying.stats.grappled = false
 	entity.carrying.stats.bleeding = false
 	entity.carrying.set_multiplayer_authority(entity.carrying.stats.id)
 
@@ -32,5 +31,22 @@ func Physics_Update(delta: float):
 		entity.basis = entity.basis.slerp(target_basis, delta*10)
 		entity.velocity = entity.velocity.lerp(Vector3(direction.x,entity.velocity.y,direction.z)*move_speed,delta*4)
 
-func bite():
-	entity.carrying.stats.damage(5)
+func randomize_wander():
+	if randf_range(-1,1)>-.2:
+		random_spot = entity.global_position+Vector3(randf_range(-20,20), 0, randf_range(-20,20))
+		entity.get_node("RayCast3D").global_position = random_spot
+		await get_tree().physics_frame
+		if !entity.get_node("RayCast3D").is_colliding():
+			randomize_wander()
+			return
+	else:
+		if !get_parent().current_state is EntityEat:
+			Transitioned.emit(self, "scan")
+			return
+		random_spot = entity.global_position
+	bite(5)
+	vocalIndex = rng.randi_range(1,8)
+	wander_time = randf_range(3,8)
+
+func bite(dmg):
+	entity.carrying.stats.damage(dmg)

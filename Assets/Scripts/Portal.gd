@@ -20,11 +20,15 @@ func _ready():
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+func _process(delta):
 	if targetPortal and GameManager.activePlayer and on and GameManager.dungeonExists:
 		if (global_position - GameManager.activePlayer.camera.global_position).length()>5:
 			targetPortal.camera.current = false#can't see to faraway camera
+			get_child(0).visible = false
+			get_child(1).visible = true
 		else:
+			get_child(0).visible = true
+			get_child(1).visible = true
 			targetPortal.camera.current = true
 			targetPortal.camera.environment.volumetric_fog_density = lerp(get_viewport().world_3d.environment.volumetric_fog_density, Utils.targetFogDensity,delta/5)
 		#print(gate.name+"|"+targetPortal.gate.name)
@@ -34,8 +38,6 @@ func _physics_process(delta):
 		#print(gate.name+"|"+"gate pos: "+str(gate.global_position)+"\ntarget gate camera pos: "+str(targetPortal.camera.global_position))
 		get_child(0).material.set_shader_parameter("texture_albedo",targetPortal.view.get_texture())
 		get_child(1).material.set("albedo_texture", GameManager.portalStatic.get_texture())
-		get_child(0).visible = true
-		get_child(1).visible = true
 	elif !on:
 		get_child(0).visible = false
 		get_child(1).visible = false

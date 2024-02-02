@@ -133,7 +133,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_5fr25")
 surface_material_override/1 = SubResource("StandardMaterial3D_jcy15")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Reptal/RootNode/root/Skeleton3D" index="1"]
-transform = Transform3D(0.999994, -0.000695892, -0.0034516, 2.12213e-05, -0.979066, 0.203544, -0.00352099, -0.203543, -0.97906, 0.00178014, -0.32214, 1.58635)
+transform = Transform3D(0.999994, -0.000695897, -0.00345159, 2.12104e-05, -0.979066, 0.203542, -0.00352099, -0.203541, -0.97906, 0.00178014, -0.322139, 1.58635)
 bone_name = "head.x"
 bone_idx = 4
 
@@ -214,6 +214,7 @@ emission_angle_degrees = 90.0
 
 [node name="Vocals" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.7418, 1.19848e-07)
+visible = false
 stream = SubResource("AudioStream_prt2l")
 volume_db = -10.0
 max_distance = 20.0

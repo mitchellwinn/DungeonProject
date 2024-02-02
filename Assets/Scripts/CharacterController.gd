@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 const MOVE_SPEED = 1
 const MAX_SPEED = 20
-const JUMP_POWER = 10
+const JUMP_POWER = 15
 const FALL_SPEED = 50
 const TURN_SPEED = 1
 const DRAG = 10
@@ -11,7 +11,6 @@ var runToggle = 1
 var moveDirection = Vector3.ZERO
 var velocityLast
 var interacting = false
-var grappled = false
 @export var inDungeon: bool
 @export var camera: Camera3D
 @export var camContainer: Node3D
@@ -20,7 +19,7 @@ var grappled = false
 @export var animator: AnimationPlayer
 @export var headSocket: Node3D
 @export var torsoSocket: BoneAttachment3D
-var rng
+var rng 
 
 func _ready():
 	velocityLast = velocity
@@ -56,9 +55,9 @@ func _process(delta):
 	$NameTag.global_transform.basis = get_viewport().get_camera_3d().global_transform.basis
 
 func _physics_process(delta):
-	if stats.bleeding:
+	if stats.bleeding and !stats.bleedingLast:
 		bleedAnimate(true)
-	else:
+	elif !stats.bleeding and stats.bleedingLast:
 		bleedAnimate(false)
 	if !is_multiplayer_authority():
 		animateRemote()
@@ -118,7 +117,7 @@ func jump():
 		
 
 func gravity(delta):
-	if !is_on_floor() and !grappled:
+	if !is_on_floor() and !stats.grappled:
 		velocity.y-=delta*FALL_SPEED
 		
 func moveInputs(delta):
@@ -152,13 +151,13 @@ func playerFocus():
 				return false
 	
 func fullyActionable():
-	if !interacting and !GameManager.generatingDungeon and !grappled:
+	if !interacting and !GameManager.generatingDungeon and !stats.grappled:
 		return true
 	
 func animate(delta):
 	camera.global_position = camera.global_position.lerp(headSocket.global_position,delta*60)
 	#camContainer.global_rotation = camContainer.global_rotation.lerp(headSocket.global_rotation,delta*20)
-	if grappled:
+	if stats.grappled:
 		stats.animSpeed = 2
 		stats.baseAnimation = "flailing"
 	elif is_on_floor():

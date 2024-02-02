@@ -63,112 +63,10 @@ properties/8/path = NodePath("stats:current_hp")
 properties/8/spawn = true
 properties/8/sync = true
 properties/8/watch = false
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_uko0c"]
-frequency = 0.0145
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qysvq"]
-noise = SubResource("FastNoiseLite_uko0c")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_r6fya"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ijvkh"]
-noise = SubResource("FastNoiseLite_r6fya")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_kuy5k"]
-noise_type = 4
-seed = 435
-frequency = 0.1054
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ybac8"]
-noise = SubResource("FastNoiseLite_kuy5k")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e4bru"]
-albedo_color = Color(0.980392, 0, 0.372549, 1)
-metallic_specular = 0.0
-roughness = 0.37
-roughness_texture = SubResource("NoiseTexture2D_ybac8")
-normal_enabled = true
-normal_scale = -0.37
-normal_texture = SubResource("NoiseTexture2D_ijvkh")
-heightmap_scale = 5.125
-heightmap_texture = SubResource("NoiseTexture2D_qysvq")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3owbp"]
-resource_name = "Trim.001"
-diffuse_mode = 3
-specular_mode = 1
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("3_taiqw")
-metallic_specular = 0.66
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ywer4"]
-resource_name = "Trim.001"
-diffuse_mode = 3
-specular_mode = 1
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("8_st3tt")
-metallic_specular = 0.66
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iyoc3"]
-resource_name = "Trim.001"
-diffuse_mode = 3
-specular_mode = 1
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("9_xjnfd")
-metallic_specular = 0.66
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wsxi3"]
-resource_name = "Trim.001"
-diffuse_mode = 3
-specular_mode = 1
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("10_3h28f")
-metallic_specular = 0.66
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_jjbi7"]
-size = Vector3(0.511855, 1, 0.222978)
-
-[sub_resource type="Curve" id="Curve_a2sg6"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_og4cw"]
-curve = SubResource("Curve_a2sg6")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fjm22"]
-lifetime_randomness = 1.0
-direction = Vector3(1, 1, 0)
-initial_velocity_min = 1.0
-initial_velocity_max = 5.0
-damping_min = 0.395
-damping_max = 11.88
-angle_max = 453.7
-scale_min = 0.03
-scale_max = 0.6
-scale_curve = SubResource("CurveTexture_og4cw")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ichsk"]
-shading_mode = 0
-diffuse_mode = 3
-specular_mode = 1
-albedo_color = Color(0.631373, 0, 0, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_gydkr"]
-material = SubResource("StandardMaterial3D_ichsk")
-radius = 0.1
-height = 0.185
-
-[sub_resource type="AudioStream" id="AudioStream_xt2ru"]
-
-[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_yfi24"]
-buffer_length = 0.1
-
-[sub_resource type="Gradient" id="Gradient_cw80n"]
-colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_sqwy5"]
-gradient = SubResource("Gradient_cw80n")
+properties/9/path = NodePath("stats:MAX_HP")
+properties/9/spawn = true
+properties/9/sync = true
+properties/9/watch = false
 
 [sub_resource type="Animation" id="Animation_m7pob"]
 resource_name = "bleed"
@@ -281,16 +179,158 @@ tracks/8/keys = {
 "update": 0,
 "values": [0.0, 0.368264]
 }
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath(".:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(1, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.247059, 0.0588235, 0.537255, 1)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("../BloodDrops2:modulate")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(1.8, 1.9),
+"transitions": PackedFloat32Array(1, 1.7411),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(0.639216, 0.498039, 0.705882, 1)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("../BloodDrops2:position")
+tracks/11/interp = 2
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(1.7, 1.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(544, 608), Vector2(282, 1166)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wxogn"]
 _data = {
-"amount": SubResource("Animation_m7pob")
+"bleed": SubResource("Animation_m7pob")
 }
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_e70na"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_uko0c"]
+frequency = 0.0145
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qysvq"]
+noise = SubResource("FastNoiseLite_uko0c")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_r6fya"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ijvkh"]
+noise = SubResource("FastNoiseLite_r6fya")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kuy5k"]
+noise_type = 4
+seed = 435
+frequency = 0.1054
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ybac8"]
+noise = SubResource("FastNoiseLite_kuy5k")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e4bru"]
+albedo_color = Color(0.980392, 0, 0.372549, 1)
+metallic_specular = 0.0
+roughness = 0.37
+roughness_texture = SubResource("NoiseTexture2D_ybac8")
+normal_enabled = true
+normal_scale = -0.37
+normal_texture = SubResource("NoiseTexture2D_ijvkh")
+heightmap_scale = 5.125
+heightmap_texture = SubResource("NoiseTexture2D_qysvq")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3owbp"]
+resource_name = "Trim.001"
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("3_taiqw")
+metallic_specular = 0.66
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ywer4"]
+resource_name = "Trim.001"
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("8_st3tt")
+metallic_specular = 0.66
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iyoc3"]
+resource_name = "Trim.001"
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("9_xjnfd")
+metallic_specular = 0.66
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wsxi3"]
+resource_name = "Trim.001"
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("10_3h28f")
+metallic_specular = 0.66
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jjbi7"]
+size = Vector3(0.511855, 1, 0.222978)
+
+[sub_resource type="Curve" id="Curve_a2sg6"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_og4cw"]
+curve = SubResource("Curve_a2sg6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fjm22"]
+lifetime_randomness = 1.0
+direction = Vector3(1, 1, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 5.0
+damping_min = 0.395
+damping_max = 11.88
+angle_max = 453.7
+scale_min = 0.03
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_og4cw")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ichsk"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.631373, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_gydkr"]
+material = SubResource("StandardMaterial3D_ichsk")
+radius = 0.1
+height = 0.185
+
+[sub_resource type="AudioStream" id="AudioStream_xt2ru"]
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_yfi24"]
+buffer_length = 0.1
+
+[sub_resource type="Gradient" id="Gradient_cw80n"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sqwy5"]
+gradient = SubResource("Gradient_cw80n")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ncyn4"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_3bkri"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_w0h8b"]
 viewport_path = NodePath("SubViewport")
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "camContainer", "stats", "skeleton", "animator", "headSocket", "torsoSocket") groups=["player"]]
@@ -344,6 +384,12 @@ font_size = 62
 [node name="stats" type="Node" parent="."]
 script = ExtResource("2_8d7s7")
 MAX_HP = 20
+
+[node name="HealthDisplay" type="AnimationPlayer" parent="stats"]
+root_node = NodePath("../../UI/Blood")
+libraries = {
+"": SubResource("AnimationLibrary_wxogn")
+}
 
 [node name="Oneiroi" parent="." instance=ExtResource("3_kqv82")]
 transform = Transform3D(0.38, 0, 0, 0, 0.38, 0, 0, 0, 0.38, 0, 0.00587857, 0)
@@ -467,7 +513,7 @@ layers = 4
 surface_material_override/0 = SubResource("StandardMaterial3D_e4bru")
 
 [node name="HeadSocket" type="BoneAttachment3D" parent="Oneiroi/RootNode/root/Skeleton3D" index="13"]
-transform = Transform3D(-0.028268, 0.987877, 0.15264, -0.996437, -0.0157088, -0.0828671, -0.0794648, -0.154439, 0.984801, 2.39657, -0.0747785, -0.811946)
+transform = Transform3D(-0.0282685, 0.987877, 0.152641, -0.996437, -0.0157092, -0.0828671, -0.0794647, -0.15444, 0.984801, 2.39657, -0.074779, -0.811946)
 bone_name = "head.x"
 bone_idx = 18
 
@@ -475,7 +521,7 @@ bone_idx = 18
 transform = Transform3D(1, -9.09495e-13, 1.45519e-11, 3.18323e-12, 1, 2.23517e-08, 1.45519e-11, 5.21541e-08, 1, 4.36333e-05, 0.233244, 0.499046)
 
 [node name="LeftFootSocket" type="BoneAttachment3D" parent="Oneiroi/RootNode/root/Skeleton3D" index="14"]
-transform = Transform3D(-0.294898, -0.865209, -0.405522, 0.953813, -0.241114, -0.179184, 0.0572544, -0.439633, 0.89635, -1.74819, -0.499787, -1.25845)
+transform = Transform3D(-0.294899, -0.865209, -0.405522, 0.953813, -0.241115, -0.179183, 0.0572536, -0.439633, 0.896351, -1.74819, -0.499787, -1.25845)
 bone_name = "foot.l"
 bone_idx = 71
 
@@ -490,7 +536,7 @@ transform = Transform3D(1, 0, -9.31323e-10, 2.98023e-08, 1, 0, 4.65661e-09, 0, 1
 shape = SubResource("BoxShape3D_jjbi7")
 
 [node name="RightFootSocket" type="BoneAttachment3D" parent="Oneiroi/RootNode/root/Skeleton3D" index="15"]
-transform = Transform3D(0.172119, -0.978409, -0.11442, 0.980798, 0.159397, 0.11239, -0.0917249, -0.131567, 0.987054, -2.04906, 0.898586, 0.233448)
+transform = Transform3D(0.17212, -0.978408, -0.11442, 0.980797, 0.159397, 0.11239, -0.0917245, -0.131567, 0.987054, -2.04906, 0.898587, 0.233448)
 bone_name = "foot.r"
 bone_idx = 77
 
@@ -505,7 +551,7 @@ transform = Transform3D(1, 0, -9.31323e-10, 2.98023e-08, 1, 0, 4.65661e-09, 0, 1
 shape = SubResource("BoxShape3D_jjbi7")
 
 [node name="TorsoSocket" type="BoneAttachment3D" parent="Oneiroi/RootNode/root/Skeleton3D" index="16"]
-transform = Transform3D(-0.0367658, 0.650288, 0.758798, -0.999324, -0.0238862, -0.0279494, -5.03394e-05, -0.759312, 0.650726, 1.61741, -0.0290674, -0.121381)
+transform = Transform3D(-0.0367661, 0.650287, 0.758798, -0.999324, -0.0238865, -0.0279497, -5.03268e-05, -0.759313, 0.650726, 1.61741, -0.0290677, -0.121381)
 bone_name = "spine_02.x"
 bone_idx = 15
 
@@ -610,7 +656,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="IdeasCount" type="RichTextLabel" parent="UI/Main"]
-visible = false
 layout_direction = 1
 layout_mode = 1
 anchors_preset = 5
@@ -674,7 +719,6 @@ scale = Vector2(35.875, 23)
 texture = SubResource("GradientTexture2D_sqwy5")
 
 [node name="Target" type="RichTextLabel" parent="UI/Main"]
-visible = false
 layout_direction = 1
 layout_mode = 1
 anchors_preset = 8
@@ -732,31 +776,36 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="BloodDrops" type="Sprite2D" parent="UI/Blood"]
-modulate = Color(0.513726, 0, 0.270588, 0)
+modulate = Color(0.513726, 0, 0.270588, 0.0404988)
 z_index = -20
-position = Vector2(576, 150)
-scale = Vector2(0.925, 0.925)
+position = Vector2(505.713, 196.241)
+scale = Vector2(0.929155, 0.925)
+skew = 0.357873
 texture = ExtResource("16_o232j")
 
 [node name="BloodSplat" type="Sprite2D" parent="UI/Blood"]
-modulate = Color(0.513726, 0, 0.270588, 1.35547e-05)
+modulate = Color(0.513726, 0, 0.270588, 0.0482569)
 z_index = -21
-position = Vector2(576, 116)
+position = Vector2(576, 239.984)
 scale = Vector2(0.768895, 0.768895)
-skew = 0.706858
+skew = 0.423815
 texture = ExtResource("17_b432k")
 
 [node name="BloodStreaks" type="Sprite2D" parent="UI/Blood"]
-modulate = Color(0.513726, 0, 0.270588, 1.35547e-05)
+modulate = Color(0.513726, 0, 0.270588, 0.286957)
 z_index = -21
 position = Vector2(576, 311)
-scale = Vector2(0.768895, 0.768895)
+scale = Vector2(0.698417, 0.698417)
 texture = ExtResource("18_bt7ge")
 
-[node name="Blood" type="AnimationPlayer" parent="UI/Blood"]
-libraries = {
-"": SubResource("AnimationLibrary_wxogn")
-}
+[node name="BloodDrops2" type="Sprite2D" parent="UI"]
+modulate = Color(1, 1, 1, 0)
+z_index = -25
+position = Vector2(544, 608)
+rotation = 0.436332
+scale = Vector2(0.978, 2.11)
+skew = -0.216421
+texture = ExtResource("16_o232j")
 
 [node name="DreamDilator" type="Control" parent="UI"]
 visible = false
@@ -834,7 +883,7 @@ grow_vertical = 2
 [node name="Good_Idea_Icon" parent="UI/DreamDilator/OutDream" instance=ExtResource("13_q20ia")]
 position = Vector2(159, 181)
 scale = Vector2(0.25, 0.25)
-texture = SubResource("ViewportTexture_e70na")
+texture = SubResource("ViewportTexture_ncyn4")
 
 [node name="idea" parent="UI/DreamDilator/OutDream/Good_Idea_Icon" index="0"]
 transform = Transform3D(0.236453, 0, 0.0811786, 0, 0.25, 0, -0.0811786, 0, 0.236453, 5, 0.647767, 0)
@@ -845,7 +894,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.672845, 1.48044)
 [node name="Bad_Idea_Icon" parent="UI/DreamDilator/OutDream" instance=ExtResource("13_5i5yv")]
 position = Vector2(159, 288)
 scale = Vector2(0.25, 0.25)
-texture = SubResource("ViewportTexture_3bkri")
+texture = SubResource("ViewportTexture_w0h8b")
 
 [node name="IdeasCount" type="RichTextLabel" parent="UI/DreamDilator/OutDream"]
 layout_direction = 1

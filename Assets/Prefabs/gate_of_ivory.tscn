@@ -167,7 +167,7 @@ size = Vector2i(3840, 2160)
 transform = Transform3D(-1, 0, -8.9407e-08, 0, 1, 0, 8.9407e-08, 0, -1, 0, 2.64902, 5.06243)
 cull_mask = 1048573
 current = true
-far = 100.0
+far = 50.0
 
 [node name="CSGBox3D" type="CSGBox3D" parent="RotationParent/Portal/CamViewport/Camera3D"]
 visible = false

@@ -18,6 +18,8 @@ var dreamLength = 60*7
 
 @export var dungeonLive: bool
 
+signal resetIdeaDeposit
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GameManager.network = self
@@ -73,6 +75,7 @@ func rpcActivate(goodModifier,badModifier):
 
 @rpc ("any_peer","call_local", "reliable")	
 func rpcAbort(newQuota):
+	resetIdeaDeposit.emit()
 	GameManager.network.ideaQuota = newQuota
 	for idea in GameManager.dreamDilator.ideas:
 		match idea.ideaType:
@@ -86,8 +89,11 @@ func rpcAbort(newQuota):
 	GameManager.network.dungeonLive = false
 	GameManager.network.dreamSequence = 0
 	GameManager.network.dreamTimer = 0
-	if GameManager.activePlayer.global_position.y<-10:
-		GameManager.activePlayer.global_position = Vector3(0,5,0)
+	if GameManager.activePlayer.inDungeon:
+		GameManager.activePlayer.global_position = Vector3(0,0,0)
+		GameManager.activePlayer.inDungeon = false
+	GameManager.activePlayer.stats.current_hp = GameManager.activePlayer.stats.MAX_HP
+	GameManager.activePlayer.stats.grappled = false
 	for idea in GameManager.activePlayer.stats.ideas:
 		idea.queue_free()
 	GameManager.activePlayer.stats.ideas.clear()

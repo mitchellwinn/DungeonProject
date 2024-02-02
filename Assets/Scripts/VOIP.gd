@@ -25,6 +25,8 @@ func _process(delta):
 	if !is_multiplayer_authority():
 		#print("no auth")
 		return
+	if get_parent().stats.current_hp<=0:
+		return
 	reverbCalculator()
 	#bufferSize = effect.get_frames_available()
 	if (effect.can_get_buffer(bufferSize) && playback.can_push_buffer(bufferSize)):

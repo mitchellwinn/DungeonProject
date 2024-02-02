@@ -291,7 +291,6 @@ func regroupRooms():
 	westEntrances.clear()
 	segregateEntrances()
 
-
 func _on_room_boundaries_body_entered(body):
 	if body == GameManager.activePlayer:
 		GameManager.activePlayer.inDungeon = true
