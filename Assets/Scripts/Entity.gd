@@ -65,7 +65,8 @@ func animate(delta):
 	#print(stats.baseAnimation)
 
 func animateRemote():
-	animator.play("root|"+stats.baseAnimation,3,stats.animSpeed,false)
+	if stats.baseAnimation!="":
+		animator.play("root|"+stats.baseAnimation,3,stats.animSpeed,false)
 
 
 func _on_left_footstep_body_entered(body):

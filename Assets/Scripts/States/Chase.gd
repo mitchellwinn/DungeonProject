@@ -1,8 +1,6 @@
 extends EntityIdle
 class_name EntityChase
 
-@export var jawSlot: Node3D
-
 func Enter():
 	entity.play_sound("Scream",entity.screamDirectory+str(1)+".mp3",rng.randf_range(.9,1.1))
 	pass

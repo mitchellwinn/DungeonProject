@@ -6,14 +6,15 @@ room_size = 0.29
 
 [sub_resource type="AudioEffectCapture" id="AudioEffectCapture_ka2ru"]
 resource_name = "Capture"
+buffer_length = 0.25
 
 [sub_resource type="AudioEffectEQ" id="AudioEffectEQ_q77op"]
 resource_name = "EQ"
 band_db/32_hz = -38.0
 band_db/100_hz = -26.0
-band_db/320_hz = -22.7
+band_db/320_hz = -11.2
 band_db/3200_hz = 4.4
-band_db/10000_hz = -5.5
+band_db/10000_hz = -9.1
 
 [sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_ip7ml"]
 resource_name = "Compressor"

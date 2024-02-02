@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://buan5yi8ma7tr"]
+[gd_scene load_steps=45 format=3 uid="uid://buan5yi8ma7tr"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/DungeonGenerator.gd" id="1_a3oe2"]
 [ext_resource type="Script" path="res://Assets/Scripts/Level.gd" id="1_xagfq"]
@@ -16,6 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://d2om3hd70purk" path="res://Assets/Materials/slabTiles/textures/slab_tiles_rough_1k.jpg" id="13_g1sva"]
 [ext_resource type="Script" path="res://Assets/Scripts/DreamDilator.gd" id="16_jm156"]
 [ext_resource type="PackedScene" uid="uid://cl7ibmdeubwb4" path="res://Assets/3Dmodels/BrassGoblets/brass_goblet_1k.glb" id="17_okry5"]
+[ext_resource type="PackedScene" uid="uid://biom78qodp4i3" path="res://Assets/3Dmodels/Items/SpiritBow/spiritbow.glb" id="18_7r4oi"]
+[ext_resource type="Script" path="res://Assets/Scripts/Interactable.gd" id="19_ceulo"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Benji_Water.gdshader" id="19_uajir"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_0qhkm"]
@@ -180,6 +182,9 @@ shader_parameter/wave = SubResource("NoiseTexture2D_v842b")
 shader_parameter/texture_normal1 = SubResource("NoiseTexture2D_8ieyp")
 shader_parameter/texture_normal2 = SubResource("NoiseTexture2D_i5pjl")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_sj40j"]
+size = Vector3(2.62463, 0.435183, 1.37851)
+
 [node name="Erebos" type="Node3D"]
 script = ExtResource("1_xagfq")
 
@@ -265,8 +270,8 @@ camera_attributes = SubResource("CameraAttributesPractical_gqrw1")
 [node name="Dungeon" type="Node" parent="NavigationRegion3D"]
 script = ExtResource("1_a3oe2")
 randomSeed = true
-nestLimit = 3
-rootRoomPosition = Vector3(0, -100, 0)
+nestLimit = 4
+rootRoomPosition = Vector3(0, -70, 0)
 roomDensity = 700
 bigRoomChance = 600
 longConfusingRoomChance = 400
@@ -371,6 +376,19 @@ operation = 1
 radius = 0.065
 radial_segments = 20
 rings = 20
+
+[node name="SpiritBow" parent="." instance=ExtResource("18_7r4oi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.77583, 1.8925, -3.10557)
+
+[node name="Area3D" type="Area3D" parent="SpiritBow"]
+collision_layer = 256
+collision_mask = 0
+script = ExtResource("19_ceulo")
+displayName = "Spirit Bow"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SpiritBow/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.591044)
+shape = SubResource("BoxShape3D_sj40j")
 
 [connection signal="body_entered" from="NavigationRegion3D/Boundaries" to="." method="_on_boundaries_body_entered"]
 

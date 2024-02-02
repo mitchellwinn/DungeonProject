@@ -4,7 +4,9 @@ class_name EntityIdle
 @export var move_speed : int
 @export var nav: NavigationAgent3D
 @export var vocalIndex: int
+var potentialTarget
 var direction: Vector3
+@export var jawSlot: Node3D
 
 var random_spot: Vector3
 var wander_time: float
@@ -40,6 +42,10 @@ func Update(delta: float):
 
 func Physics_Update(delta: float):
 	if entity:
+		potentialTarget = Utils.noticedPotentialTarget(jawSlot,GameManager.players.get_children())
+		if potentialTarget:
+			entity.prioList.append(potentialTarget)
+			Transitioned.emit(self,"chase")
 		nav.target_position = Vector3(random_spot.x,entity.global_position.y,random_spot.z)
 		if (nav.target_position-entity.global_position).length()<1:
 			entity.velocity = entity.velocity.lerp(Vector3.ZERO,delta*8)
@@ -48,3 +54,4 @@ func Physics_Update(delta: float):
 		var target_basis = Basis.looking_at(-Vector3(direction.x,0,direction.z))
 		entity.basis = entity.basis.slerp(target_basis, delta*10)
 		entity.velocity = entity.velocity.lerp(Vector3(direction.x,entity.velocity.y,direction.z)*move_speed,delta*8)
+		potentialTarget = Utils.noticedPotentialTarget(jawSlot,GameManager.players.get_children())

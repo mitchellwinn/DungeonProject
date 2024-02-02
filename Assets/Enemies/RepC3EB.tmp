@@ -159,12 +159,12 @@ nav = NodePath("../../NavigationAgent3D")
 jawSlot = NodePath("../../Reptal/RootNode/root/Skeleton3D/BoneAttachment3D/JawSlot")
 entity = NodePath("../..")
 
-[node name="Chase" type="Node" parent="State Machine" node_paths=PackedStringArray("nav", "jawSlot", "entity")]
+[node name="Chase" type="Node" parent="State Machine" node_paths=PackedStringArray("jawSlot", "nav", "entity")]
 script = ExtResource("9_sx0r7")
+jawSlot = NodePath("../../Reptal/RootNode/root/Skeleton3D/BoneAttachment3D/JawSlot")
 move_speed = 4
 nav = NodePath("../../NavigationAgent3D")
 vocalIndex = null
-jawSlot = NodePath("../../Reptal/RootNode/root/Skeleton3D/BoneAttachment3D/JawSlot")
 entity = NodePath("../..")
 
 [node name="Scan" type="Node" parent="State Machine" node_paths=PackedStringArray("jawSlot", "entity")]
@@ -172,11 +172,12 @@ script = ExtResource("9_20hga")
 jawSlot = NodePath("../../Reptal/RootNode/root/Skeleton3D/BoneAttachment3D/JawSlot")
 entity = NodePath("../..")
 
-[node name="Eat" type="Node" parent="State Machine" node_paths=PackedStringArray("nav", "jawSlot", "entity")]
+[node name="Eat" type="Node" parent="State Machine" node_paths=PackedStringArray("jawSlot", "nav", "entity")]
 script = ExtResource("11_gdunc")
+jawSlot = NodePath("../../Reptal/RootNode/root/Skeleton3D/BoneAttachment3D/JawSlot")
 move_speed = 1
 nav = NodePath("../../NavigationAgent3D")
-jawSlot = NodePath("../../Reptal/RootNode/root/Skeleton3D/BoneAttachment3D/JawSlot")
+vocalIndex = null
 entity = NodePath("../..")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]

@@ -57,11 +57,11 @@ func _process(delta):
 		bleedAnimate(true)
 	elif !stats.bleeding and stats.bleedingLast:
 		bleedAnimate(false)
+
+func _physics_process(delta):
 	if !is_multiplayer_authority():
 		animateRemote()
 		return
-
-func _physics_process(delta):
 	if Input.is_action_just_pressed("tab") and GameManager.network.dreamDilatorInUse == "":
 		match Input.get_mouse_mode():
 			Input.MOUSE_MODE_CAPTURED:
@@ -87,6 +87,7 @@ func bleedAnimate(on):
 	torsoSocket.get_node("Blood1").emitting = on
 	torsoSocket.get_node("Blood2").emitting = on
 	torsoSocket.get_node("Blood3").emitting = on
+	torsoSocket.visible = on
 
 func checkInteract():
 	if interacting:
@@ -157,7 +158,10 @@ func fullyActionable():
 func animate(delta):
 	camera.global_position = camera.global_position.lerp(headSocket.global_position,delta*60)
 	#camContainer.global_rotation = camContainer.global_rotation.lerp(headSocket.global_rotation,delta*20)
-	if stats.grappled:
+	if stats.current_hp<=0:
+		stats.animSpeed = 0
+		stats.baseAnimation = "flailing"
+	elif stats.grappled:
 		stats.animSpeed = 2
 		stats.baseAnimation = "flailing"
 	elif is_on_floor():

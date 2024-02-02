@@ -76,6 +76,7 @@ func rpcActivate(goodModifier,badModifier):
 @rpc ("any_peer","call_local", "reliable")	
 func rpcAbort(newQuota):
 	for entity in GameManager.entities.get_children():
+		entity.carrying = null
 		entity.queue_free()
 	resetIdeaDeposit.emit()
 	GameManager.network.ideaQuota = newQuota
@@ -92,10 +93,11 @@ func rpcAbort(newQuota):
 	GameManager.network.dreamSequence = 0
 	GameManager.network.dreamTimer = 0
 	if GameManager.activePlayer.inDungeon:
-		GameManager.activePlayer.global_position = Vector3(0,0,0)
+		GameManager.activePlayer.global_position = Vector3(0,1,0)
 		GameManager.activePlayer.inDungeon = false
 	GameManager.activePlayer.stats.current_hp = GameManager.activePlayer.stats.MAX_HP
 	GameManager.activePlayer.stats.grappled = false
+	GameManager.activePlayer.stats.bleeding = false
 	for idea in GameManager.activePlayer.stats.ideas:
 		idea.queue_free()
 	GameManager.activePlayer.stats.ideas.clear()

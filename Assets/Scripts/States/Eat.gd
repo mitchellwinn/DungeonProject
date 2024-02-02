@@ -1,7 +1,6 @@
 extends EntityIdle
 class_name EntityEat
 
-@export var jawSlot: Node3D
 var scanTimer = 0
 
 func Enter():
@@ -17,11 +16,14 @@ func Exit():
 	entity.carrying.stats.grappled = false
 	entity.carrying.stats.bleeding = false
 	entity.carrying.set_multiplayer_authority(entity.carrying.stats.id)
+	entity.carrying = null
 
 func Physics_Update(delta: float):
-	entity.carrying.global_position = entity.carrying.global_position.lerp(jawSlot.global_position,delta*5)
-	entity.carrying.global_rotation = jawSlot.global_rotation
 	if entity:
+		entity.carrying.global_position = entity.carrying.global_position.lerp(jawSlot.global_position,delta*5)
+		entity.carrying.global_rotation = jawSlot.global_rotation
+		if entity.carrying.stats.current_hp <= 0:
+			Transitioned.emit(self,"idle")
 		nav.target_position = Vector3(random_spot.x,entity.global_position.y,random_spot.z)
 		if (nav.target_position-entity.global_position).length()<1:
 			entity.velocity = entity.velocity.lerp(Vector3.ZERO,delta*8)

@@ -24,6 +24,10 @@ driver/enable_input=true
 GameManager="*res://Assets/Scripts/game_manager.gd"
 Utils="*res://Assets/Scripts/utils.gd"
 
+[debug]
+
+settings/stdout/verbose_stdout=true
+
 [display]
 
 window/stretch/mode="canvas_items"
@@ -79,3 +83,16 @@ jump={
 [physics]
 
 common/physics_ticks_per_second=120
+common/max_physics_steps_per_frame=16
+
+[rendering]
+
+gl_compatibility/nvidia_disable_threaded_optimization=false
+renderer/rendering_method.mobile="forward_plus"
+renderer/rendering_method.web="forward_plus"
+environment/glow/upscale_mode=0
+environment/volumetric_fog/volume_size=32
+environment/volumetric_fog/volume_depth=32
+environment/volumetric_fog/use_filter=0
+occlusion_culling/use_occlusion_culling=true
+textures/stdout/verbose_stdout=true

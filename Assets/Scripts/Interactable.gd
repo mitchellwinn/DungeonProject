@@ -1,4 +1,4 @@
-extends StaticBody3D
+extends Node3D
 class_name Interactable
 
 @export var displayName: String

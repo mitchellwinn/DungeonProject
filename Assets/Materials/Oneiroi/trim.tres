@@ -7,6 +7,10 @@ frequency = 0.0515
 offset = Vector3(52.6, 10.3, 0)
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_54154"]
+width = 117
+height = 52
+generate_mipmaps = false
+as_normal_map = true
 noise = SubResource("FastNoiseLite_e8uee")
 
 [resource]

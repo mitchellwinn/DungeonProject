@@ -44,7 +44,6 @@ func _ready():
 	pass
 
 func spawnEntity():
-	var space_state = GameManager.activePlayer.get_world_3d().direct_space_state
 	for player in GameManager.players.get_children():
 		print("Trying to spawn entity for "+player.name)
 		if !player.inDungeon:
@@ -74,7 +73,7 @@ func spawnEntity():
 				for player_ in GameManager.players.get_children():
 					var occlusionCast = PhysicsRayQueryParameters3D.create(player_.camera.global_position,entity.global_position)
 					occlusionCast.collide_with_areas = true
-					var result = space_state.intersect_ray(occlusionCast)
+					var result = GameManager.activePlayer.get_world_3d().direct_space_state.intersect_ray(occlusionCast)
 					if result:
 						if result.collider == entity:
 							if (entity.global_position-player_.camera.global_position).normalized().dot(player_.camera.basis.z)>0: #
