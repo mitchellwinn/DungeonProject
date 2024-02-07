@@ -34,6 +34,7 @@ func useDreamDilator():
 	print("using dilator")
 	GameManager.activePlayer.get_node("UI/Main").visible = false
 	GameManager.activePlayer.get_node("UI/DreamDilator").visible = true
+	GameManager.activePlayer.get_node("UI/Hotbar").visible = false
 	GameManager.activePlayer.camera.current = false
 	if GameManager.dungeonExists:
 		await inDream()
@@ -46,6 +47,7 @@ func useDreamDilator():
 	$Camera3D2.current = false
 	GameManager.activePlayer.get_node("UI/Main").visible = true
 	GameManager.activePlayer.get_node("UI/DreamDilator").visible = false
+	GameManager.activePlayer.get_node("UI/Hotbar").visible = true
 	GameManager.network.rpc("rpcDreamDilatorUsage","")
 	
 func inDream():

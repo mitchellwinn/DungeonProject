@@ -18,6 +18,7 @@ var interacting = false
 @export var skeleton: Skeleton3D
 @export var animator: AnimationPlayer
 @export var headSocket: Node3D
+@export var leftHandSocket: Node3D
 @export var torsoSocket: BoneAttachment3D
 var rng 
 
@@ -40,6 +41,7 @@ func _enter_tree():
 				continue
 			mesh.set_layer_mask_value(3,false)
 			mesh.set_layer_mask_value(4,true)
+			mesh.set_layer_mask_value(11,false)
 		camera.current = false
 		$OmniLight3D.visible = false
 		$SpotLight3D.visible = false
@@ -93,7 +95,8 @@ func checkInteract():
 	if interacting:
 		return
 	if camera.get_node("InteractCast").is_colliding():
-		$UI/Main/Target.text = "[center]\n"+camera.get_node("InteractCast").get_collider().displayName
+		if camera.get_node("InteractCast").get_collider().displayingName:
+			$UI/Main/Target.text = "[center]\n"+camera.get_node("InteractCast").get_collider().displayName
 		if Input.is_action_just_pressed("interact"):
 			print("interact")
 			interacting = true
@@ -138,7 +141,7 @@ func moveInputs(delta):
 	if Input.is_action_pressed("left"):
 		moveDirection += basis.x
 	moveDirection = moveDirection.normalized()
-	velocity += moveDirection*runToggle*delta*60
+	velocity += moveDirection*runToggle*delta*60*stats.moveSpeedScalar
 	velocity.x = clamp(velocity.x,-MAX_SPEED,MAX_SPEED)
 	velocity.z = clamp(velocity.z,-MAX_SPEED,MAX_SPEED)
 		
@@ -152,48 +155,81 @@ func playerFocus():
 				return false
 	
 func fullyActionable():
-	if !interacting and !GameManager.generatingDungeon and !stats.grappled:
+	if !interacting and !GameManager.generatingDungeon and !stats.grappled and stats.stunned<=0:
 		return true
 	
 func animate(delta):
 	camera.global_position = camera.global_position.lerp(headSocket.global_position,delta*60)
 	#camContainer.global_rotation = camContainer.global_rotation.lerp(headSocket.global_rotation,delta*20)
+	var animationModifier = ""
+	get_node("UI/Main/1stPersonViewPullBow").visible = false
+	get_node("UI/Main/1stPersonViewMain").visible = false
+	get_node("UI/Main/1stPersonViewRunBow").visible = false
+	if stats.usingAbility == "shootBow" || stats.usingAbility == "pullBow":
+		get_node("UI/Main/1stPersonViewPullBow").visible = true
+		get_node("UI/Main/1stPersonViewMain").global_position = Vector2(577,55000)
+		get_node("UI/Main/1stPersonViewPullBow").global_position = lerp(get_node("UI/Main/1stPersonViewPullBow").global_position,Vector2(577,327),delta*15)
+	elif stats.hotbar[stats.hotbarIndex]:
+		get_node("UI/Main/1stPersonViewPullBow").global_position = Vector2(577,55000)
+		animationModifier = stats.hotbar[stats.hotbarIndex].animationModifier
+		if stats.hotbar[stats.hotbarIndex].animationModifier == "Bow":
+			get_node("UI/Main/1stPersonViewRunBow").visible = true
+			get_node("UI/Main/1stPersonViewMain").global_position = Vector2(577,55000)
+	else:
+		get_node("UI/Main/1stPersonViewPullBow").global_position = Vector2(577,55000)
+		get_node("UI/Main/1stPersonViewMain").global_position = lerp(get_node("UI/Main/1stPersonViewMain").global_position,Vector2(577,327),delta*15)
+		get_node("UI/Main/1stPersonViewMain").visible = true
 	if stats.current_hp<=0:
 		stats.animSpeed = 0
 		stats.baseAnimation = "flailing"
+	if stats.usingAbility != "":
+		stats.baseAnimation = stats.usingAbility
+		stats.animSpeed = 2
 	elif stats.grappled:
 		stats.animSpeed = 2
 		stats.baseAnimation = "flailing"
+	elif stats.stunned > 0:
+		stats.baseAnimation = "stunned"
 	elif is_on_floor():
 		if velocity.length()>MOVE_SPEED*1 and runToggle>1:
 			if basis.z.dot(velocity.normalized())>0:
 				stats.animSpeed = velocity.length()/3
-				stats.baseAnimation = "run"
+				stats.baseAnimation = "run"+animationModifier
 			else:
 				stats.animSpeed = velocity.length()/3
-				stats.baseAnimation = "walkBackwards"
+				stats.baseAnimation = "walkBackwards"+animationModifier
 		elif velocity.length()>MOVE_SPEED*1:
 			if basis.z.dot(velocity.normalized())>0:
 				stats.animSpeed = velocity.length()/3
-				stats.baseAnimation = "walk"
+				stats.baseAnimation = "walk"+animationModifier
 			else:
 				stats.animSpeed = velocity.length()/3
-				stats.baseAnimation = "walkBackwards"
+				stats.baseAnimation = "walkBackwards"+animationModifier
 		else:
-			stats.baseAnimation = "idle"
+			stats.baseAnimation = "idle"+animationModifier
 			stats.animSpeed = 1
 	else:
 		if velocity.y>=0:
 			stats.animSpeed = 1
-			stats.baseAnimation = "jump"
+			stats.baseAnimation = "jump"+animationModifier
 		else:
 			stats.animSpeed = 1
-			stats.baseAnimation = "fall"
-	animator.play("root|"+stats.baseAnimation,3,stats.animSpeed,false)
+			stats.baseAnimation = "fall"+animationModifier
+	if stats.baseAnimation == "":
+		return
+	if animator.get_assigned_animation() != "root|"+stats.baseAnimation:
+		animator.play("root|"+stats.baseAnimation,.3,stats.animSpeed,false)
+	if animator.current_animation != "":
+		animator.play("root|"+stats.baseAnimation,.3,stats.animSpeed,false)
 	#print(baseAnimation)
 
 func animateRemote():
-	animator.play("root|"+stats.baseAnimation,3,stats.animSpeed,false)
+	if stats.baseAnimation == "":
+		return
+	if animator.get_assigned_animation() != "root|"+stats.baseAnimation:
+		animator.play("root|"+stats.baseAnimation,.3,stats.animSpeed,false)
+	if animator.current_animation != "":
+		animator.play("root|"+stats.baseAnimation,.3,stats.animSpeed,false)
 
 func _on_left_footstep_body_entered(body):
 	var family = Utils.getFloorType(body)

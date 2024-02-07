@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://k0a23eo6n7ba"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Items/DoorKnob.gd" id="1_3cfhs"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0t7vt"]
+radius = 0.181155
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e001h"]
+albedo_color = Color(1, 0.733333, 0.2, 1)
+metallic = 1.0
+metallic_specular = 0.17
+roughness = 0.14
+emission = Color(0.717647, 0.439216, 0, 1)
+
+[node name="Knob" type="Node3D"]
+
+[node name="Area3D" type="Area3D" parent="." node_paths=PackedStringArray("mesh")]
+collision_layer = 256
+collision_mask = 0
+script = ExtResource("1_3cfhs")
+mesh = NodePath("../Knob")
+itemSlot = "leftHand"
+animationModifier = "Bow"
+iconPath = "res://Assets/Materials/PlayerUI/knob.png"
+displayingName = true
+displayName = "Suspicious Knob"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.132122, 0)
+shape = SubResource("SphereShape3D_0t7vt")
+
+[node name="SubViewport" type="SubViewport" parent="Area3D"]
+transparent_bg = true
+
+[node name="Camera3D" type="Camera3D" parent="Area3D/SubViewport"]
+transform = Transform3D(0.33601, 0.870755, -0.359003, 0.686208, 0.0347621, 0.726574, 0.645148, -0.490487, -0.585839, -0.515575, 0.927077, -0.753323)
+cull_mask = 1024
+fov = 44.7
+
+[node name="Knob" type="CSGSphere3D" parent="."]
+transform = Transform3D(0.31, -2.89759e-11, -7.27596e-11, 1.84741e-13, 0.31, -2.03727e-10, -2.91038e-11, 3.20142e-10, 0.202, 0, 0.139, 0)
+layers = 1024
+material_override = SubResource("StandardMaterial3D_e001h")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Knob"]
+transform = Transform3D(0.781555, -8.1846e-11, -6.36921e-11, 1.10385e-10, -1.09014e-08, 0.450956, -2.5649e-10, -0.249394, -1.97119e-08, 0, 0, -0.43344)

@@ -24,7 +24,6 @@ func _process(delta):
 	else:
 		$Main/ProgressBar.visible = false
 		$Main/Skull.visible = false
-
 #DREAM ACTIVATION
 func _on_activate_pressed():
 	GameManager.network.rpcDreamDilatorUsage("")

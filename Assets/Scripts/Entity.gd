@@ -33,7 +33,12 @@ func animate(delta):
 		return
 	if is_on_floor():
 		#Chase
-		if stateMachine.current_state is EntityChase:
+		if stats.current_hp<= 0:
+			var randomness = rng.randi_range(1,2)
+			stats.baseAnimation = "Dead"+str(randomness)
+		if stats.stunned > 0:
+			stats.baseAnimation = "Stunned"
+		elif stateMachine.current_state is EntityChase:
 			if velocity.length()>2:
 				stats.baseAnimation = "Run"
 				stats.animSpeed = .5+float(velocity.length())/2
@@ -61,12 +66,12 @@ func animate(delta):
 				stats.animSpeed = 1
 	else:
 		pass
-	animator.play("root|"+stats.baseAnimation,3,stats.animSpeed,false)
+	animator.play("root|"+stats.baseAnimation,.3,stats.animSpeed,false)
 	#print(stats.baseAnimation)
 
 func animateRemote():
 	if stats.baseAnimation!="":
-		animator.play("root|"+stats.baseAnimation,3,stats.animSpeed,false)
+		animator.play("root|"+stats.baseAnimation,.3,stats.animSpeed,false)
 
 
 func _on_left_footstep_body_entered(body):
@@ -89,12 +94,16 @@ func _on_right_footstep_body_entered(body):
 		$RightFootstep.play()
 
 
-@rpc("any_peer" , "call_local")
+@rpc("any_peer" , "call_local", "reliable")
 func play_sound(streamer, sound, pitch):
 	streamer = get_node(streamer)
 	streamer.stream = load(sound)
 	streamer.pitch_scale = pitch
 	streamer.play()
 	
+@rpc("any_peer" , "call_local", "reliable")
+func despawn():
+	GameManager.entities.erase(self)
+	queue_free()
 
 	

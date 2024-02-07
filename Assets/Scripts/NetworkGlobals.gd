@@ -94,6 +94,9 @@ func rpcAbort(newQuota):
 	GameManager.network.dreamTimer = 0
 	if GameManager.activePlayer.inDungeon:
 		GameManager.activePlayer.global_position = Vector3(0,1,0)
+		GameManager.activePlayer.camera.current = true
+		GameManager.activePlayer.camera.position = Vector3(0,2.325,0)
+		GameManager.activePlayer.global_rotation = Vector3.UP
 		GameManager.activePlayer.inDungeon = false
 	GameManager.activePlayer.stats.current_hp = GameManager.activePlayer.stats.MAX_HP
 	GameManager.activePlayer.stats.grappled = false

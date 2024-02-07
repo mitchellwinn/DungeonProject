@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cpvkvfsmi2jok"]
+[gd_scene load_steps=28 format=3 uid="uid://cpvkvfsmi2jok"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Entity.gd" id="1_u23pf"]
 [ext_resource type="Texture2D" uid="uid://dxliavxps26" path="res://Assets/3Dmodels/Reptal/uncanny_valley_face_.png" id="2_8htui"]
@@ -7,13 +7,77 @@
 [ext_resource type="Texture2D" uid="uid://bpj32xj5ejlm7" path="res://Assets/3Dmodels/Reptal/headless_river_troll.png" id="2_opr0g"]
 [ext_resource type="Texture2D" uid="uid://1qnijo31jldh" path="res://Assets/3Dmodels/Reptal/Reptal-ace0e60c0fa3b2c7e074941464261f54_NormalMap (2).png" id="4_ibbak"]
 [ext_resource type="Script" path="res://Assets/Scripts/States/State Machine.gd" id="6_weoln"]
-[ext_resource type="Script" path="res://Assets/Scripts/States/Idle.gd" id="7_65rw4"]
-[ext_resource type="Script" path="res://Assets/Scripts/States/Scan.gd" id="9_20hga"]
-[ext_resource type="Script" path="res://Assets/Scripts/States/Chase.gd" id="9_sx0r7"]
-[ext_resource type="Script" path="res://Assets/Scripts/States/Eat.gd" id="11_gdunc"]
+[ext_resource type="Script" path="res://Assets/Scripts/States/EntityIdle.gd" id="8_xwkf6"]
+[ext_resource type="Script" path="res://Assets/Scripts/States/EntityChase.gd" id="9_rdku4"]
+[ext_resource type="Script" path="res://Assets/Scripts/States/EntityScan.gd" id="10_anjwx"]
+[ext_resource type="Script" path="res://Assets/Scripts/States/EntityEat.gd" id="11_yve87"]
 [ext_resource type="AudioStream" uid="uid://b0p8b4bhbmir2" path="res://Assets/SFX/monster_scream/1.wav" id="12_7lxi5"]
 [ext_resource type="AudioStream" uid="uid://csfs6tmxprskq" path="res://Assets/SFX/dramaticStab.mp3" id="13_l0pyh"]
 [ext_resource type="Script" path="res://Assets/Scripts/stats.gd" id="14_e11c1"]
+
+[sub_resource type="Animation" id="Animation_woh1l"]
+resource_name = "Chomping"
+length = 7.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Reptal/RootNode/root/Skeleton3D/Cube_002:blend_shapes/Key 1")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6, 0.7, 0.9, 1, 1.2, 1.5, 1.8, 1.9, 2.1, 2.2, 2.3, 2.4, 2.5, 2.7, 2.8, 2.9, 3, 3.1, 3.2, 3.3, 3.4, 3.8, 4, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.8, 5, 5.2, 5.3, 5.5, 5.6, 5.8, 6.4, 6.5, 6.7, 6.8, 7, 8.6, 8.7, 8.8, 8.9, 9, 9.1, 9.2, 9.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.3, 0.0, 0.3, 0.0, 0.3, 0.0, 0.3, 1.0, 0.3, 0.0, 0.3, 0.3, 0.0, 0.3, 0.0, 0.0, 0.3, 0.0, 0.0, 0.3, 0.0, 0.0, 0.3, 0.3, 0.3, 0.0, 0.3, 0.3, 0.0, 0.3, 0.0, 0.3, 0.0, 0.3, 0.0, 0.3, 0.0, 1.0, 0.3, 0.0, 0.3, 0.0, 0.3, 0.3, 0.0, 0.3, 0.3, 0.0, 0.3, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Reptal/RootNode/root/Skeleton3D/Cube_002:blend_shapes/Key 2")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6, 0.7, 0.9, 1, 1.2, 1.8, 1.9, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3, 3.1, 3.2, 3.3, 3.4, 3.8, 4, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.8, 5, 5.2, 5.3, 5.5, 5.6, 5.8, 6.4, 6.5, 6.7, 6.8, 7, 8.6, 8.7, 8.8, 8.9, 9, 9.1, 9.2, 9.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [1.0, 0.7, 1.0, 0.7, 1.0, 0.7, 1.0, 0.0, 0.7, 1.0, 0.7, 0.7, 1.0, 0.7, 0.7, 1.0, 1.0, 0.7, 1.0, 1.0, 0.7, 1.0, 1.0, 0.7, 0.7, 0.7, 1.0, 0.7, 0.7, 1.0, 0.7, 1.0, 0.7, 1.0, 0.7, 1.0, 0.7, 1.0, 0.0, 0.7, 1.0, 0.7, 1.0, 0.7, 0.7, 1.0, 0.7, 0.7, 1.0, 0.7, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_xxur0"]
+resource_name = "GapingJaws"
+length = 7.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Reptal/RootNode/root/Skeleton3D/Cube_002:blend_shapes/Key 1")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.1, 5, 7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [1.0, 0.671958, 0.866622, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Reptal/RootNode/root/Skeleton3D/Cube_002:blend_shapes/Key 2")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ay87b"]
+_data = {
+"Chomping": SubResource("Animation_woh1l"),
+"GapingJaws": SubResource("Animation_xxur0")
+}
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_bd351"]
 noise_type = 5
@@ -81,6 +145,10 @@ properties/4/path = NodePath("stats:current_hp")
 properties/4/spawn = true
 properties/4/sync = true
 properties/4/watch = false
+properties/5/path = NodePath("CollisionShape3D/ShapeKeys:current_animation")
+properties/5/spawn = true
+properties/5/sync = true
+properties/5/watch = false
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_41ds6"]
 height = 3.40703
@@ -95,6 +163,11 @@ vocalsDirectory = "res://Assets/SFX/ghoul_noises/"
 screamDirectory = "res://Assets/SFX/monster_scream/"
 offensiveDirectory = "res://Assets/SFX/monster_scream/"
 
+[node name="ShapeKeys" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ay87b")
+}
+
 [node name="RayCast3D" type="RayCast3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1, 0)
 target_position = Vector3(0, -2, 0)
@@ -105,40 +178,41 @@ debug_shape_custom_color = Color(1, 0, 0, 1)
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.222696, 0)
 
 [node name="Skeleton3D" parent="Reptal/RootNode/root" index="0"]
-bones/0/position = Vector3(-2.12065e-10, -0.00389739, 0.892667)
-bones/0/rotation = Quaternion(0.839411, -1.84914e-06, -2.86391e-06, 0.543497)
-bones/1/position = Vector3(4.02645e-10, 0.196028, 2.15172e-05)
-bones/1/rotation = Quaternion(-0.365172, -0.00314877, -0.000518948, 0.930934)
-bones/2/rotation = Quaternion(0.263273, 0.00318494, -0.000869117, 0.964716)
-bones/4/position = Vector3(-1.01253e-06, 0.269856, 7.48353e-05)
-bones/4/rotation = Quaternion(0.182841, -0.00665013, 0.00122372, 0.983119)
-bones/5/rotation = Quaternion(0.660372, 0.218661, 0.703436, 0.145856)
-bones/6/rotation = Quaternion(1.27959e-08, 7.52224e-08, 0.292974, 0.95612)
-bones/7/rotation = Quaternion(0.344058, 0.569104, -0.405576, 0.627099)
+bones/0/position = Vector3(-8.65882e-09, 0.132444, 0.862493)
+bones/0/rotation = Quaternion(0.842165, -1.83442e-06, -2.87422e-06, 0.539219)
+bones/1/position = Vector3(1.00232e-08, 0.196207, 0.000877186)
+bones/1/rotation = Quaternion(-0.3626, -0.0116041, -0.15066, 0.919613)
+bones/2/rotation = Quaternion(0.0710585, 0.00329306, -0.000234526, 0.997467)
+bones/3/rotation = Quaternion(0.565129, 0.00555189, 0.00380438, 0.824975)
+bones/4/position = Vector3(-0.000165203, 0.136218, 0.0122534)
+bones/4/rotation = Quaternion(0.187841, -0.00664368, 0.00125718, 0.982176)
+bones/5/rotation = Quaternion(0.617811, 0.333157, 0.664338, 0.25684)
+bones/6/rotation = Quaternion(-4.02157e-08, 1.00444e-07, 0.439363, 0.898308)
+bones/7/rotation = Quaternion(0.333775, 0.57485, -0.406405, 0.626878)
 bones/7/scale = Vector3(0.500475, 0.500475, 0.500475)
 bones/8/rotation = Quaternion(-4.92592e-07, 0.908668, 0.417519, -6.65964e-07)
-bones/9/rotation = Quaternion(-6.71243e-09, 0.000348263, 1.54794e-08, 1)
-bones/10/rotation = Quaternion(-5.62874e-09, -0.000531626, -7.84216e-08, 1)
-bones/11/rotation = Quaternion(-0.660367, 0.21866, 0.70344, -0.145857)
-bones/12/rotation = Quaternion(-1.07683e-09, -1.10324e-07, -0.292974, 0.95612)
-bones/13/rotation = Quaternion(0.344058, -0.569104, 0.405576, 0.627099)
+bones/9/rotation = Quaternion(-6.58334e-09, 0.00826519, -3.05013e-08, 0.999966)
+bones/10/rotation = Quaternion(-3.55768e-08, 0.00287788, 2.89891e-07, 0.999996)
+bones/11/rotation = Quaternion(-0.617807, 0.333156, 0.664342, -0.256842)
+bones/12/rotation = Quaternion(6.71864e-08, -7.86115e-08, -0.439363, 0.898308)
+bones/13/rotation = Quaternion(0.333775, -0.57485, 0.406405, 0.626878)
 bones/13/scale = Vector3(0.500475, 0.500475, 0.500475)
 bones/14/rotation = Quaternion(5.24444e-07, 0.908668, 0.417519, 6.806e-07)
-bones/15/rotation = Quaternion(-1.08442e-08, -0.00034827, 8.54138e-09, 1)
-bones/16/rotation = Quaternion(2.88434e-08, 0.000531735, 4.20025e-08, 1)
+bones/15/rotation = Quaternion(-4.57866e-09, -0.00826517, -1.39458e-08, 0.999966)
+bones/16/rotation = Quaternion(3.14743e-08, -0.00287775, -7.0529e-08, 0.999996)
 
 [node name="Cube_002" parent="Reptal/RootNode/root/Skeleton3D" index="0"]
-"blend_shapes/Key 1" = 0.386782
+"blend_shapes/Key 2" = 1.0
 surface_material_override/0 = SubResource("StandardMaterial3D_5fr25")
 surface_material_override/1 = SubResource("StandardMaterial3D_jcy15")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Reptal/RootNode/root/Skeleton3D" index="1"]
-transform = Transform3D(0.999994, -0.000695897, -0.00345159, 2.12104e-05, -0.979066, 0.203542, -0.00352099, -0.203541, -0.97906, 0.00178014, -0.322139, 1.58635)
+transform = Transform3D(0.953712, 0.0503108, -0.296484, 7.78898e-05, -0.985947, -0.167056, -0.300722, 0.159301, -0.940313, 0.160377, 0.0462665, 1.54906)
 bone_name = "head.x"
 bone_idx = 4
 
 [node name="JawSlot" type="Node3D" parent="Reptal/RootNode/root/Skeleton3D/BoneAttachment3D"]
-transform = Transform3D(0.974319, 0.0244058, -0.223846, 0.0915764, 0.865234, 0.492934, 0.20571, -0.500774, 0.840779, 0.0561553, 0.191873, 0.263166)
+transform = Transform3D(0.974319, 0.0244058, -0.223846, 0.0915764, 0.865233, 0.492934, 0.20571, -0.500774, 0.840779, -0.0438463, 0.356119, 0.298512)
 
 [node name="EatHitbox" type="Area3D" parent="Reptal/RootNode/root/Skeleton3D/BoneAttachment3D/JawSlot"]
 transform = Transform3D(0.404567, -0.083913, 0.281574, -0.151045, 0.351606, 0.321806, -0.252013, -0.345445, 0.259147, 0, 0, 0.09)
@@ -153,27 +227,26 @@ script = ExtResource("6_weoln")
 initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="State Machine" node_paths=PackedStringArray("nav", "jawSlot", "entity")]
-script = ExtResource("7_65rw4")
+script = ExtResource("8_xwkf6")
 move_speed = 1
 nav = NodePath("../../NavigationAgent3D")
 jawSlot = NodePath("../../Reptal/RootNode/root/Skeleton3D/BoneAttachment3D/JawSlot")
 entity = NodePath("../..")
 
 [node name="Chase" type="Node" parent="State Machine" node_paths=PackedStringArray("nav", "jawSlot", "entity")]
-script = ExtResource("9_sx0r7")
+script = ExtResource("9_rdku4")
 move_speed = 4
 nav = NodePath("../../NavigationAgent3D")
-vocalIndex = null
 jawSlot = NodePath("../../Reptal/RootNode/root/Skeleton3D/BoneAttachment3D/JawSlot")
 entity = NodePath("../..")
 
 [node name="Scan" type="Node" parent="State Machine" node_paths=PackedStringArray("jawSlot", "entity")]
-script = ExtResource("9_20hga")
+script = ExtResource("10_anjwx")
 jawSlot = NodePath("../../Reptal/RootNode/root/Skeleton3D/BoneAttachment3D/JawSlot")
 entity = NodePath("../..")
 
 [node name="Eat" type="Node" parent="State Machine" node_paths=PackedStringArray("nav", "jawSlot", "entity")]
-script = ExtResource("11_gdunc")
+script = ExtResource("11_yve87")
 move_speed = 1
 nav = NodePath("../../NavigationAgent3D")
 jawSlot = NodePath("../../Reptal/RootNode/root/Skeleton3D/BoneAttachment3D/JawSlot")
@@ -242,9 +315,10 @@ bus = &"Physical"
 emission_angle_enabled = true
 emission_angle_degrees = 90.0
 
-[node name="stats" type="Node" parent="."]
+[node name="stats" type="Node" parent="." node_paths=PackedStringArray("stateMachine")]
 script = ExtResource("14_e11c1")
-MAX_HP = 10
+MAX_HP = 20
+stateMachine = NodePath("../State Machine")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_ir6kx")

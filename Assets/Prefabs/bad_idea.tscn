@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://da6h2nvx8jnpt"]
+[gd_scene load_steps=21 format=3 uid="uid://da6h2nvx8jnpt"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Idea.gd" id="1_34i3w"]
 [ext_resource type="PackedScene" uid="uid://brj1mgq6dx3sx" path="res://Assets/3Dmodels/Idea/idea.glb" id="2_t3ikl"]
@@ -103,6 +103,74 @@ properties/1/spawn = true
 properties/1/sync = true
 properties/1/watch = false
 
+[sub_resource type="Curve" id="Curve_cn2wb"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, -360), 0.0, 0.0, 0, 0, Vector2(0.972851, 360), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_pisj2"]
+curve = SubResource("Curve_cn2wb")
+
+[sub_resource type="Curve" id="Curve_q6e7v"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, -360), 0.0, 0.0, 0, 0, Vector2(1, 360), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_lkkkr"]
+curve = SubResource("Curve_q6e7v")
+
+[sub_resource type="Curve" id="Curve_wq6hr"]
+min_value = -200.0
+max_value = 200.0
+_data = [Vector2(0, 56.8421), 0.0, 0.0, 0, 0, Vector2(1, -200), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_wr3i6"]
+curve = SubResource("Curve_wq6hr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qrkfv"]
+lifetime_randomness = 0.52
+direction = Vector3(0, -1, 0)
+spread = 180.0
+gravity = Vector3(0, 40, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 70.0
+angular_velocity_min = 8.75
+angular_velocity_max = 16.8
+angular_velocity_curve = SubResource("CurveTexture_lkkkr")
+linear_accel_min = 11.48
+linear_accel_max = 75.09
+linear_accel_curve = SubResource("CurveTexture_wr3i6")
+radial_accel_min = 3.05
+radial_accel_max = 11.8
+damping_min = 3.305
+damping_max = 13.55
+angle_min = -76.0
+angle_max = 74.0
+angle_curve = SubResource("CurveTexture_pisj2")
+scale_min = 0.0
+scale_max = 0.3
+color = Color(1, 0.439216, 0.25098, 1)
+turbulence_enabled = true
+turbulence_noise_strength = 4.3
+turbulence_noise_scale = 5.65
+turbulence_noise_speed_random = 1.35
+turbulence_influence_min = 0.09
+turbulence_influence_max = 0.62
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_68d5q"]
+cull_mode = 2
+emission_enabled = true
+emission = Color(0.505882, 0, 1, 1)
+emission_energy_multiplier = 6.15
+subsurf_scatter_enabled = true
+subsurf_scatter_strength = 1.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_tcbw0"]
+material = SubResource("StandardMaterial3D_68d5q")
+
 [node name="Bad_Idea" type="Node3D"]
 script = ExtResource("1_34i3w")
 ideaType = "bad"
@@ -123,7 +191,7 @@ transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 light_energy = 3.0
 shadow_enabled = true
 omni_range = 36.724
-omni_attenuation = 3.24901
+omni_attenuation = 7.46426
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="area"]
 transform = Transform3D(-1.60678, 0, 3.66309, 0, 4, 0, -3.66309, 0, -1.60678, 0, 0.892, 0)
@@ -153,6 +221,24 @@ projection = 1
 [node name="Get" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_7eqtp")
 volume_db = -5.0
+unit_size = 30.0
+bus = &"Physical"
+
+[node name="BreakParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.670028, 0)
+emitting = false
+amount = 1000
+one_shot = true
+speed_scale = 0.2
+explosiveness = 0.92
+fixed_fps = 60
+visibility_aabb = AABB(-0.001, 0.0068125, -0.00100501, 0.002, 0.002, 0.002)
+process_material = SubResource("ParticleProcessMaterial_qrkfv")
+draw_pass_1 = SubResource("PlaneMesh_tcbw0")
+
+[node name="Explode" type="AudioStreamPlayer3D" parent="."]
+volume_db = -15.0
+unit_size = 20.0
 bus = &"Physical"
 
 [connection signal="body_entered" from="area" to="." method="_on_area_body_entered"]

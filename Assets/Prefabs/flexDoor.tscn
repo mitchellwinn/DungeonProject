@@ -1,0 +1,85 @@
+[gd_scene load_steps=11 format=3 uid="uid://cgp2r6t8esigg"]
+
+[ext_resource type="Texture2D" uid="uid://35042ncl1ggb" path="res://Assets/Materials/WoodCabinetWorn/wood_cabinet_worn_long_diff_1k.jpg" id="1_xe4lf"]
+[ext_resource type="Texture2D" uid="uid://c375jsac68fds" path="res://Assets/Materials/WoodCabinetWorn/wood_cabinet_worn_long_nor_gl_1k.jpg" id="2_32m70"]
+[ext_resource type="Texture2D" uid="uid://cin68kw4aoe0w" path="res://Assets/Materials/WoodCabinetWorn/wood_cabinet_worn_long_rough_1k.jpg" id="3_3bx4s"]
+[ext_resource type="PackedScene" uid="uid://k0a23eo6n7ba" path="res://Assets/Prefabs/knob.tscn" id="4_qgi5i"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c6rav"]
+cull_mode = 2
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("1_xe4lf")
+metallic_specular = 1.0
+roughness = 0.16
+roughness_texture = ExtResource("3_3bx4s")
+normal_enabled = true
+normal_texture = ExtResource("2_32m70")
+uv1_scale = Vector3(0.69, 0.69, -0.197)
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kwyhq"]
+cull_mode = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7v11y"]
+size = Vector3(1.87885, 2.78948, 0.253676)
+
+[sub_resource type="Animation" id="Animation_45ek4"]
+resource_name = "close"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 2.61799, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_y0bh8"]
+resource_name = "open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 2.61799, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2x74p"]
+_data = {
+"close": SubResource("Animation_45ek4"),
+"open": SubResource("Animation_y0bh8")
+}
+
+[node name="Door" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="Door" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 7.27596e-12, 0, -7.27596e-12, 1, -4.65661e-10, -3.38813e-21, 4.65661e-10, 1, 1, 0.486, 0)
+material_override = SubResource("StandardMaterial3D_c6rav")
+size = Vector3(1.935, 2.99, -0.06)
+material = SubResource("StandardMaterial3D_kwyhq")
+
+[node name="Area3D" type="Area3D" parent="Door"]
+transform = Transform3D(1, 3.41913e-10, 0, -7.10543e-12, 1, -6.98492e-10, 5.82077e-11, 0, 1, -0.0708539, 3.57628e-07, -1.90735e-06)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Door/Area3D"]
+transform = Transform3D(1, 5.08749e-11, 1.16415e-10, -7.44649e-12, 1, -5.82077e-10, -1.74623e-10, -2.32831e-10, 1, 0.0843821, 0.0376416, -2.86102e-06)
+shape = SubResource("BoxShape3D_7v11y")
+
+[node name="Knob" parent="Door" instance=ExtResource("4_qgi5i")]
+transform = Transform3D(1, -1.57772e-30, 0, -1.57772e-30, 1, 0, 0, 0, -1, 0.758636, -0.215155, -0.177858)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Door"]
+libraries = {
+"": SubResource("AnimationLibrary_2x74p")
+}

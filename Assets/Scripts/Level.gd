@@ -5,6 +5,7 @@ extends Node
 func _ready():
 	GameManager.players = $Players
 	GameManager.entities = $Entities
+	GameManager.props = $Props
 	if not multiplayer.is_server():
 		return
 	multiplayer.peer_connected.connect(add_player)

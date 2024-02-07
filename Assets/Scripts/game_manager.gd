@@ -13,8 +13,11 @@ var generatingDungeon = false
 var dungeon
 var players
 var entities
+var props
+var globalPhysicsDelta: float
 
 func _physics_process(delta):
+	globalPhysicsDelta=delta
 	GameManager.teleportCool-=1
 	if activePlayer:
 		generalUImanagement()

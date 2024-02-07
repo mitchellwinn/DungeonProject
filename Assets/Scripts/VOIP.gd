@@ -22,8 +22,7 @@ func _ready():
 	2	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	if !is_multiplayer_authority():
-		#print("no auth")
+	if effect == null:
 		return
 	if get_parent().stats.current_hp<=0:
 		return

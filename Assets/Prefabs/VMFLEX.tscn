@@ -1,0 +1,177 @@
+[gd_scene load_steps=19 format=3 uid="uid://b6tsejf41s7bc"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Entity.gd" id="1_tjpgt"]
+[ext_resource type="PackedScene" uid="uid://67l58lvhqfio" path="res://Assets/3Dmodels/VMFLEX/VMFLEX.fbx" id="2_r2kw2"]
+[ext_resource type="Texture2D" uid="uid://3ua7g2cvnkgx" path="res://Assets/3Dmodels/VMFLEX/VMFLEX-56b3fed31e77358c606374a68f0f3d7e_Skin.png" id="3_p42vt"]
+[ext_resource type="Texture2D" uid="uid://c88n2g7xurd7k" path="res://Assets/3Dmodels/VMFLEX/VMFLEX-56b3fed31e77358c606374a68f0f3d7e_sweatshirt.png" id="4_28tcf"]
+[ext_resource type="Texture2D" uid="uid://b05niglf5j17f" path="res://Assets/3Dmodels/VMFLEX/VMFLEX-56b3fed31e77358c606374a68f0f3d7e_shoes.png" id="5_al6it"]
+[ext_resource type="Texture2D" uid="uid://dub4ai5fy17m5" path="res://Assets/3Dmodels/VMFLEX/VMFLEX-56b3fed31e77358c606374a68f0f3d7e_jeans.png" id="6_wptfe"]
+[ext_resource type="Script" path="res://Assets/Scripts/States/State Machine.gd" id="7_e5n4q"]
+[ext_resource type="Script" path="res://Assets/Scripts/States/EntityIdle.gd" id="8_swlxx"]
+[ext_resource type="Script" path="res://Assets/Scripts/stats.gd" id="14_po8sl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mlh88"]
+resource_name = "Material"
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 1)
+albedo_texture = ExtResource("3_p42vt")
+metallic = 0.4
+metallic_specular = 0.0
+roughness = 0.272166
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u151i"]
+resource_name = "Material.006"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.599993, 0.39023, 0.199039, 1)
+metallic = 0.4
+roughness = 0.677476
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_grmp5"]
+resource_name = "Material.005"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.122067, 0.0832478, 0.133326, 1)
+metallic = 0.4
+roughness = 0.641107
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wxxlr"]
+resource_name = "Material.001"
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 1)
+albedo_texture = ExtResource("4_28tcf")
+metallic = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xshwg"]
+resource_name = "Material.003"
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 1)
+albedo_texture = ExtResource("5_al6it")
+metallic = 0.4
+subsurf_scatter_enabled = true
+subsurf_scatter_strength = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vy008"]
+resource_name = "Material.002"
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 1)
+albedo_texture = ExtResource("6_wptfe")
+metallic = 0.4
+
+[sub_resource type="AudioStream" id="AudioStream_prt2l"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ir6kx"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/sync = true
+properties/1/watch = false
+properties/2/path = NodePath("stats:baseAnimation")
+properties/2/spawn = true
+properties/2/sync = true
+properties/2/watch = false
+properties/3/path = NodePath("stats:animSpeed")
+properties/3/spawn = true
+properties/3/sync = true
+properties/3/watch = false
+properties/4/path = NodePath("stats:current_hp")
+properties/4/spawn = true
+properties/4/sync = true
+properties/4/watch = false
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_41ds6"]
+height = 3.40703
+
+[node name="VMFLEX" type="CharacterBody3D" node_paths=PackedStringArray("animator", "stats", "stateMachine")]
+script = ExtResource("1_tjpgt")
+powerLevel = 1
+animator = NodePath("")
+stats = NodePath("stats")
+stateMachine = NodePath("State Machine")
+vocalsDirectory = "res://Assets/SFX/ghoul_noises/"
+screamDirectory = "res://Assets/SFX/monster_scream/"
+offensiveDirectory = "res://Assets/SFX/monster_scream/"
+
+[node name="VMFLEX" parent="." instance=ExtResource("2_r2kw2")]
+
+[node name="VMFlex" parent="VMFLEX/RootNode/root/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_mlh88")
+
+[node name="b0oard" parent="VMFLEX/RootNode/root/Skeleton3D" index="1"]
+surface_material_override/1 = SubResource("StandardMaterial3D_u151i")
+surface_material_override/3 = SubResource("StandardMaterial3D_grmp5")
+
+[node name="VMFlex_001" parent="VMFLEX/RootNode/root/Skeleton3D" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_wxxlr")
+
+[node name="VMFlex_003" parent="VMFLEX/RootNode/root/Skeleton3D" index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_xshwg")
+
+[node name="VMFlex_004" parent="VMFLEX/RootNode/root/Skeleton3D" index="5"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vy008")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1, 0)
+target_position = Vector3(0, -2, 0)
+collision_mask = 32
+debug_shape_custom_color = Color(1, 0, 0, 1)
+
+[node name="State Machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("7_e5n4q")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="State Machine" node_paths=PackedStringArray("nav", "jawSlot", "entity")]
+script = ExtResource("8_swlxx")
+move_speed = 1
+nav = NodePath("../../NavigationAgent3D")
+jawSlot = NodePath("")
+entity = NodePath("../..")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+avoidance_enabled = true
+
+[node name="Vocals" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.7418, 1.19848e-07)
+visible = false
+stream = SubResource("AudioStream_prt2l")
+volume_db = -10.0
+max_distance = 20.0
+bus = &"Reptal"
+emission_angle_enabled = true
+emission_angle_degrees = 90.0
+
+[node name="LeftFootstep" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+stream = SubResource("AudioStream_prt2l")
+volume_db = -15.0
+max_distance = 20.0
+bus = &"Physical"
+emission_angle_enabled = true
+emission_angle_degrees = 90.0
+
+[node name="RightFootstep" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+stream = SubResource("AudioStream_prt2l")
+volume_db = -15.0
+max_distance = 20.0
+bus = &"Physical"
+emission_angle_enabled = true
+emission_angle_degrees = 90.0
+
+[node name="stats" type="Node" parent="."]
+script = ExtResource("14_po8sl")
+MAX_HP = 10
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_ir6kx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.67782, 0)
+shape = SubResource("CapsuleShape3D_41ds6")
+
+[editable path="VMFLEX"]

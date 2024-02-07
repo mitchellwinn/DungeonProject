@@ -1,6 +1,7 @@
 extends Node3D
 class_name Interactable
 
+@export var displayingName: bool
 @export var displayName: String
 
 # Called when the node enters the scene tree for the first time.

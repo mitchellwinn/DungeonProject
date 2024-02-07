@@ -1,0 +1,239 @@
+[gd_scene load_steps=11 format=3 uid="uid://cf14khgmbvcu"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Room.gd" id="1_il2y8"]
+[ext_resource type="PackedScene" uid="uid://cgp2r6t8esigg" path="res://Assets/Prefabs/flexDoor.tscn" id="3_yunvq"]
+[ext_resource type="Script" path="res://Assets/Scripts/Entrance.gd" id="4_qskfb"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_kpgbn"]
+vertices = PackedVector3Array(0.942045, 0.3337, -4.20823, 0.592045, 0.3337, -4.50823, -0.557955, 0.3337, -4.50823, -0.907955, 0.3337, -4.20823, -0.957955, 0.3337, -1.10823, -0.707955, 0.4337, -0.708233, 0.692045, 0.4337, -0.708233, 0.942045, 0.3337, -1.10823, -0.907955, 0.3337, -4.20823, -1.40795, 0.3337, -4.20823, -1.40795, 0.3337, -1.20823, 1.39205, 0.3337, -1.20823, 1.39205, 0.3337, -4.20823, 0.942045, 0.3337, -4.20823, -1.40795, 0.3337, -1.20823, -0.957955, 0.3337, -1.10823, 0.942045, 0.3337, -1.10823, 1.39205, 0.3337, -1.20823, 0.942045, 0.3337, -4.20823, -0.907955, 0.3337, -4.20823, -4.25796, 0.3337, -0.858233, -2.45796, 0.3337, -0.658233, -2.20796, 0.3337, -0.958233, -4.25796, 0.3337, -0.858233, -2.20796, 0.3337, -0.958233, -1.65795, 0.3337, -1.20823, -1.40795, 0.3337, -4.20823, -4.20795, 0.3337, -4.20823, -1.65795, 0.3337, -1.20823, -1.40795, 0.3337, -1.20823, -1.40795, 0.3337, -4.20823, 1.79205, 0.3337, -1.15823, 2.29205, 0.3337, -0.858233, 4.24204, 0.3337, -0.958233, 1.39205, 0.3337, -1.20823, 1.79205, 0.3337, -1.15823, 4.24204, 0.3337, -0.958233, 4.24204, 0.3337, -4.20823, 1.39205, 0.3337, -4.20823, 4.49204, 0.3337, -0.00823307, 4.49204, 0.3337, -0.608233, 4.24204, 0.3337, -0.958233, 2.64205, 0.3337, -0.358233, 2.69205, 0.3337, -0.00823307, 4.24204, 0.3337, -0.958233, 2.29205, 0.3337, -0.858233, 2.64205, 0.3337, -0.358233, -4.25796, 0.3337, -0.858233, -4.50796, 0.3337, -0.558233, -4.50796, 0.3337, 0.591767, -4.25796, 0.3337, 0.891767, -2.65795, 0.3337, 0.291767, -2.70796, 0.3337, -0.108233, -4.25796, 0.3337, 0.891767, -2.45796, 0.3337, 0.691767, -2.65795, 0.3337, 0.291767, -2.70796, 0.3337, -0.108233, -2.45796, 0.3337, -0.658233, -4.25796, 0.3337, -0.858233, 4.29205, 0.3337, 0.891767, 4.49204, 0.3337, 0.641767, 4.49204, 0.3337, -0.00823307, 2.69205, 0.3337, -0.00823307, 2.64205, 0.3337, 0.341767, 2.64205, 0.3337, 0.341767, 2.34204, 0.3337, 0.791767, 4.29205, 0.3337, 0.891767, -0.907955, 0.3337, 4.24177, -0.557955, 0.3337, 4.54177, 0.592045, 0.3337, 4.54177, 0.942045, 0.3337, 4.24177, 0.792045, 0.3337, 0.991767, 0.692045, 0.4337, 0.541767, -0.707955, 0.4337, 0.541767, -0.807955, 0.3337, 0.991767, 1.34204, 0.3337, 4.24177, 1.34204, 0.3337, 1.24177, 1.14205, 0.3337, 1.24177, 0.942045, 0.3337, 4.24177, -1.15795, 0.3337, 1.24177, -1.35795, 0.3337, 1.24177, -1.35795, 0.3337, 4.24177, -0.907955, 0.3337, 4.24177, 1.14205, 0.3337, 1.24177, 0.792045, 0.3337, 0.991767, -0.807955, 0.3337, 0.991767, -1.15795, 0.3337, 1.24177, -0.907955, 0.3337, 4.24177, 0.942045, 0.3337, 4.24177, -2.20796, 0.3337, 0.941767, -2.45796, 0.3337, 0.691767, -4.25796, 0.3337, 0.891767, -1.70796, 0.3337, 1.19177, -2.20796, 0.3337, 0.941767, -4.25796, 0.3337, 0.891767, -1.35795, 0.3337, 1.24177, -1.70796, 0.3337, 1.19177, -4.25796, 0.3337, 0.891767, -4.20795, 0.3337, 4.24177, -1.35795, 0.3337, 4.24177, 4.29205, 0.3337, 0.891767, 2.34204, 0.3337, 0.791767, 1.94205, 0.3337, 1.09177, 4.29205, 0.3337, 0.891767, 1.94205, 0.3337, 1.09177, 1.34204, 0.3337, 1.24177, 1.34204, 0.3337, 4.24177, 4.24204, 0.3337, 4.24177)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(10, 9, 8), PackedInt32Array(13, 12, 11), PackedInt32Array(16, 15, 17), PackedInt32Array(17, 15, 14), PackedInt32Array(17, 14, 19), PackedInt32Array(17, 19, 18), PackedInt32Array(22, 21, 20), PackedInt32Array(24, 23, 25), PackedInt32Array(25, 23, 27), PackedInt32Array(25, 27, 26), PackedInt32Array(30, 29, 28), PackedInt32Array(33, 32, 31), PackedInt32Array(35, 34, 36), PackedInt32Array(36, 34, 38), PackedInt32Array(36, 38, 37), PackedInt32Array(40, 39, 41), PackedInt32Array(41, 39, 42), PackedInt32Array(42, 39, 43), PackedInt32Array(44, 46, 45), PackedInt32Array(48, 47, 49), PackedInt32Array(49, 47, 50), PackedInt32Array(50, 47, 52), PackedInt32Array(50, 52, 51), PackedInt32Array(54, 53, 55), PackedInt32Array(58, 57, 56), PackedInt32Array(60, 59, 61), PackedInt32Array(61, 59, 63), PackedInt32Array(61, 63, 62), PackedInt32Array(66, 65, 64), PackedInt32Array(68, 67, 69), PackedInt32Array(69, 67, 70), PackedInt32Array(72, 71, 73), PackedInt32Array(73, 71, 74), PackedInt32Array(76, 75, 77), PackedInt32Array(77, 75, 78), PackedInt32Array(80, 79, 81), PackedInt32Array(81, 79, 82), PackedInt32Array(84, 83, 85), PackedInt32Array(85, 83, 86), PackedInt32Array(86, 83, 87), PackedInt32Array(87, 83, 88), PackedInt32Array(91, 90, 89), PackedInt32Array(92, 94, 93), PackedInt32Array(96, 95, 97), PackedInt32Array(97, 95, 99), PackedInt32Array(97, 99, 98), PackedInt32Array(102, 101, 100), PackedInt32Array(104, 103, 105), PackedInt32Array(105, 103, 106), PackedInt32Array(106, 103, 107)]
+cell_size = 0.05
+cell_height = 0.05
+agent_max_climb = 1.0
+agent_max_slope = 50.0
+region_min_size = 1.0
+region_merge_size = 5.0
+edge_max_length = 20.0
+detail_sample_distance = 10.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wevnk"]
+shading_mode = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_ap6py"]
+size = Vector3(10, 0.5, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6yyo8"]
+cull_mode = 2
+shading_mode = 0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u2h5k"]
+size = Vector3(2.16153, 3.01519, 1.06539)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yi4rm"]
+size = Vector3(9.9, 10, 9.9)
+
+[sub_resource type="QuadMesh" id="QuadMesh_852hj"]
+size = Vector2(10, 10)
+
+[node name="_Test_Room" type="Node3D" node_paths=PackedStringArray("entrance1", "entrance2", "entrance3", "entrance4", "lightsParent", "roomBoundaries")]
+script = ExtResource("1_il2y8")
+entrance1 = NodePath("NavigationRegion3D/RoomOuter/NorthEntrance")
+entrance2 = NodePath("NavigationRegion3D/RoomOuter/SouthEntrance")
+entrance3 = NodePath("NavigationRegion3D/RoomOuter/EastEntrance")
+entrance4 = NodePath("NavigationRegion3D/RoomOuter/WestEntrance")
+lightsParent = NodePath("NavigationRegion3D/Lights")
+roomBoundaries = NodePath("NavigationRegion3D/RoomBoundaries")
+roomType = "Room"
+fogAmt = 0.1
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_kpgbn")
+
+[node name="Lights" type="Node3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.667299, 0)
+visible = false
+
+[node name="OmniLight3D" type="OmniLight3D" parent="NavigationRegion3D/Lights" groups=["light"]]
+transform = Transform3D(0.999999, 0.000962874, 0.000629219, -0.000962233, 0.999999, -0.0010181, -0.000630198, 0.00101749, 0.999999, -0.0095782, 7.4335, 1.68799)
+light_color = Color(1, 0.729412, 0.584314, 1)
+light_energy = 5.0
+light_volumetric_fog_energy = 5.876
+light_size = 0.285
+light_specular = 7.51
+shadow_enabled = true
+shadow_blur = 5.0
+distance_fade_enabled = true
+omni_range = 13.4551
+omni_attenuation = 2.07053
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="NavigationRegion3D/Lights" groups=["light"]]
+transform = Transform3D(0.999999, 0.000962874, 0.000629219, -0.000962233, 0.999999, -0.0010181, -0.000630198, 0.0010175, 0.999999, 1.51052, 7.4335, 0.879374)
+light_color = Color(1, 0.729412, 0.584314, 1)
+light_energy = 5.0
+light_volumetric_fog_energy = 5.876
+light_size = 0.285
+light_specular = 7.51
+shadow_enabled = true
+shadow_blur = 5.0
+distance_fade_enabled = true
+omni_range = 13.4551
+omni_attenuation = 2.07053
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="NavigationRegion3D/Lights" groups=["light"]]
+transform = Transform3D(-0.474489, 0.00043963, 0.880261, -0.000962231, 0.999999, -0.0010181, -0.880261, -0.00133009, -0.474488, 1.58768, 7.4335, -0.770522)
+light_color = Color(1, 0.729412, 0.584314, 1)
+light_energy = 5.0
+light_volumetric_fog_energy = 5.876
+light_size = 0.285
+light_specular = 7.51
+shadow_enabled = true
+shadow_blur = 5.0
+distance_fade_enabled = true
+omni_range = 13.4551
+omni_attenuation = 2.07053
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="NavigationRegion3D/Lights" groups=["light"]]
+transform = Transform3D(-0.474489, 0.00043963, 0.880261, -0.000962231, 0.999999, -0.0010181, -0.880261, -0.00133009, -0.474488, 0.155213, 7.4335, -1.72583)
+light_color = Color(1, 0.729412, 0.584314, 1)
+light_energy = 5.0
+light_volumetric_fog_energy = 5.876
+light_size = 0.285
+light_specular = 7.51
+shadow_enabled = true
+shadow_blur = 5.0
+distance_fade_enabled = true
+omni_range = 13.4551
+omni_attenuation = 2.07053
+
+[node name="OmniLight3D6" type="OmniLight3D" parent="NavigationRegion3D/Lights" groups=["light"]]
+transform = Transform3D(-0.999999, -0.000963459, -0.00120521, -0.000962232, 0.999999, -0.0010181, 0.00120619, -0.00101694, -0.999999, -1.5532, 7.4335, -0.843466)
+light_color = Color(1, 0.729412, 0.584314, 1)
+light_energy = 5.0
+light_volumetric_fog_energy = 5.876
+light_size = 0.285
+light_specular = 7.51
+shadow_enabled = true
+shadow_blur = 5.0
+distance_fade_enabled = true
+omni_range = 13.4551
+omni_attenuation = 2.07053
+
+[node name="OmniLight3D7" type="OmniLight3D" parent="NavigationRegion3D/Lights" groups=["light"]]
+transform = Transform3D(0.474995, -0.000438865, -0.879988, -0.000962229, 0.999999, -0.0010181, 0.879988, 0.00133034, 0.474995, -1.62941, 7.4335, 0.806476)
+light_color = Color(1, 0.729412, 0.584314, 1)
+light_energy = 5.0
+light_volumetric_fog_energy = 5.876
+light_size = 0.285
+light_specular = 7.51
+shadow_enabled = true
+shadow_blur = 5.0
+distance_fade_enabled = true
+omni_range = 13.4551
+omni_attenuation = 2.07053
+
+[node name="RoomFloor" type="CSGMesh3D" parent="NavigationRegion3D" groups=["carpet"]]
+material_override = SubResource("StandardMaterial3D_wevnk")
+use_collision = true
+mesh = SubResource("BoxMesh_ap6py")
+
+[node name="RoomOuter" type="CSGBox3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.999999, 0.000962871, 0.000629219, -0.00096223, 0.999999, -0.0010181, -0.000630198, 0.00101749, 0.999999, 0, 5, 0)
+material_override = SubResource("StandardMaterial3D_6yyo8")
+use_collision = true
+size = Vector3(10, 10, 10)
+
+[node name="RoomInner" type="CSGBox3D" parent="NavigationRegion3D/RoomOuter"]
+transform = Transform3D(1, -5.74119e-12, 0, -7.16227e-12, 1, -1.16415e-10, 0, 1.16415e-10, 1, 0, -0.5, 0)
+operation = 2
+size = Vector3(9.5, 12.515, 9.5)
+
+[node name="NorthEntrance" type="CSGBox3D" parent="NavigationRegion3D/RoomOuter" node_paths=PackedStringArray("opening", "area") groups=["entrance"]]
+transform = Transform3D(1, -5.74119e-12, 0, -7.16227e-12, 1, -1.16415e-10, 0, 1.16415e-10, 1, 0, -3.75, 5)
+operation = 2
+size = Vector3(2, 4, 1)
+script = ExtResource("4_qskfb")
+direction = "north"
+notes = "normal"
+opening = NodePath(".")
+canLinkToOthers = true
+area = NodePath("Area3D")
+
+[node name="Area3D" type="Area3D" parent="NavigationRegion3D/RoomOuter/NorthEntrance"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/RoomOuter/NorthEntrance/Area3D"]
+transform = Transform3D(1, -5.91172e-12, 0, -7.21911e-12, 1, -2.32831e-10, 0, 2.32831e-10, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_u2h5k")
+
+[node name="flexDoor" parent="NavigationRegion3D/RoomOuter/NorthEntrance/Area3D" instance=ExtResource("3_yunvq")]
+
+[node name="SouthEntrance" type="CSGBox3D" parent="NavigationRegion3D/RoomOuter" node_paths=PackedStringArray("opening", "area") groups=["entrance"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.75, -5)
+operation = 2
+size = Vector3(2, 4, 1)
+script = ExtResource("4_qskfb")
+direction = "south"
+notes = "normal"
+opening = NodePath(".")
+canLinkToOthers = true
+area = NodePath("Area3D")
+
+[node name="Area3D" type="Area3D" parent="NavigationRegion3D/RoomOuter/SouthEntrance"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/RoomOuter/SouthEntrance/Area3D"]
+shape = SubResource("BoxShape3D_u2h5k")
+
+[node name="EastEntrance" type="CSGBox3D" parent="NavigationRegion3D/RoomOuter" node_paths=PackedStringArray("opening", "area") groups=["entrance"]]
+transform = Transform3D(-4.37722e-08, -7.84439e-12, 1, -1.16415e-10, 1, 5.74119e-12, -1, 0, -4.37722e-08, -5, -3.75, 2.18861e-07)
+operation = 2
+size = Vector3(2, 4, 1)
+script = ExtResource("4_qskfb")
+direction = "east"
+notes = "normal"
+opening = NodePath(".")
+canLinkToOthers = true
+area = NodePath("Area3D")
+
+[node name="Area3D" type="Area3D" parent="NavigationRegion3D/RoomOuter/EastEntrance"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/RoomOuter/EastEntrance/Area3D"]
+shape = SubResource("BoxShape3D_u2h5k")
+
+[node name="WestEntrance" type="CSGBox3D" parent="NavigationRegion3D/RoomOuter" node_paths=PackedStringArray("opening", "area") groups=["entrance"]]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5, -3.75, -2.18557e-07)
+operation = 2
+size = Vector3(2, 4, 1)
+script = ExtResource("4_qskfb")
+direction = "west"
+notes = "normal"
+opening = NodePath(".")
+canLinkToOthers = true
+area = NodePath("Area3D")
+
+[node name="Area3D" type="Area3D" parent="NavigationRegion3D/RoomOuter/WestEntrance"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/RoomOuter/WestEntrance/Area3D"]
+shape = SubResource("BoxShape3D_u2h5k")
+
+[node name="RoomBoundaries" type="Area3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+collision_mask = 17
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/RoomBoundaries"]
+shape = SubResource("BoxShape3D_yi4rm")
+
+[node name="RoomCeiling" type="CSGMesh3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 9.98327, 0)
+use_collision = true
+mesh = SubResource("QuadMesh_852hj")
+material = SubResource("StandardMaterial3D_6yyo8")
+
+[connection signal="body_entered" from="NavigationRegion3D/RoomBoundaries" to="." method="_on_room_boundaries_body_entered"]

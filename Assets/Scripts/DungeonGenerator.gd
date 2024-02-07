@@ -12,6 +12,7 @@ var rooms: Array
 @export var bigRoomChance: int #adjusts the likelihood of each room being a big room instead (1-1000)
 @export var longConfusingRoomChance: int
 @export var departmentStoreChance: int
+@export var garageChance: int
 @export var ideaChance: int
 var timeSinceLastCompletion = 0
 #const gOh = preload("res://Assets/Prefabs/gate_of_horn.tscn")
@@ -19,6 +20,7 @@ var timeSinceLastCompletion = 0
 const _test_room = preload("res://Assets/Rooms/_Test_Room.tscn")
 const _big_room = preload("res://Assets/Rooms/_Big_Room.tscn")
 const _long_confusing_room = preload("res://Assets/Rooms/_Long_Confusing_Room.tscn")
+const _garage_room = preload("res://Assets/Rooms/Garage_Room.tscn")
 const _department_store = preload("res://Assets/Rooms/_Department_Store.tscn")
 var ivoryConnection = false
 var complete = false
@@ -192,7 +194,10 @@ func generateRoom(_position, nestLevel):
 
 func decideRoomType(parent, retry, nestLevel):
 	var roomInstance
-	if rng.randi_range(0,1000)>(1000-departmentStoreChance\
+	if rng.randi_range(0,1000)>(1000-garageChance\
+	-GameManager.network.goodModifier*3):
+		roomInstance = _garage_room.instantiate()
+	elif rng.randi_range(0,1000)>(1000-departmentStoreChance\
 	-GameManager.network.goodModifier*3):
 		roomInstance = _department_store.instantiate()
 	elif rng.randi_range(0,1000)>(1000-longConfusingRoomChance\
