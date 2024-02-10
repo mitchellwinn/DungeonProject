@@ -1,0 +1,396 @@
+[gd_scene load_steps=13 format=3 uid="uid://xsq7ht727wwu"]
+
+[ext_resource type="Texture2D" uid="uid://bfogpv1abt6ld" path="res://Assets/Materials/PlayerUI/lanternfire.png" id="1_gl7fb"]
+[ext_resource type="PackedScene" uid="uid://bqdiry3q8r8ip" path="res://Assets/3Dmodels/DaisyLantern/lantern.glb" id="2_pxffw"]
+[ext_resource type="Script" path="res://Assets/Scripts/Items/Lantern.gd" id="4_3v4ag"]
+
+[sub_resource type="Animation" id="Animation_owg2a"]
+resource_name = "off"
+length = 10.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 2.3, 4, 5.7, 6.7, 8, 9.1, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0, 9, 0, 9, 0, 9, 0, 9, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OmniLight3D:omni_range")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.5, 0.8, 1, 1.2, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [70.0, 70.0, 20.0, 70.0, 70.0, 40.0, 70.0, 70.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("OmniLight3D:light_energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(2.63902, 2.14355),
+"update": 0,
+"values": [2.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite3D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(2.73208, 2.73208),
+"update": 0,
+"values": [Vector3(0.6, 0.6, 0.6), Vector3(0, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite3D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Vector3(0, -1.03337, 0), Vector3(0, -1.163, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("OmniLight3D2:light_energy")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1.8025, 1),
+"update": 0,
+"values": [3.03, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_nk0jq"]
+resource_name = "o"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 2.3, 4, 5.7, 6.7, 8, 9.1, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0, 9, 0, 9, 0, 9, 0, 9, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OmniLight3D:omni_range")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.5, 0.8, 1, 1.2, 1.3, 1.5, 1.7, 2, 2.3, 2.8, 2.9, 3.4, 3.7, 3.9, 4.3, 4.7, 5, 5.2, 5.8, 6.4, 6.6, 6.9, 7.2, 7.5, 7.8, 8, 8.1, 8.4, 8.7, 9.1, 9.5, 9.8, 9.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [70.0, 70.0, 20.0, 70.0, 70.0, 40.0, 70.0, 70.0, 40.0, 20.0, 70.0, 70.0, 20.0, 20.0, 70.0, 70.0, 40.0, 70.0, 40.0, 20.0, 70.0, 70.0, 70.0, 20.0, 70.0, 70.0, 70.0, 40.0, 70.0, 20.0, 40.0, 70.0, 20.0, 70.0, 70.0, 70.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("OmniLight3D:light_energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.1, 3.4, 5.1, 5.6, 6.9, 7.4, 8.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [2.0, 1.364, 2.0, 1.364, 2.0, 1.364, 2.0, 2.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite3D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(2.73208),
+"update": 0,
+"values": [Vector3(0.6, 0.6, 0.6)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite3D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(2),
+"update": 0,
+"values": [Vector3(0, -1.03337, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("OmniLight3D2:light_energy")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.91213, 1.21213, 1.3, 1.7, 2.01213, 2.21213, 2.3, 2.31213, 2.4, 2.9, 3.21213, 3.31213, 3.4, 4, 4.31213, 4.6, 4.7, 5.7, 5.8, 6.7, 6.8, 7, 7.8, 8, 8.1, 9, 9.1, 9.9),
+"transitions": PackedFloat32Array(1.8025, 1.8025, 1, 1.8025, 1, 1.8025, 1, 1, 1, 1.8025, 1, 1.8025, 1, 1, 1, 1.8025, 1, 1, 1.8025, 1, 1.8025, 1, 1, 1.8025, 1, 1, 1.8025, 1, 1, 1.8025),
+"update": 0,
+"values": [3.03, 3.03, 0.745, 3.03, 1.925, 3.03, 0.745, 1.925, 0.745, 3.03, 1.925, 3.03, 0.745, 1.925, 0.745, 3.03, 0.745, 0.745, 3.03, 0.745, 3.03, 0.745, 1.925, 3.03, 0.745, 1.925, 3.03, 0.745, 1.925, 3.03]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprite3D:position")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1.5, 2.9, 5.1, 6, 6.9, 9.1, 9.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -1.03337, 0), Vector3(0, -0.980012, 0), Vector3(0, -1.11184, 0), Vector3(0, -1.07109, 0), Vector3(0, -1.09577, 0), Vector3(0, -1.09464, 0), Vector3(0, -1.16597, 0), Vector3(0, -1.03337, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sprite3D:scale")
+tracks/7/interp = 2
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1, 1.7, 2.4, 2.7, 2.9, 3.7, 4, 4.6, 5.4, 6.1, 7.7, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.6, 0.6, 0.6), Vector3(0.5, 0.5, 0.5), Vector3(0.6, 0.6, 0.6), Vector3(0.6, 0.6, 0.6), Vector3(0.5, 0.5, 0.5), Vector3(0.5, 0.5, 0.5), Vector3(0.6, 0.6, 0.6), Vector3(0.6, 0.6, 0.6), Vector3(0.5, 0.5, 0.5), Vector3(0.5, 0.5, 0.5), Vector3(0.6, 0.6, 0.6), Vector3(0.5, 0.5, 0.5), Vector3(0.6, 0.6, 0.6)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_scmuv"]
+_data = {
+"off": SubResource("Animation_owg2a"),
+"on": SubResource("Animation_nk0jq")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bhbu8"]
+transparency = 3
+alpha_hash_scale = 1.0
+alpha_antialiasing_mode = 0
+albedo_color = Color(0.513726, 0.513726, 0.513726, 1)
+albedo_texture = ExtResource("1_gl7fb")
+rim_enabled = true
+rim = 0.02
+backlight_enabled = true
+backlight = Color(0.439216, 0.0196078, 0, 1)
+billboard_mode = 1
+billboard_keep_scale = true
+grow_amount = -2.098
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pw6j3"]
+radius = 0.0693793
+height = 0.693793
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rheb1"]
+radius = 0.0094379
+height = 0.094379
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_veq6x"]
+radius = 0.0094379
+height = 0.094379
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_khpsb"]
+radius = 0.115449
+height = 1.15449
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4r028"]
+size = Vector3(0.65632, 1.84673, 0.607556)
+
+[node name="Lantern" type="Node3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="."]
+transform = Transform3D(0.808577, 4.82946e-09, -0.58839, -4.82941e-09, -1, -1.48446e-08, -0.58839, 1.48446e-08, -0.808577, -3.94492e-08, 1.16303, -1.21258e-07)
+bone_name = "Bone.002"
+bone_idx = 3
+override_pose = true
+use_external_skeleton = true
+external_skeleton = NodePath("../lantern/Armature/Skeleton3D")
+
+[node name="Fire" type="Node3D" parent="BoneAttachment3D"]
+transform = Transform3D(0.715, -5.52296e-09, -1.19209e-07, 5.52295e-09, 0.715, -3.52748e-09, 1.19209e-07, 3.52748e-09, 0.715, 9.0891e-09, 1.36749, 5.19685e-09)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BoneAttachment3D/Fire"]
+libraries = {
+"": SubResource("AnimationLibrary_scmuv")
+}
+
+[node name="Sprite3D" type="Sprite3D" parent="BoneAttachment3D/Fire"]
+transform = Transform3D(0.507813, 7.39585e-19, 0, -7.39585e-19, 0.507813, 0, 0, 0, 0.507813, 0, -0.982415, 0)
+layers = 8
+material_override = SubResource("StandardMaterial3D_bhbu8")
+texture = ExtResource("1_gl7fb")
+hframes = 5
+vframes = 2
+frame = 6
+
+[node name="OmniLight3D" type="OmniLight3D" parent="BoneAttachment3D/Fire"]
+transform = Transform3D(1.3986, 2.13163e-14, 0, 0, 1.3986, -1.77636e-15, 0, -1.77636e-15, 1.3986, 0.000237703, -1.00376, 2.30074e-11)
+layers = 1025
+light_color = Color(1, 0.733333, 0.513726, 1)
+light_energy = 1.364
+light_volumetric_fog_energy = 3.0
+light_size = 0.379
+shadow_enabled = true
+omni_range = 55.0
+omni_attenuation = 0.535887
+omni_shadow_mode = 0
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="BoneAttachment3D/Fire"]
+transform = Transform3D(1.3986, 2.13163e-14, 0, 0, 1.3986, -1.77636e-15, 0, -1.77636e-15, 1.3986, 0.000237703, -1.00376, 2.30074e-11)
+layers = 1025
+light_color = Color(1, 0.329412, 0.513726, 1)
+light_energy = 2.17594
+light_volumetric_fog_energy = 3.0
+light_size = 0.379
+shadow_enabled = true
+omni_range = 9.074
+omni_attenuation = 0.615574
+omni_shadow_mode = 0
+
+[node name="lantern" parent="." instance=ExtResource("2_pxffw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55313, 0)
+
+[node name="Cylinder" parent="lantern/Armature/Skeleton3D" index="0"]
+transform = Transform3D(0.10927, 1.1132e-09, -3.72529e-09, -8.53392e-10, 0.142537, 6.21001e-10, -3.72529e-09, -8.10063e-10, 0.10927, 9.83781e-09, -1.54459, 3.0239e-08)
+bone_idx = 4
+
+[node name="Cylinder" parent="lantern/Armature/Skeleton3D/Cylinder" index="0"]
+layers = 12
+
+[node name="Cylinder_001" parent="lantern/Armature/Skeleton3D" index="1"]
+transform = Transform3D(0.00449818, 1.80647e-10, -4.65661e-10, -3.51305e-11, 0.0231304, 2.5564e-11, 0, -1.31455e-10, 0.00449818, 8.25475e-09, -1.2168, 2.53731e-08)
+bone_idx = 5
+
+[node name="Cylinder_001" parent="lantern/Armature/Skeleton3D/Cylinder_001" index="0"]
+layers = 12
+
+[node name="Lantern" parent="lantern/Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.116066, 8.61751e-10, 0.0070519, -8.98195e-10, 0.11628, 5.73671e-10, -0.0070519, -6.27088e-10, 0.116066, 2.39351e-09, -0.388844, 1.30824e-08)
+bone_idx = 6
+
+[node name="Lantern" parent="lantern/Armature/Skeleton3D/Lantern" index="0"]
+layers = 12
+
+[node name="Icosphere_002" parent="lantern/Armature/Skeleton3D" index="3"]
+transform = Transform3D(0.137991, 1.02454e-09, 0.00838399, -1.06787e-09, 0.138245, 6.82036e-10, -0.00838398, -7.45543e-10, 0.137991, 4.20411e-09, -0.402168, 1.32802e-08)
+bone_idx = 7
+
+[node name="Icosphere_002" parent="lantern/Armature/Skeleton3D/Icosphere_002" index="0"]
+layers = 12
+
+[node name="Torus" parent="lantern/Armature/Skeleton3D" index="4"]
+transform = Transform3D(-2.04336e-08, -0.214485, 0.0130316, 0.172066, -8.42405e-10, 3.24688e-09, 5.36835e-09, 0.0130316, 0.214485, 3.99548e-09, -0.358966, 1.26389e-08)
+bone_idx = 8
+
+[node name="Torus" parent="lantern/Armature/Skeleton3D/Torus" index="0"]
+layers = 12
+
+[node name="Torus_001" parent="lantern/Armature/Skeleton3D" index="5"]
+transform = Transform3D(6.63507e-08, 0.0235351, 0.38736, 0.36379, 3.79154e-08, -4.97387e-08, -5.50121e-08, 0.38736, -0.0235351, 2.32529e-09, -0.0131424, 7.50528e-09)
+bone_idx = 9
+
+[node name="Torus_001" parent="lantern/Armature/Skeleton3D/Torus_001" index="0"]
+layers = 12
+
+[node name="Physical Bone Bone" type="PhysicalBone3D" parent="lantern/Armature/Skeleton3D" index="6"]
+transform = Transform3D(0.80859, -0.588417, -1.50502e-06, -2.07871e-06, 4.17326e-07, 1.00003, -0.588398, -0.808588, -1.09564e-06, 5.126e-06, 0.145535, -6.69228e-06)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.92756e-06, -3.14396e-06, 0.346906)
+body_offset = Transform3D(1.00002, -1.55568e-05, -4.51079e-07, 2.19989e-06, -4.48463e-08, -1.00003, -1.63913e-06, 1.00002, 2.14393e-06, 8.08411e-06, 0.346916, 2.40028e-06)
+bone_name = "Bone"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="lantern/Armature/Skeleton3D/Physical Bone Bone"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_pw6j3")
+
+[node name="Physical Bone Bone_001" type="PhysicalBone3D" parent="lantern/Armature/Skeleton3D" index="7"]
+transform = Transform3D(0.808577, -0.588412, 2.81632e-06, -3.94881e-07, -9.61125e-07, 1.00002, -0.588397, -0.808578, -4.94336e-06, -2.14577e-06, -0.248532, 7.21307e-06)
+joint_type = 1
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.77483e-06, 4.58332e-06, 0.0471886)
+body_offset = Transform3D(1, -1.74642e-05, 5.18101e-06, 3.90051e-07, 9.4628e-07, -1.00002, 5.78165e-06, 1.00001, 2.32515e-06, -6.01925e-06, 0.0471896, -4.69313e-06)
+bone_name = "Bone.001"
+joint_constraints/bias = 0.3
+joint_constraints/damping = 1.0
+joint_constraints/impulse_clamp = 0.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="lantern/Armature/Skeleton3D/Physical Bone Bone_001"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_rheb1")
+
+[node name="Physical Bone Bone_003" type="PhysicalBone3D" parent="lantern/Armature/Skeleton3D" index="8"]
+transform = Transform3D(0.808577, -0.588412, 2.81632e-06, -3.94881e-07, -9.61125e-07, 1.00002, -0.588397, -0.808578, -4.9433e-06, -9.77517e-06, -0.342912, 2.02668e-05)
+joint_type = 1
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.96241e-05, 1.06476e-05, 0.0471903)
+body_offset = Transform3D(1, -1.74642e-05, 5.18097e-06, 3.90051e-07, 9.4628e-07, -1.00002, 5.78165e-06, 1.00001, 2.3251e-06, -1.98684e-05, 0.0471913, -1.07576e-05)
+bone_name = "Bone.003"
+joint_constraints/bias = 0.3
+joint_constraints/damping = 1.0
+joint_constraints/impulse_clamp = 0.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="lantern/Armature/Skeleton3D/Physical Bone Bone_003"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_veq6x")
+
+[node name="Physical Bone Bone_002" type="PhysicalBone3D" parent="lantern/Armature/Skeleton3D" index="9"]
+transform = Transform3D(0.808576, -0.588415, 1.40816e-06, -3.94881e-07, 2.47322e-06, 1.00003, -0.588397, -0.808586, -5.26673e-06, 1.45781e-10, -0.967365, 1.43619e-05)
+joint_type = 1
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.04377e-06, 9.75384e-06, 0.577249)
+body_offset = Transform3D(1, -1.51098e-05, 4.23267e-06, 3.90051e-07, -2.48806e-06, -1.00003, 5.78165e-06, 1.00002, 3.41517e-06, -8.48694e-06, 0.577265, -1.17255e-05)
+bone_name = "Bone.002"
+joint_constraints/bias = 0.3
+joint_constraints/damping = 1.0
+joint_constraints/impulse_clamp = 0.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="lantern/Armature/Skeleton3D/Physical Bone Bone_002"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_khpsb")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 256
+collision_mask = 0
+script = ExtResource("4_3v4ag")
+itemSlot = "leftHand"
+animationModifier = "Bow"
+displayName = "Gas Lantern"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.945802, 0)
+shape = SubResource("BoxShape3D_4r028")
+
+[node name="SubViewport" type="SubViewport" parent="Area3D"]
+transparent_bg = true
+
+[node name="Camera3D" type="Camera3D" parent="Area3D/SubViewport"]
+transform = Transform3D(0.33601, 0.870755, -0.359003, 0.686208, 0.0347621, 0.726574, 0.645148, -0.490487, -0.585839, -0.515575, 0.927077, -0.753323)
+cull_mask = 1024
+fov = 44.7
+
+[node name="GrabPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.95107, 0)
+
+[editable path="lantern"]

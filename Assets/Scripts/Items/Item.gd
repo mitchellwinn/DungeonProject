@@ -2,6 +2,7 @@ extends Interactable
 class_name Item
 
 @export var mesh: Node3D
+@export var manyMeshes: Array
 @export var itemSlot: String
 @export var animationModifier: String
 @export var iconPath: String
@@ -15,7 +16,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
+	if !mesh:
+		return
 	if holderID == -1:
 		mesh.rotation = Vector3(0,0,-deg_to_rad(90))
 		displayingName = true
@@ -26,9 +28,15 @@ func _process(delta):
 		return
 	#print(str(GameManager.activePlayer.stats.id)+":"+str(get_parent().get_multiplayer_authority()))
 	if holderID != GameManager.activePlayer.stats.id:
-		mesh.set_layer_mask_value(3,false)
-		mesh.set_layer_mask_value(4,true)
-		mesh.set_layer_mask_value(11,false)
+		if mesh is MeshInstance3D:
+			mesh.set_layer_mask_value(3,false)
+			mesh.set_layer_mask_value(4,true)
+			mesh.set_layer_mask_value(11,false)
+		else:
+			for meshOf in manyMeshes:
+				meshOf.set_layer_mask_value(3,false)
+				meshOf.set_layer_mask_value(4,true)
+				meshOf.set_layer_mask_value(11,false)
 	else:
 		if GameManager.activePlayer.stats.hotbar[GameManager.activePlayer.stats.hotbarIndex] != self:
 			rpc("toggleVisibility", false)
@@ -38,13 +46,25 @@ func _process(delta):
 			if Input.is_action_just_pressed("rightClick"):
 				rightClick()
 			rpc("toggleVisibility", true)
-		mesh.set_layer_mask_value(3,true)
-		mesh.set_layer_mask_value(4,false)
-		mesh.set_layer_mask_value(11,true)
+		if mesh is MeshInstance3D:
+			mesh.set_layer_mask_value(3,true)
+			mesh.set_layer_mask_value(4,false)
+			mesh.set_layer_mask_value(11,true)
+		else:
+			for meshOf in manyMeshes:
+				meshOf.set_layer_mask_value(3,true)
+				meshOf.set_layer_mask_value(4,false)
+				meshOf.set_layer_mask_value(11,true)
 	if !GameManager.activePlayer.fullyActionable and holderID == GameManager.activePlayer.stats.id:
-		mesh.set_layer_mask_value(3,false)
-		mesh.set_layer_mask_value(4,true)
-		mesh.set_layer_mask_value(11,false)
+		if mesh is MeshInstance3D:
+			mesh.set_layer_mask_value(3,false)
+			mesh.set_layer_mask_value(4,true)
+			mesh.set_layer_mask_value(11,false)
+		else:
+			for meshOf in manyMeshes:
+				meshOf.set_layer_mask_value(3,true)
+				meshOf.set_layer_mask_value(4,false)
+				meshOf.set_layer_mask_value(11,true)
 
 func leftClick():
 	pass
@@ -77,7 +97,13 @@ func rpcDrop(pos,rot):
 func matchToLimb():
 	match itemSlot:
 		"leftHand":
+			var offset = Vector3.ZERO
+			if get_parent().get_node("lantern"):
+				get_parent().get_node("lantern/Armature/Skeleton3D").physical_bones_start_simulation(["Bone", "Bone.001", "Bone.003", "Bone.002"])
+			if get_parent().get_node("GrabPoint"):
+				offset = get_parent().get_node("GrabPoint").position
 			get_parent().global_transform = holder.leftHandSocket.global_transform
+			get_parent().global_position = get_parent().global_position + offset
 			mesh.rotation = Vector3(deg_to_rad(-90),deg_to_rad(-90),0)
 
 			#get_parent().rotate(get_parent().basis.x,deg_to_rad(90))

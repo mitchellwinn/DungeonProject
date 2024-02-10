@@ -22,7 +22,6 @@ mesh = NodePath("../Knob")
 itemSlot = "leftHand"
 animationModifier = "Bow"
 iconPath = "res://Assets/Materials/PlayerUI/knob.png"
-displayingName = true
 displayName = "Suspicious Knob"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
@@ -39,7 +38,7 @@ fov = 44.7
 
 [node name="Knob" type="CSGSphere3D" parent="."]
 transform = Transform3D(0.31, -2.89759e-11, -7.27596e-11, 1.84741e-13, 0.31, -2.03727e-10, -2.91038e-11, 3.20142e-10, 0.202, 0, 0.139, 0)
-layers = 1024
+layers = 8
 material_override = SubResource("StandardMaterial3D_e001h")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="Knob"]

@@ -4,6 +4,83 @@
 [ext_resource type="Script" path="res://Assets/Scripts/Items/DoorKnob.gd" id="1_j6x0u"]
 [ext_resource type="Texture2D" uid="uid://bfogpv1abt6ld" path="res://Assets/Materials/PlayerUI/lanternfire.png" id="3_pih1s"]
 
+[sub_resource type="Animation" id="Animation_owg2a"]
+resource_name = "off"
+length = 10.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 2.3, 4, 5.7, 6.7, 8, 9.1, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0, 9, 0, 9, 0, 9, 0, 9, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OmniLight3D:omni_range")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.5, 0.8, 1, 1.2, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [70.0, 70.0, 20.0, 70.0, 70.0, 40.0, 70.0, 70.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("OmniLight3D:light_energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(2.63902, 2.14355),
+"update": 0,
+"values": [2.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite3D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(2.73208, 2.73208),
+"update": 0,
+"values": [Vector3(0.6, 0.6, 0.6), Vector3(0, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite3D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Vector3(0, -1.03337, 0), Vector3(0, -1.163, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("OmniLight3D2:light_energy")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1.8025, 1),
+"update": 0,
+"values": [3.03, 0.0]
+}
+
 [sub_resource type="Animation" id="Animation_nk0jq"]
 resource_name = "o"
 length = 10.0
@@ -105,83 +182,6 @@ tracks/7/keys = {
 "values": [Vector3(0.6, 0.6, 0.6), Vector3(0.5, 0.5, 0.5), Vector3(0.6, 0.6, 0.6), Vector3(0.6, 0.6, 0.6), Vector3(0.5, 0.5, 0.5), Vector3(0.5, 0.5, 0.5), Vector3(0.6, 0.6, 0.6), Vector3(0.6, 0.6, 0.6), Vector3(0.5, 0.5, 0.5), Vector3(0.5, 0.5, 0.5), Vector3(0.6, 0.6, 0.6), Vector3(0.5, 0.5, 0.5), Vector3(0.6, 0.6, 0.6)]
 }
 
-[sub_resource type="Animation" id="Animation_owg2a"]
-resource_name = "off"
-length = 10.0
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.7, 2.3, 4, 5.7, 6.7, 8, 9.1, 10),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [0, 9, 0, 9, 0, 9, 0, 9, 0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("OmniLight3D:omni_range")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.5, 0.8, 1, 1.2, 1.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [70.0, 70.0, 20.0, 70.0, 70.0, 40.0, 70.0, 70.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("OmniLight3D:light_energy")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.7),
-"transitions": PackedFloat32Array(2.63902, 2.14355),
-"update": 0,
-"values": [2.0, 0.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite3D:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.8),
-"transitions": PackedFloat32Array(2.73208, 2.73208),
-"update": 0,
-"values": [Vector3(0.6, 0.6, 0.6), Vector3(0, 0, 0)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Sprite3D:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.8),
-"transitions": PackedFloat32Array(2, 1),
-"update": 0,
-"values": [Vector3(0, -1.03337, 0), Vector3(0, -1.163, 0)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("OmniLight3D2:light_energy")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.7),
-"transitions": PackedFloat32Array(1.8025, 1),
-"update": 0,
-"values": [3.03, 0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_scmuv"]
 _data = {
 "off": SubResource("Animation_owg2a"),
@@ -211,25 +211,48 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 
 [node name="lantern" parent="." instance=ExtResource("1_5od8i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.54386, 0)
 
+[node name="Cylinder" parent="lantern/Armature/Skeleton3D" index="0"]
+transform = Transform3D(0.10927, 1.11321e-09, -7.45058e-09, -8.53391e-10, 0.142537, 6.21002e-10, 3.72529e-09, -8.10063e-10, 0.10927, 9.83779e-09, -1.54459, 3.0239e-08)
+bone_idx = 4
+
+[node name="Cylinder_001" parent="lantern/Armature/Skeleton3D" index="1"]
+transform = Transform3D(0.00449818, 1.80648e-10, -4.65661e-10, -3.51305e-11, 0.0231304, 2.5564e-11, 2.32831e-10, -1.31455e-10, 0.00449818, 8.25474e-09, -1.2168, 2.53731e-08)
+bone_idx = 5
+
+[node name="Lantern" parent="lantern/Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.116066, 8.61752e-10, 0.00705189, -8.98194e-10, 0.11628, 5.73672e-10, -0.00705189, -6.27088e-10, 0.116066, 2.39351e-09, -0.388844, 1.30824e-08)
+bone_idx = 6
+
+[node name="Icosphere_002" parent="lantern/Armature/Skeleton3D" index="3"]
+transform = Transform3D(0.137991, 1.02454e-09, 0.00838399, -1.06787e-09, 0.138245, 6.82036e-10, -0.00838398, -7.45543e-10, 0.137991, 4.20411e-09, -0.402168, 1.32802e-08)
+bone_idx = 7
+
+[node name="Torus" parent="lantern/Armature/Skeleton3D" index="4"]
+transform = Transform3D(-2.04336e-08, -0.214485, 0.0130316, 0.172066, -8.42405e-10, 3.24688e-09, 5.36835e-09, 0.0130316, 0.214485, 3.99548e-09, -0.358966, 1.26389e-08)
+bone_idx = 8
+
+[node name="Torus_001" parent="lantern/Armature/Skeleton3D" index="5"]
+transform = Transform3D(6.63507e-08, 0.0235351, 0.38736, 0.36379, 3.79154e-08, -4.97387e-08, -5.50121e-08, 0.38736, -0.0235351, 2.32529e-09, -0.0131424, 7.50528e-09)
+bone_idx = 9
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="lantern"]
 libraries = {
 "": SubResource("AnimationLibrary_scmuv")
 }
 
 [node name="Sprite3D" type="Sprite3D" parent="lantern"]
-transform = Transform3D(0.574706, 0, 0, 0, 0.574706, 0, 0, 0, 0.574706, 0, -1.11954, 0)
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, -1.03337, 0)
 layers = 1032
 material_override = SubResource("StandardMaterial3D_fk4ye")
 texture = ExtResource("3_pih1s")
 hframes = 5
 vframes = 2
-frame = 6
 
 [node name="OmniLight3D" type="OmniLight3D" parent="lantern"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000237703, -1.00376, 2.07807e-11)
 layers = 1025
 light_color = Color(1, 0.733333, 0.513726, 1)
-light_energy = 1.97987
+light_energy = 2.0
 light_size = 0.379
 shadow_enabled = true
 omni_range = 70.0
@@ -240,40 +263,21 @@ omni_shadow_mode = 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000237703, -1.00376, 2.07807e-11)
 layers = 1025
 light_color = Color(1, 0.329412, 0.513726, 1)
-light_energy = 0.949901
+light_energy = 3.03
 light_size = 0.379
 shadow_enabled = true
 omni_range = 9.074
 omni_attenuation = 0.615574
 omni_shadow_mode = 0
 
-[node name="Lantern" parent="lantern" index="4"]
-layers = 1032
-
-[node name="Cylinder" parent="lantern/Lantern" index="0"]
-layers = 1032
-
-[node name="Cylinder_001" parent="lantern/Lantern" index="1"]
-layers = 1032
-
-[node name="Icosphere_002" parent="lantern/Lantern" index="2"]
-layers = 1032
-
-[node name="Torus" parent="lantern/Lantern" index="3"]
-transform = Transform3D(0, -1.84796, 2.98023e-08, 1.47975, 0, 0, 0, 2.98023e-08, 1.84796, 0, 0, 0)
-layers = 1032
-
-[node name="Torus_001" parent="lantern/Lantern" index="4"]
-layers = 1032
-
-[node name="Area3D" type="Area3D" parent="." node_paths=PackedStringArray("mesh")]
+[node name="Area3D" type="Area3D" parent="."]
 collision_layer = 256
 collision_mask = 0
 script = ExtResource("1_j6x0u")
-mesh = NodePath("../lantern/Lantern")
 itemSlot = "leftHand"
 animationModifier = "Bow"
 iconPath = "res://Assets/Materials/PlayerUI/knob.png"
+holderID = null
 displayingName = true
 displayName = "Gas Lantern"
 

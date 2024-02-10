@@ -347,10 +347,10 @@ viewport_path = NodePath("Oneiroi/RootNode/root/Skeleton3D/TorsoSocket/1stPerson
 [sub_resource type="ViewportTexture" id="ViewportTexture_gu0p3"]
 viewport_path = NodePath("Oneiroi/RootNode/root/Skeleton3D/TorsoSocket/pullBow/SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_l3p20"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_q5wml"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_j5prd"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_xqi4w"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="Curve" id="Curve_ly022"]
@@ -1173,7 +1173,7 @@ grow_vertical = 2
 [node name="Good_Idea_Icon" parent="UI/DreamDilator/OutDream" instance=ExtResource("13_q20ia")]
 position = Vector2(159, 181)
 scale = Vector2(0.25, 0.25)
-texture = SubResource("ViewportTexture_l3p20")
+texture = SubResource("ViewportTexture_q5wml")
 
 [node name="idea" parent="UI/DreamDilator/OutDream/Good_Idea_Icon" index="0"]
 transform = Transform3D(-0.0206422, 0, -0.249146, 0, 0.25, 0, 0.249146, 0, -0.0206422, 5, 0.647767, 0)
@@ -1184,7 +1184,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.672845, 1.48044)
 [node name="Bad_Idea_Icon" parent="UI/DreamDilator/OutDream" instance=ExtResource("13_5i5yv")]
 position = Vector2(159, 288)
 scale = Vector2(0.25, 0.25)
-texture = SubResource("ViewportTexture_j5prd")
+texture = SubResource("ViewportTexture_xqi4w")
 
 [node name="IdeasCount" type="RichTextLabel" parent="UI/DreamDilator/OutDream"]
 layout_direction = 1

@@ -30,7 +30,6 @@ mesh = NodePath("../aim")
 itemSlot = "leftHand"
 animationModifier = "Bow"
 iconPath = "res://Assets/Materials/PlayerUI/spiritbow.png"
-displayingName = true
 displayName = "Spirit Bow"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
